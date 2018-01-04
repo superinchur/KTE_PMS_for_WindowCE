@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRunConfiguration xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006" id="2dbdf786-92d1-4143-b9a1-a0bea5baf38b" name="로컬 SmartDevices 테스트 실행">
+	<Description>로컬 SmartDevice 테스트 실행의 기본 테스트 실행 구성입니다.</Description>
+	<Timeouts testTimeout="1800000"/>
+	<Hosts type="Smart Device">
+		<DeviceHostRunConfigData name="Smart Device" deviceId="E282E6BE-C7C3-4ece-916A-88FB1CF8AF3C" deviceName="Pocket PC 2003 SE 에뮬레이터" platformId="3C41C503-53EF-4c2a-8DD4-A8217CAD115E" platformName="Pocket PC 2003" uiPlatformId="E2BECB1F-8C8C-41ba-B736-9BE7D946A398"/>
+	</Hosts>
+</TestRunConfiguration>

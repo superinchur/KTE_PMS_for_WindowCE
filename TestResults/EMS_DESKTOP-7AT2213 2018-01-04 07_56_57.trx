@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="ca426e4f-1f2a-4a5e-b252-d869ea061f9f" name="EMS@DESKTOP-7AT2213 2018-01-04 07:56:57" runUser="DESKTOP-7AT2213\EMS" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="로컬 SmartDevices 테스트 실행" id="2dbdf786-92d1-4143-b9a1-a0bea5baf38b">
+    <Description>로컬 SmartDevice 테스트 실행의 기본 테스트 실행 구성입니다.</Description>
+    <Deployment runDeploymentRoot="C:\WinCE_PMS\TestResults\EMS_DESKTOP-7AT2213 2018-01-04 07_56_57">
+      <DeploymentItem filename="C:\WinCE_PMS\PMS\bin\Release\SmartXCommon.dll" />
+      <DeploymentItem filename="C:\WinCE_PMS\PMS\bin\Release\SmartX_IEC667.dll" />
+      <DeploymentItem filename="C:\WinCE_PMS\PMS\bin\Release\PMS.exe" />
+      <DeploymentItem filename="C:\WinCE_PMS\PMS\bin\Release\SmartXCommonExt.dll" />
+    </Deployment>
+    <Hosts type="Smart Device">
+      <DeviceHostRunConfigData name="Smart Device" deviceId="E282E6BE-C7C3-4ece-916A-88FB1CF8AF3C" deviceName="Pocket PC 2003 SE 에뮬레이터" platformId="3C41C503-53EF-4c2a-8DD4-A8217CAD115E" platformName="Pocket PC 2003" uiPlatformId="E2BECB1F-8C8C-41ba-B736-9BE7D946A398" />
+    </Hosts>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="1" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-7AT2213" outcome="Warning" timestamp="2018-01-04T07:56:58.8140983+09:00">
+        <Text>경고: 테스트 실행 배포 문제: 어셈블리 또는 모듈 'Microsoft.WindowsCE.Forms' 테스트 컨테이너 'c:\wince_pms\testproject1\bin\release\testproject1.dll'에서 직접 또는 간접적으로 참조함을(를) 찾을 수 없습니다.</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-7AT2213" outcome="Aborted" timestamp="2018-01-04T07:57:05.6187545+09:00">
+        <Text>오류: 이 테스트 실행에 필요한 .NET Compact Framework가 이 장치에 설치되어 있지 않습니다.</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-7AT2213" outcome="Error" timestamp="2018-01-04T07:57:05.6257733+09:00">
+        <Text>이 테스트를 실행하는 데 필요한 테스트 어댑터('Microsoft.VisualStudio.SmartDevice.TestHostAdapter.DeviceAgent.DeviceHostAdapter, Microsoft.VisualStudio.SmartDevice.TestHostAdapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')를 로드할 수 없습니다. 테스트 어댑터가 제대로 설치되었는지 확인하십시오. 'Microsoft.VisualStudio.SmartDevice.TestHostAdapter.DeviceAgent.NetCFNotInstalledException' 형식의 예외가 Throw되었습니다.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <Times creation="2018-01-04T07:56:57.8229670+09:00" queuing="2018-01-04T07:56:58.8140983+09:00" start="2018-01-04T07:56:58.9557623+09:00" finish="2018-01-04T07:57:13.1300493+09:00" />
+  <TestDefinitions>
+    <UnitTest name="DisplayTest" storage="c:\wince_pms\testproject1\bin\release\testproject1.dll" id="a0faf0ba-268f-53fc-c573-dda187d71877">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <DeploymentItems>
+        <DeploymentItem filename="PMS.exe" />
+      </DeploymentItems>
+      <Execution id="e41a24e2-cfdb-4a8a-84eb-462e5cf311b7" />
+      <TestMethod codeBase="C:\WinCE_PMS\TestProject1\bin\Release\TestProject1.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.BMS클라이언트Test, TestProject1" name="DisplayTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="목록에 없는 결과" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="로드된 모든 결과" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="a0faf0ba-268f-53fc-c573-dda187d71877" executionId="e41a24e2-cfdb-4a8a-84eb-462e5cf311b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="e41a24e2-cfdb-4a8a-84eb-462e5cf311b7" testId="a0faf0ba-268f-53fc-c573-dda187d71877" testName="DisplayTest" computerName="DESKTOP-7AT2213" duration="00:00:00" startTime="0001-01-01T09:00:00.0000000+09:00" endTime="2018-01-04T07:57:05.6277783+09:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Error" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>이 테스트를 실행하는 데 필요한 테스트 어댑터('Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')를 로드할 수 없습니다. 테스트 어댑터가 제대로 설치되었는지 확인하십시오. 'Microsoft.VisualStudio.SmartDevice.TestHostAdapter.DeviceAgent.NetCFNotInstalledException' 형식의 예외가 Throw되었습니다.</Message>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

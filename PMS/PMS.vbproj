@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{02EE2F62-80DD-4840-B6EF-D7B4DC4DCD9A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>PMS.메인화면</StartupObject>
+    <RootNamespace>PMS</RootNamespace>
+    <AssemblyName>PMS</AssemblyName>
+    <ProjectTypeGuids>{68B1623D-7FB9-47D8-8664-7ECEA3297D4F};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
+    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
+    <OSVersion>5.0</OSVersion>
+    <MyType>WindowsForms</MyType>
+    <DeployDirSuffix>PMS</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <NativePlatformName>Windows CE</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>$(PlatformFamilyName)=TRUE</DefineConstants>
+    <DocumentationFile>PMS.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <FileAlignment>512</FileAlignment>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>$(PlatformFamilyName)=TRUE</DefineConstants>
+    <DocumentationFile>PMS.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <FileAlignment>512</FileAlignment>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SmartXCommon, Version=1.0.5743.24152, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\HNS\Embedded SmartX Component\SmartXCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartXCommonExt, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\HNS\Embedded SmartX Component\SmartXCommonExt.dll</HintPath>
+    </Reference>
+    <Reference Include="SmartX_IEC667, Version=1.0.5743.24154, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\HNS\Embedded SmartX Component\SmartX_IEC667.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="2. 서브화면\wnd서브화면.designer.vb">
+      <DependentUpon>wnd서브화면.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면1_메인.Designer.vb">
+      <DependentUpon>wnd서브화면1_메인.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면1_메인.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면2_배터리.Designer.vb">
+      <DependentUpon>wnd서브화면2_배터리.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면2_배터리.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면7_설정.Designer.vb">
+      <DependentUpon>wnd서브화면7_설정.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면7_설정.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면3_수요관리.Designer.vb">
+      <DependentUpon>wnd서브화면3_수요관리.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면3_수요관리.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면4_소비.Designer.vb">
+      <DependentUpon>wnd서브화면4_소비.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면4_소비.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면5_사용모드.Designer.vb">
+      <DependentUpon>wnd서브화면5_사용모드.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면5_사용모드.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면6_이력.Designer.vb">
+      <DependentUpon>wnd서브화면6_이력.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면6_이력.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면8_고장.Designer.vb">
+      <DependentUpon>wnd서브화면8_고장.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 서브화면\wnd서브화면8_고장.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="2. 통신\1. EMS\비동기통신소켓.vb" />
+    <Compile Include="2. 통신\3. 공통\Crc16.vb" />
+    <Compile Include="1. 화면\메인화면.designer.vb">
+      <DependentUpon>메인화면.vb</DependentUpon>
+    </Compile>
+    <Compile Include="1. 화면\메인화면.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="2. 통신\3. 공통\모듈_제어대기열.vb" />
+    <Compile Include="2. 통신\4. BMS\BMS시리얼통신.vb" />
+    <Compile Include="2. 통신\4. BMS\BMS클라이언트.Designer.vb">
+      <DependentUpon>BMS클라이언트.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 통신\4. BMS\BMS클라이언트.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="2. 통신\4. BMS\BMS통신서버.vb" />
+    <Compile Include="2. 통신\4. BMS\BMS통신차일드.vb" />
+    <Compile Include="9. 코드\IniFileVb.vb" />
+    <Compile Include="9. 코드\MBMaster.vb" />
+    <Compile Include="9. 코드\모듈_고장함수.vb" />
+    <Compile Include="9. 코드\모듈_배터리사용량.vb" />
+    <Compile Include="9. 코드\모듈_함수선언.vb" />
+    <Compile Include="9. 코드\BMS.vb" />
+    <Compile Include="9. 코드\BMS_Module.vb" />
+    <Compile Include="9. 코드\BMS_Rack.vb" />
+    <Compile Include="9. 코드\클래스_이력저장.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="2. 통신\3. 공통\MODBUS배열.vb" />
+    <Compile Include="9. 코드\모듈_변수선언.vb" />
+    <Compile Include="2. 통신\1. EMS\EMS비동기통신소켓.vb" />
+    <Compile Include="2. 통신\1. EMS\EMS통신서버.vb" />
+    <Compile Include="2. 통신\1. EMS\EMS통신차일드.vb" />
+    <Compile Include="2. 통신\2. PCS\PCS통신.vb" />
+    <Compile Include="VSLib\ucScrollArrow.Designer.vb">
+      <DependentUpon>ucScrollArrow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VSLib\ucScrollArrow.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VSLib\VSGroupBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VSLib\VSKeyPad.designer.vb">
+      <DependentUpon>VSKeyPad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VSLib\VSKeyPad.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VSLib\VSLabel.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VSLib\VSNumericTextBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VSLib\VSPictureBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="VSLib\VSPictureButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="1. 화면\메인화면.resx">
+      <DependentUpon>메인화면.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면.resx">
+      <DependentUpon>wnd서브화면.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면1_메인.resx">
+      <DependentUpon>wnd서브화면1_메인.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면2_배터리.resx">
+      <DependentUpon>wnd서브화면2_배터리.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면7_설정.resx">
+      <DependentUpon>wnd서브화면7_설정.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면3_수요관리.resx">
+      <DependentUpon>wnd서브화면3_수요관리.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면4_소비.resx">
+      <DependentUpon>wnd서브화면4_소비.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면5_사용모드.resx">
+      <DependentUpon>wnd서브화면5_사용모드.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면6_이력.resx">
+      <DependentUpon>wnd서브화면6_이력.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 서브화면\wnd서브화면8_고장.resx">
+      <DependentUpon>wnd서브화면8_고장.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 통신\4. BMS\BMS클라이언트.resx">
+      <DependentUpon>BMS클라이언트.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VSLib\ucScrollArrow.resx">
+      <DependentUpon>ucScrollArrow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VSLib\VSKeyPad.resx">
+      <DependentUpon>VSKeyPad.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\단선_32.png" />
+    <None Include="Resources\연결_32.png" />
+    <None Include="Resources\배터리_000.png" />
+    <None Include="Resources\배터리_020.png" />
+    <None Include="Resources\배터리_040.png" />
+    <None Include="Resources\배터리_060.png" />
+    <None Include="Resources\배터리_080.png" />
+    <None Include="Resources\배터리_100.png" />
+    <Content Include="vnc\vncconfig.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="vnc\winvnc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.VisualBasic.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{F184B08F-C81C-45F6-A57F-5ABD9991F28F}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

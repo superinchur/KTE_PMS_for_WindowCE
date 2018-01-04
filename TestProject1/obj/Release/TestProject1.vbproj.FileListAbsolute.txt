@@ -1,0 +1,17 @@
+C:\WinCE_PMS\TestProject1\bin\Release\vnc\vncconfig.exe
+C:\WinCE_PMS\TestProject1\bin\Release\vnc\winvnc.exe
+C:\WinCE_PMS\TestProject1\bin\Release\TestProject1.dll
+C:\WinCE_PMS\TestProject1\bin\Release\TestProject1.pdb
+C:\WinCE_PMS\TestProject1\bin\Release\TestProject1.xml
+C:\WinCE_PMS\TestProject1\bin\Release\PMS.exe
+C:\WinCE_PMS\TestProject1\bin\Release\SmartX_IEC667.dll
+C:\WinCE_PMS\TestProject1\bin\Release\SmartXCommon.dll
+C:\WinCE_PMS\TestProject1\bin\Release\SmartXCommonExt.dll
+C:\WinCE_PMS\TestProject1\bin\Release\PMS.pdb
+C:\WinCE_PMS\TestProject1\bin\Release\PMS.xml
+C:\WinCE_PMS\TestProject1\bin\Release\PMS_Accessor.dll
+C:\WinCE_PMS\TestProject1\bin\Release\PMS_Accessor.pdb
+C:\WinCE_PMS\TestProject1\obj\Release\ResolveAssemblyReference.cache
+C:\WinCE_PMS\TestProject1\obj\Release\TestProject1.dll
+C:\WinCE_PMS\TestProject1\obj\Release\TestProject1.xml
+C:\WinCE_PMS\TestProject1\obj\Release\TestProject1.pdb
