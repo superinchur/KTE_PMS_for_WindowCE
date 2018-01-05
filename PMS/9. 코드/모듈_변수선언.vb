@@ -13,7 +13,7 @@
     Public PMS_통신ID As Integer = 1
     Public BMS_통신ID As Integer = 1
 
-
+    ' 겁나 중요해잉
     Public Enum BMS통신모드정의
         동작안함 = 0
         BankInfo = 1
