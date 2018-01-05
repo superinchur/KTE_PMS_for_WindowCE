@@ -13,7 +13,6 @@
     Public PMS_통신ID As Integer = 1
     Public BMS_통신ID As Integer = 1
 
-
     Public Enum BMS통신모드정의
         동작안함 = 0
         BankInfo = 1
@@ -28,7 +27,7 @@
     Public 설정변경_BMS As Boolean = False
 
     Public Const 인버터용량 As Integer = 99
-    Public trigger_BMS As Boolean
+
     ' PCS MODBUS ADDRESS
     Public Const PT_PV_Power As Integer = 1
     Public Const PT_PV_Voltage As Integer = 2
@@ -82,10 +81,6 @@
     Public Const PT_Fre_Set As Integer = 47
     Public Const PT_V_Inv_Set As Integer = 48
 
-    Public Const PT_SOC As Integer = 49
-    Public Const PT_SOH As Integer = 50
-    Public Const PT_TEMP As Integer = 51
-    Public Const PT_STS As Integer = 52
 
     'Public 현재사용모드 As 사용모드정의 = 사용모드정의.동작안함
 
@@ -102,25 +97,19 @@
     Public 현재사용모드_유효전력 As Boolean = False
     Public 현재사용모드_무효전력 As Boolean = False
     Public 현재사용모드_배터리충전 As Boolean = False
-    Public 현재사용모드_배터리방전 As Boolean = False
-    Public 현재사용모드_배터리방전시간 As Boolean = False
 
-    Public 현재사용모드_PCS방전강제종료 As Boolean = False
-    Public 현재사용모드_PCS충전강제종료 As Boolean = False
 
     Public 사용모드_피크컷시간(,) As Integer
-    Public d사용모드_로드파워 As Double
-    Public d사용모드_피크컷 As Double
+    Public 사용모드_로드파워 As Double
+    Public 사용모드_피크컷 As Double
 
-    Public d사용모드_유효전력 As Double
-    Public d사용모드_무효전력 As Double
+    Public 사용모드_유효전력 As Double
+    Public 사용모드_무효전력 As Double
 
-    Public d사용모드_배터리_충전정지SOC As Double
-    Public d사용모드_배터리_방전정지SOC As Double
-    Public d사용모드_배터리_충전정지전압 As Double
-    Public d사용모드_배터리_방전정지전압 As Double
-    Public d사용모드_배터리_충전시최대전류 As Double
-    Public d사용모드_배터리_방전시최대전류 As Double
+    Public 사용모드_배터리_충전시작 As Double
+    Public 사용모드_배터리_방전중지 As Double
+    Public 사용모드_배터리_충전전류 As Double
+    Public 사용모드_배터리_충전전압 As Double
 
 
     Public cBMS As New BMS
@@ -130,13 +119,6 @@
     Public num_Rack As Integer
     Public num_Module As Integer
 
-    Public DEBUG_COMM As Boolean = 0
-    Public Assertbit As Boolean
-
-    Public qRecvFault As New Queue
-    Public heartbit As Integer = 0
-
-    'BMS데이터비교에서 Deadband를 사용하기 위해서 저장하는 시간 값.
 
     Public Enum BSC상태
         Connect = 1

@@ -144,118 +144,117 @@ Public Class BMS통신차일드
 
     '받아온 데이터 Parsing
     Public Sub Arrange_Data(ByRef btFrameData() As Byte)
-        'BMS.Over_Current_Discharge_Warning = MODBUS배열.bytetobit(btFrameData, 6, 7)
-        'BMS.Over_Current_Charge_Warning = MODBUS배열.bytetobit(btFrameData, 6, 6)
-        'BMS.Rack_Over_Voltage_Protection_Warning = MODBUS배열.bytetobit(btFrameData, 6, 5)
-        'BMS.Rack_Under_Voltage_Protection_Warning = MODBUS배열.bytetobit(btFrameData, 6, 4)
-        'BMS.Rack_Voltage_Imbalance_Warning = MODBUS배열.bytetobit(btFrameData, 6, 3)
-        'BMS.Rack_Over_Temperature_Warning = MODBUS배열.bytetobit(btFrameData, 6, 2)
-        'BMS.Rack_Under_Temperature_Warning = MODBUS배열.bytetobit(btFrameData, 6, 1)
-        'BMS.Rack_Temperature_Imbalance_Warning = MODBUS배열.bytetobit(btFrameData, 6, 0)
-        '
-        '        BMS.Tray_Rack_Communication_Fault = MODBUS배열.bytetobit(btFrameData, 7, 12)
-        '        BMS.Fuse_positive_Fault_Status = MODBUS배열.bytetobit(btFrameData, 7, 11)
-        '        BMS.Fuse_negative_Fault_Status = MODBUS배열.bytetobit(btFrameData, 7, 10)
-        '        BMS.Discharge_Relay_negative_Fault_Status = MODBUS배열.bytetobit(btFrameData, 7, 9)
-        '        BMS.Charge_Relay_positive_Fault_Status = MODBUS배열.bytetobit(btFrameData, 7, 8)
-        '        BMS.Over_Current_Discharge_Fault = MODBUS배열.bytetobit(btFrameData, 7, 7)
-        '        BMS.Over_Current_Charge_Fault = MODBUS배열.bytetobit(btFrameData, 7, 6)
-        '        BMS.Rack_Over_Voltage_Protection_Fault = MODBUS배열.bytetobit(btFrameData, 7, 5)
-        '        BMS.Rack_Under_Voltage_Protection_Fault = MODBUS배열.bytetobit(btFrameData, 7, 4)
-        '        BMS.Rack_Voltage_Imbalance_Fault = MODBUS배열.bytetobit(btFrameData, 7, 3)
-        '        BMS.Rack_Over_Temperature_Fault = MODBUS배열.bytetobit(btFrameData, 7, 2)
-        '        BMS.Rack_Under_Temperature_Fault = MODBUS배열.bytetobit(btFrameData, 7, 1)
-        '        BMS.Rack_Temperature_Imbalance_Fault = MODBUS배열.bytetobit(btFrameData, 7, 0)
-        '
-        '        BMS.Rack2_to_Master_BMS_Communication_Status = MODBUS배열.bytetobit(btFrameData, 8, 1)
-        '        BMS.Rack1_to_Master_BMS_Communication_Status = MODBUS배열.bytetobit(btFrameData, 8, 0)
-        '
-        '        BMS.Rack_to_Master_BMS_Communication_Status = MODBUS배열.bytetobit(btFrameData, 9, 5)
-        '        BMS.Bank_Warning = MODBUS배열.bytetobit(btFrameData, 9, 4)
-        '        BMS.Bank_Fault = MODBUS배열.bytetobit(btFrameData, 9, 3)
-        '        BMS.Bank_Charge_status1 = MODBUS배열.bytetobit(btFrameData, 9, 2)
-        '        BMS.Bank_Charge_status0 = MODBUS배열.bytetobit(btFrameData, 9, 1)
-        '        BMS.Bank_RUN = MODBUS배열.bytetobit(btFrameData, 9, 0)
-        '
-        '        BMS.Bank_SOC = MODBUS배열.bytetoWord(btFrameData, 10) * 0.1
-        '        BMS.Bank_SOH = MODBUS배열.bytetoWord(btFrameData, 11) * 0.1
-        '        BMS.Bank_DC전압 = MODBUS배열.bytetoWord(btFrameData, 12) * 0.1
-        '        BMS.Bank_DC전류 = MODBUS배열.bytetoWord(btFrameData, 13) * 0.1
-        '        BMS.Bank_충방전_전력_제한값 = MODBUS배열.bytetoWord(btFrameData, 14) * 0.1
-        '        BMS.Bank내_Cell_최고_전압 = MODBUS배열.bytetoWord(btFrameData, 16) * 0.001
-        '        BMS.Bank내_Cell_최소_전압 = MODBUS배열.bytetoWord(btFrameData, 18) * 0.001
-        '        BMS.Bank내_Module_최고_온도 = MODBUS배열.bytetoWord(btFrameData, 20) * 0.1
-        '        BMS.Bank내_Module_최저_온도 = MODBUS배열.bytetoWord(btFrameData, 22) * 0.1
-        '        BMS.Bank_충방전_전력 = MODBUS배열.bytetoWord(btFrameData, 11) * 0.1 * 0.1
-        '
+       
+
+        cBMS.Over_Current_Discharge_Warning = MODBUS배열.bytetobit(btFrameData, 6, 7)
+        cBMS.Over_Current_Charge_Warning = MODBUS배열.bytetobit(btFrameData, 6, 6)
+        cBMS.Rack_Over_Voltage_Protection_Warning = MODBUS배열.bytetobit(btFrameData, 6, 5)
+        cBMS.Rack_Under_Voltage_Protection_Warning = MODBUS배열.bytetobit(btFrameData, 6, 4)
+        cBMS.Rack_Voltage_Imbalance_Warning = MODBUS배열.bytetobit(btFrameData, 6, 3)
+        cBMS.Rack_Over_Temperature_Warning = MODBUS배열.bytetobit(btFrameData, 6, 2)
+        cBMS.Rack_Under_Temperature_Warning = MODBUS배열.bytetobit(btFrameData, 6, 1)
+        cBMS.Rack_Temperature_Imbalance_Warning = MODBUS배열.bytetobit(btFrameData, 6, 0)
+
+        cBMS.Tray_Rack_Communication_Fault = MODBUS배열.bytetobit(btFrameData, 7, 12)
+        cBMS.Fuse_positive_Fault_Status = MODBUS배열.bytetobit(btFrameData, 7, 11)
+        cBMS.Fuse_negative_Fault_Status = MODBUS배열.bytetobit(btFrameData, 7, 10)
+        cBMS.Discharge_Relay_negative_Fault_Status = MODBUS배열.bytetobit(btFrameData, 7, 9)
+        cBMS.Charge_Relay_positive_Fault_Status = MODBUS배열.bytetobit(btFrameData, 7, 8)
+        cBMS.Over_Current_Discharge_Fault = MODBUS배열.bytetobit(btFrameData, 7, 7)
+        cBMS.Over_Current_Charge_Fault = MODBUS배열.bytetobit(btFrameData, 7, 6)
+        cBMS.Rack_Over_Voltage_Protection_Fault = MODBUS배열.bytetobit(btFrameData, 7, 5)
+        cBMS.Rack_Under_Voltage_Protection_Fault = MODBUS배열.bytetobit(btFrameData, 7, 4)
+        cBMS.Rack_Voltage_Imbalance_Fault = MODBUS배열.bytetobit(btFrameData, 7, 3)
+        cBMS.Rack_Over_Temperature_Fault = MODBUS배열.bytetobit(btFrameData, 7, 2)
+        cBMS.Rack_Under_Temperature_Fault = MODBUS배열.bytetobit(btFrameData, 7, 1)
+        cBMS.Rack_Temperature_Imbalance_Fault = MODBUS배열.bytetobit(btFrameData, 7, 0)
+
+        cBMS.Rack2_to_Master_BMS_Communication_Status = MODBUS배열.bytetobit(btFrameData, 8, 1)
+        cBMS.Rack1_to_Master_BMS_Communication_Status = MODBUS배열.bytetobit(btFrameData, 8, 0)
+
+        cBMS.Rack_to_Master_BMS_Communication_Status = MODBUS배열.bytetobit(btFrameData, 9, 5)
+        cBMS.Bank_Warning = MODBUS배열.bytetobit(btFrameData, 9, 4)
+        cBMS.Bank_Fault = MODBUS배열.bytetobit(btFrameData, 9, 3)
+        cBMS.Bank_Charge_status1 = MODBUS배열.bytetobit(btFrameData, 9, 2)
+        cBMS.Bank_Charge_status0 = MODBUS배열.bytetobit(btFrameData, 9, 1)
+        cBMS.Bank_RUN = MODBUS배열.bytetobit(btFrameData, 9, 0)
+
+        cBMS.Bank_SOC = MODBUS배열.bytetoWord(btFrameData, 10) * 0.1
+        cBMS.Bank_SOH = MODBUS배열.bytetoWord(btFrameData, 11) * 0.1
+        cBMS.Bank_DC전압 = MODBUS배열.bytetoWord(btFrameData, 12) * 0.1
+        cBMS.Bank_DC전류 = MODBUS배열.bytetoWord(btFrameData, 13) * 0.1
+        cBMS.Bank_충방전_전력_제한값 = MODBUS배열.bytetoWord(btFrameData, 14) * 0.1
+        cBMS.Bank내_Cell_최고_전압 = MODBUS배열.bytetoWord(btFrameData, 16) * 0.001
+        cBMS.Bank내_Cell_최소_전압 = MODBUS배열.bytetoWord(btFrameData, 18) * 0.001
+        cBMS.Bank내_Module_최고_온도 = MODBUS배열.bytetoWord(btFrameData, 20) * 0.1
+        cBMS.Bank내_Module_최저_온도 = MODBUS배열.bytetoWord(btFrameData, 22) * 0.1
+        cBMS.Bank_충방전_전력 = MODBUS배열.bytetoWord(btFrameData, 11) * 0.1 * 0.1
+
         Dim rack_offset
         For i = 1 To 5
-            ' rack_offset = 354* (i-1) + 25 = 354 * i -329
+
             rack_offset = 354 * i - 329
 
-            '            BMS.Rack(i).Current_sensor_Charge = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 4) '25 - 4
-            '           BMS.Rack(i).Current_sensor_Discharge = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 3)  '25 - 3
-            '          BMS.Rack(i).Cell_balance_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 2)       '25 - 2
-            '         BMS.Rack(i).Charge_Relay_positive_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 1) ' 25 - 1
-            '        BMS.Rack(i).Discharge_Relay_negative_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 0) ' 25 - 0
-            '
-            'BMS.Rack(i).Over_Current_Discharge_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 7) ' 26 - 7
-            'BMS.Rack(i).Over_Current_Charge_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 6) ' 26 - 6
-            'BMS.Rack(i).Rack_Over_Voltage_Protection_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 5) ' 26 - 5
-            'BMS.Rack(i).Rack_Under_Voltage_Protection_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 4) ' 26 - 4
-            'BMS.Rack(i).Rack_Voltage_Imbalance_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 3) ' 26 - 3
-            'BMS.Rack(i).Rack_Over_Temperature_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 2) ' 26 - 2
-            'BMS.Rack(i).Rack_Under_Temperature_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 1) ' 26 - 1
-            'BMS.Rack(i).Rack_Temperature_Imbalance_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 0) ' 26 - 0
-            '
-            '           BMS.Rack(i).TrayRack_Communication_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 12) ' 27 - 12
-            '          BMS.Rack(i).Fuse_positive_Fault_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 11) ' 27 - 11
-            '          BMS.Rack(i).Fuse_negative_Fault_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 10) ' 27 - 10
-            '          BMS.Rack(i).Discharge_Relay_negative_Fault_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 9) ' 27 - 9
-            '          BMS.Rack(i).Charge_Relay_positive_Fault_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 8) ' 27 - 8
-            '          BMS.Rack(i).Over_Current_Discharge_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 7) ' 27 - 7
-            '          BMS.Rack(i).Over_Current_Charge_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 6) ' 27 - 6
-            '          BMS.Rack(i).Rack_Over_Voltage_Protection_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 5) ' 27 - 5
-            '          BMS.Rack(i).Rack_Under_Voltage_Protection_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 4) ' 27 - 4
-            '          BMS.Rack(i).Rack_Voltage_Imbalance_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 3) ' 27 - 3
-            '          BMS.Rack(i).Rack_Over_Temperature_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 2) ' 27 - 2
-            '          BMS.Rack(i).Rack_Under_Temperature_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 1) ' 27 - 1
-            '          BMS.Rack(i).Rack_Temperature_Imbalance_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 0) ' 27 - 0
-            '
-            '            BMS.Rack(i).Rack_SOC = MODBUS배열.bytetoWord(btFrameData, rack_offset + 2) * 0.1 ' 28 - 0.1 %
-            '            BMS.Rack(i).Rack_SOH = MODBUS배열.bytetoWord(btFrameData, rack_offset + 3) * 0.1 ' 29 - 0.1 %
-            '            BMS.Rack(i).Rack_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 4) * 0.1 ' 30 - 0.1 %
-            '            BMS.Rack(i).Rack_Current = MODBUS배열.bytetoWord(btFrameData, rack_offset + 5) * 0.1 ' 31 - 0.1 A
-            '            BMS.Rack(i).Max_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 6) * 1 ' 32 - 1 mv
-            '            BMS.Rack(i).Max_Cell_Voltage_Position = MODBUS배열.bytetoWord(btFrameData, rack_offset + 7) * 1 ' 33 - 1
-            '            BMS.Rack(i).Min_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 8) * 1 ' 34 - 1 mv
-            '            BMS.Rack(i).Min_Cell_Voltage_Position = MODBUS배열.bytetoWord(btFrameData, rack_offset + 9) * 1 ' 35 - 1
-            '            BMS.Rack(i).Cell_Voltage_Gap = MODBUS배열.bytetoWord(btFrameData, rack_offset + 10) * 1 ' 36 - 1 mv
-            '            BMS.Rack(i).Rack_Average_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 11) * 1 ' 37 - 1 mv
-            '            BMS.Rack(i).Max_Cell_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 12) * 0.1 ' 38 - 0.1 C
-            '            BMS.Rack(i).Max_Cell_Temperature_Position = MODBUS배열.bytetoWord(btFrameData, rack_offset + 13) * 1 ' 39 - 1
-            '            BMS.Rack(i).Min_Cell_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 14) * 0.1 ' 40 - 0.1 C
-            '            BMS.Rack(i).Min_Cell_Temperature_Position = MODBUS배열.bytetoWord(btFrameData, rack_offset + 15) * 1 ' 41 - 1
-            '            BMS.Rack(i).Cell_Temperature_Gap = MODBUS배열.bytetoWord(btFrameData, rack_offset + 16) * 1 ' 42 - 1
-            '            BMS.Rack(i).Rack_Average_Module_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 17) * 1 ' 43 - 1
-            '
+            cBMS_Rack(i).Current_sensor_Charge = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 4) '25 - 4
+            cBMS_Rack(i).Current_sensor_Discharge = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 3)  '25 - 3
+            cBMS_Rack(i).Cell_balance_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 2)       '25 - 2
+            cBMS_Rack(i).Charge_Relay_positive_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 1) ' 25 - 1
+            cBMS_Rack(i).Discharge_Relay_negative_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 0, 0) ' 25 - 0
+
+            cBMS_Rack(i).Over_Current_Discharge_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 7) ' 26 - 7
+            cBMS_Rack(i).Over_Current_Charge_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 6) ' 26 - 6
+            cBMS_Rack(i).Rack_Over_Voltage_Protection_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 5) ' 26 - 5
+            cBMS_Rack(i).Rack_Under_Voltage_Protection_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 4) ' 26 - 4
+            cBMS_Rack(i).Rack_Voltage_Imbalance_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 3) ' 26 - 3
+            cBMS_Rack(i).Rack_Over_Temperature_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 2) ' 26 - 2
+            cBMS_Rack(i).Rack_Under_Temperature_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 1) ' 26 - 1
+            cBMS_Rack(i).Rack_Temperature_Imbalance_Warning = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 0) ' 26 - 0
+
+            cBMS_Rack(i).TrayRack_Communication_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 12) ' 27 - 12
+            cBMS_Rack(i).Fuse_positive_Fault_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 11) ' 27 - 11
+            cBMS_Rack(i).Fuse_negative_Fault_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 10) ' 27 - 10
+            cBMS_Rack(i).Discharge_Relay_negative_Fault_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 9) ' 27 - 9
+            cBMS_Rack(i).Charge_Relay_positive_Fault_Status = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 8) ' 27 - 8
+            cBMS_Rack(i).Over_Current_Discharge_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 7) ' 27 - 7
+            cBMS_Rack(i).Over_Current_Charge_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 6) ' 27 - 6
+            cBMS_Rack(i).Rack_Over_Voltage_Protection_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 5) ' 27 - 5
+            cBMS_Rack(i).Rack_Under_Voltage_Protection_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 4) ' 27 - 4
+            cBMS_Rack(i).Rack_Voltage_Imbalance_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 3) ' 27 - 3
+            cBMS_Rack(i).Rack_Over_Temperature_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 2) ' 27 - 2
+            cBMS_Rack(i).Rack_Under_Temperature_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 1) ' 27 - 1
+            cBMS_Rack(i).Rack_Temperature_Imbalance_Fault = MODBUS배열.bytetobit(btFrameData, rack_offset + 1, 0) ' 27 - 0
+
+            cBMS_Rack(i).Rack_SOC = MODBUS배열.bytetoWord(btFrameData, rack_offset + 2) * 0.1 ' 28 - 0.1 %
+            cBMS_Rack(i).Rack_SOH = MODBUS배열.bytetoWord(btFrameData, rack_offset + 3) * 0.1 ' 29 - 0.1 %
+            cBMS_Rack(i).Rack_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 4) * 0.1 ' 30 - 0.1 %
+            cBMS_Rack(i).Rack_Current = MODBUS배열.bytetoWord(btFrameData, rack_offset + 5) * 0.1 ' 31 - 0.1 A
+            cBMS_Rack(i).Max_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 6) * 1 ' 32 - 1 mv
+            cBMS_Rack(i).Max_Cell_Voltage_Position = MODBUS배열.bytetoWord(btFrameData, rack_offset + 7) * 1 ' 33 - 1
+            cBMS_Rack(i).Min_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 8) * 1 ' 34 - 1 mv
+            cBMS_Rack(i).Min_Cell_Voltage_Position = MODBUS배열.bytetoWord(btFrameData, rack_offset + 9) * 1 ' 35 - 1
+            cBMS_Rack(i).Cell_Voltage_Gap = MODBUS배열.bytetoWord(btFrameData, rack_offset + 10) * 1 ' 36 - 1 mv
+            cBMS_Rack(i).Rack_Average_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 11) * 1 ' 37 - 1 mv
+            cBMS_Rack(i).Max_Cell_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 12) * 0.1 ' 38 - 0.1 C
+            cBMS_Rack(i).Max_Cell_Temperature_Position = MODBUS배열.bytetoWord(btFrameData, rack_offset + 13) * 1 ' 39 - 1
+            cBMS_Rack(i).Min_Cell_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 14) * 0.1 ' 40 - 0.1 C
+            cBMS_Rack(i).Min_Cell_Temperature_Position = MODBUS배열.bytetoWord(btFrameData, rack_offset + 15) * 1 ' 41 - 1
+            cBMS_Rack(i).Cell_Temperature_Gap = MODBUS배열.bytetoWord(btFrameData, rack_offset + 16) * 1 ' 42 - 1
+            cBMS_Rack(i).Rack_Average_Module_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 17) * 1 ' 43 - 1
+
             Dim module_offset
             For j = 1 To 17
                 module_offset = (j - 1) * 9
-                '                BMS.Rack(i).BMS_Module(j).Module_DC_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + module_offset + 18) ' 44 - 0
-                '                BMS.Rack(i).BMS_Module(j).Max_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 19) ' 45 - 0
-                '                BMS.Rack(i).BMS_Module(j).Min_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 20) ' 46 - 0
-                '                BMS.Rack(i).BMS_Module(j).Averge_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 21) ' 47 - 0
-                '                BMS.Rack(i).BMS_Module(j).Max_Min_Cell_Voltage_Location = MODBUS배열.bytetoWord(btFrameData, rack_offset + 22) ' 48 - 0
-                '                BMS.Rack(i).BMS_Module(j).Average_Module_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 23) ' 49 - 0
-                '                BMS.Rack(i).BMS_Module(j).Max_Module_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 24) ' 50 - 0
-                '                BMS.Rack(i).BMS_Module(j).Min_Module_Temeperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 25) ' 51 - 0
-                '                BMS.Rack(i).BMS_Module(j).Max_Min_Module_Temperature_Location = MODBUS배열.bytetoWord(btFrameData, rack_offset + 26) ' 52 - 0
+                cBMS_Module(i, j).Module_DC_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + module_offset + 18) ' 44 - 0
+                cBMS_Module(i, j).Max_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 19) ' 45 - 0
+                cBMS_Module(i, j).Min_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 20) ' 46 - 0
+                cBMS_Module(i, j).Averge_Cell_Voltage = MODBUS배열.bytetoWord(btFrameData, rack_offset + 21) ' 47 - 0
+                cBMS_Module(i, j).Max_Min_Cell_Voltage_Location = MODBUS배열.bytetoWord(btFrameData, rack_offset + 22) ' 48 - 0
+                cBMS_Module(i, j).Average_Module_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 23) ' 49 - 0
+                cBMS_Module(i, j).Max_Module_Temperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 24) ' 50 - 0
+                cBMS_Module(i, j).Min_Module_Temeperature = MODBUS배열.bytetoWord(btFrameData, rack_offset + 25) ' 51 - 0
+                cBMS_Module(i, j).Max_Min_Module_Temperature_Location = MODBUS배열.bytetoWord(btFrameData, rack_offset + 26) ' 52 - 0
             Next
         Next
-
-
-
 
 
     End Sub
@@ -383,6 +382,6 @@ Public Class BMS통신차일드
         'Debug.WriteLine(szRecvMsg)
 
     End Sub
-    
+
 
 End Class

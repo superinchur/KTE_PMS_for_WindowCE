@@ -1,4 +1,4 @@
-'Date: 08\23\2010 - Ludvik Jerabek - Initial Release
+﻿'Date: 08\23\2010 - Ludvik Jerabek - Initial Release
 'Version: 1.0
 'Comment: Allow INI manipulation in .NET
 'License: CPOL

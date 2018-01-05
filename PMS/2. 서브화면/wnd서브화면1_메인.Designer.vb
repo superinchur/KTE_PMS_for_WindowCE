@@ -23,13 +23,17 @@ Partial Public Class wnd서브화면1_메인
         Me.타이머_상태 = New System.Windows.Forms.Timer
         Me.pbBattery = New System.Windows.Forms.PictureBox
         Me.PictureBox2 = New System.Windows.Forms.PictureBox
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox
         Me.PictureBox4 = New System.Windows.Forms.PictureBox
         Me.Label2 = New System.Windows.Forms.Label
+        Me.Label3 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
         Me.lbRunMode = New PMS.VSLabel
+        Me.ucScrollLoadStatus = New PMS.ucScrollArrow
         Me.ucScrollGridStatus = New PMS.ucScrollArrow
         Me.ucScrollBattStatus = New PMS.ucScrollArrow
         Me.lbBattPercent = New PMS.VSLabel
+        Me.lbLoadStatus = New PMS.VSLabel
         Me.lbGridStatus = New PMS.VSLabel
         Me.lbBattStatus = New PMS.VSLabel
         Me.SuspendLayout()
@@ -53,10 +57,18 @@ Partial Public Class wnd서브화면1_메인
         Me.PictureBox2.Size = New System.Drawing.Size(80, 80)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Location = New System.Drawing.Point(654, 189)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(64, 64)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        '
         'PictureBox4
         '
         Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
-        Me.PictureBox4.Location = New System.Drawing.Point(656, 149)
+        Me.PictureBox4.Location = New System.Drawing.Point(654, 103)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(64, 64)
         Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -64,9 +76,16 @@ Partial Public Class wnd서브화면1_메인
         'Label2
         '
         Me.Label2.BackColor = System.Drawing.Color.DarkGray
-        Me.Label2.Location = New System.Drawing.Point(466, 195)
+        Me.Label2.Location = New System.Drawing.Point(464, 149)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(151, 2)
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.Color.DarkGray
+        Me.Label3.Location = New System.Drawing.Point(464, 220)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(151, 2)
         '
         'Label4
         '
@@ -94,9 +113,16 @@ Partial Public Class wnd서브화면1_메인
         Me.lbRunMode.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbRunMode.UseKeyPad = True
         '
+        'ucScrollLoadStatus
+        '
+        Me.ucScrollLoadStatus.Location = New System.Drawing.Point(464, 230)
+        Me.ucScrollLoadStatus.Name = "ucScrollLoadStatus"
+        Me.ucScrollLoadStatus.Size = New System.Drawing.Size(150, 20)
+        Me.ucScrollLoadStatus.TabIndex = 26
+        '
         'ucScrollGridStatus
         '
-        Me.ucScrollGridStatus.Location = New System.Drawing.Point(466, 167)
+        Me.ucScrollGridStatus.Location = New System.Drawing.Point(464, 121)
         Me.ucScrollGridStatus.Name = "ucScrollGridStatus"
         Me.ucScrollGridStatus.Size = New System.Drawing.Size(150, 20)
         Me.ucScrollGridStatus.TabIndex = 26
@@ -126,6 +152,24 @@ Partial Public Class wnd서브화면1_메인
         Me.lbBattPercent.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbBattPercent.UseKeyPad = True
         '
+        'lbLoadStatus
+        '
+        Me.lbLoadStatus.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.lbLoadStatus.BorderColor = System.Drawing.Color.Gray
+        Me.lbLoadStatus.BorderSide_Bottom = True
+        Me.lbLoadStatus.BorderSide_Left = True
+        Me.lbLoadStatus.BorderSide_Right = True
+        Me.lbLoadStatus.BorderSide_Top = True
+        Me.lbLoadStatus.BorderWidth = 1
+        Me.lbLoadStatus.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lbLoadStatus.ForeColor = System.Drawing.Color.Black
+        Me.lbLoadStatus.Location = New System.Drawing.Point(479, 256)
+        Me.lbLoadStatus.Name = "lbLoadStatus"
+        Me.lbLoadStatus.Size = New System.Drawing.Size(120, 30)
+        Me.lbLoadStatus.TabIndex = 0
+        Me.lbLoadStatus.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbLoadStatus.UseKeyPad = True
+        '
         'lbGridStatus
         '
         Me.lbGridStatus.BackColor = System.Drawing.Color.WhiteSmoke
@@ -137,7 +181,7 @@ Partial Public Class wnd서브화면1_메인
         Me.lbGridStatus.BorderWidth = 1
         Me.lbGridStatus.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
         Me.lbGridStatus.ForeColor = System.Drawing.Color.Black
-        Me.lbGridStatus.Location = New System.Drawing.Point(481, 131)
+        Me.lbGridStatus.Location = New System.Drawing.Point(479, 85)
         Me.lbGridStatus.Name = "lbGridStatus"
         Me.lbGridStatus.Size = New System.Drawing.Size(120, 30)
         Me.lbGridStatus.TabIndex = 1
@@ -169,13 +213,17 @@ Partial Public Class wnd서브화면1_메인
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.lbRunMode)
         Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.ucScrollLoadStatus)
         Me.Controls.Add(Me.ucScrollGridStatus)
         Me.Controls.Add(Me.ucScrollBattStatus)
         Me.Controls.Add(Me.lbBattPercent)
+        Me.Controls.Add(Me.lbLoadStatus)
         Me.Controls.Add(Me.lbGridStatus)
         Me.Controls.Add(Me.lbBattStatus)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.PictureBox4)
+        Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.pbBattery)
         Me.Name = "wnd서브화면1_메인"
@@ -186,14 +234,18 @@ Partial Public Class wnd서브화면1_메인
     Friend WithEvents 타이머_상태 As System.Windows.Forms.Timer
     Friend WithEvents pbBattery As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents lbBattStatus As PMS.VSLabel
     Friend WithEvents lbGridStatus As PMS.VSLabel
+    Friend WithEvents lbLoadStatus As PMS.VSLabel
     Friend WithEvents lbBattPercent As PMS.VSLabel
     Friend WithEvents ucScrollBattStatus As PMS.ucScrollArrow
     Friend WithEvents ucScrollGridStatus As PMS.ucScrollArrow
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents ucScrollLoadStatus As PMS.ucScrollArrow
     Friend WithEvents lbRunMode As PMS.VSLabel
 
 End Class

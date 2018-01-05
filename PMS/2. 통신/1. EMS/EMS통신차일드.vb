@@ -44,7 +44,7 @@ Public Class EMS통신차일드
     Public Sub OnDataArrived(ByVal szAddr As String, ByVal nPort As Integer, ByVal szMode As String, ByVal btData() As Byte, ByVal nLength As Integer)
         Try
             If nLength > 0 Then
-                'RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
+                RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
             End If
         Catch ex As Exception
             Debug.WriteLine("")
@@ -56,7 +56,7 @@ Public Class EMS통신차일드
             For i As Integer = 0 To nLength - 1
                 szRecvMsg &= String.Format("{0:X2} ", btData(i))
             Next
-            'Debug.WriteLine(szRecvMsg)
+            Debug.WriteLine(szRecvMsg)
 
 
             Array.Copy(btData, 0, btRecvBuffer, nRecvBuffer, nLength)

@@ -7,16 +7,16 @@
     Public MODBUS_EMS_BUFFER(1024) As Byte
     Public MODBUS_BMS_BUFFER(1024) As Byte
 
-    'Private btDataMap(10240) As Byte
+    Private btDataMap(10240) As Byte
 
-    'Public Property ModbusData(ByVal nAddress As Integer) As Byte
-    '    Get
-    '        Return btDataMap(nAddress)
-    '    End Get
-    '    Set(ByVal value As Byte)
-    '        btDataMap(nAddress) = value
-    '    End Set
-    'End Property
+    Public Property ModbusData(ByVal nAddress As Integer) As Byte
+        Get
+            Return btDataMap(nAddress)
+        End Get
+        Set(ByVal value As Byte)
+            btDataMap(nAddress) = value
+        End Set
+    End Property
 
     Private htModbusData As New Hashtable
 
@@ -168,7 +168,7 @@
         Dim ushReturn As UShort = 0
 
         ushReturn = btdata(nAddress * 2) * &H100 + btdata(nAddress * 2 + 1)
-        
+
 
         Return ushReturn
     End Function

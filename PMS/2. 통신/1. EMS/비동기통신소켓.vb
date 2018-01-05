@@ -44,7 +44,7 @@ Public Class 비동기통신소켓
         Try
             Dim szAddress As String = IPAddress.Parse(CType(client.RemoteEndPoint, IPEndPoint).Address.ToString()).ToString
             Dim nPort As Integer = CType(client.RemoteEndPoint, IPEndPoint).Port
-            'RaiseEvent DataArrived(szAddress, nPort, "TX", Data, idx)
+            RaiseEvent DataArrived(szAddress, nPort, "TX", Data, idx)
 
             client.BeginSend(Data, 0, idx, SocketFlags.None, New AsyncCallback(AddressOf sckSendComplete), Nothing)
         Catch ex As Exception
@@ -57,10 +57,10 @@ Public Class 비동기통신소켓
 
         Try
             Dim SentPacketSize As Long
-
+            'TODO :: PacketSize는 보낸 패킷의 크기입니다.
             SentPacketSize = client.EndSend(Rs)
 
-            'RaiseEvent DataSendComplete(SentPacketSize)
+            RaiseEvent DataSendComplete(SentPacketSize)
 
         Catch ex As Exception
             Debug.WriteLine(ex.ToString)
@@ -80,10 +80,10 @@ Public Class 비동기통신소켓
 
                     Dim PacketSize As Long
                     PacketSize = client.EndReceive(Rs)
-
+                    'TODO :: Buffer에 데이터가 저장되며 PacketSize는 패킷의 크기입니다.
 
                     If PacketSize > 0 Then
-                        'RaiseEvent DataArrived(szAddress, nPort, "RX", buffer, PacketSize)
+                        RaiseEvent DataArrived(szAddress, nPort, "RX", buffer, PacketSize)
 
                         client.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, New AsyncCallback(AddressOf sckArrived), Nothing)
                     Else

@@ -14,7 +14,7 @@ Public Class EMS통신서버
 
     Public Event DataArrived(ByVal szAddr As String, ByVal nPort As Integer, ByVal szMode As String, ByVal btData() As Byte, ByVal nLength As Integer)
     Public Sub OnDataArrived(ByVal szAddr As String, ByVal nPort As Integer, ByVal szMode As String, ByVal btData() As Byte, ByVal nLength As Integer)
-        'RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
+        RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
     End Sub
 
     Public Overloads Sub ServiceStart()

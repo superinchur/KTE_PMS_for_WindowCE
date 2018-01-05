@@ -11,8 +11,8 @@
         화면초기화()
         PageHeader1_Click(Nothing, EventArgs.Empty)
 
-        타이머_상태.Interval = 1000
-        타이머_상태.Enabled = True
+        '타이머_상태.Interval = 1000
+        '        타이머_상태.Enabled = True
 
     End Sub
 

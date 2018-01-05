@@ -130,15 +130,16 @@ Public Class wnd서브화면7_설정
 
     Private Sub 화면_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles MyBase.Paint
 
-        Dim g As Graphics = e.Graphics
+        'Dim g As Graphics = e.Graphics
 
-        Dim thisRect As New Rectangle(0, 0, Me.Width - 1, Me.Height - 1)
-        Dim pPen As New Pen(메인화면.버튼_화면전환_메인.BorderColor, 메인화면.버튼_화면전환_메인.BorderWidth)
-        g.DrawLine(pPen, Me.Width - 1, 0, Me.Width - 1, Me.Height - 1)
+        'Dim thisRect As New Rectangle(0, 0, Me.Width - 1, Me.Height - 1)
+        'Dim pPen As New Pen(메인화면.버튼_화면전환_메인.BorderColor, 메인화면.버튼_화면전환_메인.BorderWidth)
 
-        g.DrawLine(pPen, 0, 0, Me.Width - 1, 0)
+        'g.DrawLine(pPen, Me.Width - 1, 0, Me.Width - 1, Me.Height - 1)
 
-        g.DrawLine(pPen, 0, Me.Height - 1, Me.Width - 1, Me.Height - 1)
+        'g.DrawLine(pPen, 0, 0, Me.Width - 1, 0)
+
+        'g.DrawLine(pPen, 0, Me.Height - 1, Me.Width - 1, Me.Height - 1)
 
     End Sub
 

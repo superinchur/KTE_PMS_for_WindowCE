@@ -104,8 +104,7 @@ Public Class BMS통신서버
                     Dim spTerm As TimeSpan = Now - pObj.tLastReceive
                     If spTerm.TotalSeconds > 30 Then
                         pObj.ConnectStatus = False
-
-
+                        
                         Timer_Comm.Enabled = False
 
 
@@ -140,5 +139,5 @@ Public Class BMS통신서버
         Return alClientList.Count
     End Function
 
-    
+
 End Class

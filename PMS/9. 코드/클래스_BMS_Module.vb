@@ -1,4 +1,4 @@
-﻿Structure BMS_Module
+﻿Public Structure 클래스_BMS_Module
     Dim Module_DC_Voltage As Integer
     Dim Max_Cell_Voltage As Integer
     Dim Min_Cell_Voltage As Integer

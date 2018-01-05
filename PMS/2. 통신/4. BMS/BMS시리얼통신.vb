@@ -18,7 +18,7 @@
             DeviceCommPort.Close()
         End If
 
-        DeviceCommPort.PortName = BMS_통신포트
+        DeviceCommPort.PortName = PCS_통신포트
         DeviceCommPort.BaudRate = 19200
         DeviceCommPort.Parity = IO.Ports.Parity.Even
         DeviceCommPort.DataBits = 8
@@ -28,7 +28,7 @@
         Try
             DeviceCommPort.Open()
 
-            Timer_Comm.Interval = BMS_통신주기
+            Timer_Comm.Interval = PCS_통신주기
             Timer_Comm.Enabled = True
 
         Catch ex As Exception
@@ -62,7 +62,7 @@
         Try
 
             For nCnt As Integer = 0 To nLength - 1
-                If (nRecvBufferLength = 0 And btData(nCnt) = BMS_통신ID) Or nRecvBufferLength > 0 Then
+                If (nRecvBufferLength = 0 And btData(nCnt) = PMS_통신ID) Or nRecvBufferLength > 0 Then
                     btRecvBuffer(nRecvBufferLength) = btData(nCnt)
                     nRecvBufferLength += 1
 
@@ -148,7 +148,7 @@
             Dim btData(32) As Byte
             Dim nData As Integer = 0
 
-            btData(nData) = BMS_통신ID
+            btData(nData) = PMS_통신ID
             nData += 1
 
             btData(nData) = &H6
@@ -166,6 +166,7 @@
             btData(nData) = nWriteData Mod &H100
             nData += 1
 
+
             '<----------------------------------------------------------->
             '   Check Sum
             '<----------------------------------------------------------->
@@ -178,11 +179,14 @@
             btData(nData) = shCheckSum \ &H100
             nData += 1
 
+
             Array.Clear(btRecvBuffer, 0, btRecvBuffer.Length)
             nRecvBufferLength = 0
+
             '<----------------------------------------------------------->
             '   Data Receive
             '<----------------------------------------------------------->
+
             Try
                 RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
                 DeviceCommPort.Write(btData, 0, nData)
@@ -269,37 +273,6 @@
         End If
 
         Return nReturn
-    End Function
-
-
-    Private Function ReadStartAdr(ByVal nRack As UShort, ByVal nModule As UShort) As UShort
-
-        Dim nStartAddress As UShort
-        If nModule = 0 And nRack = 0 Then
-            nStartAddress = 0
-        ElseIf nModule = 0 And Not nRack = 0 Then
-            nStartAddress = (379 * nRack) - 354
-        Else
-            nStartAddress = (379 * nRack) + (9 * nModule) - 354
-        End If
-
-        Return Convert.ToUInt16(nStartAddress)
-
-    End Function
-
-    Private Function ReadLength(ByVal nRack As UShort, ByVal nModule As UShort) As UShort
-
-        Dim nLength As UShort
-        If nModule = 0 And nRack = 0 Then
-            nLength = 25
-        ElseIf nModule = 0 And Not nRack = 0 Then
-            nLength = 19
-        Else
-            nLength = 9
-        End If
-
-        Return Convert.ToUInt16(nLength)
-
     End Function
 End Class
 

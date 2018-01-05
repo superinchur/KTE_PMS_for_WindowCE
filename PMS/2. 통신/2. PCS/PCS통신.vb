@@ -1,9 +1,7 @@
 ﻿Public Class PCS통신
     Public PCS_MODBUS_ADDRESS As Integer = 0
-    ' 추후 수정 가능함
     Public PCS_MODBUS_COUNT As Integer = 6
 
-    Public Priority_Read As Integer = 5
     Private pCRC16 As New Crc16
     Private WithEvents Timer_Comm As New Windows.Forms.Timer
     Private WithEvents DeviceCommPort As New System.IO.Ports.SerialPort
@@ -49,11 +47,12 @@
 
         'RaiseEvent DataArrived(DeviceCommPort.PortName, "RX", btData, nLength)
 
+
         Dim szRecvMsg As String = "RX : "
         For i As Integer = 0 To nLength - 1
             szRecvMsg &= String.Format("{0:X2} ", btData(i))
         Next
-        'Debug.WriteLine(szRecvMsg)
+        Debug.WriteLine(szRecvMsg)
 
         If nRecvBufferLength + nLength > btRecvBuffer.Length Then
             Array.Clear(btRecvBuffer, 0, btRecvBuffer.Length)
@@ -81,10 +80,7 @@
 
                                 If nCheckSum1 = btRecvBuffer(nRecvBufferLength - 2) And nCheckSum2 = btRecvBuffer(nRecvBufferLength - 1) Then
 
-                                    If DEBUG_COMM = True Then
-                                        RaiseEvent DataArrived(DeviceCommPort.PortName, "RX", btRecvBuffer, nRecvBufferLength)
-                                    End If
-
+                                    RaiseEvent DataArrived(DeviceCommPort.PortName, "RX", btRecvBuffer, nRecvBufferLength)
 
                                     tLastRecv = Now
 
@@ -104,26 +100,22 @@
                             If nRecvBufferLength = 8 Then
 
                                 ' 제어응답 - 싱글
-                                If DEBUG_COMM = True Then
-                                    'Debug.WriteLine("btRecvBuffer : " + btData(1) + btData(2) + btData(3) + btData(4) + btData(5))
-                                    'Debug.WriteLine("btRecvBuffer : " + btRecvBuffer(1) + btRecvBuffer(2) + btRecvBuffer(3) + btRecvBuffer(4) + btRecvBuffer(5))
-                                End If
-                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
 
+                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
                                 'nModbusWriteRegisterResponse = nRecvBufferLength - 3
                             End If
 
-                            ElseIf btRecvCommand = &H10 Then
-                                If nRecvBufferLength = 8 Then
+                        ElseIf btRecvCommand = &H10 Then
+                            If nRecvBufferLength = 8 Then
 
-                                    ' 제어응답 - 멀티
+                                ' 제어응답 - 멀티
 
-                                    'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
-                                    'nModbusWriteRegisterResponse = nRecvBufferLength - 3
-                                End If
-
-
+                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
+                                'nModbusWriteRegisterResponse = nRecvBufferLength - 3
                             End If
+
+
+                        End If
                     End If
                 End If
             Next
@@ -148,96 +140,13 @@
     Private Sub Timer_Comm_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer_Comm.Tick
         Timer_Comm.Enabled = False
 
-        ' 매초 비교를 현재 BMS 데이터를 비교하고, 비교한 값과 달라지는게 있다면 제어대기열에 넣어서 Writing을 한다.
-        BMS데이터비교()
-
-        Priority_Read = Priority_Read + 1
-        If Priority_Read > 4 Then
-            Priority_Read = 1
-        End If
-        ' 
-        If 제어대기열_대기수량() > 0 And Not Priority_Read = 1 Then
+        If 제어대기열_대기수량() > 0 Then
             SendWriteRegister()
         Else
             SendPollingData()
         End If
-        'SendPollingData()
+
         Timer_Comm.Enabled = True
-    End Sub
-
-    'BMS데이터비교에서 Deadband를 사용하기 위해서 저장하는 시간 값.
-    Private tLastSOC As Date
-    Private tLastSOH As Date
-    Private tLastStatus As Date
-
-    Private Sub BMS데이터비교()
-
-        ' 같다면 이전 상태아무런 동작을 하지 않지만, 다르다면 제어대기열 추가 이후, prev_값을 넣는다
-
-
-        Dim tSpan As TimeSpan
-        Dim Ondelay As Integer = 3
-
-        '' Deadband를 넣어야함.
-        '' On-Delay Off-Delay를 넣어야 함.
-
-        If Not cBMS.prev_Bank_SOC = cBMS.Bank_SOC Then
-            tSpan = Now - tLastSOC
-            If tSpan.TotalSeconds <= Ondelay Then
-                제어대기열_추가(PT_SOC, Convert.ToInt16(cBMS.Bank_SOC))
-                cBMS.prev_Bank_SOC = cBMS.Bank_SOC
-            Else
-                ' Waiting until Deadband
-            End If
-        Else
-            tLastSOC = Now
-        End If
-
-        If Not cBMS.prev_Bank_SOH = cBMS.Bank_SOH Then
-            tSpan = Now - tLastSOH
-            If tSpan.TotalSeconds <= Ondelay Then
-                제어대기열_추가(PT_SOH, Convert.ToInt16(cBMS.Bank_SOH))
-                cBMS.prev_Bank_SOH = cBMS.Bank_SOH
-            Else
-                ' Waiting until Deadband
-            End If
-            tLastSOH = Now
-        End If
-
-        Dim ushValue As UShort
-        BMS경보값비교(cBMS.prev_Over_Current_Discharge_Warning, cBMS.Over_Current_Discharge_Warning, ushValue, 7)
-        BMS경보값비교(cBMS.prev_Over_Current_Charge_Warning, cBMS.Over_Current_Charge_Warning, ushValue, 6)
-        BMS경보값비교(cBMS.prev_Rack_Over_Voltage_Protection_Warning, cBMS.Rack_Over_Voltage_Protection_Warning, ushValue, 5)
-        BMS경보값비교(cBMS.prev_Rack_Under_Voltage_Protection_Warning, cBMS.Rack_Under_Voltage_Protection_Warning, ushValue, 4)
-        BMS경보값비교(cBMS.prev_Rack_Voltage_Imbalance_Warning, cBMS.Rack_Voltage_Imbalance_Warning, ushValue, 3)
-        BMS경보값비교(cBMS.prev_Rack_Over_Temperature_Warning, cBMS.Rack_Over_Temperature_Warning, ushValue, 2)
-        BMS경보값비교(cBMS.prev_Rack_Under_Temperature_Warning, cBMS.Rack_Under_Temperature_Warning, ushValue, 1)
-        BMS경보값비교(cBMS.prev_Rack_Temperature_Imbalance_Warning, cBMS.Rack_Temperature_Imbalance_Warning, ushValue, 0)
-
-        If Not ushValue = cBMS.prev_Bank_Status Then
-            tSpan = Now - tLastStatus
-            If tSpan.TotalSeconds <= Ondelay Then
-                제어대기열_추가(PT_STS, ushValue)
-                cBMS.prev_Bank_Status = ushValue
-            Else
-                ' Waiting until Deadband
-            End If
-
-        Else
-            tLastStatus = Now
-        End If
-
-    End Sub
-
-    Private Sub BMS경보값비교(ByRef prev_a As Boolean, ByVal a As Boolean, ByRef ushValue As Integer, ByVal nbit As Integer)
-        Dim temp_flag As Integer = 0
-
-        If Not prev_a = a Then
-            temp_flag = a
-            ushValue = SetBitmask(ushValue, nbit, temp_flag)
-
-            prev_a = a
-        End If
     End Sub
 
     Private Sub SendWriteRegister()
@@ -252,7 +161,7 @@
 
         Try
 
-            Dim btData(64) As Byte
+            Dim btData(32) As Byte
             Dim nData As Integer = 0
 
             btData(nData) = PMS_통신ID
@@ -293,10 +202,9 @@
             '<----------------------------------------------------------->
             '   Data Receive
             '<----------------------------------------------------------->
+
             Try
-                If DEBUG_COMM = True Then
-                    RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
-                End If
+                RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
                 DeviceCommPort.Write(btData, 0, nData)
 
                 Dim szMsg As String = "TX :"
@@ -322,7 +230,7 @@
 
         Try
 
-            Dim btData(64) As Byte
+            Dim btData(32) As Byte
             Dim nData As Integer = 0
 
             btData(nData) = PMS_통신ID
@@ -358,10 +266,7 @@
 
 
             Try
-                If DEBUG_COMM = True Then
-                    RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
-                End If
-                'RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
+                RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
                 DeviceCommPort.Write(btData, 0, nData)
 
             Catch ex As Exception
@@ -379,7 +284,7 @@
         Dim tSpan As TimeSpan = Now - tLastRecv
         Dim nReturn As Integer = 0
 
-        If tSpan.TotalSeconds <= 60 Then
+        If tSpan.TotalSeconds <= 30 Then
             nReturn = 1
         End If
 

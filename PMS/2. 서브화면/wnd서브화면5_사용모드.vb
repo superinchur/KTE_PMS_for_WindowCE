@@ -50,6 +50,9 @@
 
     Public Sub 설정값불러오기()
 
+        lbLoadPower.Text = String.Format("{0:N0}", 사용모드_로드파워)  ' 로드파워
+        lbPeakCut.Text = String.Format("{0:N0}", 사용모드_피크컷)  ' 피크컷
+
         lbTime1StartHour.Text = 사용모드_피크컷시간(1, 1).ToString("00")  ' 피크컷시간1 - 시작 시
         lbTime1StartMin.Text = 사용모드_피크컷시간(1, 2).ToString("00")  ' 피크컷시간1 - 시작 분
         lbTime1EndHour.Text = 사용모드_피크컷시간(1, 3).ToString("00")  ' 피크컷시간1 - 종료 시
@@ -60,23 +63,18 @@
         lbTime2EndHour.Text = 사용모드_피크컷시간(2, 3).ToString("00")  ' 피크컷시간2 - 종료 시
         lbTime2EndMin.Text = 사용모드_피크컷시간(2, 4).ToString("00")  ' 피크컷시간2 - 종료 분
 
-        lbGridActivePower.Text = String.Format("{0:N0}", d사용모드_유효전력)  ' 유효전력
-        lbGridReactivePower.Text = String.Format("{0:N01}", d사용모드_무효전력)  ' 무효전력
+        lbGridActivePower.Text = String.Format("{0:N0}", 사용모드_유효전력)  ' 유효전력
+        lbGridReactivePower.Text = String.Format("{0:N0}", 사용모드_무효전력)  ' 무효전력
 
-        lbBatteryFD.Text = String.Format("{0:N0}", d사용모드_배터리_방전정지SOC)  ' 방전 중지
-        lbBatteryCS.Text = String.Format("{0:N0}", d사용모드_배터리_충전정지SOC)  ' 충전 시작
-        lb방전정지전압.Text = String.Format("{0:N1}", d사용모드_배터리_방전정지전압)  ' 방전 중지
-        lb충전정지전압.Text = String.Format("{0:N1}", d사용모드_배터리_충전정지전압)  ' 충전 시작
-        lbBatteryCC.Text = String.Format("{0:N1}", d사용모드_배터리_충전시최대전류) ' 충전 전류
-        lbBatteryCV.Text = String.Format("{0:N1}", d사용모드_배터리_방전시최대전류)  ' 충전 전압
-
-        'Test
-        VsLabel17.Text = cBMS.Bank_DC전압.ToString
-        VsLabel23.Text = cBMS.Bank_SOC.ToString
+        lbBatteryFD.Text = String.Format("{0:N0}", 사용모드_배터리_방전중지)  ' 방전 중지
+        lbBatteryCS.Text = String.Format("{0:N0}", 사용모드_배터리_충전시작)  ' 충전 시작
+        lbBatteryCC.Text = String.Format("{0:N0}", 사용모드_배터리_충전전류) ' 충전 전류
+        lbBatteryCV.Text = String.Format("{0:N0}", 사용모드_배터리_충전전압)  ' 충전 전압
 
     End Sub
 
     Private Sub Panel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
+
         Dim pObj As Panel = sender
 
         Dim pPen As New Pen(Color.Gray, 1)
@@ -85,8 +83,7 @@
         e.Graphics.DrawLine(pPen, pObj.Width - 1, 0, pObj.Width - 1, pObj.Height - 1)
         e.Graphics.DrawLine(pPen, 0, pObj.Height - 1, pObj.Width - 1, pObj.Height - 1)
 
-        e.Graphics.DrawLine(pPen, PageHeader4.Left + PageHeader4.Width - PageHeader1.Left, 0, pObj.Width - 1, 0)
-
+        e.Graphics.DrawLine(pPen, PageHeader3.Left + PageHeader3.Width - PageHeader1.Left, 0, pObj.Width - 1, 0)
 
     End Sub
 
@@ -98,6 +95,15 @@
         PageHeader1.Enabled = False
         PageHeader1.Invalidate()
 
+        PageHeader2.BorderSide_Bottom = True
+        PageHeader2.BackColor = Color.WhiteSmoke
+        PageHeader2.Enabled = True
+        PageHeader2.Invalidate()
+
+        PageHeader3.BorderSide_Bottom = True
+        PageHeader3.BackColor = Color.WhiteSmoke
+        PageHeader3.Enabled = True
+        PageHeader3.Invalidate()
 
         PageHeader4.BorderSide_Bottom = True
         PageHeader4.BackColor = Color.WhiteSmoke
@@ -111,12 +117,22 @@
 
     End Sub
 
-    Private Sub PageHeader2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub PageHeader2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PageHeader2.Click
 
         PageHeader1.BorderSide_Bottom = True
         PageHeader1.BackColor = Color.WhiteSmoke
         PageHeader1.Enabled = True
         PageHeader1.Invalidate()
+
+        PageHeader2.BorderSide_Bottom = False
+        PageHeader2.BackColor = Color.White
+        PageHeader2.Enabled = False
+        PageHeader2.Invalidate()
+
+        PageHeader3.BorderSide_Bottom = True
+        PageHeader3.BackColor = Color.WhiteSmoke
+        PageHeader3.Enabled = True
+        PageHeader3.Invalidate()
 
         PageHeader4.BorderSide_Bottom = True
         PageHeader4.BackColor = Color.WhiteSmoke
@@ -130,12 +146,22 @@
 
     End Sub
 
-    Private Sub PageHeader3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub PageHeader3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PageHeader3.Click
 
         PageHeader1.BorderSide_Bottom = True
         PageHeader1.BackColor = Color.WhiteSmoke
         PageHeader1.Enabled = True
         PageHeader1.Invalidate()
+
+        PageHeader2.BorderSide_Bottom = True
+        PageHeader2.BackColor = Color.WhiteSmoke
+        PageHeader2.Enabled = True
+        PageHeader2.Invalidate()
+
+        PageHeader3.BorderSide_Bottom = False
+        PageHeader3.BackColor = Color.White
+        PageHeader3.Enabled = False
+        PageHeader3.Invalidate()
 
         PageHeader4.BorderSide_Bottom = True
         PageHeader4.BackColor = Color.WhiteSmoke
@@ -155,6 +181,16 @@
         PageHeader1.BackColor = Color.WhiteSmoke
         PageHeader1.Enabled = True
         PageHeader1.Invalidate()
+
+        PageHeader2.BorderSide_Bottom = True
+        PageHeader2.BackColor = Color.WhiteSmoke
+        PageHeader2.Enabled = True
+        PageHeader2.Invalidate()
+
+        PageHeader3.BorderSide_Bottom = True
+        PageHeader3.BackColor = Color.WhiteSmoke
+        PageHeader3.Enabled = True
+        PageHeader3.Invalidate()
 
         PageHeader4.BorderSide_Bottom = False
         PageHeader4.BackColor = Color.White
@@ -182,40 +218,32 @@
     Private nCurrentGridReactivePower As Integer = -1
     Private Sub 상태표시()
 
-        Dim temp_CurrentGridActivePower As Double
 
         ' 유효전력
         Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
         Dim pArray As New BitArray(System.BitConverter.GetBytes(ushValue))
 
+        Dim nGridActivePower As Integer = ushValue >> 8 And &H1
+        If nCurrentGridActivePower <> nGridActivePower Then
+            nCurrentGridActivePower = nGridActivePower
 
-        temp_CurrentGridActivePower = GetModbusData_Ushort(PT_Grid_Active_Power) * 0.1
-        lbCurrentGridActivePower.Text = Format(temp_CurrentGridActivePower, "0.0")
-
-        ' 유효전력
-        Dim dPower As Double = Val(lbGridActivePower.Text & "") * 10
-        If Not (GetModbusData_Ushort(PT_Grid_Active_Power) = dPower) Then
-
-            If dPower > 0 Then
-                '         제어대기열_추가(PT_Grid_Active_Power, dPower)
+            If nGridActivePower = 1 Then
+                btnGridActivePower.Selected = True
+            Else
+                btnGridActivePower.Selected = False
             End If
         End If
 
-        ' 충전중, 방전중 상태 표시
+        ' 무효전력
+        Dim nGridReactivePower As Integer = ushValue >> 9 And &H1
+        If nCurrentGridReactivePower <> nGridReactivePower Then
+            nCurrentGridReactivePower = nGridReactivePower
 
-        Dim nCharging As Integer = ushValue >> 4 And &H1
-        Dim nDischarging As Integer = ushValue >> 5 And &H1
-
-        If nCharging = 1 Then
-            lbStatusCharging.Text = "충전중"
-        Else
-            lbStatusCharging.Text = "충전중X"
-        End If
-
-        If nDischarging = 1 Then
-            lbStatusDisCharging.Text = "방전중"
-        Else
-            lbStatusDisCharging.Text = "방전중X"
+            If nGridReactivePower = 1 Then
+                btnGridReactivePower.Selected = True
+            Else
+                btnGridReactivePower.Selected = False
+            End If
         End If
 
     End Sub
@@ -224,7 +252,7 @@
     Private Sub btnPeakCutSet_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPeakCutSet.Click
         ' 피크컷 설정
 
-        If MsgBox("충/방전 설정을 변경하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "피크컷 설정") = MsgBoxResult.Yes Then
+        If MsgBox("피크컷 설정을 변경하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "피크컷 설정") = MsgBoxResult.Yes Then
 
             Dim szTime1Start As String = String.Format("{0}:{1}", Val(lbTime1StartHour.Text).ToString("00"), Val(lbTime1StartMin.Text).ToString("00"))
             Dim szTime1End As String = String.Format("{0}:{1}", Val(lbTime1EndHour.Text).ToString("00"), Val(lbTime1EndMin.Text).ToString("00"))
@@ -252,6 +280,9 @@
             End If
 
 
+            사용모드_로드파워 = Val(lbLoadPower.Text)  ' 로드파워
+            사용모드_피크컷 = Val(lbPeakCut.Text)  ' 피크컷
+
             사용모드_피크컷시간(1, 1) = Val(lbTime1StartHour.Text)  ' 피크컷시간1 - 시작 시
             사용모드_피크컷시간(1, 2) = Val(lbTime1StartMin.Text)  ' 피크컷시간1 - 시작 분
             사용모드_피크컷시간(1, 3) = Val(lbTime1EndHour.Text)  ' 피크컷시간1 - 종료 시
@@ -262,12 +293,10 @@
             사용모드_피크컷시간(2, 3) = Val(lbTime2EndHour.Text)  ' 피크컷시간2 - 종료 시
             사용모드_피크컷시간(2, 4) = Val(lbTime2EndMin.Text)  ' 피크컷시간2 - 종료 분
 
-            d사용모드_유효전력 = Val(lbGridActivePower.Text)
-
             Dim pINI As New IniFile(CONFIG_FILE)
 
-            pINI.SetKeyValue("사용모드", "로드파워", d사용모드_로드파워.ToString)
-            pINI.SetKeyValue("사용모드", "피크컷", d사용모드_피크컷.ToString)
+            pINI.SetKeyValue("사용모드", "로드파워", 사용모드_로드파워.ToString)
+            pINI.SetKeyValue("사용모드", "피크컷", 사용모드_피크컷.ToString)
 
             pINI.SetKeyValue("사용모드", "피크컷시간1_시작시", 사용모드_피크컷시간(1, 1).ToString("00"))
             pINI.SetKeyValue("사용모드", "피크컷시간1_시작분", 사용모드_피크컷시간(1, 2).ToString("00"))
@@ -279,15 +308,13 @@
             pINI.SetKeyValue("사용모드", "피크컷시간2_종료시", 사용모드_피크컷시간(2, 3).ToString("00"))
             pINI.SetKeyValue("사용모드", "피크컷시간2_종료분", 사용모드_피크컷시간(2, 4).ToString("00"))
 
-
-            pINI.SetKeyValue("사용모드", "유효전력", d사용모드_유효전력.ToString)
             pINI.Save(CONFIG_FILE)
 
         End If
 
     End Sub
 
-    Private Sub btnGridActivePower_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnGridActivePower_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGridActivePower.Click
 
         Dim szTime1Start As String = String.Format("{0}:{1}", 사용모드_피크컷시간(1, 1).ToString("00"), 사용모드_피크컷시간(1, 2).ToString("00"))
         Dim szTime1End As String = String.Format("{0}:{1}", 사용모드_피크컷시간(1, 3).ToString("00"), 사용모드_피크컷시간(1, 4).ToString("00"))
@@ -306,6 +333,42 @@
             MsgBox("피크컷 동작 시작에는 설정을 변경 할 수 없습니다.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkCancel, "알림")
         Else
 
+            Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
+
+            If btnGridActivePower.Selected = False Then
+                If MsgBox("유효전력 모드로 동작하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "유효전력모드") = MsgBoxResult.Yes Then
+
+                    Dim dPower As Double = Val(lbGridActivePower.Text & "") * 10
+
+                    If dPower > 0 Then
+                        제어대기열_추가(PT_Grid_Active_Power, dPower)
+
+                        ushValue = SetBitmask(ushValue, 9, 0)
+                        ushValue = SetBitmask(ushValue, 8, 1)
+                        제어대기열_추가(PT_MODE_Status, ushValue)
+
+
+                        사용모드_유효전력 = dPower
+                        Dim pINI As New IniFile(CONFIG_FILE)
+                        pINI.SetKeyValue("사용모드", "유효전력", 사용모드_유효전력.ToString)
+                        pINI.Save(CONFIG_FILE)
+                    Else
+                        ushValue = SetBitmask(ushValue, 8, 0)
+                        제어대기열_추가(PT_MODE_Status, ushValue)
+
+                        제어대기열_추가(PT_Grid_Active_Power, 0)
+                    End If
+
+                End If
+            Else
+                If MsgBox("유효전력 모드 동작을 취소하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "유효전력모드") = MsgBoxResult.Yes Then
+                    ushValue = SetBitmask(ushValue, 8, 0)
+                    제어대기열_추가(PT_MODE_Status, ushValue)
+
+                    제어대기열_추가(PT_Grid_Active_Power, 0)
+
+                End If
+            End If
 
         End If
     End Sub
@@ -340,9 +403,9 @@
                         ushValue = SetBitmask(ushValue, 9, 1)
                         제어대기열_추가(PT_MODE_Status, ushValue)
 
-                        d사용모드_무효전력 = dPower
+                        사용모드_무효전력 = dPower
                         Dim pINI As New IniFile(CONFIG_FILE)
-                        pINI.SetKeyValue("사용모드", "무효전력", d사용모드_무효전력.ToString)
+                        pINI.SetKeyValue("사용모드", "무효전력", 사용모드_무효전력.ToString)
                         pINI.Save(CONFIG_FILE)
                     Else
                         ushValue = SetBitmask(ushValue, 9, 0)
@@ -365,35 +428,42 @@
     End Sub
 
     Private Sub VsPictureButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBatteryCharging.Click
+        Dim szTime1Start As String = String.Format("{0}:{1}", 사용모드_피크컷시간(1, 1).ToString("00"), 사용모드_피크컷시간(1, 2).ToString("00"))
+        Dim szTime1End As String = String.Format("{0}:{1}", 사용모드_피크컷시간(1, 3).ToString("00"), 사용모드_피크컷시간(1, 4).ToString("00"))
+        Dim szTime2Start As String = String.Format("{0}:{1}", 사용모드_피크컷시간(2, 1).ToString("00"), 사용모드_피크컷시간(2, 2).ToString("00"))
+        Dim szTime2End As String = String.Format("{0}:{1}", 사용모드_피크컷시간(2, 3).ToString("00"), 사용모드_피크컷시간(2, 4).ToString("00"))
 
-        If MsgBox("배터리 충/방전 설정을 변경하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "배터리 설정 변경") = MsgBoxResult.Yes Then
-
-            d사용모드_배터리_방전정지SOC = Val(lbBatteryFD.Text)
-            d사용모드_배터리_충전정지SOC = Val(lbBatteryCS.Text)
-            d사용모드_배터리_방전정지전압 = Val(lb방전정지전압.Text)
-            d사용모드_배터리_충전정지전압 = Val(lb충전정지전압.Text)
-            d사용모드_배터리_충전시최대전류 = Val(lbBatteryCC.Text)
-            d사용모드_배터리_방전시최대전류 = Val(lbBatteryCV.Text)
-
-            Dim pINI As New IniFile(CONFIG_FILE)
-            pINI.SetKeyValue("사용모드", "배터리방전중지SOC", d사용모드_배터리_방전정지SOC.ToString)
-            pINI.SetKeyValue("사용모드", "배터리충전중지SOC", d사용모드_배터리_충전정지SOC.ToString)
-            pINI.SetKeyValue("사용모드", "배터리방전정지전압", (d사용모드_배터리_방전정지전압) * 10).ToString()
-            pINI.SetKeyValue("사용모드", "배터리충전정지전압", (d사용모드_배터리_충전정지전압) * 10).ToString()
-            pINI.SetKeyValue("사용모드", "배터리충전전류", d사용모드_배터리_충전시최대전류.ToString)
-            pINI.SetKeyValue("사용모드", "배터리충전전압", d사용모드_배터리_방전시최대전류.ToString)
-            pINI.Save(CONFIG_FILE)
-
+        Dim szCurrent As String = Format(Now, "HH:mm")
+        Dim bPeakCutTime As Boolean = False
+        If szTime1Start <= szCurrent And szCurrent < szTime1End Then
+            bPeakCutTime = True
+        ElseIf szTime2Start <= szCurrent And szCurrent < szTime2End Then
+            bPeakCutTime = True
         End If
 
+        If bPeakCutTime = True Then
+            MsgBox("피크컷 동작 시작에는 설정을 변경 할 수 없습니다.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkCancel, "알림")
+        Else
+
+            If MsgBox("배터리 충/방전 설정을 변경하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "배터리 설정 변경") = MsgBoxResult.Yes Then
+
+                사용모드_배터리_방전중지 = Val(lbBatteryFD.Text)
+                사용모드_배터리_충전시작 = Val(lbBatteryCS.Text)
+                사용모드_배터리_충전전류 = Val(lbBatteryCC.Text)
+                사용모드_배터리_충전전압 = Val(lbBatteryCV.Text)
+
+                Dim pINI As New IniFile(CONFIG_FILE)
+                pINI.SetKeyValue("사용모드", "배터리방전중지", 사용모드_배터리_방전중지.ToString)
+                pINI.SetKeyValue("사용모드", "배터리충전시작", 사용모드_배터리_충전시작.ToString)
+                pINI.SetKeyValue("사용모드", "배터리충전전류", 사용모드_배터리_충전전류.ToString)
+                pINI.SetKeyValue("사용모드", "배터리충전전압", 사용모드_배터리_충전전압.ToString)
+                pINI.Save(CONFIG_FILE)
+
+            End If
+
+        End If
     End Sub
 
-
-    Private Sub VsLabel17_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsLabel17.TextChanged
-        cBMS.Bank_DC전압 = Val(VsLabel17.Text)
-    End Sub
-
-    Private Sub VsLabel23_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsLabel23.TextChanged
-        cBMS.Bank_SOC = Val(VsLabel23.Text)
+    Private Sub Panel1_GotFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
     End Sub
 End Class

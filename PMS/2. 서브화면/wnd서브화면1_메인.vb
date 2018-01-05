@@ -8,6 +8,8 @@
 
         ' InitializeComponent() 호출 뒤에 초기화 코드를 추가하십시오.
 
+        ucScrollLoadStatus.Arrow = ucScrollArrow.eArrow.Arrow_Right
+
         타이머_상태.Interval = 1000
         타이머_상태.Enabled = True
 
@@ -226,6 +228,10 @@
         Dim dLoadPower As Double = GetModbusData_Ushort(PT_Load_Power) * 0.1
         szValue = String.Format("{0:F1} kW", dLoadPower)
 
+        If lbLoadStatus.Text <> szValue Then
+            lbLoadStatus.Text = szValue
+            lbLoadStatus.Invalidate()
+        End If
     End Sub
 
 End Class

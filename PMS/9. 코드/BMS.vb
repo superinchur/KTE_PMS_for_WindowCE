@@ -9,16 +9,6 @@
     Dim Rack_Under_Temperature_Warning As Boolean   ' 6 - 1
     Dim Rack_Temperature_Imbalance_Warning As Boolean      ' 6 - 0
 
-    Dim prev_Over_Current_Discharge_Warning As Boolean           ' 6 - 7
-    Dim prev_Over_Current_Charge_Warning As Boolean       ' 6 - 6
-    Dim prev_Rack_Over_Voltage_Protection_Warning As Boolean     ' 6 - 5
-    Dim prev_Rack_Under_Voltage_Protection_Warning As Boolean  ' 6 - 4
-    Dim prev_Rack_Voltage_Imbalance_Warning As Boolean        ' 6 - 3
-    Dim prev_Rack_Over_Temperature_Warning As Boolean     ' 6 - 2
-    Dim prev_Rack_Under_Temperature_Warning As Boolean   ' 6 - 1
-    Dim prev_Rack_Temperature_Imbalance_Warning As Boolean      ' 6 - 0
-
-
     Dim Tray_Rack_Communication_Fault As Boolean         ' 7 - 12
     Dim Fuse_positive_Fault_Status As Boolean       ' 7 - 11
     Dim Fuse_negative_Fault_Status As Boolean     ' 7 - 10
@@ -53,9 +43,8 @@
     Dim Bank내_Module_최저_온도 As Double     ' 22 - 0.1 C
     Dim Bank_충방전_전력 As Double       ' 24 - 0.1 kW
 
-    Dim prev_Bank_SOC As Double                ' 10 - 0.1 %
-    Dim prev_Bank_SOH As Double                   ' 11 - 0.1 %
-    Dim prev_Bank_Status As UShort
+
+
     'public public Rack() As 클래스_BMS_Rack
 
 

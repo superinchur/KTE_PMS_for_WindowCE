@@ -64,7 +64,7 @@
                                     배터리_누적_충전 += dBatteryCharge
                                     배터리_누적_방전 += dBatteryDischarge
                                 End If
-                                
+
 
                             End If
 
@@ -240,7 +240,7 @@
             End If
         End If
 
-    
+
     End Sub
 
 
