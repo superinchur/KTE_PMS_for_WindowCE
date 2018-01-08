@@ -83,7 +83,7 @@
 
         ' 5% 정도의 오차는 감안해서 5% 이내로 움직일 때만 요청을 보내도록 한다.
 
-        If Not (minvalue >= d최종_유효전력 And d최종_유효전력 <= maxvalue) Then
+        If minvalue >= d최종_유효전력 Or d최종_유효전력 >= maxvalue Then
             If d최종_유효전력 > 0 Then
                 제어대기열_추가(PT_Grid_Active_Power, d최종_유효전력 * 10)
             End If
@@ -152,6 +152,8 @@
             현재사용모드_배터리방전시간 = True
         ElseIf szTime2Start <= szCurrent And szCurrent < szTime2End Then
             현재사용모드_배터리방전시간 = True
+        Else
+            현재사용모드_배터리방전시간 = False
         End If
     End Sub
 

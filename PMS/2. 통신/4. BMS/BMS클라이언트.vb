@@ -615,19 +615,16 @@ Public Class BMS클라이언트
 
     Private Sub Display(ByVal word() As UShort)
 
-
-        cBMS.Bank_SOC = Convert.ToDouble(word(12)) / 10
-        cBMS.Bank_SOH = Convert.ToDouble(word(13)) / 10
-        cBMS.Bank_DC전압 = Convert.ToDouble(word(14)) / 10
-
-
-        cBMS.Bank_DC전류 = Convert.ToDouble(Convert.ToInt16(word(15).ToString("X4"), 16)) / 10
-        cBMS.Bank_충방전_전력_제한값 = Convert.ToDouble(word(14)) / 10
-        cBMS.Bank내_Cell_최고_전압 = Convert.ToDouble(word(16)) / 1000
-        cBMS.Bank내_Cell_최소_전압 = Convert.ToDouble(word(18)) / 1000
-        cBMS.Bank내_Module_최고_온도 = Convert.ToDouble(Convert.ToInt16(word(20).ToString("X4"), 16))
-        cBMS.Bank내_Module_최저_온도 = Convert.ToDouble(Convert.ToInt16(word(22).ToString("X4"), 16))
-        cBMS.Bank_충방전_전력 = Convert.ToDouble(Convert.ToInt16(word(24).ToString("X4"), 16))
+        'cBMS.Bank_SOC = word(10)
+        cBMS.Bank_SOH = word(11)
+        'cBMS.Bank_DC전압 = word(12)
+        cBMS.Bank_DC전류 = Convert.ToInt16(word(13).ToString("X4"), 16)
+        cBMS.Bank_충방전_전력_제한값 = word(14)
+        cBMS.Bank내_Cell_최고_전압 = word(16)
+        cBMS.Bank내_Cell_최소_전압 = word(18)
+        cBMS.Bank내_Module_최고_온도 = Convert.ToInt16(word(20).ToString("X4"), 16)
+        cBMS.Bank내_Module_최저_온도 = Convert.ToInt16(word(22).ToString("X4"), 16)
+        cBMS.Bank_충방전_전력 = Convert.ToInt16(word(24).ToString("X4"), 16)
 
         If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
         ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then

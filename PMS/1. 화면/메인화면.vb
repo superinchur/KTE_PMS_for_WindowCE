@@ -658,7 +658,7 @@ Public Class 메인화면
         Dim deadbandVolt As Integer = 10
 
 
-        If nCurrent <> nRunModeCheck And nCurrent Mod 5 = 0 Then
+        If nCurrent <> nRunModeCheck Then ' And nCurrent Mod 5 = 0 Then
             ' 사용모드 확인
             현재사용모드확인() ' 현재의 상태값을 상태비트에 저장한다.
 
@@ -770,6 +770,16 @@ Public Class 메인화면
         '<---------------------------------------
         경보발생및해제(nStatus, nFileNo, nBit)
         
+    End Sub
+
+
+
+    Private Sub VsLabel4_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsLabel4.Click
+        If Label1.Text = "GBESS-125K" Then
+            Label1.Text = "GBESS-99K"
+        Else
+            Label1.Text = "GBESS-125K"
+        End If
     End Sub
 End Class
 
