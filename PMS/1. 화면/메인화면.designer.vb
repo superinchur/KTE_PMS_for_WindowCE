@@ -65,7 +65,6 @@ Partial Public Class 메인화면
         Me.VsLabel3 = New PMS.VSLabel
         Me.SerialPort_Debug = New System.IO.Ports.SerialPort(Me.components)
         Me.타이머_사용모드 = New System.Windows.Forms.Timer
-        Me.VsLabel4 = New PMS.VSLabel
         Me.Panel1.SuspendLayout()
         Me.판넬_통신상태.SuspendLayout()
         Me.pnlWorkArea.SuspendLayout()
@@ -222,7 +221,6 @@ Partial Public Class 메인화면
         '판넬_통신상태
         '
         Me.판넬_통신상태.BackColor = System.Drawing.Color.White
-        Me.판넬_통신상태.Controls.Add(Me.VsLabel4)
         Me.판넬_통신상태.Controls.Add(Me.VsLabel5)
         Me.판넬_통신상태.Controls.Add(Me.pbBMS)
         Me.판넬_통신상태.Controls.Add(Me.VsLabel2)
@@ -309,7 +307,7 @@ Partial Public Class 메인화면
         Me.Label1.Location = New System.Drawing.Point(8, 5)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(319, 31)
-        Me.Label1.Text = "GBE-ESS125K"
+        Me.Label1.Text = "GBESS-99K"
         '
         'pnlWorkArea
         '
@@ -505,17 +503,6 @@ Partial Public Class 메인화면
         '타이머_사용모드
         '
         '
-        'VsLabel4
-        '
-        Me.VsLabel4.BackColor = System.Drawing.Color.White
-        Me.VsLabel4.BorderWidth = 0
-        Me.VsLabel4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel4.Location = New System.Drawing.Point(190, 3)
-        Me.VsLabel4.Name = "VsLabel4"
-        Me.VsLabel4.Size = New System.Drawing.Size(59, 34)
-        Me.VsLabel4.TabIndex = 8
-        Me.VsLabel4.TextAlign = System.Drawing.StringAlignment.Far
-        '
         '메인화면
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -578,6 +565,5 @@ Partial Public Class 메인화면
     Friend WithEvents 타이머_사용모드 As System.Windows.Forms.Timer
     Friend WithEvents VsLabel5 As PMS.VSLabel
     Friend WithEvents pbBMS As System.Windows.Forms.PictureBox
-    Friend WithEvents VsLabel4 As PMS.VSLabel
 
 End Class

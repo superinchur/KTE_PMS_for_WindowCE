@@ -72,7 +72,7 @@
 
         'Test
         VsLabel17.Text = cBMS.Bank_DC전압.ToString
-        VsLabel23.Text = cBMS.Bank_SOC.ToString
+        'VsLabel23.Text = cBMS.Bank_SOC.ToString
 
     End Sub
 
@@ -393,7 +393,7 @@
         cBMS.Bank_DC전압 = Val(VsLabel17.Text)
     End Sub
 
-    Private Sub VsLabel23_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsLabel23.TextChanged
-        cBMS.Bank_SOC = Val(VsLabel23.Text)
+    Private Sub VsLabel23_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        'cBMS.Bank_SOC = Val(VsLabel23.Text)
     End Sub
 End Class

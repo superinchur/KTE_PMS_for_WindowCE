@@ -65,7 +65,10 @@ Partial Public Class wnd서브화면5_사용모드
         Me.PageHeader1 = New PMS.VSLabel
         Me.PageHeader4 = New PMS.VSLabel
         Me.pnlScreen4 = New System.Windows.Forms.Panel
+        Me.VsLabel17 = New PMS.VSLabel
+        Me.VsLabel10 = New PMS.VSLabel
         Me.VsLabel16 = New PMS.VSLabel
+        Me.VsLabel21 = New PMS.VSLabel
         Me.lb방전정지전압 = New PMS.VSLabel
         Me.VsLabel2 = New PMS.VSLabel
         Me.lb충전정지전압 = New PMS.VSLabel
@@ -80,11 +83,6 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbBatteryCC = New PMS.VSLabel
         Me.VsLabel37 = New PMS.VSLabel
         Me.VsLabel31 = New PMS.VSLabel
-        Me.VsLabel10 = New PMS.VSLabel
-        Me.VsLabel17 = New PMS.VSLabel
-        Me.VsLabel21 = New PMS.VSLabel
-        Me.VsLabel23 = New PMS.VSLabel
-        Me.VsLabel24 = New PMS.VSLabel
         Me.pnlScreen1.SuspendLayout()
         Me.pnlScreen2.SuspendLayout()
         Me.pnlScreen3.SuspendLayout()
@@ -917,8 +915,6 @@ Partial Public Class wnd서브화면5_사용모드
         'pnlScreen4
         '
         Me.pnlScreen4.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlScreen4.Controls.Add(Me.VsLabel23)
-        Me.pnlScreen4.Controls.Add(Me.VsLabel24)
         Me.pnlScreen4.Controls.Add(Me.VsLabel17)
         Me.pnlScreen4.Controls.Add(Me.VsLabel10)
         Me.pnlScreen4.Controls.Add(Me.VsLabel16)
@@ -947,6 +943,46 @@ Partial Public Class wnd서브화면5_사용모드
         Me.pnlScreen4.Name = "pnlScreen4"
         Me.pnlScreen4.Size = New System.Drawing.Size(784, 283)
         '
+        'VsLabel17
+        '
+        Me.VsLabel17.BackColor = System.Drawing.Color.White
+        Me.VsLabel17.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel17.BorderSide_Bottom = True
+        Me.VsLabel17.BorderSide_Left = True
+        Me.VsLabel17.BorderSide_Right = True
+        Me.VsLabel17.BorderSide_Top = True
+        Me.VsLabel17.BorderWidth = 1
+        Me.VsLabel17.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel17.IsPassword = False
+        Me.VsLabel17.Location = New System.Drawing.Point(246, 215)
+        Me.VsLabel17.MaxRange = 1000
+        Me.VsLabel17.MinRange = 0
+        Me.VsLabel17.Name = "VsLabel17"
+        Me.VsLabel17.Size = New System.Drawing.Size(77, 40)
+        Me.VsLabel17.TabIndex = 41
+        Me.VsLabel17.Text = "10"
+        Me.VsLabel17.TextAlign = System.Drawing.StringAlignment.Center
+        Me.VsLabel17.UseKeyPad = True
+        '
+        'VsLabel10
+        '
+        Me.VsLabel10.BackColor = System.Drawing.Color.LightGreen
+        Me.VsLabel10.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsLabel10.BorderSide_Bottom = True
+        Me.VsLabel10.BorderSide_Left = True
+        Me.VsLabel10.BorderSide_Right = True
+        Me.VsLabel10.BorderSide_Top = True
+        Me.VsLabel10.BorderWidth = 1
+        Me.VsLabel10.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel10.IsPassword = False
+        Me.VsLabel10.Location = New System.Drawing.Point(35, 215)
+        Me.VsLabel10.Name = "VsLabel10"
+        Me.VsLabel10.Size = New System.Drawing.Size(205, 40)
+        Me.VsLabel10.TabIndex = 40
+        Me.VsLabel10.Text = "배터리 전압"
+        Me.VsLabel10.TextAlign = System.Drawing.StringAlignment.Center
+        Me.VsLabel10.UseKeyPad = False
+        '
         'VsLabel16
         '
         Me.VsLabel16.BackColor = System.Drawing.Color.LightGreen
@@ -965,6 +1001,25 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel16.Text = "방전 정지 전압"
         Me.VsLabel16.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel16.UseKeyPad = False
+        '
+        'VsLabel21
+        '
+        Me.VsLabel21.BackColor = System.Drawing.Color.White
+        Me.VsLabel21.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel21.BorderSide_Bottom = True
+        Me.VsLabel21.BorderSide_Left = True
+        Me.VsLabel21.BorderSide_Right = True
+        Me.VsLabel21.BorderSide_Top = True
+        Me.VsLabel21.BorderWidth = 0
+        Me.VsLabel21.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel21.IsPassword = False
+        Me.VsLabel21.Location = New System.Drawing.Point(329, 215)
+        Me.VsLabel21.Name = "VsLabel21"
+        Me.VsLabel21.Size = New System.Drawing.Size(58, 40)
+        Me.VsLabel21.TabIndex = 40
+        Me.VsLabel21.Text = "V"
+        Me.VsLabel21.TextAlign = System.Drawing.StringAlignment.Near
+        Me.VsLabel21.UseKeyPad = False
         '
         'lb방전정지전압
         '
@@ -1240,105 +1295,6 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel31.TextAlign = System.Drawing.StringAlignment.Near
         Me.VsLabel31.UseKeyPad = False
         '
-        'VsLabel10
-        '
-        Me.VsLabel10.BackColor = System.Drawing.Color.LightGreen
-        Me.VsLabel10.BorderColor = System.Drawing.Color.DarkGray
-        Me.VsLabel10.BorderSide_Bottom = True
-        Me.VsLabel10.BorderSide_Left = True
-        Me.VsLabel10.BorderSide_Right = True
-        Me.VsLabel10.BorderSide_Top = True
-        Me.VsLabel10.BorderWidth = 1
-        Me.VsLabel10.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel10.IsPassword = False
-        Me.VsLabel10.Location = New System.Drawing.Point(35, 215)
-        Me.VsLabel10.Name = "VsLabel10"
-        Me.VsLabel10.Size = New System.Drawing.Size(205, 40)
-        Me.VsLabel10.TabIndex = 40
-        Me.VsLabel10.Text = "배터리 전압"
-        Me.VsLabel10.TextAlign = System.Drawing.StringAlignment.Center
-        Me.VsLabel10.UseKeyPad = False
-        '
-        'VsLabel17
-        '
-        Me.VsLabel17.BackColor = System.Drawing.Color.White
-        Me.VsLabel17.BorderColor = System.Drawing.Color.Gray
-        Me.VsLabel17.BorderSide_Bottom = True
-        Me.VsLabel17.BorderSide_Left = True
-        Me.VsLabel17.BorderSide_Right = True
-        Me.VsLabel17.BorderSide_Top = True
-        Me.VsLabel17.BorderWidth = 1
-        Me.VsLabel17.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel17.IsPassword = False
-        Me.VsLabel17.Location = New System.Drawing.Point(246, 215)
-        Me.VsLabel17.MaxRange = 1000
-        Me.VsLabel17.MinRange = 0
-        Me.VsLabel17.Name = "VsLabel17"
-        Me.VsLabel17.Size = New System.Drawing.Size(77, 40)
-        Me.VsLabel17.TabIndex = 41
-        Me.VsLabel17.Text = "10"
-        Me.VsLabel17.TextAlign = System.Drawing.StringAlignment.Center
-        Me.VsLabel17.UseKeyPad = True
-        '
-        'VsLabel21
-        '
-        Me.VsLabel21.BackColor = System.Drawing.Color.White
-        Me.VsLabel21.BorderColor = System.Drawing.Color.Gray
-        Me.VsLabel21.BorderSide_Bottom = True
-        Me.VsLabel21.BorderSide_Left = True
-        Me.VsLabel21.BorderSide_Right = True
-        Me.VsLabel21.BorderSide_Top = True
-        Me.VsLabel21.BorderWidth = 0
-        Me.VsLabel21.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel21.IsPassword = False
-        Me.VsLabel21.Location = New System.Drawing.Point(329, 215)
-        Me.VsLabel21.Name = "VsLabel21"
-        Me.VsLabel21.Size = New System.Drawing.Size(58, 40)
-        Me.VsLabel21.TabIndex = 40
-        Me.VsLabel21.Text = "V"
-        Me.VsLabel21.TextAlign = System.Drawing.StringAlignment.Near
-        Me.VsLabel21.UseKeyPad = False
-        '
-        'VsLabel23
-        '
-        Me.VsLabel23.BackColor = System.Drawing.Color.White
-        Me.VsLabel23.BorderColor = System.Drawing.Color.Gray
-        Me.VsLabel23.BorderSide_Bottom = True
-        Me.VsLabel23.BorderSide_Left = True
-        Me.VsLabel23.BorderSide_Right = True
-        Me.VsLabel23.BorderSide_Top = True
-        Me.VsLabel23.BorderWidth = 1
-        Me.VsLabel23.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel23.IsPassword = False
-        Me.VsLabel23.Location = New System.Drawing.Point(395, 240)
-        Me.VsLabel23.MaxRange = 1000
-        Me.VsLabel23.MinRange = 0
-        Me.VsLabel23.Name = "VsLabel23"
-        Me.VsLabel23.Size = New System.Drawing.Size(77, 40)
-        Me.VsLabel23.TabIndex = 43
-        Me.VsLabel23.Text = "10"
-        Me.VsLabel23.TextAlign = System.Drawing.StringAlignment.Center
-        Me.VsLabel23.UseKeyPad = True
-        '
-        'VsLabel24
-        '
-        Me.VsLabel24.BackColor = System.Drawing.Color.White
-        Me.VsLabel24.BorderColor = System.Drawing.Color.Gray
-        Me.VsLabel24.BorderSide_Bottom = True
-        Me.VsLabel24.BorderSide_Left = True
-        Me.VsLabel24.BorderSide_Right = True
-        Me.VsLabel24.BorderSide_Top = True
-        Me.VsLabel24.BorderWidth = 0
-        Me.VsLabel24.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel24.IsPassword = False
-        Me.VsLabel24.Location = New System.Drawing.Point(478, 240)
-        Me.VsLabel24.Name = "VsLabel24"
-        Me.VsLabel24.Size = New System.Drawing.Size(58, 40)
-        Me.VsLabel24.TabIndex = 42
-        Me.VsLabel24.Text = "%"
-        Me.VsLabel24.TextAlign = System.Drawing.StringAlignment.Near
-        Me.VsLabel24.UseKeyPad = False
-        '
         'wnd서브화면5_사용모드
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1423,7 +1379,5 @@ Partial Public Class wnd서브화면5_사용모드
     Friend WithEvents VsLabel17 As PMS.VSLabel
     Friend WithEvents VsLabel10 As PMS.VSLabel
     Friend WithEvents VsLabel21 As PMS.VSLabel
-    Friend WithEvents VsLabel23 As PMS.VSLabel
-    Friend WithEvents VsLabel24 As PMS.VSLabel
 
 End Class

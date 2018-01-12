@@ -264,8 +264,8 @@ Public Class 메인화면
 #Region "통신"
     Private EMS수신서버 As EMS통신서버 = Nothing
     Private PCS통신 As PCS통신 = Nothing
-    Private BMS통신 As BMS클라이언트 = Nothing
-    'Private BMS통신 As BMS시리얼통신 = Nothing
+    'Private BMS통신 As BMS클라이언트 = Nothing
+    Private BMS통신 As BMS시리얼통신 = Nothing
 
     Private Sub 통신시작()
         EMS수신서버 = New EMS통신서버
@@ -274,7 +274,10 @@ Public Class 메인화면
         PCS통신 = New PCS통신
         AddHandler PCS통신.DataArrived, AddressOf PCS_DataArrived
 
-        BMS통신 = New BMS클라이언트
+        'BMS통신 = New BMS클라이언트
+
+        BMS통신 = New BMS시리얼통신
+        AddHandler BMS통신.DataArrived, AddressOf PCS_DataArrived
 
         EMS_통신시작()
         PCS_통신시작()
@@ -355,6 +358,19 @@ Public Class 메인화면
             End If
         End If
     End Sub
+
+
+    Public Sub BMS_DataArrived(ByVal szComPort As String, ByVal szMode As String, ByVal btData() As Byte, ByVal nLength As Integer)
+        Dim szMessage As String = String.Format("[{0}] {1} : ", Format(Now, "HH:mm:ss"), szMode)
+        For i As Integer = 0 To nLength - 1
+            szMessage &= String.Format("{0:X2} ", btData(i))
+        Next
+
+        'BMS_DataDisplay(szMode, szMessage)
+
+        Debug.WriteLine(szMessage)
+    End Sub
+
     Private Sub EMS_통신시작()
         EMS수신서버.ServiceStart()
     End Sub
@@ -493,6 +509,7 @@ Public Class 메인화면
     Private Sub SmartWatchDog1_OnTimeOutEvent(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SmartWatchDog1.OnTimeOutEvent
         '' 시스템을 다시 시작하기 전에 로그파일에 정보를 기록합니다.
         Try
+            'pHistorySave.Contro()
             'pHistory.ControlEventSave("오류", "WATCHDOG", "처리 되지 않은 예외로 시스템 다시 시작")
         Catch exp As Exception
             Debug.WriteLine(exp.ToString())
@@ -555,7 +572,7 @@ Public Class 메인화면
 
         nCurrentImage = nComm_BMS_Image
         ' Test를 위해서 잠시 바꿔 놓음'
-        'If EMS수신서버.Connected > 0 Then
+        'If BMS수신서버.Connected > 0 Then
         If 1 Then
             nCurrentImage = 2
         Else
@@ -574,7 +591,7 @@ Public Class 메인화면
             End Select
         End If
 
-        타이머_통신상태.Interval = PCS_통신주기
+        타이머_통신상태.Interval = BMS_통신주기
         타이머_통신상태.Enabled = True
     End Sub
 
@@ -774,12 +791,5 @@ Public Class 메인화면
 
 
 
-    Private Sub VsLabel4_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsLabel4.Click
-        If Label1.Text = "GBESS-125K" Then
-            Label1.Text = "GBESS-99K"
-        Else
-            Label1.Text = "GBESS-125K"
-        End If
-    End Sub
 End Class
 

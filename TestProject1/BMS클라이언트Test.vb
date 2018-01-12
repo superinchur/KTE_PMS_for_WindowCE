@@ -61,6 +61,8 @@ Public Class BMS클라이언트Test
         Dim target As BMS클라이언트_Accessor = New BMS클라이언트_Accessor ' TODO: 적절한 값으로 초기화합니다.
         Dim word() As UShort = Nothing ' TODO: 적절한 값으로 초기화합니다.
         target.Display(word)
+        'TODO: asd 
+
         Assert.Inconclusive("값을 반환하지 않는 메서드는 확인할 수 없습니다.")
     End Sub
 End Class
