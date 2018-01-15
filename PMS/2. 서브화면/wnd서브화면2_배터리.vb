@@ -260,40 +260,55 @@
             lbBatteryCharge_Total.Text = szValue
         End If
 
-        lSOC.Text = String.Format("{0:F1} %   ", cBMS.Bank_SOC)
-        lSOH.Text = String.Format("{0:F1} %   ", cBMS.Bank_SOH)
+        Try
 
-        lPower.Text = String.Format("{0:F1} %   ", cBMS.Bank_충방전_전력)
+            'VSrack.Text = num_Rack
+            'VSmodule.Text = num_Module
+            'VSStatus.Text = BMS현재통신모드
 
-        lVoltage.Text = String.Format("{0:F1} V   ", cBMS.Bank_DC전압)
-        lCurrent.Text = String.Format("{0:F1} A   ", cBMS.Bank_DC전류)
 
-        l랙SOC.Text = String.Format("{0:F1} %   ", cBMS_Rack(num_Rack).Rack_SOC)
-        l랙SOH.Text = String.Format("{0:F1} %   ", cBMS_Rack(num_Rack).Rack_SOH)
-        l랙전압.Text = String.Format("{0:F1} V   ", cBMS_Rack(num_Rack).Rack_Voltage)
-        l랙전류.Text = String.Format("{0:F1} A   ", cBMS_Rack(num_Rack).Rack_Current)
-        lCell최대전압.Text = String.Format("{0:F1} V   ", cBMS_Rack(num_Rack).Max_Cell_Voltage)
-        lCell최대전압위치.Text = String.Format("{0:F0} V   ", cBMS_Rack(num_Rack).Max_Cell_Voltage_Position)
-        lCell최소전압.Text = String.Format("{0:F1} V   ", cBMS_Rack(num_Rack).Min_Cell_Voltage)
-        lCell최소전압위치.Text = String.Format("{0:F0} V   ", cBMS_Rack(num_Rack).Min_Cell_Voltage_Position)
-        lCell전압편차.Text = String.Format("{0:F1} V   ", cBMS_Rack(num_Rack).Cell_Voltage_Gap)
-        lCell평균전압.Text = String.Format("{0:F1} V   ", cBMS_Rack(num_Rack).Rack_Average_Cell_Voltage)
-        lCell최대온도.Text = String.Format("{0:F1} C   ", cBMS_Rack(num_Rack).Max_Cell_Temperature)
-        lCell최대온도위치.Text = String.Format("{0:F0}   ", cBMS_Rack(num_Rack).Max_Cell_Temperature_Position)
-        lCell최소온도.Text = String.Format("{0:F1} C   ", cBMS_Rack(num_Rack).Min_Cell_Temperature)
-        lCell최소온도위치.Text = String.Format("{0:F0}   ", cBMS_Rack(num_Rack).Min_Cell_Temperature_Position)
-        lCell온도편차.Text = String.Format("{0:F0}   ", cBMS_Rack(num_Rack).Cell_Temperature_Gap)
-        l랙평균모듈온도.Text = String.Format("{0:F0}   ", cBMS_Rack(num_Rack).Rack_Average_Module_Temperature)
-        '
-        '        l모듈전압.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Module_DC_Voltage
-        '        l모듈내Cell최대전압.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Max_Cell_Voltage
-        '        l모듈내Cell최저전압.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Min_Cell_Voltage
-        '        l모듈내Cell평균전압.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Averge_Cell_Voltage
-        '        l최고최저셀전압위치.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Max_Min_Cell_Voltage_Location
-        '        l모듈평균온도.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Average_Module_Temperature
-        '        l모듈최고온도.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Max_Module_Temperature
-        '        l모듈최저온도.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Min_Module_Temeperature
-        '        l모듈최고최저온도위치.Text = BMS.Rack(num_Rack).BMS_Module(num_Module).Max_Min_Module_Temperature_Location
+            If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
+                lSOC.Text = Convert.ToString(cBMS.Bank_SOC * 0.1) + " %"
+                lSOH.Text = Convert.ToString(cBMS.Bank_SOH * 0.1) + " %"
+                lPower.Text = Convert.ToString(cBMS.Bank_충방전_전력 * 0.1) + " kW"
+                lVoltage.Text = Convert.ToString(cBMS.Bank_DC전압 * 0.1) + " V"
+                lCurrent.Text = Convert.ToString(cBMS.Bank_DC전류 * 0.1) + " A"
+                lTemperature.Text = Convert.ToString(cBMS.Bank_SOC * 0.1) + " °C"
+
+            ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
+                l랙SOC.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_SOC * 0.1) + " %"
+                l랙SOH.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_SOH * 0.1) + " %"
+                l랙전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Voltage * 0.1) + " V"
+                l랙전류.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Current * 0.1) + " A"
+                lCell최대전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Max_Cell_Voltage * 1) + " mV"
+                lCell최대전압위치.Text = cBMS_Rack(num_Rack).Max_Cell_Voltage_Position
+                lCell최소전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Min_Cell_Voltage * 1) + " mV"
+                lCell최소전압위치.Text = cBMS_Rack(num_Rack).Min_Cell_Voltage_Position
+                lCell전압편차.Text = Convert.ToString(cBMS_Rack(num_Rack).Cell_Voltage_Gap * 1) + " mV"
+                lCell평균전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Average_Cell_Voltage * 1) + " mV"
+                lCell최대온도.Text = Convert.ToString(cBMS_Rack(num_Rack).Max_Cell_Temperature * 0.1) + " °C"
+                lCell최대온도위치.Text = cBMS_Rack(num_Rack).Max_Cell_Temperature_Position
+                lCell최소온도.Text = Convert.ToString(cBMS_Rack(num_Rack).Min_Cell_Temperature * 0.1) + " °C"
+                lCell최소온도위치.Text = cBMS_Rack(num_Rack).Min_Cell_Temperature_Position
+                lCell온도편차.Text = Convert.ToString(cBMS_Rack(num_Rack).Cell_Temperature_Gap)
+                l랙평균모듈온도.Text = cBMS_Rack(num_Rack).Rack_Average_Module_Temperature
+            ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
+                l모듈전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Module_DC_Voltage * 0.1) + " V"
+                l모듈내Cell최대전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Max_Cell_Voltage * 0.001) + " V"
+                l모듈내Cell최저전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Min_Cell_Voltage * 0.001) + " V"
+                l모듈내Cell평균전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Averge_Cell_Voltage * 0.001) + " V"
+                l최고최저셀전압위치.Text = cBMS_Module(num_Rack, num_Module).Max_Min_Cell_Voltage_Location
+                l모듈평균온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Average_Module_Temperature * 0.1) + " °C"
+                l모듈최고온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Max_Module_Temperature * 0.1) + " °C"
+                l모듈최저온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Min_Module_Temeperature * 0.1) + " °C"
+                l모듈최고최저온도위치.Text = cBMS_Module(num_Rack, num_Module).Max_Min_Module_Temperature_Location
+            End If
+
+        Catch ex As Exception
+
+            MsgBox(ex.ToString())
+
+        End Try
     End Sub
 
 
@@ -319,6 +334,10 @@
         PageHeader4.Invalidate()
 
         num_Rack = 0
+        num_Module = 0
+
+        BMS현재통신모드 = BMS통신모드정의.BankInfo
+
 
         btn_Module.Visible = False
 
@@ -350,6 +369,8 @@
         PageHeader4.Invalidate()
 
         num_Rack = 1
+        num_Module = 0
+        BMS현재통신모드 = BMS통신모드정의.RackInfo
 
         btn_Module.Visible = True
 
@@ -380,6 +401,8 @@
         PageHeader4.Invalidate()
 
         num_Rack = 2
+        num_Module = 0
+        BMS현재통신모드 = BMS통신모드정의.RackInfo
         btn_Module.Visible = True
 
 
@@ -411,6 +434,8 @@
         PageHeader4.Invalidate()
 
         num_Rack = 3
+        num_Module = 0
+        BMS현재통신모드 = BMS통신모드정의.RackInfo
         btn_Module.Visible = True
 
 
@@ -427,6 +452,9 @@
         Panel1.Visible = False
         Panel2.Visible = False
         Panel3.Visible = True
+
+        num_Module = 1
+        BMS현재통신모드 = BMS통신모드정의.ModuleInfo
     End Sub
 
     Private Sub Panel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel.Paint

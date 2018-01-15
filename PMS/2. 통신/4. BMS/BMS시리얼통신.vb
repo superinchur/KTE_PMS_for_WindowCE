@@ -213,7 +213,7 @@
             Dim btData(32) As Byte
             Dim nData As Integer = 0
 
-            btData(nData) = PMS_통신ID
+            btData(nData) = BMS_통신ID
             nData += 1
 
             btData(nData) = &H4
@@ -275,30 +275,30 @@
     Private Function ReadStartAdr(ByVal nRack As UShort, ByVal nModule As UShort) As UShort
 
         Dim nStartAddress As UShort
-        If nModule = 0 And nRack = 0 Then
+        If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
             nStartAddress = 0
-        ElseIf nModule = 0 And Not nRack = 0 Then
+        ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
             nStartAddress = (379 * nRack) - 354
-        Else
+        ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
             nStartAddress = (379 * nRack) + (9 * nModule) - 354
         End If
 
-        Return Convert.ToUInt16(nStartAddress)
+        Return nStartAddress
 
     End Function
 
     Private Function ReadLength(ByVal nRack As UShort, ByVal nModule As UShort) As UShort
 
         Dim nLength As UShort
-        If nModule = 0 And nRack = 0 Then
+        If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
             nLength = 25
-        ElseIf nModule = 0 And Not nRack = 0 Then
+        ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
             nLength = 19
-        Else
+        ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
             nLength = 9
         End If
 
-        Return Convert.ToUInt16(nLength)
+        Return nLength
 
     End Function
 End Class

@@ -151,44 +151,11 @@ Public Class BMS클라이언트
     Private Sub Timer_Comm_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer_Comm.Tick
         Timer_Comm.Enabled = False
 
-        'Dim StartAddress As UShort = ReadStartAdr(num_Rack, num_Module)
-        'Dim length As UShort = ReadLength(num_Rack, num_Module)
-        Dim StartAddress As UShort
-        Dim length As UShort
-
-        ReDim writedata(6)
+        Dim StartAddress As UShort = ReadStartAdr(num_Rack, num_Module)
+        Dim length As UShort = ReadLength(num_Rack, num_Module)
+        
         Try
-            StartAddress = 40000
-            length = 27 * 2
-            ReadHoldingRegister(3, StartAddress, length)
-            ' Read Heartbit (읽어온다
-
-
-            ' 읽어온 Heartbit를 Write 한다
-            StartAddress = 44000
-
-            If heartbit = 1 Then
-                heartbit = 0
-            Else
-                heartbit = 1
-            End If
-            ' 44000 Controller HeartBeat
-            writedata(0) = heartbit \ &H100
-            writedata(1) = heartbit Mod &H100
-
-            '44001
-            Dim temp_BSCStatus As UShort = Set_BSCStatus()
-            writedata(2) = temp_BSCStatus \ &H100
-            writedata(3) = temp_BSCStatus Mod &H100
-
-            '44002
-            Dim temp_Req_Contactor As UShort = Set_BSC_Req_Contactor()
-            writedata(4) = temp_Req_Contactor \ &H100
-            writedata(5) = temp_Req_Contactor Mod &H100
-
-            WriteMultipleRegister(StartAddress, writedata)
-
-
+            ReadInputRegister(StartAddress, length)
         Catch ex As Exception
             Debug.WriteLine(ex.ToString)
         End Try
@@ -423,10 +390,10 @@ Public Class BMS클라이언트
 
     Private Sub MBmaster_OnResponseData(ByVal ID As UShort, ByVal unit As Byte, ByVal func As Byte, ByVal values As Byte())
 
-        'If Me.InvokeRequired Then
-        'Me.BeginInvoke(New ResponseData(AddressOf MBmaster_OnResponseData), New Object() {ID, unit, func, values})
-        'Return
-        'End If
+        If Me.InvokeRequired Then
+            Me.BeginInvoke(New ResponseData(AddressOf MBmaster_OnResponseData), New Object() {ID, unit, func, values})
+            Return
+        End If
 
         If ID = &HFF Then
             Return
@@ -605,28 +572,22 @@ Public Class BMS클라이언트
         Return status
     End Function
 
-    Private Function UShortToShort(ByVal vIn As Integer) As Short
-        Dim vOut As Short
-        If vIn > 32767 Then
-            vOut = (vIn - 32768) * -1
-        End If
-        Return vOut
-    End Function
 
     Private Sub Display(ByVal word() As UShort)
 
-        'cBMS.Bank_SOC = word(10)
-        cBMS.Bank_SOH = word(11)
-        'cBMS.Bank_DC전압 = word(12)
-        cBMS.Bank_DC전류 = Convert.ToInt16(word(13).ToString("X4"), 16)
-        cBMS.Bank_충방전_전력_제한값 = word(14)
-        cBMS.Bank내_Cell_최고_전압 = word(16)
-        cBMS.Bank내_Cell_최소_전압 = word(18)
-        cBMS.Bank내_Module_최고_온도 = Convert.ToInt16(word(20).ToString("X4"), 16)
-        cBMS.Bank내_Module_최저_온도 = Convert.ToInt16(word(22).ToString("X4"), 16)
-        cBMS.Bank_충방전_전력 = Convert.ToInt16(word(24).ToString("X4"), 16)
 
         If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
+            cBMS.Bank_SOC = word(10)
+            cBMS.Bank_SOH = word(11)
+            cBMS.Bank_DC전압 = word(12)
+            cBMS.Bank_DC전류 = Convert.ToInt16(word(13).ToString("X4"), 16)
+            cBMS.Bank_충방전_전력_제한값 = word(14)
+            cBMS.Bank내_Cell_최고_전압 = word(16)
+            cBMS.Bank내_Cell_최소_전압 = word(18)
+            cBMS.Bank내_Module_최고_온도 = Convert.ToInt16(word(20).ToString("X4"), 16)
+            cBMS.Bank내_Module_최저_온도 = Convert.ToInt16(word(22).ToString("X4"), 16)
+            cBMS.Bank_충방전_전력 = Convert.ToInt16(word(24).ToString("X4"), 16)
+
         ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
             cBMS_Rack(num_Rack).Rack_SOC = word(3)
             cBMS_Rack(num_Rack).Rack_SOH = word(4)
