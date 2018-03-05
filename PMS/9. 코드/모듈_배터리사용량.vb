@@ -1,15 +1,9 @@
 ﻿Module 모듈_배터리사용량
 
-    ' 배터리 사용량
-    Public 배터리_당일_충전 As Double = 0
-    Public 배터리_당일_방전 As Double = 0
-    Public 배터리_어제_충전 As Double = 0
-    Public 배터리_어제_방전 As Double = 0
-    Public 배터리_누적_충전 As Double = 0
-    Public 배터리_누적_방전 As Double = 0
+
 
     Public Sub 배터리사용량_초기화()
-        Dim nStartYear As Integer = 2014
+        Dim nStartYear As Integer = 2017
 
         Dim tCurrent As Date = Now
 
@@ -116,6 +110,9 @@
                             Dim dLoad As Double = Val(szItems(6))
 
                             If nDay < tCurrent.Day Then
+                                배터리_당월_충전 += dBatteryCharge
+                                배터리_당월_방전 += dBatteryDischarge
+
                                 배터리_누적_충전 += dBatteryCharge
                                 배터리_누적_방전 += dBatteryDischarge
                             End If
@@ -227,6 +224,9 @@
                             If nHour < tCurrent.Hour Then
                                 배터리_당일_충전 += dBatteryCharge
                                 배터리_당일_방전 += dBatteryDischarge
+
+                                배터리_당월_충전 += dBatteryCharge
+                                배터리_당월_방전 += dBatteryDischarge
 
                                 배터리_누적_충전 += dBatteryCharge
                                 배터리_누적_방전 += dBatteryDischarge

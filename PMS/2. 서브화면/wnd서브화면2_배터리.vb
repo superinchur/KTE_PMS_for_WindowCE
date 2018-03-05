@@ -1,9 +1,5 @@
 ﻿Public Class wnd서브화면2_배터리
 
-    Private num_Rack As Integer
-    Private num_Module As Integer
-
-
     Public Sub New()
 
 
@@ -71,9 +67,7 @@
         Dim nDischarge As Integer = ushValue >> 5 And &H1
 
         Dim nOldStatus As Integer = 배터리모드
-        Dim ushTemp As UShort = GetModbusData_Ushort(PT_BAT_SOC)
-        Dim dValue As Double = ushTemp * 0.01
-
+        Dim dValue As Double = cBMS.Bank_SOC
         If nCharge = 1 Then
             배터리모드 = 1
 
@@ -138,57 +132,7 @@
         End If
 
 
-
-        ' SOC
-        Dim szValue As String = String.Format("{0:F2} %    ", dValue)
-        If lSOC.Text <> szValue Then
-            lSOC.Text = szValue
-        End If
-
-        ' SOH
-        ushTemp = GetModbusData_Ushort(PT_BAT_SOH)
-        dValue = ushTemp * 0.01
-        szValue = String.Format("{0:F2} %    ", dValue)
-        If lSOH.Text <> szValue Then
-            lSOH.Text = szValue
-        End If
-
-
-        ' 전력
-        ushTemp = GetModbusData_Ushort(PT_BAT_Power)
-        dValue = ushTemp * 0.1
-        szValue = String.Format("{0:F1} kW  ", dValue)
-        If lPower.Text <> szValue Then
-            lPower.Text = szValue
-        End If
-
-
-
-        ' 전압
-        ushTemp = GetModbusData_Ushort(PT_BAT_V)
-        dValue = ushTemp * 0.1
-        szValue = String.Format("{0:F1} V    ", dValue)
-        If lVoltage.Text <> szValue Then
-            lVoltage.Text = szValue
-        End If
-
-        ' 전류
-        ushTemp = GetModbusData_Ushort(PT_BAT_I)
-        dValue = ushTemp * 0.1
-        szValue = String.Format("{0:F1} A    ", dValue)
-        If lCurrent.Text <> szValue Then
-            lCurrent.Text = szValue
-        End If
-
-
-        ' 온도
-        ushTemp = GetModbusData_Ushort(PT_BAT_TEMP)
-        dValue = ushTemp * 0.1
-        szValue = String.Format("{0:F1} ℃    ", dValue)
-        If lTemperature.Text <> szValue Then
-            lTemperature.Text = szValue
-        End If
-
+        Dim szValue As String = ""
 
         ' -----------------------------------------------------------------------------------
         ' 배터리 사용량
@@ -196,7 +140,7 @@
         If 배터리_당일_방전 < 1000 Then
             szValue = String.Format("{0:F1} kWh   ", 배터리_당일_방전)
         ElseIf 배터리_당일_방전 < 1000 * 1000 Then
-            szValue = String.Format("{0:F1} mWh   ", 배터리_당일_방전 / 1000)
+            szValue = String.Format("{0:F1} MWh   ", 배터리_당일_방전 / 1000)
         ElseIf 배터리_당일_방전 < 1000 * 1000 * 1000 Then
             szValue = String.Format("{0:F1} gWh   ", 배터리_당일_방전 / 1000 / 1000)
         End If
@@ -204,12 +148,23 @@
             lbBatteryDischarge_Today.Text = szValue
         End If
 
-        If 배터리_어제_방전 < 1000 Then
-            szValue = String.Format("{0:F1} kWh   ", 배터리_어제_방전)
-        ElseIf 배터리_당일_방전 < 1000 * 1000 Then
-            szValue = String.Format("{0:F1} mWh   ", 배터리_어제_방전 / 1000)
-        ElseIf 배터리_당일_방전 < 1000 * 1000 * 1000 Then
-            szValue = String.Format("{0:F1} gWh   ", 배터리_어제_방전 / 1000 / 1000)
+        ' If 배터리_어제_방전 < 1000 Then
+        'szValue = String.Format("{0:F1} kWh   ", 배터리_어제_방전)
+        ' ElseIf 배터리_당일_방전 < 1000 * 1000 Then
+        ' szValue = String.Format("{0:F1} MWh   ", 배터리_어제_방전 / 1000)
+        ' ElseIf 배터리_당일_방전 < 1000 * 1000 * 1000 Then
+        ' szValue = String.Format("{0:F1} gWh   ", 배터리_어제_방전 / 1000 / 1000)
+        ' End If
+        ' If lbBatteryDischarge_Yesterday.Text <> szValue Then
+        'lbBatteryDischarge_Yesterday.Text = szValue
+        'End If
+
+        If 배터리_당월_방전 < 1000 Then
+            szValue = String.Format("{0:F1} kWh   ", 배터리_당월_방전)
+        ElseIf 배터리_당월_방전 < 1000 * 1000 Then
+            szValue = String.Format("{0:F1} MWh   ", 배터리_당월_방전 / 1000)
+        ElseIf 배터리_당월_방전 < 1000 * 1000 * 1000 Then
+            szValue = String.Format("{0:F1} gWh   ", 배터리_당월_방전 / 1000 / 1000)
         End If
         If lbBatteryDischarge_Yesterday.Text <> szValue Then
             lbBatteryDischarge_Yesterday.Text = szValue
@@ -217,9 +172,9 @@
 
         If 배터리_누적_방전 < 1000 Then
             szValue = String.Format("{0:F1} kWh   ", 배터리_누적_방전)
-        ElseIf 배터리_당일_방전 < 1000 * 1000 Then
-            szValue = String.Format("{0:F1} mWh   ", 배터리_누적_방전 / 1000)
-        ElseIf 배터리_당일_방전 < 1000 * 1000 * 1000 Then
+        ElseIf 배터리_누적_방전 < 1000 * 1000 Then
+            szValue = String.Format("{0:F1} MWh   ", 배터리_누적_방전 / 1000)
+        ElseIf 배터리_누적_방전 < 1000 * 1000 * 1000 Then
             szValue = String.Format("{0:F1} gWh   ", 배터리_누적_방전 / 1000 / 1000)
         End If
         If lbBatteryDischarge_Total.Text <> szValue Then
@@ -230,7 +185,7 @@
         If 배터리_당일_충전 < 1000 Then
             szValue = String.Format("{0:F1} kWh   ", 배터리_당일_충전)
         ElseIf 배터리_당일_충전 < 1000 * 1000 Then
-            szValue = String.Format("{0:F1} mWh   ", 배터리_당일_충전 / 1000)
+            szValue = String.Format("{0:F1} MWh   ", 배터리_당일_충전 / 1000)
         ElseIf 배터리_당일_충전 < 1000 * 1000 * 1000 Then
             szValue = String.Format("{0:F1} gWh   ", 배터리_당일_충전 / 1000 / 1000)
         End If
@@ -238,22 +193,34 @@
             lbBatteryCharge_Today.Text = szValue
         End If
 
-        If 배터리_어제_충전 < 1000 Then
-            szValue = String.Format("{0:F1} kWh   ", 배터리_어제_충전)
-        ElseIf 배터리_당일_충전 < 1000 * 1000 Then
-            szValue = String.Format("{0:F1} mWh   ", 배터리_어제_충전 / 1000)
-        ElseIf 배터리_당일_충전 < 1000 * 1000 * 1000 Then
-            szValue = String.Format("{0:F1} gWh   ", 배터리_어제_충전 / 1000 / 1000)
+        'If 배터리_어제_충전 < 1000 Then
+        'szValue = String.Format("{0:F1} kWh   ", 배터리_어제_충전)
+        'ElseIf 배터리_어제_충전 < 1000 * 1000 Then
+        'szValue = String.Format("{0:F1} MWh   ", 배터리_어제_충전 / 1000)
+        'ElseIf 배터리_어제_충전 < 1000 * 1000 * 1000 Then
+        'szValue = String.Format("{0:F1} gWh   ", 배터리_어제_충전 / 1000 / 1000)
+        'End If
+        'If lbBatteryCharge_Yesterday.Text <> szValue Then
+        'lbBatteryCharge_Yesterday.Text = szValue
+        'End If
+
+        If 배터리_당월_충전 < 1000 Then
+            szValue = String.Format("{0:F1} kWh   ", 배터리_당월_충전)
+        ElseIf 배터리_당월_충전 < 1000 * 1000 Then
+            szValue = String.Format("{0:F1} MWh   ", 배터리_당월_충전 / 1000)
+        ElseIf 배터리_당월_충전 < 1000 * 1000 * 1000 Then
+            szValue = String.Format("{0:F1} gWh   ", 배터리_당월_충전 / 1000 / 1000)
         End If
+
         If lbBatteryCharge_Yesterday.Text <> szValue Then
             lbBatteryCharge_Yesterday.Text = szValue
         End If
 
         If 배터리_누적_충전 < 1000 Then
             szValue = String.Format("{0:F1} kWh   ", 배터리_누적_충전)
-        ElseIf 배터리_당일_충전 < 1000 * 1000 Then
-            szValue = String.Format("{0:F1} mWh   ", 배터리_누적_충전 / 1000)
-        ElseIf 배터리_당일_충전 < 1000 * 1000 * 1000 Then
+        ElseIf 배터리_누적_충전 < 1000 * 1000 Then
+            szValue = String.Format("{0:F1} MWh   ", 배터리_누적_충전 / 1000)
+        ElseIf 배터리_누적_충전 < 1000 * 1000 * 1000 Then
             szValue = String.Format("{0:F1} gWh   ", 배터리_누적_충전 / 1000 / 1000)
         End If
         If lbBatteryCharge_Total.Text <> szValue Then
@@ -261,46 +228,40 @@
         End If
 
         Try
-
-            'VSrack.Text = num_Rack
-            'VSmodule.Text = num_Module
-            'VSStatus.Text = BMS현재통신모드
-
-
             If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
-                lSOC.Text = Convert.ToString(cBMS.Bank_SOC * 0.1) + " %"
-                lSOH.Text = Convert.ToString(cBMS.Bank_SOH * 0.1) + " %"
-                lPower.Text = Convert.ToString(cBMS.Bank_충방전_전력 * 0.1) + " kW"
-                lVoltage.Text = Convert.ToString(cBMS.Bank_DC전압 * 0.1) + " V"
-                lCurrent.Text = Convert.ToString(cBMS.Bank_DC전류 * 0.1) + " A"
-                lTemperature.Text = Convert.ToString(cBMS.Bank_SOC * 0.1) + " °C"
+                lSOC.Text = Convert.ToString(cBMS.Bank_SOC) + " %"
+                lSOH.Text = Convert.ToString(cBMS.Bank_SOH) + " %"
+                lPower.Text = Convert.ToString(cBMS.Bank_충방전_전력) + " kW"
+                lVoltage.Text = Convert.ToString(cBMS.Bank_DC전압) + " V"
+                lCurrent.Text = Convert.ToString(cBMS.Bank_DC전류) + " A"
+                lTemperature.Text = Convert.ToString(cBMS.Bank내_Module_최고_온도) + " °C"
 
             ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
-                l랙SOC.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_SOC * 0.1) + " %"
-                l랙SOH.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_SOH * 0.1) + " %"
-                l랙전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Voltage * 0.1) + " V"
-                l랙전류.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Current * 0.1) + " A"
-                lCell최대전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Max_Cell_Voltage * 1) + " mV"
+                l랙SOC.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_SOC) + " %"
+                l랙SOH.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_SOH) + " %"
+                l랙전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Voltage) + " V"
+                l랙전류.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Current) + " A"
+                lCell최대전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Max_Cell_Voltage) + " mV"
                 lCell최대전압위치.Text = cBMS_Rack(num_Rack).Max_Cell_Voltage_Position
-                lCell최소전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Min_Cell_Voltage * 1) + " mV"
+                lCell최소전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Min_Cell_Voltage) + " mV"
                 lCell최소전압위치.Text = cBMS_Rack(num_Rack).Min_Cell_Voltage_Position
-                lCell전압편차.Text = Convert.ToString(cBMS_Rack(num_Rack).Cell_Voltage_Gap * 1) + " mV"
-                lCell평균전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Average_Cell_Voltage * 1) + " mV"
-                lCell최대온도.Text = Convert.ToString(cBMS_Rack(num_Rack).Max_Cell_Temperature * 0.1) + " °C"
+                lCell전압편차.Text = Convert.ToString(cBMS_Rack(num_Rack).Cell_Voltage_Gap) + " mV"
+                lCell평균전압.Text = Convert.ToString(cBMS_Rack(num_Rack).Rack_Average_Cell_Voltage) + " mV"
+                lCell최대온도.Text = Convert.ToString(cBMS_Rack(num_Rack).Max_Cell_Temperature) + " °C"
                 lCell최대온도위치.Text = cBMS_Rack(num_Rack).Max_Cell_Temperature_Position
-                lCell최소온도.Text = Convert.ToString(cBMS_Rack(num_Rack).Min_Cell_Temperature * 0.1) + " °C"
+                lCell최소온도.Text = Convert.ToString(cBMS_Rack(num_Rack).Min_Cell_Temperature) + " °C"
                 lCell최소온도위치.Text = cBMS_Rack(num_Rack).Min_Cell_Temperature_Position
                 lCell온도편차.Text = Convert.ToString(cBMS_Rack(num_Rack).Cell_Temperature_Gap)
                 l랙평균모듈온도.Text = cBMS_Rack(num_Rack).Rack_Average_Module_Temperature
             ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
-                l모듈전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Module_DC_Voltage * 0.1) + " V"
-                l모듈내Cell최대전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Max_Cell_Voltage * 0.001) + " V"
-                l모듈내Cell최저전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Min_Cell_Voltage * 0.001) + " V"
-                l모듈내Cell평균전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Averge_Cell_Voltage * 0.001) + " V"
+                l모듈전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Module_DC_Voltage) + " V"
+                l모듈내Cell최대전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Max_Cell_Voltage) + " V"
+                l모듈내Cell최저전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Min_Cell_Voltage) + " V"
+                l모듈내Cell평균전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Averge_Cell_Voltage) + " V"
                 l최고최저셀전압위치.Text = cBMS_Module(num_Rack, num_Module).Max_Min_Cell_Voltage_Location
-                l모듈평균온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Average_Module_Temperature * 0.1) + " °C"
-                l모듈최고온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Max_Module_Temperature * 0.1) + " °C"
-                l모듈최저온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Min_Module_Temeperature * 0.1) + " °C"
+                l모듈평균온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Average_Module_Temperature) + " °C"
+                l모듈최고온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Max_Module_Temperature) + " °C"
+                l모듈최저온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Min_Module_Temeperature) + " °C"
                 l모듈최고최저온도위치.Text = cBMS_Module(num_Rack, num_Module).Max_Min_Module_Temperature_Location
             End If
 
@@ -313,6 +274,7 @@
 
 
     Private Sub PageHeader1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PageHeader1.Click
+        타이머_상태.Enabled = False
         PageHeader1.BorderSide_Bottom = False
         PageHeader1.BackColor = Color.White
         PageHeader1.Enabled = False
@@ -339,15 +301,16 @@
         BMS현재통신모드 = BMS통신모드정의.BankInfo
 
 
-        btn_Module.Visible = False
 
         Panel1.Visible = True
         Panel2.Visible = False
         Panel3.Visible = False
 
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub PageHeader2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PageHeader2.Click
+        타이머_상태.Enabled = False
         PageHeader1.BorderSide_Bottom = True
         PageHeader1.BackColor = Color.WhiteSmoke
         PageHeader1.Enabled = True
@@ -372,14 +335,15 @@
         num_Module = 0
         BMS현재통신모드 = BMS통신모드정의.RackInfo
 
-        btn_Module.Visible = True
 
         Panel1.Visible = False
         Panel2.Visible = True
         Panel3.Visible = False
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub PageHeader3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PageHeader3.Click
+        타이머_상태.Enabled = False
         PageHeader1.BorderSide_Bottom = True
         PageHeader1.BackColor = Color.WhiteSmoke
         PageHeader1.Enabled = True
@@ -403,16 +367,17 @@
         num_Rack = 2
         num_Module = 0
         BMS현재통신모드 = BMS통신모드정의.RackInfo
-        btn_Module.Visible = True
 
 
         Panel1.Visible = False
         Panel2.Visible = True
         Panel3.Visible = False
+        타이머_상태.Enabled = True
     End Sub
 
 
     Private Sub PageHeader4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PageHeader4.Click
+        타이머_상태.Enabled = False
         PageHeader1.BorderSide_Bottom = True
         PageHeader1.BackColor = Color.WhiteSmoke
         PageHeader1.Enabled = True
@@ -436,7 +401,6 @@
         num_Rack = 3
         num_Module = 0
         BMS현재통신모드 = BMS통신모드정의.RackInfo
-        btn_Module.Visible = True
 
 
         Panel1.Visible = False
@@ -444,17 +408,18 @@
         Panel3.Visible = False
 
 
-
+        타이머_상태.Enabled = True
     End Sub
 
-    Private Sub btn_Module_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module.Click
-
+    Private Sub btn_Module_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        타이머_상태.Enabled = False
         Panel1.Visible = False
         Panel2.Visible = False
         Panel3.Visible = True
 
         num_Module = 1
         BMS현재통신모드 = BMS통신모드정의.ModuleInfo
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub Panel_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel.Paint
@@ -549,154 +514,189 @@
     End Sub
 
     Private Sub btn_Module1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module1.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module1.BackColor = Color.White
         btn_Module1.Enabled = False
         btn_Module1.Invalidate()
 
         num_Module = 1
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module2.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module2.BackColor = Color.White
         btn_Module2.Enabled = False
         btn_Module2.Invalidate()
         num_Module = 2
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module3.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module3.BackColor = Color.White
         btn_Module3.Enabled = False
         btn_Module3.Invalidate()
         num_Module = 3
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module4.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module4.BackColor = Color.White
         btn_Module4.Enabled = False
         btn_Module4.Invalidate()
         num_Module = 4
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module5.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module5.BackColor = Color.White
         btn_Module5.Enabled = False
         btn_Module5.Invalidate()
         num_Module = 5
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module6.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module6.BackColor = Color.White
         btn_Module6.Enabled = False
         btn_Module6.Invalidate()
         num_Module = 6
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module7.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module7.BackColor = Color.White
         btn_Module7.Enabled = False
         btn_Module7.Invalidate()
         num_Module = 7
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module8.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module8.BackColor = Color.White
         btn_Module8.Enabled = False
         btn_Module8.Invalidate()
         num_Module = 8
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module9.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module9.BackColor = Color.White
         btn_Module9.Enabled = False
         btn_Module9.Invalidate()
         num_Module = 9
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module10.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module10.BackColor = Color.White
         btn_Module10.Enabled = False
         btn_Module10.Invalidate()
         num_Module = 10
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module11.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module11.BackColor = Color.White
         btn_Module11.Enabled = False
         btn_Module11.Invalidate()
         num_Module = 11
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module12_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module12.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module12.BackColor = Color.White
         btn_Module12.Enabled = False
         btn_Module12.Invalidate()
         num_Module = 12
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module13.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module13.BackColor = Color.White
         btn_Module13.Enabled = False
         btn_Module13.Invalidate()
         num_Module = 13
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module14.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module14.BackColor = Color.White
         btn_Module14.Enabled = False
         btn_Module14.Invalidate()
         num_Module = 14
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module15.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module15.BackColor = Color.White
         btn_Module15.Enabled = False
         btn_Module15.Invalidate()
         num_Module = 15
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module16.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module16.BackColor = Color.White
         btn_Module16.Enabled = False
         btn_Module16.Invalidate()
         num_Module = 16
+        타이머_상태.Enabled = True
     End Sub
 
     Private Sub btn_Module17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Module17.Click
+        타이머_상태.Enabled = False
         btn_Module_clear()
         btn_Module17.BackColor = Color.White
         btn_Module17.Enabled = False
         btn_Module17.Invalidate()
         num_Module = 17
+        타이머_상태.Enabled = True
     End Sub
 
-
-
-    Private Sub btn_None_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_None.Click
+    Private Sub btn_None_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         현재BSC상태 = BSC상태.Normal
-
     End Sub
 
-    Private Sub btn_Close_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Close.Click
+    Private Sub btn_Close_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         현재BSC상태 = BSC상태.Contactor_Close
     End Sub
 
-    Private Sub btn_Open_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Open.Click
+    Private Sub btn_Open_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         현재BSC상태 = BSC상태.Contactor_Open1
+    End Sub
+
+    Private Sub wnd서브화면2_배터리_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Click
+
     End Sub
 End Class

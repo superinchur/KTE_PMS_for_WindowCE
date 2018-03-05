@@ -14,7 +14,7 @@ Public Class EMS통신서버
 
     Public Event DataArrived(ByVal szAddr As String, ByVal nPort As Integer, ByVal szMode As String, ByVal btData() As Byte, ByVal nLength As Integer)
     Public Sub OnDataArrived(ByVal szAddr As String, ByVal nPort As Integer, ByVal szMode As String, ByVal btData() As Byte, ByVal nLength As Integer)
-        'RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
+        RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
     End Sub
 
     Public Overloads Sub ServiceStart()
@@ -39,6 +39,8 @@ Public Class EMS통신서버
             Dim objCallBack As New WaitCallback(AddressOf AcceptClient)
             ThreadPool.QueueUserWorkItem(objCallBack)
         Catch ex As Exception
+            Debug.WriteLine(ex.ToString())
+
         End Try
 
 
@@ -62,7 +64,7 @@ Public Class EMS통신서버
             End While
 
         Catch ex As Exception
-            'MsgBox(ex.ToString)
+            MsgBox(ex.ToString)
         End Try
     End Sub
 

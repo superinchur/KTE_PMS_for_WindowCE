@@ -1,8 +1,12 @@
 ﻿Module 모듈_변수선언
     Public CONFIG_FILE As String = ""
+    Public CONFIG_FILE1 As String = ""
+    Public CONFIG_FILE2 As String = ""
+    Public CONFIG_FILE3 As String = ""
+    Public MODBUS_EMS_BUFFER(1024) As Byte
 
-    Public EMS_수신포트 As Integer = 502
-    Public BMS_수신포트 As Integer = 503
+    Public EMS_수신포트 As Integer = 503
+    Public BMS_수신포트 As Integer = 502
 
     Public PCS_통신포트 As String = "COM2"
     Public PCS_통신주기 As Integer = 100
@@ -87,16 +91,16 @@
     Public Const PT_TEMP As Integer = 51
     Public Const PT_STS As Integer = 52
 
-    'Public 현재사용모드 As 사용모드정의 = 사용모드정의.동작안함
+    Public 현재사용모드 As 사용모드정의 = 사용모드정의.동작안함
 
-    'Public Enum 사용모드정의
-    '    동작안함 = 0
-    '    평상 = 1
-    '    피크컷 = 2
-    '    유효전력 = 3
-    '    무효전력 = 4
-    '    배터리충전 = 5
-    'End Enum
+    Public Enum 사용모드정의
+        동작안함 = 0
+        평상 = 1
+        피크컷 = 2
+        유효전력 = 3
+        무효전력 = 4
+        배터리충전 = 5
+    End Enum
 
     Public 현재사용모드_피크컷동작 As Boolean = False
     Public 현재사용모드_유효전력 As Boolean = False
@@ -121,8 +125,16 @@
     Public d사용모드_배터리_방전정지전압 As Double
     Public d사용모드_배터리_충전시최대전류 As Double
     Public d사용모드_배터리_방전시최대전류 As Double
+    ' 배터리 사용량
+    Public 배터리_당일_충전 As Double = 0
+    Public 배터리_당일_방전 As Double = 0
+    Public 배터리_어제_충전 As Double = 0
+    Public 배터리_어제_방전 As Double = 0
+    Public 배터리_누적_충전 As Double = 0
+    Public 배터리_누적_방전 As Double = 0
 
-
+    Public 배터리_당월_충전 As Double = 0
+    Public 배터리_당월_방전 As Double = 0
     Public cBMS As New BMS
     Public cBMS_Rack(5) As BMS_Rack
     Public cBMS_Module(4, 17) As BMS_Module

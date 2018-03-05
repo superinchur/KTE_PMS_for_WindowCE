@@ -86,6 +86,7 @@
         If minvalue >= d최종_유효전력 Or d최종_유효전력 >= maxvalue Then
             If d최종_유효전력 > 0 Then
                 제어대기열_추가(PT_Grid_Active_Power, d최종_유효전력 * 10)
+                Set_MODBUS_EMS_BUFFER(44, d최종_유효전력 * 10)
             End If
         End If
     End Sub
@@ -110,6 +111,7 @@
 
             If Not (minvalue >= d최종_유효전력 And d최종_유효전력 <= maxvalue) Then
                 제어대기열_추가(PT_Grid_Active_Power, d최종_유효전력 * 10)
+                Set_MODBUS_EMS_BUFFER(44, d최종_유효전력 * 10)
             End If
         End If
     End Sub
@@ -187,5 +189,8 @@
         End If
     End Sub
 
-
+    Public Sub Set_MODBUS_EMS_BUFFER(ByVal address, ByVal val)
+        MODBUS_EMS_BUFFER(address * 2) = Convert.ToInt16(val) \ &H100
+        MODBUS_EMS_BUFFER(address * 2 + 1) = Convert.ToInt16(val) Mod &H100
+    End Sub
 End Module

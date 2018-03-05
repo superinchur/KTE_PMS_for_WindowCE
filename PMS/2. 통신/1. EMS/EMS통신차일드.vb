@@ -44,7 +44,7 @@ Public Class EMS통신차일드
     Public Sub OnDataArrived(ByVal szAddr As String, ByVal nPort As Integer, ByVal szMode As String, ByVal btData() As Byte, ByVal nLength As Integer)
         Try
             If nLength > 0 Then
-                'RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
+                RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
             End If
         Catch ex As Exception
             Debug.WriteLine("")
@@ -154,8 +154,6 @@ Public Class EMS통신차일드
 
             Dim nAddrESS As Integer = btRecv(2) * &H100 + btRecv(3)
             Dim nDataCount As Integer = btRecv(4) * &H100 + btRecv(5)
-
-
 
             EMS_MODBUS_ADDRESS = nAddrESS
 

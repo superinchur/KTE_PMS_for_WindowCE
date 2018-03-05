@@ -209,20 +209,32 @@
 
         Dim szValue As String = "-"
         Dim nOldStatus As Integer = 그리드상태
-        Dim dGrid_In_Power As Double = GetModbusData_Ushort(PT_grid_in_Power) * 0.1
-        Dim dGrid_Out_Power As Double = GetModbusData_Ushort(PT_grid_out_Power) * 0.1
+        'Dim dGrid_In_Power As Double = GetModbusData_Ushort(PT_grid_in_Power) * 0.1
+        'Dim dGrid_Out_Power As Double = GetModbusData_Ushort(PT_grid_out_Power) * 0.1
 
-        If dGrid_In_Power > 0 And dGrid_Out_Power <= 0 Then
+        'If dGrid_In_Power > 0 And dGrid_Out_Power <= 0 Then
+        '그리드상태 = 1
+        'szValue = String.Format("{0:F1} kW", dGrid_In_Power)
+        'ElseIf dGrid_In_Power <= 0 And dGrid_Out_Power > 0 Then
+        '그리드상태 = 2
+        ' szValue = String.Format("{0:F1} kW", dGrid_Out_Power)
+        'Else
+        '그리드상태 = 0
+        'szValue = ""
+        'End If
+
+
+        If cBMS.Bank_충방전_전력 > 0 Then
             그리드상태 = 1
-            szValue = String.Format("{0:F1} kW", dGrid_In_Power)
-        ElseIf dGrid_In_Power <= 0 And dGrid_Out_Power > 0 Then
+        ElseIf cBMS.Bank_충방전_전력 < 0 Then
             그리드상태 = 2
-            szValue = String.Format("{0:F1} kW", dGrid_Out_Power)
         Else
             그리드상태 = 0
-            szValue = ""
-        End If
 
+        End If
+        Dim dPT_Inv_Power As Double = GetModbusData_Ushort(PT_Inv_Power) * 0.1
+        'Dim dPT_Inv_Power As Double = cBMS.Bank_충방전_전력
+        szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
         If lbGridStatus.Text <> szValue Then
             lbGridStatus.Text = szValue
             lbGridStatus.Invalidate()

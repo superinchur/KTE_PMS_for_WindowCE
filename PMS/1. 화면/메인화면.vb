@@ -36,7 +36,7 @@ Public Class 메인화면
             InitializeComponent()
             ' InitializeComponent() 호출 뒤에 초기화 코드를 추가하십시오.
         Catch ex As Exception
-            MsgBox(ex.ToString)
+            'MsgBox(ex.ToString)
         End Try
     End Sub
 
@@ -87,7 +87,12 @@ Public Class 메인화면
         Dim szPath As String = System.IO.Path.GetDirectoryName(szFilePath)
 
         CONFIG_FILE = String.Format("{0}\pms.ini", szPath)
+        CONFIG_FILE1 = String.Format("{0}\pms1.ini", szPath)
+        CONFIG_FILE2 = String.Format("{0}\pms2.ini", szPath)
+        CONFIG_FILE3 = String.Format("{0}\pms3.ini", szPath)
 
+        num_Module = 1
+        num_Rack = 1
         'MsgBox(CONFIG_FILE)
         ' 변수 초기화
 
@@ -98,30 +103,19 @@ Public Class 메인화면
             PMS_통신ID = Val(pINI.GetKeyValue("PMS", "통신ID") & "")
             PCS_통신포트 = pINI.GetKeyValue("PCS", "통신포트") & ""
             PCS_통신주기 = Val(pINI.GetKeyValue("PCS", "통신주기") & "")
-
-            BMS_통신ID = Val(pINI.GetKeyValue("BMS", "통신ID") & "")
-            BMS_통신포트 = pINI.GetKeyValue("BMS", "통신포트") & ""
-            BMS_통신주기 = Val(pINI.GetKeyValue("BMS", "통신주기") & "")
-
         Else
-            EMS_수신포트 = 502
+            EMS_수신포트 = 503
             PMS_통신ID = 1
             PCS_통신포트 = "COM2"
             PCS_통신주기 = 500
 
-            BMS_통신ID = 1
-            BMS_통신포트 = "COM3"
-            BMS_통신주기 = 500
+
         End If
 
-        If EMS_수신포트 = 0 Then EMS_수신포트 = 502
+        If EMS_수신포트 = 0 Then EMS_수신포트 = 503
         If PMS_통신ID = 0 Then PMS_통신ID = 1
         If PCS_통신포트 = "" Then PCS_통신포트 = "COM2"
         If PCS_통신주기 = 0 Then PCS_통신주기 = 500
-
-        If BMS_통신ID = 0 Then BMS_통신ID = 1
-        If BMS_통신포트 = "" Then BMS_통신포트 = "COM3"
-        If BMS_통신주기 = 0 Then BMS_통신주기 = 500
 
         ' 스마트리모트 실행
         SmartRemote1.Start()
@@ -129,7 +123,6 @@ Public Class 메인화면
         타이머_통신상태.Enabled = False
         타이머_통신상태.Interval = 500
         타이머_통신상태.Enabled = True
-
 
         ' 피크컷 정보 설정
         ReDim 사용모드_피크컷시간(2, 4)
@@ -161,11 +154,8 @@ Public Class 메인화면
 
             d사용모드_배터리_충전시최대전류 = Val(pINI.GetKeyValue("사용모드", "배터리충전전류") & "")
             d사용모드_배터리_방전시최대전류 = Val(pINI.GetKeyValue("사용모드", "배터리충전전압") & "")
-
         End If
-
         배터리사용량_초기화()
-
     End Sub
 
     Private tLastCheckHour As Integer = -1
@@ -264,9 +254,9 @@ Public Class 메인화면
 #Region "통신"
     Private EMS수신서버 As EMS통신서버 = Nothing
     Private PCS통신 As PCS통신 = Nothing
-    'Private BMS통신 As BMS클라이언트 = Nothing
-    Private BMS통신 As BMS시리얼통신 = Nothing
 
+    Private BMS통신 As BMS클라이언트 = Nothing
+    'Private BMS통신 As BMS시리얼통신 = Nothing
     Private Sub 통신시작()
         EMS수신서버 = New EMS통신서버
         AddHandler EMS수신서버.DataArrived, AddressOf EMS_DataArrived
@@ -274,10 +264,11 @@ Public Class 메인화면
         PCS통신 = New PCS통신
         AddHandler PCS통신.DataArrived, AddressOf PCS_DataArrived
 
-        'BMS통신 = New BMS클라이언트
 
-        BMS통신 = New BMS시리얼통신
-        AddHandler BMS통신.DataArrived, AddressOf PCS_DataArrived
+        BMS통신 = New BMS클라이언트
+
+        'BMS통신 = New BMS시리얼통신
+        'AddHandler BMS통신.DataArrived, AddressOf PCS_DataArrived
 
         EMS_통신시작()
         PCS_통신시작()
@@ -365,9 +356,7 @@ Public Class 메인화면
         For i As Integer = 0 To nLength - 1
             szMessage &= String.Format("{0:X2} ", btData(i))
         Next
-
         'BMS_DataDisplay(szMode, szMessage)
-
         Debug.WriteLine(szMessage)
     End Sub
 
@@ -550,8 +539,7 @@ Public Class 메인화면
 
         nCurrentImage = nComm_EMS_Image
         ' Test를 위해서 잠시 바꿔 놓음'
-        'If EMS수신서버.Connected > 0 Then
-        If 1 Then
+        If EMS수신서버.Connected > 0 Then
             nCurrentImage = 2
         Else
             nCurrentImage = 1
@@ -572,27 +560,36 @@ Public Class 메인화면
 
         nCurrentImage = nComm_BMS_Image
         ' Test를 위해서 잠시 바꿔 놓음'
-        'If BMS수신서버.Connected > 0 Then
-        If 1 Then
+        'If BMS통신.connected() > 0 Then
+        If 1 > 0 Then
             nCurrentImage = 2
         Else
             nCurrentImage = 1
         End If
-        If nCurrentImage <> nComm_BMS_Image Then
-            nComm_BMS_Image = nCurrentImage
+        ' If nCurrentImage <> nComm_BMS_Image Then
+        nComm_BMS_Image = nCurrentImage
 
-            Select Case nComm_BMS_Image
-                Case 1
-                    pbBMS.Image = My.Resources.단선_32
-                    pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "BMS 통신", "단선")
-                Case 2
-                    pbBMS.Image = My.Resources.연결_32
-                    pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "BMS 통신", "연결")
-            End Select
-        End If
+        Select Case nComm_BMS_Image
+            Case 1
+                pbBMS.Image = My.Resources.단선_32
+                pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "BMS 통신", "단선")
+            Case 2
+                pbBMS.Image = My.Resources.연결_32
+                pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "BMS 통신", "연결")
+        End Select
+        'End If
+
+
+        Set_MODBUS_EMS_BUFFER(62, 배터리_당일_충전)
+        Set_MODBUS_EMS_BUFFER(63, 배터리_당일_방전)
+        Set_MODBUS_EMS_BUFFER(64, 배터리_어제_충전)
+        Set_MODBUS_EMS_BUFFER(65, 배터리_어제_방전)
+        Set_MODBUS_EMS_BUFFER(66, 배터리_누적_충전 / 1000 / 1000)
+        Set_MODBUS_EMS_BUFFER(66, 배터리_누적_방전 / 1000 / 1000)
 
         타이머_통신상태.Interval = BMS_통신주기
         타이머_통신상태.Enabled = True
+
     End Sub
 
     Private Sub VsPictureButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles 버튼_화면전환_메인.Click
@@ -691,8 +688,9 @@ Public Class 메인화면
                 If 현재사용모드_배터리충전 = True Then
                     배터리충전취소()
                 ElseIf 현재사용모드_배터리충전 = False Then
-
-                    If cBMS.Bank_SOC <= d사용모드_배터리_방전정지SOC And cBMS.Bank_DC전압 <= d사용모드_배터리_방전정지전압 Then
+                    Dim dBATT_SOC As Double = cBMS.Bank_SOC
+                    Dim dBATT_DC전압 As Double = cBMS.Bank_DC전압
+                    If dBATT_SOC <= d사용모드_배터리_방전정지SOC And dBATT_DC전압 <= d사용모드_배터리_방전정지전압 Then
                         ' SOC가 배터리 방전정지값 보다 작거나 같다면 방전을 중지해야한다.
                         If 현재사용모드_배터리방전 = True Then
                             ' 계속 방전중이라면 방전을 취소하고
@@ -701,7 +699,8 @@ Public Class 메인화면
                         ElseIf 현재사용모드_배터리방전 = False Then
                             ' Nothing to do
                         End If
-                    ElseIf cBMS.Bank_SOC > d사용모드_배터리_방전정지SOC + deadbandSOC And cBMS.Bank_DC전압 > d사용모드_배터리_방전정지SOC + deadbandVolt Then
+                    ElseIf dBATT_SOC > d사용모드_배터리_방전정지SOC + deadbandSOC And dBATT_DC전압 > d사용모드_배터리_방전정지전압 + deadbandVolt Then
+
                         ' SOC가 배터리 방전 정지보다 크다면 방전을 계속 실시해야한다.
                         ' 방전중이 아니라면 방전 요청을 지속적으로 보낸다..
                         If 현재사용모드_배터리방전 = True Then
@@ -718,12 +717,13 @@ Public Class 메인화면
 
                 ' 배터리 충/방전 확인 비트
                 Dim dBATT_SOC As Double = cBMS.Bank_SOC
+                Dim dBATT_DC전압 As Double = cBMS.Bank_DC전압
                 Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
 
                 If 현재사용모드_배터리방전 = True Then
                     배터리방전취소()
                 ElseIf 현재사용모드_배터리방전 = False Then
-                    If dBATT_SOC < d사용모드_배터리_충전정지SOC And cBMS.Bank_DC전압 < d사용모드_배터리_충전정지전압 Then
+                    If dBATT_SOC < d사용모드_배터리_충전정지SOC And dBATT_DC전압 < d사용모드_배터리_충전정지전압 Then
                         If 현재사용모드_배터리충전 = True Then
                             ' 배터리가 정상적으로 충전중이라면 더이상 명령을 내릴 필요가 없으니 아무일도 하지 않는다.
                             ' nothing to do
@@ -733,7 +733,7 @@ Public Class 메인화면
                             End If
                         End If
 
-                    ElseIf dBATT_SOC >= d사용모드_배터리_충전정지SOC And cBMS.Bank_DC전압 >= d사용모드_배터리_충전정지전압 Then
+                    ElseIf dBATT_SOC >= d사용모드_배터리_충전정지SOC And dBATT_DC전압 >= d사용모드_배터리_충전정지전압 Then
                         '현재 SOC값이 사용모드_배터리_충전정지보다 클 경우
                         If 현재사용모드_배터리충전 = True Then
                             ' 충전 정지를 한다.
@@ -772,6 +772,7 @@ Public Class 메인화면
                 방전시유효전력설정(dBattVoltageofPCS)
             End If
         End If
+
         타이머_사용모드.Enabled = True
     End Sub
 

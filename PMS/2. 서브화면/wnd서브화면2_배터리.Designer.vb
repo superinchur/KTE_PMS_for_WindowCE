@@ -92,11 +92,8 @@ Partial Public Class wnd서브화면2_배터리
         Me.VsLabel10 = New PMS.VSLabel
         Me.lbBatteryDischarge_Total = New PMS.VSLabel
         Me.lbBatteryCharge_Total = New PMS.VSLabel
-        Me.btn_Close = New PMS.VSLabel
         Me.VsLabel66 = New PMS.VSLabel
-        Me.btn_Open = New PMS.VSLabel
         Me.VsLabel61 = New PMS.VSLabel
-        Me.btn_None = New PMS.VSLabel
         Me.lCell최대전압 = New PMS.VSLabel
         Me.VsLabel58 = New PMS.VSLabel
         Me.lCell최대전압위치 = New PMS.VSLabel
@@ -127,7 +124,6 @@ Partial Public Class wnd서브화면2_배터리
         Me.VsLabel19 = New PMS.VSLabel
         Me.VsLabel20 = New PMS.VSLabel
         Me.lCell최소온도 = New PMS.VSLabel
-        Me.btn_Module = New PMS.VSLabel
         Me.PageHeader4 = New PMS.VSLabel
         Me.PageHeader3 = New PMS.VSLabel
         Me.PageHeader2 = New PMS.VSLabel
@@ -156,11 +152,8 @@ Partial Public Class wnd서브화면2_배터리
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Panel2.Controls.Add(Me.btn_Close)
         Me.Panel2.Controls.Add(Me.VsLabel66)
-        Me.Panel2.Controls.Add(Me.btn_Open)
         Me.Panel2.Controls.Add(Me.VsLabel61)
-        Me.Panel2.Controls.Add(Me.btn_None)
         Me.Panel2.Controls.Add(Me.lCell최대전압)
         Me.Panel2.Controls.Add(Me.VsLabel58)
         Me.Panel2.Controls.Add(Me.lCell최대전압위치)
@@ -661,7 +654,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l모듈최고최저온도위치.Name = "l모듈최고최저온도위치"
         Me.l모듈최고최저온도위치.Size = New System.Drawing.Size(119, 30)
         Me.l모듈최고최저온도위치.TabIndex = 51
-        Me.l모듈최고최저온도위치.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l모듈최고최저온도위치.TextAlign = System.Drawing.StringAlignment.Center
         Me.l모듈최고최저온도위치.UseKeyPad = False
         '
         'VsLabel63
@@ -698,7 +691,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l모듈최저온도.Name = "l모듈최저온도"
         Me.l모듈최저온도.Size = New System.Drawing.Size(119, 30)
         Me.l모듈최저온도.TabIndex = 59
-        Me.l모듈최저온도.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l모듈최저온도.TextAlign = System.Drawing.StringAlignment.Center
         Me.l모듈최저온도.UseKeyPad = False
         '
         'l최고최저셀전압위치
@@ -716,7 +709,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l최고최저셀전압위치.Name = "l최고최저셀전압위치"
         Me.l최고최저셀전압위치.Size = New System.Drawing.Size(119, 30)
         Me.l최고최저셀전압위치.TabIndex = 39
-        Me.l최고최저셀전압위치.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l최고최저셀전압위치.TextAlign = System.Drawing.StringAlignment.Center
         Me.l최고최저셀전압위치.UseKeyPad = False
         '
         'VsLabel41
@@ -753,7 +746,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l모듈내Cell최대전압.Name = "l모듈내Cell최대전압"
         Me.l모듈내Cell최대전압.Size = New System.Drawing.Size(119, 30)
         Me.l모듈내Cell최대전압.TabIndex = 43
-        Me.l모듈내Cell최대전압.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l모듈내Cell최대전압.TextAlign = System.Drawing.StringAlignment.Center
         Me.l모듈내Cell최대전압.UseKeyPad = False
         '
         'VsLabel55
@@ -809,7 +802,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l모듈내Cell최저전압.Name = "l모듈내Cell최저전압"
         Me.l모듈내Cell최저전압.Size = New System.Drawing.Size(119, 30)
         Me.l모듈내Cell최저전압.TabIndex = 41
-        Me.l모듈내Cell최저전압.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l모듈내Cell최저전압.TextAlign = System.Drawing.StringAlignment.Center
         Me.l모듈내Cell최저전압.UseKeyPad = False
         '
         'VsLabel56
@@ -865,7 +858,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l모듈전압.Name = "l모듈전압"
         Me.l모듈전압.Size = New System.Drawing.Size(316, 30)
         Me.l모듈전압.TabIndex = 49
-        Me.l모듈전압.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l모듈전압.TextAlign = System.Drawing.StringAlignment.Center
         Me.l모듈전압.UseKeyPad = False
         '
         'VsLabel45
@@ -902,7 +895,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l모듈최고온도.Name = "l모듈최고온도"
         Me.l모듈최고온도.Size = New System.Drawing.Size(119, 30)
         Me.l모듈최고온도.TabIndex = 54
-        Me.l모듈최고온도.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l모듈최고온도.TextAlign = System.Drawing.StringAlignment.Center
         Me.l모듈최고온도.UseKeyPad = False
         '
         'l모듈평균온도
@@ -920,7 +913,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l모듈평균온도.Name = "l모듈평균온도"
         Me.l모듈평균온도.Size = New System.Drawing.Size(119, 30)
         Me.l모듈평균온도.TabIndex = 57
-        Me.l모듈평균온도.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l모듈평균온도.TextAlign = System.Drawing.StringAlignment.Center
         Me.l모듈평균온도.UseKeyPad = False
         '
         'l모듈내Cell평균전압
@@ -938,7 +931,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l모듈내Cell평균전압.Name = "l모듈내Cell평균전압"
         Me.l모듈내Cell평균전압.Size = New System.Drawing.Size(119, 30)
         Me.l모듈내Cell평균전압.TabIndex = 45
-        Me.l모듈내Cell평균전압.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l모듈내Cell평균전압.TextAlign = System.Drawing.StringAlignment.Center
         Me.l모듈내Cell평균전압.UseKeyPad = False
         '
         'VsLabel44
@@ -1101,7 +1094,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lSOC.Name = "lSOC"
         Me.lSOC.Size = New System.Drawing.Size(119, 30)
         Me.lSOC.TabIndex = 26
-        Me.lSOC.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lSOC.TextAlign = System.Drawing.StringAlignment.Center
         Me.lSOC.UseKeyPad = False
         '
         'VsLabel6
@@ -1138,7 +1131,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lSOH.Name = "lSOH"
         Me.lSOH.Size = New System.Drawing.Size(119, 30)
         Me.lSOH.TabIndex = 26
-        Me.lSOH.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lSOH.TextAlign = System.Drawing.StringAlignment.Center
         Me.lSOH.UseKeyPad = False
         '
         'VsLabel2
@@ -1175,7 +1168,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lPower.Name = "lPower"
         Me.lPower.Size = New System.Drawing.Size(119, 30)
         Me.lPower.TabIndex = 26
-        Me.lPower.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lPower.TextAlign = System.Drawing.StringAlignment.Center
         Me.lPower.UseKeyPad = False
         '
         'VsLabel5
@@ -1212,7 +1205,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lVoltage.Name = "lVoltage"
         Me.lVoltage.Size = New System.Drawing.Size(119, 30)
         Me.lVoltage.TabIndex = 26
-        Me.lVoltage.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lVoltage.TextAlign = System.Drawing.StringAlignment.Center
         Me.lVoltage.UseKeyPad = False
         '
         'lTemperature
@@ -1230,7 +1223,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lTemperature.Name = "lTemperature"
         Me.lTemperature.Size = New System.Drawing.Size(119, 30)
         Me.lTemperature.TabIndex = 26
-        Me.lTemperature.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lTemperature.TextAlign = System.Drawing.StringAlignment.Center
         Me.lTemperature.UseKeyPad = False
         '
         'lCurrent
@@ -1248,7 +1241,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCurrent.Name = "lCurrent"
         Me.lCurrent.Size = New System.Drawing.Size(119, 30)
         Me.lCurrent.TabIndex = 26
-        Me.lCurrent.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCurrent.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCurrent.UseKeyPad = False
         '
         'VsGroupBox2
@@ -1305,7 +1298,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lbBatteryDischarge_Today.Name = "lbBatteryDischarge_Today"
         Me.lbBatteryDischarge_Today.Size = New System.Drawing.Size(149, 40)
         Me.lbBatteryDischarge_Today.TabIndex = 26
-        Me.lbBatteryDischarge_Today.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lbBatteryDischarge_Today.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbBatteryDischarge_Today.UseKeyPad = False
         '
         'VsLabel9
@@ -1342,7 +1335,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lbBatteryCharge_Today.Name = "lbBatteryCharge_Today"
         Me.lbBatteryCharge_Today.Size = New System.Drawing.Size(149, 40)
         Me.lbBatteryCharge_Today.TabIndex = 26
-        Me.lbBatteryCharge_Today.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lbBatteryCharge_Today.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbBatteryCharge_Today.UseKeyPad = False
         '
         'VsLabel13
@@ -1379,7 +1372,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lbBatteryDischarge_Yesterday.Name = "lbBatteryDischarge_Yesterday"
         Me.lbBatteryDischarge_Yesterday.Size = New System.Drawing.Size(149, 40)
         Me.lbBatteryDischarge_Yesterday.TabIndex = 26
-        Me.lbBatteryDischarge_Yesterday.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lbBatteryDischarge_Yesterday.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbBatteryDischarge_Yesterday.UseKeyPad = False
         '
         'VsLabel12
@@ -1397,7 +1390,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.VsLabel12.Name = "VsLabel12"
         Me.VsLabel12.Size = New System.Drawing.Size(76, 40)
         Me.VsLabel12.TabIndex = 26
-        Me.VsLabel12.Text = "어제"
+        Me.VsLabel12.Text = "당월"
         Me.VsLabel12.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel12.UseKeyPad = False
         '
@@ -1416,7 +1409,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lbBatteryCharge_Yesterday.Name = "lbBatteryCharge_Yesterday"
         Me.lbBatteryCharge_Yesterday.Size = New System.Drawing.Size(149, 40)
         Me.lbBatteryCharge_Yesterday.TabIndex = 26
-        Me.lbBatteryCharge_Yesterday.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lbBatteryCharge_Yesterday.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbBatteryCharge_Yesterday.UseKeyPad = False
         '
         'VsLabel10
@@ -1453,7 +1446,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lbBatteryDischarge_Total.Name = "lbBatteryDischarge_Total"
         Me.lbBatteryDischarge_Total.Size = New System.Drawing.Size(149, 40)
         Me.lbBatteryDischarge_Total.TabIndex = 26
-        Me.lbBatteryDischarge_Total.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lbBatteryDischarge_Total.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbBatteryDischarge_Total.UseKeyPad = False
         '
         'lbBatteryCharge_Total
@@ -1471,30 +1464,8 @@ Partial Public Class wnd서브화면2_배터리
         Me.lbBatteryCharge_Total.Name = "lbBatteryCharge_Total"
         Me.lbBatteryCharge_Total.Size = New System.Drawing.Size(149, 40)
         Me.lbBatteryCharge_Total.TabIndex = 26
-        Me.lbBatteryCharge_Total.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lbBatteryCharge_Total.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbBatteryCharge_Total.UseKeyPad = False
-        '
-        'btn_Close
-        '
-        Me.btn_Close.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.btn_Close.BackImage = Nothing
-        Me.btn_Close.BorderColor = System.Drawing.Color.DarkGray
-        Me.btn_Close.BorderSide_Bottom = True
-        Me.btn_Close.BorderSide_Left = True
-        Me.btn_Close.BorderSide_Right = True
-        Me.btn_Close.BorderSide_Top = True
-        Me.btn_Close.BorderWidth = 1
-        Me.btn_Close.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.btn_Close.IsPassword = False
-        Me.btn_Close.Location = New System.Drawing.Point(139, 214)
-        Me.btn_Close.MaxRange = 0
-        Me.btn_Close.MinRange = 0
-        Me.btn_Close.Name = "btn_Close"
-        Me.btn_Close.Size = New System.Drawing.Size(80, 30)
-        Me.btn_Close.TabIndex = 118
-        Me.btn_Close.Text = "CLOSE"
-        Me.btn_Close.TextAlign = System.Drawing.StringAlignment.Center
-        Me.btn_Close.UseKeyPad = False
         '
         'VsLabel66
         '
@@ -1515,28 +1486,6 @@ Partial Public Class wnd서브화면2_배터리
         Me.VsLabel66.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel66.UseKeyPad = False
         '
-        'btn_Open
-        '
-        Me.btn_Open.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.btn_Open.BackImage = Nothing
-        Me.btn_Open.BorderColor = System.Drawing.Color.DarkGray
-        Me.btn_Open.BorderSide_Bottom = True
-        Me.btn_Open.BorderSide_Left = True
-        Me.btn_Open.BorderSide_Right = True
-        Me.btn_Open.BorderSide_Top = True
-        Me.btn_Open.BorderWidth = 1
-        Me.btn_Open.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.btn_Open.IsPassword = False
-        Me.btn_Open.Location = New System.Drawing.Point(139, 247)
-        Me.btn_Open.MaxRange = 0
-        Me.btn_Open.MinRange = 0
-        Me.btn_Open.Name = "btn_Open"
-        Me.btn_Open.Size = New System.Drawing.Size(80, 30)
-        Me.btn_Open.TabIndex = 117
-        Me.btn_Open.Text = "OPEN"
-        Me.btn_Open.TextAlign = System.Drawing.StringAlignment.Center
-        Me.btn_Open.UseKeyPad = False
-        '
         'VsLabel61
         '
         Me.VsLabel61.BackColor = System.Drawing.Color.LightGray
@@ -1556,28 +1505,6 @@ Partial Public Class wnd서브화면2_배터리
         Me.VsLabel61.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel61.UseKeyPad = False
         '
-        'btn_None
-        '
-        Me.btn_None.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.btn_None.BackImage = Nothing
-        Me.btn_None.BorderColor = System.Drawing.Color.DarkGray
-        Me.btn_None.BorderSide_Bottom = True
-        Me.btn_None.BorderSide_Left = True
-        Me.btn_None.BorderSide_Right = True
-        Me.btn_None.BorderSide_Top = True
-        Me.btn_None.BorderWidth = 1
-        Me.btn_None.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.btn_None.IsPassword = False
-        Me.btn_None.Location = New System.Drawing.Point(139, 181)
-        Me.btn_None.MaxRange = 0
-        Me.btn_None.MinRange = 0
-        Me.btn_None.Name = "btn_None"
-        Me.btn_None.Size = New System.Drawing.Size(80, 30)
-        Me.btn_None.TabIndex = 116
-        Me.btn_None.Text = "NONE"
-        Me.btn_None.TextAlign = System.Drawing.StringAlignment.Center
-        Me.btn_None.UseKeyPad = False
-        '
         'lCell최대전압
         '
         Me.lCell최대전압.BackColor = System.Drawing.Color.White
@@ -1593,7 +1520,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell최대전압.Name = "lCell최대전압"
         Me.lCell최대전압.Size = New System.Drawing.Size(119, 30)
         Me.lCell최대전압.TabIndex = 68
-        Me.lCell최대전압.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell최대전압.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell최대전압.UseKeyPad = False
         '
         'VsLabel58
@@ -1630,7 +1557,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell최대전압위치.Name = "lCell최대전압위치"
         Me.lCell최대전압위치.Size = New System.Drawing.Size(119, 30)
         Me.lCell최대전압위치.TabIndex = 66
-        Me.lCell최대전압위치.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell최대전압위치.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell최대전압위치.UseKeyPad = False
         '
         'VsLabel53
@@ -1667,7 +1594,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell최소전압.Name = "lCell최소전압"
         Me.lCell최소전압.Size = New System.Drawing.Size(119, 30)
         Me.lCell최소전압.TabIndex = 64
-        Me.lCell최소전압.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell최소전압.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell최소전압.UseKeyPad = False
         '
         'VsLabel51
@@ -1704,7 +1631,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell최소전압위치.Name = "lCell최소전압위치"
         Me.lCell최소전압위치.Size = New System.Drawing.Size(120, 30)
         Me.lCell최소전압위치.TabIndex = 62
-        Me.lCell최소전압위치.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell최소전압위치.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell최소전압위치.UseKeyPad = False
         '
         'lCell전압편차
@@ -1722,7 +1649,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell전압편차.Name = "lCell전압편차"
         Me.lCell전압편차.Size = New System.Drawing.Size(119, 30)
         Me.lCell전압편차.TabIndex = 60
-        Me.lCell전압편차.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell전압편차.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell전압편차.UseKeyPad = False
         '
         'VsLabel30
@@ -1815,7 +1742,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell평균전압.Name = "lCell평균전압"
         Me.lCell평균전압.Size = New System.Drawing.Size(119, 30)
         Me.lCell평균전압.TabIndex = 39
-        Me.lCell평균전압.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell평균전압.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell평균전압.UseKeyPad = False
         '
         'l랙SOH
@@ -1833,7 +1760,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l랙SOH.Name = "l랙SOH"
         Me.l랙SOH.Size = New System.Drawing.Size(119, 30)
         Me.l랙SOH.TabIndex = 63
-        Me.l랙SOH.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l랙SOH.TextAlign = System.Drawing.StringAlignment.Center
         Me.l랙SOH.UseKeyPad = False
         '
         'l랙전류
@@ -1851,7 +1778,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l랙전류.Name = "l랙전류"
         Me.l랙전류.Size = New System.Drawing.Size(119, 30)
         Me.l랙전류.TabIndex = 55
-        Me.l랙전류.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l랙전류.TextAlign = System.Drawing.StringAlignment.Center
         Me.l랙전류.UseKeyPad = False
         '
         'VsLabel38
@@ -1888,7 +1815,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l랙전압.Name = "l랙전압"
         Me.l랙전압.Size = New System.Drawing.Size(119, 30)
         Me.l랙전압.TabIndex = 57
-        Me.l랙전압.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l랙전압.TextAlign = System.Drawing.StringAlignment.Center
         Me.l랙전압.UseKeyPad = False
         '
         'VsLabel14
@@ -1963,7 +1890,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.l랙평균모듈온도.Name = "l랙평균모듈온도"
         Me.l랙평균모듈온도.Size = New System.Drawing.Size(119, 30)
         Me.l랙평균모듈온도.TabIndex = 31
-        Me.l랙평균모듈온도.TextAlign = System.Drawing.StringAlignment.Far
+        Me.l랙평균모듈온도.TextAlign = System.Drawing.StringAlignment.Center
         Me.l랙평균모듈온도.UseKeyPad = False
         '
         'lCell최대온도
@@ -1999,7 +1926,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell온도편차.Name = "lCell온도편차"
         Me.lCell온도편차.Size = New System.Drawing.Size(119, 30)
         Me.lCell온도편차.TabIndex = 33
-        Me.lCell온도편차.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell온도편차.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell온도편차.UseKeyPad = False
         '
         'VsLabel17
@@ -2055,7 +1982,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell최대온도위치.Name = "lCell최대온도위치"
         Me.lCell최대온도위치.Size = New System.Drawing.Size(119, 30)
         Me.lCell최대온도위치.TabIndex = 39
-        Me.lCell최대온도위치.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell최대온도위치.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell최대온도위치.UseKeyPad = False
         '
         'lCell최소온도위치
@@ -2073,7 +2000,7 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell최소온도위치.Name = "lCell최소온도위치"
         Me.lCell최소온도위치.Size = New System.Drawing.Size(119, 30)
         Me.lCell최소온도위치.TabIndex = 27
-        Me.lCell최소온도위치.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell최소온도위치.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell최소온도위치.UseKeyPad = False
         '
         'VsLabel19
@@ -2129,25 +2056,8 @@ Partial Public Class wnd서브화면2_배터리
         Me.lCell최소온도.Name = "lCell최소온도"
         Me.lCell최소온도.Size = New System.Drawing.Size(119, 30)
         Me.lCell최소온도.TabIndex = 29
-        Me.lCell최소온도.TextAlign = System.Drawing.StringAlignment.Far
+        Me.lCell최소온도.TextAlign = System.Drawing.StringAlignment.Center
         Me.lCell최소온도.UseKeyPad = False
-        '
-        'btn_Module
-        '
-        Me.btn_Module.BackColor = System.Drawing.Color.White
-        Me.btn_Module.BorderColor = System.Drawing.Color.Gray
-        Me.btn_Module.BorderSide_Bottom = True
-        Me.btn_Module.BorderSide_Left = True
-        Me.btn_Module.BorderSide_Right = True
-        Me.btn_Module.BorderSide_Top = True
-        Me.btn_Module.BorderWidth = 1
-        Me.btn_Module.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.btn_Module.Location = New System.Drawing.Point(668, 3)
-        Me.btn_Module.Name = "btn_Module"
-        Me.btn_Module.Size = New System.Drawing.Size(100, 40)
-        Me.btn_Module.TabIndex = 30
-        Me.btn_Module.Text = "Module"
-        Me.btn_Module.TextAlign = System.Drawing.StringAlignment.Center
         '
         'PageHeader4
         '
@@ -2225,7 +2135,6 @@ Partial Public Class wnd서브화면2_배터리
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.btn_Module)
         Me.Controls.Add(Me.PageHeader4)
         Me.Controls.Add(Me.PageHeader3)
         Me.Controls.Add(Me.PageHeader2)
@@ -2350,10 +2259,6 @@ Partial Public Class wnd서브화면2_배터리
     Friend WithEvents VsLabel8 As PMS.VSLabel
     Friend WithEvents VsGroupBox2 As PMS.VSGroupBox
     Friend WithEvents PageHeader4 As PMS.VSLabel
-    Friend WithEvents btn_Module As PMS.VSLabel
     Friend WithEvents Panel As System.Windows.Forms.Panel
-    Friend WithEvents btn_Close As PMS.VSLabel
-    Friend WithEvents btn_Open As PMS.VSLabel
-    Friend WithEvents btn_None As PMS.VSLabel
 
 End Class

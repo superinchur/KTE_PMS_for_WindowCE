@@ -48,6 +48,7 @@ Partial Public Class wnd서브화면7_설정
         Me.btnCommSave = New PMS.VSPictureButton
         Me.lbCommEMSPort = New PMS.VSLabel
         Me.pnlScreen = New System.Windows.Forms.Panel
+        Me.VsPictureButton3 = New PMS.VSPictureButton
         Me.VsPictureButton2 = New PMS.VSPictureButton
         Me.VsPictureButton1 = New PMS.VSPictureButton
         Me.pnlNetwork = New System.Windows.Forms.Panel
@@ -67,9 +68,6 @@ Partial Public Class wnd서브화면7_설정
         Me.PageHeader2 = New PMS.VSLabel
         Me.PageHeader1 = New PMS.VSLabel
         Me.PageHeader5 = New PMS.VSLabel
-        Me.pnlLanguage = New System.Windows.Forms.Panel
-        Me.VsLabel5 = New PMS.VSLabel
-        Me.VsLabel4 = New PMS.VSLabel
         Me.PageHeader6 = New PMS.VSLabel
         Me.pnlInformation = New System.Windows.Forms.Panel
         Me.VsLabel14 = New PMS.VSLabel
@@ -78,17 +76,15 @@ Partial Public Class wnd서브화면7_설정
         Me.VsLabel10 = New PMS.VSLabel
         Me.VsLabel9 = New PMS.VSLabel
         Me.VsLabel8 = New PMS.VSLabel
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.cbBMS통신포트 = New System.Windows.Forms.ComboBox
-        Me.cbBMS통신주기 = New System.Windows.Forms.ComboBox
-        Me.Label7 = New System.Windows.Forms.Label
+        Me.VsLabel4 = New PMS.VSLabel
+        Me.VsLabel5 = New PMS.VSLabel
+        Me.pnlLanguage = New System.Windows.Forms.Panel
         Me.pnlDateTime.SuspendLayout()
         Me.pnlComm.SuspendLayout()
         Me.pnlScreen.SuspendLayout()
         Me.pnlNetwork.SuspendLayout()
-        Me.pnlLanguage.SuspendLayout()
         Me.pnlInformation.SuspendLayout()
+        Me.pnlLanguage.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -323,14 +319,9 @@ Partial Public Class wnd서브화면7_설정
         'pnlComm
         '
         Me.pnlComm.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlComm.Controls.Add(Me.Label1)
         Me.pnlComm.Controls.Add(Me.Label3)
-        Me.pnlComm.Controls.Add(Me.Label6)
-        Me.pnlComm.Controls.Add(Me.cbBMS통신포트)
         Me.pnlComm.Controls.Add(Me.RadioButton1)
-        Me.pnlComm.Controls.Add(Me.cbBMS통신주기)
         Me.pnlComm.Controls.Add(Me.Label4)
-        Me.pnlComm.Controls.Add(Me.Label7)
         Me.pnlComm.Controls.Add(Me.cbPCS통신포트)
         Me.pnlComm.Controls.Add(Me.Label10)
         Me.pnlComm.Controls.Add(Me.cbPCS통신주기)
@@ -346,7 +337,7 @@ Partial Public Class wnd서브화면7_설정
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label3.Location = New System.Drawing.Point(103, 125)
+        Me.Label3.Location = New System.Drawing.Point(253, 123)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(141, 20)
         Me.Label3.Text = "PCS 통신포트 :"
@@ -356,7 +347,7 @@ Partial Public Class wnd서브화면7_설정
         '
         Me.RadioButton1.Checked = True
         Me.RadioButton1.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.RadioButton1.Location = New System.Drawing.Point(258, 221)
+        Me.RadioButton1.Location = New System.Drawing.Point(408, 219)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(40, 20)
         Me.RadioButton1.TabIndex = 20
@@ -365,7 +356,7 @@ Partial Public Class wnd서브화면7_설정
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label4.Location = New System.Drawing.Point(103, 168)
+        Me.Label4.Location = New System.Drawing.Point(253, 166)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(141, 20)
         Me.Label4.Text = "PCS 통신주기 :"
@@ -374,7 +365,7 @@ Partial Public Class wnd서브화면7_설정
         'cbPCS통신포트
         '
         Me.cbPCS통신포트.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.cbPCS통신포트.Location = New System.Drawing.Point(250, 122)
+        Me.cbPCS통신포트.Location = New System.Drawing.Point(400, 120)
         Me.cbPCS통신포트.Name = "cbPCS통신포트"
         Me.cbPCS통신포트.Size = New System.Drawing.Size(85, 29)
         Me.cbPCS통신포트.TabIndex = 23
@@ -382,7 +373,7 @@ Partial Public Class wnd서브화면7_설정
         'Label10
         '
         Me.Label10.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label10.Location = New System.Drawing.Point(103, 69)
+        Me.Label10.Location = New System.Drawing.Point(253, 67)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(141, 20)
         Me.Label10.Text = "EMS 수신포트 :"
@@ -391,7 +382,7 @@ Partial Public Class wnd서브화면7_설정
         'cbPCS통신주기
         '
         Me.cbPCS통신주기.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.cbPCS통신주기.Location = New System.Drawing.Point(250, 165)
+        Me.cbPCS통신주기.Location = New System.Drawing.Point(400, 163)
         Me.cbPCS통신주기.Name = "cbPCS통신주기"
         Me.cbPCS통신주기.Size = New System.Drawing.Size(85, 29)
         Me.cbPCS통신주기.TabIndex = 24
@@ -399,7 +390,7 @@ Partial Public Class wnd서브화면7_설정
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(111, 221)
+        Me.Label2.Location = New System.Drawing.Point(261, 219)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(141, 20)
         Me.Label2.Text = "PMS ID :"
@@ -408,7 +399,7 @@ Partial Public Class wnd서브화면7_설정
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label5.Location = New System.Drawing.Point(341, 168)
+        Me.Label5.Location = New System.Drawing.Point(491, 166)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(37, 20)
         Me.Label5.Text = "ms"
@@ -416,7 +407,7 @@ Partial Public Class wnd서브화면7_설정
         'RadioButton2
         '
         Me.RadioButton2.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.RadioButton2.Location = New System.Drawing.Point(304, 221)
+        Me.RadioButton2.Location = New System.Drawing.Point(454, 219)
         Me.RadioButton2.Name = "RadioButton2"
         Me.RadioButton2.Size = New System.Drawing.Size(40, 20)
         Me.RadioButton2.TabIndex = 21
@@ -449,7 +440,7 @@ Partial Public Class wnd서브화면7_설정
         Me.lbCommEMSPort.BorderSide_Top = True
         Me.lbCommEMSPort.BorderWidth = 1
         Me.lbCommEMSPort.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbCommEMSPort.Location = New System.Drawing.Point(250, 62)
+        Me.lbCommEMSPort.Location = New System.Drawing.Point(400, 60)
         Me.lbCommEMSPort.MaxRange = 65535
         Me.lbCommEMSPort.MinRange = 0
         Me.lbCommEMSPort.Name = "lbCommEMSPort"
@@ -462,11 +453,28 @@ Partial Public Class wnd서브화면7_설정
         'pnlScreen
         '
         Me.pnlScreen.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlScreen.Controls.Add(Me.VsPictureButton3)
         Me.pnlScreen.Controls.Add(Me.VsPictureButton2)
         Me.pnlScreen.Controls.Add(Me.VsPictureButton1)
         Me.pnlScreen.Location = New System.Drawing.Point(10, 627)
         Me.pnlScreen.Name = "pnlScreen"
         Me.pnlScreen.Size = New System.Drawing.Size(784, 283)
+        '
+        'VsPictureButton3
+        '
+        Me.VsPictureButton3.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsPictureButton3.BorderSide_Bottom = True
+        Me.VsPictureButton3.BorderSide_Left = True
+        Me.VsPictureButton3.BorderSide_Right = True
+        Me.VsPictureButton3.BorderSide_Top = True
+        Me.VsPictureButton3.BorderWidth = 1
+        Me.VsPictureButton3.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.VsPictureButton3.Location = New System.Drawing.Point(240, 199)
+        Me.VsPictureButton3.Name = "VsPictureButton3"
+        Me.VsPictureButton3.Selected = False
+        Me.VsPictureButton3.Size = New System.Drawing.Size(300, 50)
+        Me.VsPictureButton3.TabIndex = 8
+        Me.VsPictureButton3.Text = "프로그램 종료"
         '
         'VsPictureButton2
         '
@@ -477,7 +485,7 @@ Partial Public Class wnd서브화면7_설정
         Me.VsPictureButton2.BorderSide_Top = True
         Me.VsPictureButton2.BorderWidth = 1
         Me.VsPictureButton2.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.VsPictureButton2.Location = New System.Drawing.Point(242, 158)
+        Me.VsPictureButton2.Location = New System.Drawing.Point(240, 115)
         Me.VsPictureButton2.Name = "VsPictureButton2"
         Me.VsPictureButton2.Selected = False
         Me.VsPictureButton2.Size = New System.Drawing.Size(300, 50)
@@ -493,7 +501,7 @@ Partial Public Class wnd서브화면7_설정
         Me.VsPictureButton1.BorderSide_Top = True
         Me.VsPictureButton1.BorderWidth = 1
         Me.VsPictureButton1.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.VsPictureButton1.Location = New System.Drawing.Point(242, 75)
+        Me.VsPictureButton1.Location = New System.Drawing.Point(240, 32)
         Me.VsPictureButton1.Name = "VsPictureButton1"
         Me.VsPictureButton1.Selected = False
         Me.VsPictureButton1.Size = New System.Drawing.Size(300, 50)
@@ -753,39 +761,6 @@ Partial Public Class wnd서브화면7_설정
         Me.PageHeader5.Text = "언어"
         Me.PageHeader5.TextAlign = System.Drawing.StringAlignment.Center
         '
-        'pnlLanguage
-        '
-        Me.pnlLanguage.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlLanguage.Controls.Add(Me.VsLabel5)
-        Me.pnlLanguage.Controls.Add(Me.VsLabel4)
-        Me.pnlLanguage.Location = New System.Drawing.Point(800, 627)
-        Me.pnlLanguage.Name = "pnlLanguage"
-        Me.pnlLanguage.Size = New System.Drawing.Size(784, 283)
-        '
-        'VsLabel5
-        '
-        Me.VsLabel5.BackColor = System.Drawing.Color.White
-        Me.VsLabel5.BorderWidth = 0
-        Me.VsLabel5.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel5.Location = New System.Drawing.Point(395, 124)
-        Me.VsLabel5.Name = "VsLabel5"
-        Me.VsLabel5.Size = New System.Drawing.Size(143, 35)
-        Me.VsLabel5.TabIndex = 1
-        Me.VsLabel5.Text = "한국어"
-        Me.VsLabel5.TextAlign = System.Drawing.StringAlignment.Near
-        '
-        'VsLabel4
-        '
-        Me.VsLabel4.BackColor = System.Drawing.Color.White
-        Me.VsLabel4.BorderWidth = 0
-        Me.VsLabel4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel4.Location = New System.Drawing.Point(143, 124)
-        Me.VsLabel4.Name = "VsLabel4"
-        Me.VsLabel4.Size = New System.Drawing.Size(246, 35)
-        Me.VsLabel4.TabIndex = 1
-        Me.VsLabel4.Text = "현재 선택 언어 : "
-        Me.VsLabel4.TextAlign = System.Drawing.StringAlignment.Far
-        '
         'PageHeader6
         '
         Me.PageHeader6.BackColor = System.Drawing.Color.White
@@ -888,47 +863,36 @@ Partial Public Class wnd서브화면7_설정
         Me.VsLabel8.Text = "PCS Program Version :"
         Me.VsLabel8.TextAlign = System.Drawing.StringAlignment.Far
         '
-        'Label1
+        'VsLabel4
         '
-        Me.Label1.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label1.Location = New System.Drawing.Point(449, 121)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(141, 20)
-        Me.Label1.Text = "BMS 통신포트 :"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.VsLabel4.BackColor = System.Drawing.Color.White
+        Me.VsLabel4.BorderWidth = 0
+        Me.VsLabel4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel4.Location = New System.Drawing.Point(211, 115)
+        Me.VsLabel4.Name = "VsLabel4"
+        Me.VsLabel4.Size = New System.Drawing.Size(246, 35)
+        Me.VsLabel4.TabIndex = 1
+        Me.VsLabel4.TextAlign = System.Drawing.StringAlignment.Far
         '
-        'Label6
+        'VsLabel5
         '
-        Me.Label6.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label6.Location = New System.Drawing.Point(448, 168)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(141, 20)
-        Me.Label6.Text = "BMS 통신주기 :"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.VsLabel5.BackColor = System.Drawing.Color.White
+        Me.VsLabel5.BorderWidth = 0
+        Me.VsLabel5.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel5.Location = New System.Drawing.Point(463, 115)
+        Me.VsLabel5.Name = "VsLabel5"
+        Me.VsLabel5.Size = New System.Drawing.Size(143, 35)
+        Me.VsLabel5.TabIndex = 1
+        Me.VsLabel5.TextAlign = System.Drawing.StringAlignment.Near
         '
-        'cbBMS통신포트
+        'pnlLanguage
         '
-        Me.cbBMS통신포트.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.cbBMS통신포트.Location = New System.Drawing.Point(596, 118)
-        Me.cbBMS통신포트.Name = "cbBMS통신포트"
-        Me.cbBMS통신포트.Size = New System.Drawing.Size(85, 29)
-        Me.cbBMS통신포트.TabIndex = 29
-        '
-        'cbBMS통신주기
-        '
-        Me.cbBMS통신주기.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.cbBMS통신주기.Location = New System.Drawing.Point(595, 165)
-        Me.cbBMS통신주기.Name = "cbBMS통신주기"
-        Me.cbBMS통신주기.Size = New System.Drawing.Size(85, 29)
-        Me.cbBMS통신주기.TabIndex = 30
-        '
-        'Label7
-        '
-        Me.Label7.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label7.Location = New System.Drawing.Point(686, 168)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(37, 20)
-        Me.Label7.Text = "ms"
+        Me.pnlLanguage.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlLanguage.Controls.Add(Me.VsLabel5)
+        Me.pnlLanguage.Controls.Add(Me.VsLabel4)
+        Me.pnlLanguage.Location = New System.Drawing.Point(800, 627)
+        Me.pnlLanguage.Name = "pnlLanguage"
+        Me.pnlLanguage.Size = New System.Drawing.Size(784, 283)
         '
         'wnd서브화면7_설정
         '
@@ -954,8 +918,8 @@ Partial Public Class wnd서브화면7_설정
         Me.pnlComm.ResumeLayout(False)
         Me.pnlScreen.ResumeLayout(False)
         Me.pnlNetwork.ResumeLayout(False)
-        Me.pnlLanguage.ResumeLayout(False)
         Me.pnlInformation.ResumeLayout(False)
+        Me.pnlLanguage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1005,11 +969,8 @@ Partial Public Class wnd서브화면7_설정
     Friend WithEvents VsLabel18 As PMS.VSLabel
     Friend WithEvents VsLabel17 As PMS.VSLabel
     Friend WithEvents PageHeader5 As PMS.VSLabel
-    Friend WithEvents pnlLanguage As System.Windows.Forms.Panel
     Friend WithEvents VsPictureButton2 As PMS.VSPictureButton
     Friend WithEvents VsPictureButton1 As PMS.VSPictureButton
-    Friend WithEvents VsLabel5 As PMS.VSLabel
-    Friend WithEvents VsLabel4 As PMS.VSLabel
     Friend WithEvents PageHeader6 As PMS.VSLabel
     Friend WithEvents pnlInformation As System.Windows.Forms.Panel
     Friend WithEvents VsLabel7 As PMS.VSLabel
@@ -1018,10 +979,9 @@ Partial Public Class wnd서브화면7_설정
     Friend WithEvents VsLabel8 As PMS.VSLabel
     Friend WithEvents VsLabel14 As PMS.VSLabel
     Friend WithEvents VsLabel13 As PMS.VSLabel
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents cbBMS통신포트 As System.Windows.Forms.ComboBox
-    Friend WithEvents cbBMS통신주기 As System.Windows.Forms.ComboBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents VsPictureButton3 As PMS.VSPictureButton
+    Friend WithEvents VsLabel4 As PMS.VSLabel
+    Friend WithEvents VsLabel5 As PMS.VSLabel
+    Friend WithEvents pnlLanguage As System.Windows.Forms.Panel
 
 End Class

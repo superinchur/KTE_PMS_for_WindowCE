@@ -90,9 +90,6 @@
 
                                     Dim nAddrESS As Integer = 0
                                     For i As Integer = 0 To nDataCount / 2 - 1
-                                        'Dim btValue As Byte = btRecvBuffer(3 + i)
-                                        'ModbusData(nAddrESS) = btValue
-
                                         SetModbusData(PCS_MODBUS_ADDRESS + nAddrESS, btRecvBuffer, 3 + i * 2, 2)
                                         nAddrESS += 1
                                     Next
@@ -108,8 +105,8 @@
                                     'Debug.WriteLine("btRecvBuffer : " + btData(1) + btData(2) + btData(3) + btData(4) + btData(5))
                                     'Debug.WriteLine("btRecvBuffer : " + btRecvBuffer(1) + btRecvBuffer(2) + btRecvBuffer(3) + btRecvBuffer(4) + btRecvBuffer(5))
                                 End If
-                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
 
+                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
                                 'nModbusWriteRegisterResponse = nRecvBufferLength - 3
                             End If
 

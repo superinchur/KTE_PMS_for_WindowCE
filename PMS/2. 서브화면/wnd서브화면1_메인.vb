@@ -28,41 +28,41 @@
     Private 그리드상태 As Integer = -1
     Private 로드상태 As Integer = -1
 
-    'Private 최종사용모드 As 사용모드정의 = -1
+    Private 최종사용모드 As 사용모드정의 = -1
 
     Private Sub 상태표시()
         ' -------------------------------------------------------------------------------------------------------
         ' 운전상태
 
-        'If 최종사용모드 <> 현재사용모드 Then
-        '    최종사용모드 = 현재사용모드
+        If 최종사용모드 <> 현재사용모드 Then
+            최종사용모드 = 현재사용모드
 
-        '    Select Case 최종사용모드
-        '        Case 사용모드정의.동작안함
-        '            lbRunMode.Text = ""
-        '            lbRunMode.Visible = False
-        '        Case 사용모드정의.평상
-        '            lbRunMode.Text = ""
-        '            lbRunMode.Visible = False
-        '        Case 사용모드정의.피크컷
-        '            lbRunMode.Text = "피크컷 동작"
-        '            lbRunMode.BackColor = Color.LightPink
-        '            lbRunMode.Visible = True
-        '        Case 사용모드정의.유효전력
-        '            lbRunMode.Text = "유효전력 동작"
-        '            lbRunMode.BackColor = Color.LightGreen
-        '            lbRunMode.Visible = True
-        '        Case 사용모드정의.무효전력
-        '            lbRunMode.Text = "무효전력 동작"
-        '            lbRunMode.BackColor = Color.LightGreen
-        '            lbRunMode.Visible = True
-        '        Case 사용모드정의.배터리충전
-        '            lbRunMode.Text = "배터리 충전"
-        '            lbRunMode.BackColor = Color.LightCyan
-        '            lbRunMode.Visible = True
-        '    End Select
+                Select 최종사용모드
+                Case 사용모드정의.동작안함
+                    lbRunMode.Text = ""
+                    lbRunMode.Visible = False
+                Case 사용모드정의.평상
+                    lbRunMode.Text = ""
+                    lbRunMode.Visible = False
+                Case 사용모드정의.피크컷
+                    lbRunMode.Text = "피크컷 동작"
+                    lbRunMode.BackColor = Color.LightPink
+                    lbRunMode.Visible = True
+                Case 사용모드정의.유효전력
+                    lbRunMode.Text = "유효전력 동작"
+                    lbRunMode.BackColor = Color.LightGreen
+                    lbRunMode.Visible = True
+                Case 사용모드정의.무효전력
+                    lbRunMode.Text = "무효전력 동작"
+                    lbRunMode.BackColor = Color.LightGreen
+                    lbRunMode.Visible = True
+                Case 사용모드정의.배터리충전
+                    lbRunMode.Text = "배터리 충전"
+                    lbRunMode.BackColor = Color.LightCyan
+                    lbRunMode.Visible = True
+            End Select
 
-        'End If
+        End If
 
         Dim szCurrentStatus As String = ""
         If 현재사용모드_피크컷동작 = True Then
@@ -82,7 +82,7 @@
                 szCurrentStatus = "배터리 충전"
             End If
         End If
-        
+
         If lbRunMode.Text <> szCurrentStatus Then
             If szCurrentStatus <> "" Then
                 lbRunMode.Text = szCurrentStatus
@@ -104,8 +104,11 @@
 
         Dim nOldStatus As Integer = 배터리모드
         Dim szValue As String = ""
+
         Dim ushTemp As UShort = GetModbusData_Ushort(PT_BAT_Power)
-        Dim dValue As Double = ushTemp * 0.1
+
+        'Dim dValue As Double = ushTemp * 0.1
+        Dim dValue As Double = Convert.ToInt16(ushTemp.ToString("X4"), 16) * 0.1
 
         If nCharge = 1 Then
             배터리모드 = 1
@@ -118,8 +121,10 @@
             szValue = "대기"
         End If
 
-        ushTemp = GetModbusData_Ushort(PT_BAT_SOC)
-        dValue = ushTemp * 0.01
+        'ushTemp = GetModbusData_Ushort(PT_BAT_SOC)
+        'dValue = ushTemp * 0.01
+
+        dValue = cBMS.Bank_SOC
 
         Dim nBatteryImage As Integer = 0
         If dValue >= 90 Then
@@ -161,13 +166,15 @@
             End Select
         End If
 
-        If lbBattStatus.Text <> szValue Then
-            lbBattStatus.Text = szValue
-        End If
-
         szValue = String.Format("{0:F2}%", dValue)
         If lbBattPercent.Text <> szValue Then
             lbBattPercent.Text = szValue
+        End If
+
+        Dim lbBattStatusPower As Double = cBMS.Bank_충방전_전력
+        szValue = String.Format("{0:F1} kW", lbBattStatusPower)
+        If lbBattStatus.Text <> szValue Then
+            lbBattStatus.Text = szValue
         End If
 
         If nOldStatus <> 배터리모드 Then
@@ -186,26 +193,38 @@
 
         ' -------------------------------------------------------------------------------------------------------
         ' 그리드 상태 
-        nOldStatus = 그리드상태
-        Dim dGrid_In_Power As Double = GetModbusData_Ushort(PT_Grid_In_Power) * 0.1
-        Dim dGrid_Out_Power As Double = GetModbusData_Ushort(PT_Grid_Out_Power) * 0.1
+        'nOldStatus = 그리드상태
+        'Dim dGrid_In_Power As Double = GetModbusData_Ushort(PT_Grid_In_Power) * 0.1
+        'Dim dGrid_Out_Power As Double = GetModbusData_Ushort(PT_Grid_Out_Power) * 0.1
 
-        If dGrid_In_Power > 0 And dGrid_Out_Power <= 0 Then
-            그리드상태 = 1
-            szValue = String.Format("{0:F1} kW", dGrid_In_Power)
-        ElseIf dGrid_In_Power <= 0 And dGrid_Out_Power > 0 Then
-            그리드상태 = 2
-            szValue = String.Format("{0:F1} kW", dGrid_Out_Power)
-        Else
-            그리드상태 = 0
-            szValue = ""
-        End If
+        'If dGrid_In_Power > 0 And dGrid_Out_Power <= 0 Then
+        '그리드상태 = 1
+        'szValue = String.Format("{0:F1} kW", dGrid_In_Power)
+        'ElseIf dGrid_In_Power <= 0 And dGrid_Out_Power > 0 Then
+        '그리드상태 = 2
+        'szValue = String.Format("{0:F1} kW", dGrid_Out_Power)
+        'Else
+        '그리드상태 = 0
+        'szValue = ""
+        'End If
+        'Dim dPT_Inv_Power As Double = GetModbusData_Ushort(PT_Inv_Power) * 0.1
 
+        Dim dPT_Inv_Power As Double = cBMS.Bank_충방전_전력
+        szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
         If lbGridStatus.Text <> szValue Then
             lbGridStatus.Text = szValue
             lbGridStatus.Invalidate()
         End If
 
+
+        If cBMS.Bank_충방전_전력 > 0 Then
+            그리드상태 = 1
+        ElseIf cBMS.Bank_충방전_전력 < 0 Then
+            그리드상태 = 2
+        Else
+            그리드상태 = 0
+
+        End If
         If nOldStatus <> 그리드상태 Then
             Select Case 그리드상태
                 Case 0
