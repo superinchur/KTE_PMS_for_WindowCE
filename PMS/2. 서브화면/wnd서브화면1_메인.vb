@@ -60,6 +60,11 @@
                     lbRunMode.Text = "배터리 충전"
                     lbRunMode.BackColor = Color.LightCyan
                     lbRunMode.Visible = True
+                Case 사용모드정의.배터리충전
+                    lbRunMode.Text = "배터리 방전"
+                    lbRunMode.BackColor = Color.LightGreen
+                    lbRunMode.Visible = True
+
             End Select
 
         End If
@@ -80,6 +85,10 @@
             If 현재사용모드_배터리충전 = True Then
                 If szCurrentStatus <> "" Then szCurrentStatus &= vbCrLf
                 szCurrentStatus = "배터리 충전"
+            End If
+            If 현재사용모드_배터리방전 = True Then
+                If szCurrentStatus <> "" Then szCurrentStatus &= vbCrLf
+                szCurrentStatus = "배터리 방전"
             End If
         End If
 
@@ -207,9 +216,11 @@
         '그리드상태 = 0
         'szValue = ""
         'End If
-        'Dim dPT_Inv_Power As Double = GetModbusData_Ushort(PT_Inv_Power) * 0.1
 
-        Dim dPT_Inv_Power As Double = cBMS.Bank_충방전_전력
+        Dim usPower As UShort = GetModbusData_Ushort(PT_Inv_Power)
+        Dim dPT_Inv_Power As Double = Convert.ToInt16(usPower.ToString("X4"), 16) * 0.1
+
+        'Dim dPT_Inv_Power As Double = cBMS.Bank_충방전_전력
         szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
         If lbGridStatus.Text <> szValue Then
             lbGridStatus.Text = szValue
@@ -217,13 +228,18 @@
         End If
 
 
-        If cBMS.Bank_충방전_전력 > 0 Then
+        'If cBMS.Bank_충방전_전력 > 0 Then
+        '그리드상태 = 1
+        ' ElseIf cBMS.Bank_충방전_전력 < 0 Then
+        '그리드상태 = 2
+        'Else
+        '그리드상태 = 0
+        If dPT_Inv_Power > 0 Then
             그리드상태 = 1
-        ElseIf cBMS.Bank_충방전_전력 < 0 Then
+        ElseIf dPT_Inv_Power < 0 Then
             그리드상태 = 2
         Else
             그리드상태 = 0
-
         End If
         If nOldStatus <> 그리드상태 Then
             Select Case 그리드상태
@@ -231,19 +247,18 @@
                     ' 중지
                     ucScrollGridStatus.Arrow = ucScrollArrow.eArrow.Arrow_Stop
                 Case 1
-                    ' 출력 전력
-                    ucScrollGridStatus.Arrow = ucScrollArrow.eArrow.Arrow_Left
-                Case 2
-                    ' 입력 전력
+                    ' 출력 전력 ' 방전
                     ucScrollGridStatus.Arrow = ucScrollArrow.eArrow.Arrow_Right
+                Case 2
+                    ' 입력 전력 ' 충전
+                    ucScrollGridStatus.Arrow = ucScrollArrow.eArrow.Arrow_Left
 
             End Select
         End If
 
         ' -------------------------------------------------------------------------------------------------------
         ' 부하 상태 
-        Dim dLoadPower As Double = GetModbusData_Ushort(PT_Load_Power) * 0.1
-        szValue = String.Format("{0:F1} kW", dLoadPower)
+        szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
 
     End Sub
 

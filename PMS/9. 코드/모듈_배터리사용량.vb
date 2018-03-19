@@ -1,6 +1,15 @@
 ﻿Module 모듈_배터리사용량
 
+    ' 배터리 사용량
+    Public 배터리_당일_충전 As Double = 0
+    Public 배터리_당일_방전 As Double = 0
+    Public 배터리_어제_충전 As Double = 0
+    Public 배터리_어제_방전 As Double = 0
+    Public 배터리_누적_충전 As Double = 0
+    Public 배터리_누적_방전 As Double = 0
 
+    Public 배터리_당월_충전 As Double = 0
+    Public 배터리_당월_방전 As Double = 0
 
     Public Sub 배터리사용량_초기화()
         Dim nStartYear As Integer = 2017
@@ -13,7 +22,20 @@
         ' 전월까지의 누적
         For nYear As Integer = nStartYear To tCurrent.Year
 
-            szPath = String.Format("\Flash Disk\Run\History\{0}", nYear)
+            If isSDCard_Mode = True Then
+                If PathCheck("\SD Card\History") = False Then
+                    Exit Sub
+                Else
+                    szPath = String.Format("\SD Card\History\{0}", nYear)
+                End If
+            Else '  isSDCard_Mode = False
+                If PathCheck("\Flash Disk\Run\History") = False Then
+                    Exit Sub
+                Else
+                    szPath = String.Format("\Flash Disk\History\{0}", nYear)
+                End If
+            End If
+
             szHistoryFile = String.Format("{0}\H{1}.csv", szPath, nYear.ToString("0000"))
             If System.IO.File.Exists(szHistoryFile) = True Then
                 Dim bMatch As Boolean = False
@@ -71,7 +93,20 @@
         Next
 
         ' 당월 누적
-        szPath = String.Format("\Flash Disk\Run\History\{0}", tCurrent.Year)
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\History") = False Then
+                Exit Sub
+            Else
+                szPath = String.Format("\SD Card\History\{0}", tCurrent.Year)
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\History") = False Then
+                Exit Sub
+            Else
+                szPath = String.Format("\Flash Disk\History\{0}", tCurrent.Year)
+            End If
+        End If
+
         szHistoryFile = String.Format("{0}\H{1}-{2}.csv", szPath, tCurrent.Year.ToString("0000"), tCurrent.Month.ToString("00"))
         If System.IO.File.Exists(szHistoryFile) = True Then
             Dim bMatch As Boolean = False
@@ -128,7 +163,20 @@
         ' 전일
         Dim dtYesterday As Date = DateAdd(DateInterval.Day, -1, tCurrent)
 
-        szPath = String.Format("\Flash Disk\Run\History\{0}", dtYesterday.Year)
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\History") = False Then
+                Exit Sub
+            Else
+                szPath = String.Format("\SD Card\History\{0}", dtYesterday.Year)
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\History") = False Then
+                Exit Sub
+            Else
+                szPath = String.Format("\Flash Disk\History\{0}", dtYesterday.Year)
+            End If
+        End If
+
         szHistoryFile = String.Format("{0}\H{1}-{2}-{3}.csv", szPath, dtYesterday.Year.ToString("0000"), dtYesterday.Month.ToString("00"), dtYesterday.Day.ToString("00"))
         If System.IO.File.Exists(szHistoryFile) = True Then
             Dim bMatch As Boolean = False
@@ -181,7 +229,20 @@
         End If
 
         ' 당일
-        szPath = String.Format("\Flash Disk\Run\History\{0}", tCurrent.Year)
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\History") = False Then
+                Exit Sub
+            Else
+                szPath = String.Format("\SD Card\History\{0}", tCurrent.Year)
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\History") = False Then
+                Exit Sub
+            Else
+                szPath = String.Format("\Flash Disk\History\{0}", tCurrent.Year)
+            End If
+        End If
+
         szHistoryFile = String.Format("{0}\H{1}-{2}-{3}.csv", szPath, tCurrent.Year.ToString("0000"), tCurrent.Month.ToString("00"), tCurrent.Day.ToString("00"))
         If System.IO.File.Exists(szHistoryFile) = True Then
             Dim bMatch As Boolean = False

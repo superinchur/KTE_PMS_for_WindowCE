@@ -22,6 +22,10 @@ Partial Public Class wnd서브화면5_사용모드
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(wnd서브화면5_사용모드))
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.pnlScreen1 = New System.Windows.Forms.Panel
+        Me.VsPictureButton4 = New PMS.VSPictureButton
+        Me.VsPictureButton3 = New PMS.VSPictureButton
+        Me.VsPictureButton2 = New PMS.VSPictureButton
+        Me.VsPictureButton1 = New PMS.VSPictureButton
         Me.VsLabel9 = New PMS.VSLabel
         Me.VsLabel8 = New PMS.VSLabel
         Me.lbCurrentGridActivePower = New PMS.VSLabel
@@ -81,9 +85,6 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbBatteryCC = New PMS.VSLabel
         Me.VsLabel37 = New PMS.VSLabel
         Me.VsLabel31 = New PMS.VSLabel
-        Me.VsPictureButton1 = New PMS.VSPictureButton
-        Me.VsPictureButton2 = New PMS.VSPictureButton
-        Me.VsPictureButton3 = New PMS.VSPictureButton
         Me.pnlScreen1.SuspendLayout()
         Me.pnlScreen2.SuspendLayout()
         Me.pnlScreen3.SuspendLayout()
@@ -100,6 +101,7 @@ Partial Public Class wnd서브화면5_사용모드
         'pnlScreen1
         '
         Me.pnlScreen1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlScreen1.Controls.Add(Me.VsPictureButton4)
         Me.pnlScreen1.Controls.Add(Me.VsPictureButton3)
         Me.pnlScreen1.Controls.Add(Me.VsPictureButton2)
         Me.pnlScreen1.Controls.Add(Me.VsPictureButton1)
@@ -131,6 +133,70 @@ Partial Public Class wnd서브화면5_사용모드
         Me.pnlScreen1.Location = New System.Drawing.Point(798, 47)
         Me.pnlScreen1.Name = "pnlScreen1"
         Me.pnlScreen1.Size = New System.Drawing.Size(784, 283)
+        '
+        'VsPictureButton4
+        '
+        Me.VsPictureButton4.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsPictureButton4.BorderSide_Bottom = True
+        Me.VsPictureButton4.BorderSide_Left = True
+        Me.VsPictureButton4.BorderSide_Right = True
+        Me.VsPictureButton4.BorderSide_Top = True
+        Me.VsPictureButton4.BorderWidth = 1
+        Me.VsPictureButton4.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.VsPictureButton4.Location = New System.Drawing.Point(567, 216)
+        Me.VsPictureButton4.Name = "VsPictureButton4"
+        Me.VsPictureButton4.Selected = False
+        Me.VsPictureButton4.Size = New System.Drawing.Size(160, 40)
+        Me.VsPictureButton4.TabIndex = 48
+        Me.VsPictureButton4.Text = "방전"
+        '
+        'VsPictureButton3
+        '
+        Me.VsPictureButton3.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsPictureButton3.BorderSide_Bottom = True
+        Me.VsPictureButton3.BorderSide_Left = True
+        Me.VsPictureButton3.BorderSide_Right = True
+        Me.VsPictureButton3.BorderSide_Top = True
+        Me.VsPictureButton3.BorderWidth = 1
+        Me.VsPictureButton3.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.VsPictureButton3.Location = New System.Drawing.Point(401, 216)
+        Me.VsPictureButton3.Name = "VsPictureButton3"
+        Me.VsPictureButton3.Selected = False
+        Me.VsPictureButton3.Size = New System.Drawing.Size(160, 40)
+        Me.VsPictureButton3.TabIndex = 47
+        Me.VsPictureButton3.Text = "충전"
+        '
+        'VsPictureButton2
+        '
+        Me.VsPictureButton2.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsPictureButton2.BorderSide_Bottom = True
+        Me.VsPictureButton2.BorderSide_Left = True
+        Me.VsPictureButton2.BorderSide_Right = True
+        Me.VsPictureButton2.BorderSide_Top = True
+        Me.VsPictureButton2.BorderWidth = 1
+        Me.VsPictureButton2.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.VsPictureButton2.Location = New System.Drawing.Point(235, 216)
+        Me.VsPictureButton2.Name = "VsPictureButton2"
+        Me.VsPictureButton2.Selected = False
+        Me.VsPictureButton2.Size = New System.Drawing.Size(160, 40)
+        Me.VsPictureButton2.TabIndex = 41
+        Me.VsPictureButton2.Text = "태양광 연계용"
+        '
+        'VsPictureButton1
+        '
+        Me.VsPictureButton1.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsPictureButton1.BorderSide_Bottom = True
+        Me.VsPictureButton1.BorderSide_Left = True
+        Me.VsPictureButton1.BorderSide_Right = True
+        Me.VsPictureButton1.BorderSide_Top = True
+        Me.VsPictureButton1.BorderWidth = 1
+        Me.VsPictureButton1.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
+        Me.VsPictureButton1.Location = New System.Drawing.Point(69, 216)
+        Me.VsPictureButton1.Name = "VsPictureButton1"
+        Me.VsPictureButton1.Selected = False
+        Me.VsPictureButton1.Size = New System.Drawing.Size(160, 40)
+        Me.VsPictureButton1.TabIndex = 40
+        Me.VsPictureButton1.Text = "심야 전기"
         '
         'VsLabel9
         '
@@ -1259,57 +1325,6 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel31.TextAlign = System.Drawing.StringAlignment.Near
         Me.VsLabel31.UseKeyPad = False
         '
-        'VsPictureButton1
-        '
-        Me.VsPictureButton1.BorderColor = System.Drawing.Color.DarkGray
-        Me.VsPictureButton1.BorderSide_Bottom = True
-        Me.VsPictureButton1.BorderSide_Left = True
-        Me.VsPictureButton1.BorderSide_Right = True
-        Me.VsPictureButton1.BorderSide_Top = True
-        Me.VsPictureButton1.BorderWidth = 1
-        Me.VsPictureButton1.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.VsPictureButton1.Location = New System.Drawing.Point(100, 228)
-        Me.VsPictureButton1.Name = "VsPictureButton1"
-        Me.VsPictureButton1.Selected = False
-        Me.VsPictureButton1.Size = New System.Drawing.Size(160, 40)
-        Me.VsPictureButton1.TabIndex = 40
-        Me.VsPictureButton1.Text = "동계 모드"
-        Me.VsPictureButton1.Visible = False
-        '
-        'VsPictureButton2
-        '
-        Me.VsPictureButton2.BorderColor = System.Drawing.Color.DarkGray
-        Me.VsPictureButton2.BorderSide_Bottom = True
-        Me.VsPictureButton2.BorderSide_Left = True
-        Me.VsPictureButton2.BorderSide_Right = True
-        Me.VsPictureButton2.BorderSide_Top = True
-        Me.VsPictureButton2.BorderWidth = 1
-        Me.VsPictureButton2.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.VsPictureButton2.Location = New System.Drawing.Point(295, 228)
-        Me.VsPictureButton2.Name = "VsPictureButton2"
-        Me.VsPictureButton2.Selected = False
-        Me.VsPictureButton2.Size = New System.Drawing.Size(160, 40)
-        Me.VsPictureButton2.TabIndex = 41
-        Me.VsPictureButton2.Text = "추계 모드"
-        Me.VsPictureButton2.Visible = False
-        '
-        'VsPictureButton3
-        '
-        Me.VsPictureButton3.BorderColor = System.Drawing.Color.DarkGray
-        Me.VsPictureButton3.BorderSide_Bottom = True
-        Me.VsPictureButton3.BorderSide_Left = True
-        Me.VsPictureButton3.BorderSide_Right = True
-        Me.VsPictureButton3.BorderSide_Top = True
-        Me.VsPictureButton3.BorderWidth = 1
-        Me.VsPictureButton3.Font = New System.Drawing.Font("Tahoma", 16.0!, System.Drawing.FontStyle.Bold)
-        Me.VsPictureButton3.Location = New System.Drawing.Point(485, 228)
-        Me.VsPictureButton3.Name = "VsPictureButton3"
-        Me.VsPictureButton3.Selected = False
-        Me.VsPictureButton3.Size = New System.Drawing.Size(160, 40)
-        Me.VsPictureButton3.TabIndex = 47
-        Me.VsPictureButton3.Text = "하계 모드"
-        Me.VsPictureButton3.Visible = False
-        '
         'wnd서브화면5_사용모드
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1395,5 +1410,6 @@ Partial Public Class wnd서브화면5_사용모드
     Friend WithEvents VsPictureButton3 As PMS.VSPictureButton
     Friend WithEvents VsPictureButton2 As PMS.VSPictureButton
     Friend WithEvents VsPictureButton1 As PMS.VSPictureButton
+    Friend WithEvents VsPictureButton4 As PMS.VSPictureButton
 
 End Class

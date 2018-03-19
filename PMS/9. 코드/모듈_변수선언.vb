@@ -3,6 +3,7 @@
     Public CONFIG_FILE1 As String = ""
     Public CONFIG_FILE2 As String = ""
     Public CONFIG_FILE3 As String = ""
+    Public CONFIG_FILE4 As String = ""
     Public MODBUS_EMS_BUFFER(1024) As Byte
 
     Public EMS_수신포트 As Integer = 503
@@ -44,29 +45,10 @@
     Public Const PT_I_Inv_U As Integer = 8
     Public Const PT_I_Inv_V As Integer = 9
     Public Const PT_I_Inv_W As Integer = 10
-    Public Const PT_Grid_PF As Integer = 11
-    Public Const PT_Grid_In_Power As Integer = 12
-    Public Const PT_Grid_Out_Power As Integer = 13
-    Public Const PT_V_Grid_R As Integer = 14
-    Public Const PT_V_Grid_S As Integer = 15
-    Public Const PT_V_Grid_T As Integer = 16
-    Public Const PT_I_Grid_R As Integer = 17
-    Public Const PT_I_Grid_S As Integer = 18
-    Public Const PT_I_Grid_T As Integer = 19
     Public Const PT_Grid_Freq As Integer = 20
-    Public Const PT_Load_Power As Integer = 21
-    Public Const PT_I_Load_R As Integer = 22
-    Public Const PT_I_Load_S As Integer = 23
-    Public Const PT_I_Load_T As Integer = 24
-    Public Const PT_V_Load_R As Integer = 25
-    Public Const PT_V_Load_S As Integer = 26
-    Public Const PT_V_Load_T As Integer = 27
     Public Const PT_BAT_Power As Integer = 28
     Public Const PT_BAT_V As Integer = 29
     Public Const PT_BAT_I As Integer = 30
-    Public Const PT_BAT_SOC As Integer = 31
-    Public Const PT_BAT_SOH As Integer = 32
-    Public Const PT_BAT_TEMP As Integer = 33
     Public Const PT_BAT_STS As Integer = 34
     Public Const PT_Inv_Status As Integer = 35
     Public Const PT_Grid_Status As Integer = 36
@@ -77,9 +59,6 @@
     Public Const PT_SOC_DCHG_FNSH As Integer = 41
     Public Const PT_Constant_Current As Integer = 42
     Public Const PT_Constant_Voltage As Integer = 43
-    'Public Const PT_SOC_CHG_Start_off As Integer = 41
-    'Public Const PT_SOC_DCHG_FNSH As Integer = 42
-    'Public Const PT_SOC_DCHG_FNSH_OFF As Integer = 43
     Public Const PT_Grid_Active_Power As Integer = 44
     Public Const PT_Grid_Reactive_Power As Integer = 45
     Public Const PT_Pf_Set As Integer = 46
@@ -100,6 +79,7 @@
         유효전력 = 3
         무효전력 = 4
         배터리충전 = 5
+        배터리방전 = 6
     End Enum
 
     Public 현재사용모드_피크컷동작 As Boolean = False
@@ -125,16 +105,7 @@
     Public d사용모드_배터리_방전정지전압 As Double
     Public d사용모드_배터리_충전시최대전류 As Double
     Public d사용모드_배터리_방전시최대전류 As Double
-    ' 배터리 사용량
-    Public 배터리_당일_충전 As Double = 0
-    Public 배터리_당일_방전 As Double = 0
-    Public 배터리_어제_충전 As Double = 0
-    Public 배터리_어제_방전 As Double = 0
-    Public 배터리_누적_충전 As Double = 0
-    Public 배터리_누적_방전 As Double = 0
 
-    Public 배터리_당월_충전 As Double = 0
-    Public 배터리_당월_방전 As Double = 0
     Public cBMS As New BMS
     Public cBMS_Rack(5) As BMS_Rack
     Public cBMS_Module(4, 17) As BMS_Module
@@ -150,6 +121,7 @@
 
     'BMS데이터비교에서 Deadband를 사용하기 위해서 저장하는 시간 값.
 
+    Public isSDCard_Mode As Boolean = 0
     Public Enum BSC상태
         Connect = 1
         Initializing = 2
@@ -169,6 +141,7 @@
         Warning = 11
         Fault = 12
     End Enum
+
 
     Public 현재BSC상태 As UShort
 End Module

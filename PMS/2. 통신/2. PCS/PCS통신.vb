@@ -81,9 +81,9 @@
 
                                 If nCheckSum1 = btRecvBuffer(nRecvBufferLength - 2) And nCheckSum2 = btRecvBuffer(nRecvBufferLength - 1) Then
 
-                                    If DEBUG_COMM = True Then
-                                        RaiseEvent DataArrived(DeviceCommPort.PortName, "RX", btRecvBuffer, nRecvBufferLength)
-                                    End If
+                                    'If DEBUG_COMM = True Then
+                                    RaiseEvent DataArrived(DeviceCommPort.PortName, "RX", btRecvBuffer, nRecvBufferLength)
+                                    'End If
 
 
                                     tLastRecv = Now
@@ -110,17 +110,17 @@
                                 'nModbusWriteRegisterResponse = nRecvBufferLength - 3
                             End If
 
-                            ElseIf btRecvCommand = &H10 Then
-                                If nRecvBufferLength = 8 Then
+                        ElseIf btRecvCommand = &H10 Then
+                            If nRecvBufferLength = 8 Then
 
-                                    ' 제어응답 - 멀티
+                                ' 제어응답 - 멀티
 
-                                    'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
-                                    'nModbusWriteRegisterResponse = nRecvBufferLength - 3
-                                End If
-
-
+                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
+                                'nModbusWriteRegisterResponse = nRecvBufferLength - 3
                             End If
+
+
+                        End If
                     End If
                 End If
             Next

@@ -209,20 +209,6 @@
 
         Dim szValue As String = "-"
         Dim nOldStatus As Integer = 그리드상태
-        'Dim dGrid_In_Power As Double = GetModbusData_Ushort(PT_grid_in_Power) * 0.1
-        'Dim dGrid_Out_Power As Double = GetModbusData_Ushort(PT_grid_out_Power) * 0.1
-
-        'If dGrid_In_Power > 0 And dGrid_Out_Power <= 0 Then
-        '그리드상태 = 1
-        'szValue = String.Format("{0:F1} kW", dGrid_In_Power)
-        'ElseIf dGrid_In_Power <= 0 And dGrid_Out_Power > 0 Then
-        '그리드상태 = 2
-        ' szValue = String.Format("{0:F1} kW", dGrid_Out_Power)
-        'Else
-        '그리드상태 = 0
-        'szValue = ""
-        'End If
-
 
         If cBMS.Bank_충방전_전력 > 0 Then
             그리드상태 = 1
@@ -232,7 +218,10 @@
             그리드상태 = 0
 
         End If
-        Dim dPT_Inv_Power As Double = GetModbusData_Ushort(PT_Inv_Power) * 0.1
+
+        Dim usPower As UShort = GetModbusData_Ushort(PT_Inv_Power)
+        Dim dPT_Inv_Power As Double = Convert.ToInt16(usPower.ToString("X4"), 16) * 0.1
+
         'Dim dPT_Inv_Power As Double = cBMS.Bank_충방전_전력
         szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
         If lbGridStatus.Text <> szValue Then
@@ -257,28 +246,28 @@
             End Select
         End If
 
-        Dim dValue As Double = GetModbusData_Ushort(PT_V_Grid_R) * 0.1
+        Dim dValue As Double = GetModbusData_Ushort(PT_V_Inv_U) * 0.1
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage1.Text <> szValue Then lbVoltage1.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_V_Grid_S) * 0.1
+        dValue = GetModbusData_Ushort(PT_V_Inv_V) * 0.1
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage2.Text <> szValue Then lbVoltage2.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_V_Grid_T) * 0.1
+        dValue = GetModbusData_Ushort(PT_V_Inv_W) * 0.1
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage3.Text <> szValue Then lbVoltage3.Text = szValue
 
 
-        dValue = GetModbusData_Ushort(PT_I_Grid_R) * 0.1
+        dValue = GetModbusData_Ushort(PT_I_Inv_U) * 0.1
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent1.Text <> szValue Then lbCurrent1.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_I_Grid_S) * 0.1
+        dValue = GetModbusData_Ushort(PT_I_Inv_V) * 0.1
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent2.Text <> szValue Then lbCurrent2.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_I_Grid_T) * 0.1
+        dValue = GetModbusData_Ushort(PT_I_Inv_W) * 0.1
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent3.Text <> szValue Then lbCurrent3.Text = szValue
 
@@ -466,7 +455,7 @@
         nMaxValue_Day = 0
         htHistoryData_Day.Clear()
 
-        Dim szPath As String = String.Format("\Flash Disk\Run\History\{0}", dtDayReport_Date.Year)
+        Dim szPath As String = String.Format("\SD Card\History\{0}", dtDayReport_Date.Year)
         Dim szHistoryFile As String = ""
         szHistoryFile = String.Format("{0}\H{1}-{2}-{3}.csv", szPath, dtDayReport_Date.Year.ToString("0000"), dtDayReport_Date.Month.ToString("00"), dtDayReport_Date.Day.ToString("00"))
         If System.IO.File.Exists(szHistoryFile) = True Then
@@ -744,7 +733,7 @@
 
 
 
-        Dim szPath As String = String.Format("\Flash Disk\Run\History\{0}", nMonthReport_Year)
+        Dim szPath As String = String.Format("\SD Card\History\{0}", nMonthReport_Year)
         Dim szHistoryFile As String = ""
         szHistoryFile = String.Format("{0}\H{1}-{2}.csv", szPath, nMonthReport_Year.ToString("0000"), nMonthReport_Month.ToString("00"))
         If System.IO.File.Exists(szHistoryFile) = True Then

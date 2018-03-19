@@ -872,6 +872,7 @@ Partial Public Class wnd서브화면7_설정
         Me.VsLabel4.Name = "VsLabel4"
         Me.VsLabel4.Size = New System.Drawing.Size(246, 35)
         Me.VsLabel4.TabIndex = 1
+        Me.VsLabel4.Text = "사용언어 : "
         Me.VsLabel4.TextAlign = System.Drawing.StringAlignment.Far
         '
         'VsLabel5
@@ -883,6 +884,7 @@ Partial Public Class wnd서브화면7_설정
         Me.VsLabel5.Name = "VsLabel5"
         Me.VsLabel5.Size = New System.Drawing.Size(143, 35)
         Me.VsLabel5.TabIndex = 1
+        Me.VsLabel5.Text = "한국어"
         Me.VsLabel5.TextAlign = System.Drawing.StringAlignment.Near
         '
         'pnlLanguage

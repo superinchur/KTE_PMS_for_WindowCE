@@ -51,15 +51,7 @@
     Public Sub 설정값불러오기()
 
 
-        lbTime1StartHour.Text = 사용모드_피크컷시간(1, 1).ToString("00")  ' 피크컷시간1 - 시작 시
-        lbTime1StartMin.Text = 사용모드_피크컷시간(1, 2).ToString("00")  ' 피크컷시간1 - 시작 분
-        lbTime1EndHour.Text = 사용모드_피크컷시간(1, 3).ToString("00")  ' 피크컷시간1 - 종료 시
-        lbTime1EndMin.Text = 사용모드_피크컷시간(1, 4).ToString("00")  ' 피크컷시간1 - 종료 분
-
-        lbTime2StartHour.Text = 사용모드_피크컷시간(2, 1).ToString("00")  ' 피크컷시간2 - 시작 시
-        lbTime2StartMin.Text = 사용모드_피크컷시간(2, 2).ToString("00")  ' 피크컷시간2 - 시작 분
-        lbTime2EndHour.Text = 사용모드_피크컷시간(2, 3).ToString("00")  ' 피크컷시간2 - 종료 시
-        lbTime2EndMin.Text = 사용모드_피크컷시간(2, 4).ToString("00")  ' 피크컷시간2 - 종료 분
+        피크컷시간_설정값불러오기()
 
         lbGridActivePower.Text = String.Format("{0:N01}", d사용모드_유효전력)  ' 유효전력
         lbGridReactivePower.Text = String.Format("{0:N01}", d사용모드_무효전력)  ' 무효전력
@@ -74,6 +66,22 @@
         'Test
         'VsLabel17.Text = cBMS.Bank_DC전압.ToString
         'VsLabel23.Text = cBMS.Bank_SOC.ToString
+
+    End Sub
+
+    Public Sub 피크컷시간_설정값불러오기()
+
+
+        lbTime1StartHour.Text = 사용모드_피크컷시간(1, 1).ToString("00")  ' 피크컷시간1 - 시작 시
+        lbTime1StartMin.Text = 사용모드_피크컷시간(1, 2).ToString("00")  ' 피크컷시간1 - 시작 분
+        lbTime1EndHour.Text = 사용모드_피크컷시간(1, 3).ToString("00")  ' 피크컷시간1 - 종료 시
+        lbTime1EndMin.Text = 사용모드_피크컷시간(1, 4).ToString("00")  ' 피크컷시간1 - 종료 분
+
+        lbTime2StartHour.Text = 사용모드_피크컷시간(2, 1).ToString("00")  ' 피크컷시간2 - 시작 시
+        lbTime2StartMin.Text = 사용모드_피크컷시간(2, 2).ToString("00")  ' 피크컷시간2 - 시작 분
+        lbTime2EndHour.Text = 사용모드_피크컷시간(2, 3).ToString("00")  ' 피크컷시간2 - 종료 시
+        lbTime2EndMin.Text = 사용모드_피크컷시간(2, 4).ToString("00")  ' 피크컷시간2 - 종료 분
+
 
     End Sub
 
@@ -231,16 +239,29 @@
             Dim szTime2Start As String = String.Format("{0}:{1}", Val(lbTime2StartHour.Text).ToString("00"), Val(lbTime2StartMin.Text).ToString("00"))
             Dim szTime2End As String = String.Format("{0}:{1}", Val(lbTime2EndHour.Text).ToString("00"), Val(lbTime2EndMin.Text).ToString("00"))
 
-            If szTime1Start > szTime1End Then
-                MsgBox("시간설정1의 종료시간이 시작시간 이전입니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
-                Exit Sub
-            End If
+            '<------------------------------------------------------------------------------------------
+            ' 다음날 까지 설정할 수 있도록 하기위해서 해당 사항을 주석 처리
+            'If lbTime1StartHour.Text = 24 And (Not lbTime1StartMin.Text = 0) Then
+            '            MsgBox("최대 24시 까지 설정할 수 있습니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+            'End If
+            '            If lbTime2StartHour.Text = 24 And (Not lbTime2StartMin.Text = 0) Then
+            '            MsgBox("최대 24시 까지 설정할 수 있습니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+            'End If
+            '<------------------------------------------------------------------------------------------
 
-            If szTime2Start > szTime2End Then
-                MsgBox("시간설정2의 종료시간이 시작시간 이전입니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
-                Exit Sub
-            End If
+            '<------------------------------------------------------------------------------------------
+            ' 다음날 까지 설정할 수 있도록 하기위해서 해당 사항을 주석 처리
+            ' 180306 
+            'If szTime1Start > szTime1End Then
+            'MsgBox("시간설정1의 종료시간이 시작시간 이전입니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+            'Exit Sub
+            'End If
 
+            'If szTime2Start > szTime2End Then
+            'MsgBox("시간설정2의 종료시간이 시작시간 이전입니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+            'Exit Sub
+            'End If
+            '<------------------------------------------------------------------------------------------
             If szTime1Start < szTime2Start And szTime2Start < szTime1End Then
                 MsgBox("시간설정2의 시작시간이 시간설정1의 시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
                 Exit Sub
@@ -385,27 +406,6 @@
 
     End Sub
 
-
-    Private Sub VsLabel17_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        'cBMS.Bank_DC전압 = Val(VsLabel17.Text)
-    End Sub
-
-    Private Sub VsLabel23_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        'cBMS.Bank_SOC = Val(VsLabel23.Text)
-    End Sub
-
-    Private Sub btn_Mode1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        get_Mode(CONFIG_FILE1)
-    End Sub
-
-    Private Sub btn_Mode2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        get_Mode(CONFIG_FILE2)
-    End Sub
-
-    Private Sub btn_Mode3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        get_Mode(CONFIG_FILE3)
-    End Sub
-
     Private Sub get_Mode(ByVal FILE)
 
         ' 피크컷 정보 설정
@@ -426,41 +426,35 @@
             사용모드_피크컷시간(2, 2) = Val(pINI.GetKeyValue("사용모드", "피크컷시간2_시작분") & "")  ' 피크컷시간2 - 시작 분
             사용모드_피크컷시간(2, 3) = Val(pINI.GetKeyValue("사용모드", "피크컷시간2_종료시") & "")  ' 피크컷시간2 - 종료 시
             사용모드_피크컷시간(2, 4) = Val(pINI.GetKeyValue("사용모드", "피크컷시간2_종료분") & "")  ' 피크컷시간2 - 종료 분
-
-            d사용모드_유효전력 = Val(pINI.GetKeyValue("사용모드", "유효전력") & "")
-            d사용모드_무효전력 = Val(pINI.GetKeyValue("사용모드", "무효전력") & "")
-
-            d사용모드_배터리_충전정지SOC = Val(pINI.GetKeyValue("사용모드", "배터리충전중지SOC") & "")
-            d사용모드_배터리_방전정지SOC = Val(pINI.GetKeyValue("사용모드", "배터리방전중지SOC") & "")
-
-            d사용모드_배터리_충전정지전압 = Val(pINI.GetKeyValue("사용모드", "배터리충전정지전압") & "") * 0.1
-            d사용모드_배터리_방전정지전압 = Val(pINI.GetKeyValue("사용모드", "배터리방전정지전압") & "") * 0.1
-
-            d사용모드_배터리_충전시최대전류 = Val(pINI.GetKeyValue("사용모드", "배터리충전전류") & "")
-            d사용모드_배터리_방전시최대전류 = Val(pINI.GetKeyValue("사용모드", "배터리충전전압") & "")
-
         End If
     End Sub
 
     Private Sub VsPictureButton1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsPictureButton1.Click
-        If MsgBox("동계모드의 설정값을 불러오시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "모드 변경") = MsgBoxResult.Yes Then
+        If MsgBox("심야전기 사용 모드의 설정값을 불러오시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "모드 변경") = MsgBoxResult.Yes Then
             get_Mode(CONFIG_FILE1)
-            설정값불러오기()
+            피크컷시간_설정값불러오기()
         End If
     End Sub
 
     Private Sub VsPictureButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsPictureButton2.Click
-        If MsgBox("춘추계모드의 설정값을 불러오시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "모드 변경") = MsgBoxResult.Yes Then
+        If MsgBox("태양광 연계용 모드 설정값을 불러오시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "모드 변경") = MsgBoxResult.Yes Then
             get_Mode(CONFIG_FILE2)
-            설정값불러오기()
+            피크컷시간_설정값불러오기()
         End If
     End Sub
 
     Private Sub VsPictureButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsPictureButton3.Click
-        If MsgBox("하계모드의 설정값을 불러오시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "모드 변경") = MsgBoxResult.Yes Then
+        If MsgBox("충전 모드 설정값을 불러오시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "모드 변경") = MsgBoxResult.Yes Then
             get_Mode(CONFIG_FILE3)
-            설정값불러오기()
+            피크컷시간_설정값불러오기()
         End If
 
+    End Sub
+
+    Private Sub VsPictureButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsPictureButton4.Click
+        If MsgBox("방전 모드 설정값을 불러오시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "모드 변경") = MsgBoxResult.Yes Then
+            get_Mode(CONFIG_FILE4)
+            피크컷시간_설정값불러오기()
+        End If
     End Sub
 End Class

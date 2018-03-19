@@ -163,18 +163,13 @@ Public Class BMS클라이언트
 
         Dim StartAddress As UShort = ReadStartAdr(num_Rack, num_Module)
         Dim length As UShort = ReadLength(num_Rack, num_Module)
-        Debug.WriteLine("num_Rack : " + num_Rack.ToString() + " num_Module : " + num_Module.ToString())
+
+        'Debug.WriteLine("num_Rack : " + num_Rack.ToString() + " num_Module : " + num_Module.ToString())
         Try
             ReadInputRegister(StartAddress, length)
         Catch ex As Exception
             Debug.WriteLine(ex.ToString)
         End Try
-
-        'For i = 0 To 42
-
-        Debug.WriteLine(MODBUS_EMS_BUFFER(4).ToString())
-        'Next
-
 
         Timer_Comm.Enabled = True
     End Sub
@@ -455,13 +450,17 @@ Public Class BMS클라이언트
             Return
         End If
 
-        tLastRecv = Now
+        If ID > 0 Then
+            tLastRecv = Now
+        End If
+
         Select Case ID
             Case 1
                 data = values
                 'heartbit = Convert.ToUInt16(values(1))
                 'Read Input Register
                 ShowAs()
+
             Case 2
 
                 data = values

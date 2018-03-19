@@ -150,9 +150,15 @@
 
         Dim szCurrent As String = Format(Now, "HH:mm")
         Dim bDischargingTime As Boolean = False
-        If szTime1Start <= szCurrent And szCurrent < szTime1End Then
+
+        '' 24시간 넘어가는것을 하기 위해서 And 에서 Or로 변경 ' 180306
+        If (szTime1Start > szTime1End) And (szTime1Start <= szCurrent Or szCurrent < szTime1End) Then
             현재사용모드_배터리방전시간 = True
-        ElseIf szTime2Start <= szCurrent And szCurrent < szTime2End Then
+        ElseIf (szTime1Start < szTime1End) And (szTime1Start <= szCurrent And szCurrent < szTime1End) Then
+            현재사용모드_배터리방전시간 = True
+        ElseIf (szTime2Start > szTime2End) And (szTime2Start <= szCurrent Or szCurrent < szTime2End) Then
+            현재사용모드_배터리방전시간 = True
+        ElseIf (szTime2Start < szTime2End) And (szTime2Start <= szCurrent And szCurrent < szTime2End) Then
             현재사용모드_배터리방전시간 = True
         Else
             현재사용모드_배터리방전시간 = False
@@ -190,7 +196,22 @@
     End Sub
 
     Public Sub Set_MODBUS_EMS_BUFFER(ByVal address, ByVal val)
-        MODBUS_EMS_BUFFER(address * 2) = Convert.ToInt16(val) \ &H100
-        MODBUS_EMS_BUFFER(address * 2 + 1) = Convert.ToInt16(val) Mod &H100
+
+        '' Buffer Overflow를 막기위한 항목
+        If address < 512 Then
+            MODBUS_EMS_BUFFER(address * 2) = Convert.ToInt16(val) \ &H100
+            MODBUS_EMS_BUFFER(address * 2 + 1) = Convert.ToInt16(val) Mod &H100
+        End If
+        
     End Sub
+
+    Function PathCheck(ByVal directory)
+
+        Dim szPath As String = directory
+        Dim bPathCheck As Boolean = System.IO.Directory.Exists(szPath)
+
+        If bPathCheck = False Then System.IO.Directory.CreateDirectory(szPath)
+        ' SDCard가 인식이 되지 않으면, Flash Disk에 넣도록 수정한다.
+        PathCheck = System.IO.Directory.Exists(szPath)
+    End Function
 End Module
