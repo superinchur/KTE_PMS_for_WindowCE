@@ -53,8 +53,10 @@
 
         피크컷시간_설정값불러오기()
 
-        lbGridActivePower.Text = String.Format("{0:N01}", d사용모드_유효전력)  ' 유효전력
-        lbGridReactivePower.Text = String.Format("{0:N01}", d사용모드_무효전력)  ' 무효전력
+        lbChargingGridActivePower.Text = String.Format("{0:N01}", d사용모드_충전유효전력)  ' 유효전력
+        lbDischargingGridActivePower.Text = String.Format("{0:N01}", d사용모드_방전유효전력)  ' 유효전력 
+
+        'lbGridReactivePower.Text = String.Format("{0:N01}", d사용모드_무효전력)  ' 무효전력
 
         lbBatteryFD.Text = String.Format("{0:N0}", d사용모드_배터리_방전정지SOC)  ' 방전 중지
         lbBatteryCS.Text = String.Format("{0:N0}", d사용모드_배터리_충전정지SOC)  ' 충전 시작
@@ -62,6 +64,7 @@
         lb충전정지전압.Text = String.Format("{0:N1}", d사용모드_배터리_충전정지전압)  ' 충전 시작
         lbBatteryCC.Text = String.Format("{0:N1}", d사용모드_배터리_충전시최대전류) ' 충전 전류
         lbBatteryCV.Text = String.Format("{0:N1}", d사용모드_배터리_방전시최대전류)  ' 충전 전압
+
 
         'Test
         'VsLabel17.Text = cBMS.Bank_DC전압.ToString
@@ -232,43 +235,20 @@
     Private Sub btnPeakCutSet_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPeakCutSet.Click
         ' 피크컷 설정
 
-        If MsgBox("충/방전 설정을 변경하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "피크컷 설정") = MsgBoxResult.Yes Then
+        If MsgBox("충/방전 설정을 변경하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "알림") = MsgBoxResult.Yes Then
 
             Dim szTime1Start As String = String.Format("{0}:{1}", Val(lbTime1StartHour.Text).ToString("00"), Val(lbTime1StartMin.Text).ToString("00"))
             Dim szTime1End As String = String.Format("{0}:{1}", Val(lbTime1EndHour.Text).ToString("00"), Val(lbTime1EndMin.Text).ToString("00"))
             Dim szTime2Start As String = String.Format("{0}:{1}", Val(lbTime2StartHour.Text).ToString("00"), Val(lbTime2StartMin.Text).ToString("00"))
             Dim szTime2End As String = String.Format("{0}:{1}", Val(lbTime2EndHour.Text).ToString("00"), Val(lbTime2EndMin.Text).ToString("00"))
 
-            '<------------------------------------------------------------------------------------------
-            ' 다음날 까지 설정할 수 있도록 하기위해서 해당 사항을 주석 처리
-            'If lbTime1StartHour.Text = 24 And (Not lbTime1StartMin.Text = 0) Then
-            '            MsgBox("최대 24시 까지 설정할 수 있습니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
-            'End If
-            '            If lbTime2StartHour.Text = 24 And (Not lbTime2StartMin.Text = 0) Then
-            '            MsgBox("최대 24시 까지 설정할 수 있습니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
-            'End If
-            '<------------------------------------------------------------------------------------------
-
-            '<------------------------------------------------------------------------------------------
-            ' 다음날 까지 설정할 수 있도록 하기위해서 해당 사항을 주석 처리
-            ' 180306 
-            'If szTime1Start > szTime1End Then
-            'MsgBox("시간설정1의 종료시간이 시작시간 이전입니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
-            'Exit Sub
-            'End If
-
-            'If szTime2Start > szTime2End Then
-            'MsgBox("시간설정2의 종료시간이 시작시간 이전입니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
-            'Exit Sub
-            'End If
-            '<------------------------------------------------------------------------------------------
             If szTime1Start < szTime2Start And szTime2Start < szTime1End Then
-                MsgBox("시간설정2의 시작시간이 시간설정1의 시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+                MsgBox("충전시간이 방전시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
                 Exit Sub
             End If
 
             If szTime1Start < szTime2End And szTime2End < szTime1End Then
-                MsgBox("시간설정2의 종료시간이 시간설정1의 시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+                MsgBox("방전시간이 충전시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
                 Exit Sub
             End If
 
@@ -283,7 +263,13 @@
             사용모드_피크컷시간(2, 3) = Val(lbTime2EndHour.Text)  ' 피크컷시간2 - 종료 시
             사용모드_피크컷시간(2, 4) = Val(lbTime2EndMin.Text)  ' 피크컷시간2 - 종료 분
 
-            d사용모드_유효전력 = Val(lbGridActivePower.Text)
+
+
+            d사용모드_충전유효전력 = Val(lbChargingGridActivePower.Text)
+            d사용모드_방전유효전력 = Val(lbDischargingGridActivePower.Text)
+
+            제어대기열_추가(PT_Charging_Power, Convert.ToUInt16(d사용모드_충전유효전력 * 10))
+            제어대기열_추가(PT_Discharging_Power, Convert.ToUInt16(d사용모드_방전유효전력 * 10))
 
             Dim pINI As New IniFile(CONFIG_FILE)
 
@@ -298,7 +284,9 @@
             pINI.SetKeyValue("사용모드", "피크컷시간2_종료분", 사용모드_피크컷시간(2, 4).ToString("00"))
 
 
-            pINI.SetKeyValue("사용모드", "유효전력", d사용모드_유효전력.ToString)
+            pINI.SetKeyValue("사용모드", "충전유효전력", d사용모드_충전유효전력.ToString)
+            pINI.SetKeyValue("사용모드", "방전유효전력", d사용모드_방전유효전력.ToString)
+
             pINI.Save(CONFIG_FILE)
 
         End If
@@ -358,9 +346,9 @@
                         ushValue = SetBitmask(ushValue, 9, 1)
                         제어대기열_추가(PT_MODE_Status, ushValue)
 
-                        d사용모드_무효전력 = dPower
+                        'd사용모드_무효전력 = dPower
                         Dim pINI As New IniFile(CONFIG_FILE)
-                        pINI.SetKeyValue("사용모드", "무효전력", d사용모드_무효전력.ToString)
+                        'pINI.SetKeyValue("사용모드", "무효전력", d사용모드_무효전력.ToString)
                         pINI.Save(CONFIG_FILE)
                     Else
                         ushValue = SetBitmask(ushValue, 9, 0)

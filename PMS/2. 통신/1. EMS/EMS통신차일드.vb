@@ -186,39 +186,12 @@ Public Class EMS통신차일드
 
         Dim bMatch As Boolean = True
 
-        Select Case nAddress
-            Case 1
-                ' PCS1 MODE SET
-                nAddress = 38
-            Case 2
-                ' PCS2 MODE SET
-                nAddress = 38
-            Case 3
-                ' PCS1 POWER ACTIVE SET
-                nAddress = 44
-            Case 4
-                ' PCS1 POWER REACTIVE SET
-                nAddress = 45
-            Case 5
-                ' PCS2 POWER ACTIVE SET
-                nAddress = 44
-            Case 6
-                ' PCS2 POWER REACTIVE SET
-                nAddress = 45
-            Case 7
-                ' PCS1 RESET SET
-                nAddress = 38
-                nWriteData = &H1
-            Case 8
-                ' PCS2 RESET SET
-                nAddress = 38
-                nWriteData = &H1
-            Case Else
-                bMatch = False
-        End Select
+        If nAddress < 50 Then
+            MODBUS_EMS_BUFFER(nAddress * 2) = btData(4)
+            MODBUS_EMS_BUFFER(nAddress * 2 + 1) = btData(5)
 
-        제어대기열_추가(nAddress, nWriteData)
-
+            제어대기열_추가(nAddress * 2, nWriteData)
+        End If
         WriteDataFrame(btData, nData)
 
     End Sub

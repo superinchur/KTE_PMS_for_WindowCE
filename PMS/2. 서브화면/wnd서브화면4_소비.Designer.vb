@@ -71,7 +71,7 @@ Partial Public Class wnd서브화면4_소비
         Me.PictureBox2.Location = New System.Drawing.Point(258, 113)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(80, 80)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         '
         'Label2
         '

@@ -68,7 +68,7 @@ Public Class 메인화면
         Me.Top = 0
 
         화면_고장.Visible = False
-        타이머_상태.Interval = 1
+        타이머_상태.Interval = 1000
         타이머_상태.Enabled = True
 
         Panel1.BackColor = Color.White
@@ -149,8 +149,9 @@ Public Class 메인화면
                 사용모드_피크컷시간(2, 3) = Val(pINI.GetKeyValue("사용모드", "피크컷시간2_종료시") & "")  ' 피크컷시간2 - 종료 시
                 사용모드_피크컷시간(2, 4) = Val(pINI.GetKeyValue("사용모드", "피크컷시간2_종료분") & "")  ' 피크컷시간2 - 종료 분
 
-                d사용모드_유효전력 = Val(pINI.GetKeyValue("사용모드", "유효전력") & "")
-                d사용모드_무효전력 = Val(pINI.GetKeyValue("사용모드", "무효전력") & "")
+                d사용모드_충전유효전력 = Val(pINI.GetKeyValue("사용모드", "충전유효전력") & "")
+                d사용모드_방전유효전력 = Val(pINI.GetKeyValue("사용모드", "방전유효전력") & "")
+                'd사용모드_무효전력 = Val(pINI.GetKeyValue("사용모드", "무효전력") & "")
 
                 d사용모드_배터리_충전정지SOC = Val(pINI.GetKeyValue("사용모드", "배터리충전중지SOC") & "")
                 d사용모드_배터리_방전정지SOC = Val(pINI.GetKeyValue("사용모드", "배터리방전중지SOC") & "")
@@ -724,7 +725,7 @@ Public Class 메인화면
                     End If
                 End If
 
-            ElseIf 현재사용모드_배터리방전시간 = False Then
+            ElseIf 현재사용모드_배터리충전시간 = True Then
 
                 ' 배터리 충/방전 확인 비트
                 Dim dBATT_SOC As Double = cBMS.Bank_SOC
@@ -799,7 +800,11 @@ Public Class 메인화면
         
     End Sub
 
+    Public fault As Integer = 0
+
+    Private Sub pbBMS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pbBMS.Click
 
 
+    End Sub
 End Class
 

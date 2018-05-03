@@ -70,23 +70,25 @@
         '                                                                        전류              X       전압               / kW
         Dim d배터리_충전시최대전력 As Double = (d사용모드_배터리_충전시최대전류 * dBattVoltageofPCS) / 1000
 
-        If d배터리_충전시최대전력 < d사용모드_유효전력 Then
+        ' 74.0 // 20.0
+        If d배터리_충전시최대전력 < d사용모드_충전유효전력 Then
             ' 유효전력을 낮춰줘야함
             d최종_유효전력 = d배터리_충전시최대전력
         Else
-            d최종_유효전력 = d사용모드_유효전력
+            d최종_유효전력 = d사용모드_충전유효전력
         End If
 
-        Dim rawvalue As UShort = GetModbusData_Ushort(PT_Grid_Active_Power)
-        Dim minvalue As UShort = rawvalue * (1 - 0.1)
-        Dim maxvalue As UShort = rawvalue * (1 + 0.1)
+        Dim rawvalue As Double = GetModbusData_Ushort(PT_Grid_Active_Power) * 0.1
+        Dim minvalue As Double = rawvalue * 0.9
+        Dim maxvalue As Double = rawvalue * 1.1
 
         ' 5% 정도의 오차는 감안해서 5% 이내로 움직일 때만 요청을 보내도록 한다.
 
+        '20
         If minvalue >= d최종_유효전력 Or d최종_유효전력 >= maxvalue Then
             If d최종_유효전력 > 0 Then
-                제어대기열_추가(PT_Grid_Active_Power, d최종_유효전력 * 10)
-                Set_MODBUS_EMS_BUFFER(44, d최종_유효전력 * 10)
+                제어대기열_추가(PT_Grid_Active_Power, Convert.ToInt16(d최종_유효전력 * 10))
+                Set_MODBUS_EMS_BUFFER(44, Convert.ToInt16(d최종_유효전력 * 10))
             End If
         End If
     End Sub
@@ -96,22 +98,22 @@
         '                                                                        전류              X       전압               / kW
         Dim d배터리_방전시최대전력 As Double = (d사용모드_배터리_방전시최대전류 * dBattVoltageofPCS) / 1000
 
-        If d배터리_방전시최대전력 < d사용모드_유효전력 Then
+        If d배터리_방전시최대전력 < d사용모드_방전유효전력 Then
             ' 유효전력을 낮춰줘야함
             d최종_유효전력 = d배터리_방전시최대전력
         Else
-            d최종_유효전력 = d사용모드_유효전력
+            d최종_유효전력 = d사용모드_방전유효전력
         End If
 
-        Dim rawvalue As UShort = GetModbusData_Ushort(PT_Grid_Active_Power)
-        Dim minvalue As UShort = rawvalue * (1 - 0.1)
-        Dim maxvalue As UShort = rawvalue * (1 + 0.1)
+        Dim rawvalue As Double = GetModbusData_Ushort(PT_Grid_Active_Power) * 0.1
+        Dim minvalue As Double = rawvalue * (1 - 0.1)
+        Dim maxvalue As Double = rawvalue * (1 + 0.1)
 
-        If Not (GetModbusData_Ushort(PT_Grid_Active_Power) = d최종_유효전력) Then
 
-            If Not (minvalue >= d최종_유효전력 And d최종_유효전력 <= maxvalue) Then
-                제어대기열_추가(PT_Grid_Active_Power, d최종_유효전력 * 10)
-                Set_MODBUS_EMS_BUFFER(44, d최종_유효전력 * 10)
+        If minvalue >= d최종_유효전력 Or d최종_유효전력 >= maxvalue Then
+            If d최종_유효전력 > 0 Then
+                제어대기열_추가(PT_Grid_Active_Power, Convert.ToInt16(d최종_유효전력 * 10))
+                Set_MODBUS_EMS_BUFFER(44, Convert.ToInt16(d최종_유효전력 * 10))
             End If
         End If
     End Sub
@@ -152,16 +154,22 @@
         Dim bDischargingTime As Boolean = False
 
         '' 24시간 넘어가는것을 하기 위해서 And 에서 Or로 변경 ' 180306
+        ' 1이 충전시간
         If (szTime1Start > szTime1End) And (szTime1Start <= szCurrent Or szCurrent < szTime1End) Then
-            현재사용모드_배터리방전시간 = True
+            현재사용모드_배터리충전시간 = True
+            현재사용모드_배터리방전시간 = False
         ElseIf (szTime1Start < szTime1End) And (szTime1Start <= szCurrent And szCurrent < szTime1End) Then
-            현재사용모드_배터리방전시간 = True
+            현재사용모드_배터리충전시간 = True
+            현재사용모드_배터리방전시간 = False
         ElseIf (szTime2Start > szTime2End) And (szTime2Start <= szCurrent Or szCurrent < szTime2End) Then
             현재사용모드_배터리방전시간 = True
+            현재사용모드_배터리충전시간 = False
         ElseIf (szTime2Start < szTime2End) And (szTime2Start <= szCurrent And szCurrent < szTime2End) Then
             현재사용모드_배터리방전시간 = True
+            현재사용모드_배터리충전시간 = False
         Else
             현재사용모드_배터리방전시간 = False
+            현재사용모드_배터리충전시간 = False
         End If
     End Sub
 

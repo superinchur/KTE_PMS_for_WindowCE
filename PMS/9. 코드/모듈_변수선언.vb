@@ -6,14 +6,14 @@
     Public CONFIG_FILE4 As String = ""
     Public MODBUS_EMS_BUFFER(1024) As Byte
 
-    Public EMS_수신포트 As Integer = 503
-    Public BMS_수신포트 As Integer = 502
+    Public EMS_수신포트 As Integer = 502
+    Public BMS_수신포트 As Integer = 503
 
     Public PCS_통신포트 As String = "COM2"
-    Public PCS_통신주기 As Integer = 100
+    Public PCS_통신주기 As Integer = 500
 
     Public BMS_통신포트 As String = "COM3"
-    Public BMS_통신주기 As Integer = 100
+    Public BMS_통신주기 As Integer = 500
 
     Public PMS_통신ID As Integer = 1
     Public BMS_통신ID As Integer = 1
@@ -55,8 +55,10 @@
     Public Const PT_전장_Status As Integer = 37
     Public Const PT_MODE_Status As Integer = 38
     Public Const PT_OpFLAG_Status As Integer = 39
-    Public Const PT_SOC_CHG_Start As Integer = 40
-    Public Const PT_SOC_DCHG_FNSH As Integer = 41
+
+    Public Const PT_Charging_Power As Integer = 40
+    Public Const PT_Discharging_Power As Integer = 41
+
     Public Const PT_Constant_Current As Integer = 42
     Public Const PT_Constant_Voltage As Integer = 43
     Public Const PT_Grid_Active_Power As Integer = 44
@@ -87,6 +89,7 @@
     Public 현재사용모드_무효전력 As Boolean = False
     Public 현재사용모드_배터리충전 As Boolean = False
     Public 현재사용모드_배터리방전 As Boolean = False
+    Public 현재사용모드_배터리충전시간 As Boolean = False
     Public 현재사용모드_배터리방전시간 As Boolean = False
 
     Public 현재사용모드_PCS방전강제종료 As Boolean = False
@@ -96,8 +99,11 @@
     Public d사용모드_로드파워 As Double
     Public d사용모드_피크컷 As Double
 
-    Public d사용모드_유효전력 As Double
-    Public d사용모드_무효전력 As Double
+    'Public d사용모드_유효전력 As Double
+    'Public d사용모드_무효전력 As Double
+
+    Public d사용모드_충전유효전력 As Double
+    Public d사용모드_방전유효전력 As Double
 
     Public d사용모드_배터리_충전정지SOC As Double
     Public d사용모드_배터리_방전정지SOC As Double

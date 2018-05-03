@@ -502,6 +502,7 @@ Partial Public Class 메인화면
         '
         '타이머_사용모드
         '
+        Me.타이머_사용모드.Interval = 2000
         '
         '메인화면
         '

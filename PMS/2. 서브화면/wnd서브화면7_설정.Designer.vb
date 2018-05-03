@@ -541,6 +541,7 @@ Partial Public Class wnd서브화면7_설정
         Me.btnNetworkSave.Size = New System.Drawing.Size(100, 40)
         Me.btnNetworkSave.TabIndex = 6
         Me.btnNetworkSave.Text = "적용"
+        Me.btnNetworkSave.Visible = False
         '
         'lbNetworkDNS
         '
@@ -666,6 +667,7 @@ Partial Public Class wnd서브화면7_설정
         Me.rbNetworkStatic.Size = New System.Drawing.Size(180, 20)
         Me.rbNetworkStatic.TabIndex = 0
         Me.rbNetworkStatic.Text = "고정 IP 주소 사용"
+        Me.rbNetworkStatic.Visible = False
         '
         'rbNetworkDHCP
         '
@@ -675,6 +677,7 @@ Partial Public Class wnd서브화면7_설정
         Me.rbNetworkDHCP.Size = New System.Drawing.Size(219, 20)
         Me.rbNetworkDHCP.TabIndex = 0
         Me.rbNetworkDHCP.Text = "자동으로 IP 주소 받기"
+        Me.rbNetworkDHCP.Visible = False
         '
         'PageHeader4
         '

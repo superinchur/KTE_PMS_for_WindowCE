@@ -330,6 +330,7 @@
 
 
         If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
+
             cBMS.Bank_SOC = word(10)
             cBMS.Bank_SOH = word(11)
             cBMS.Bank_DC전압 = word(12)
