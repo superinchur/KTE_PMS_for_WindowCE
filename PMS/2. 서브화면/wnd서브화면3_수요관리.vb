@@ -591,8 +591,6 @@
         Dim nCellWidth As Integer = (nGraphWidth / 4 * 3) / 3
         Dim nLeftGap = (nGraphWidth - nCellWidth * 3) / 2
 
-
-
         pGraphic.FillRectangle(New SolidBrush(Color.White), 0, 0, pnlGraphMonth.Width, pnlGraphMonth.Height)
 
         Dim pRectGraph As New Rectangle(nHGap, nVGap1, nCtrlWidth, nCtrlHeight)
@@ -659,12 +657,9 @@
 
             End If
 
-
             Dim dValueArray() As Double = htHistoryData_Month(nDay)
 
             If dValueArray IsNot Nothing Then
-
-
                 For nCell As Integer = 0 To 2
                     Dim dValue As Double = 0
 
@@ -730,8 +725,6 @@
 
         nMaxValue_Month = 0
         htHistoryData_Month.Clear()
-
-
 
         Dim szPath As String = String.Format("\SD Card\History\{0}", nMonthReport_Year)
         Dim szHistoryFile As String = ""

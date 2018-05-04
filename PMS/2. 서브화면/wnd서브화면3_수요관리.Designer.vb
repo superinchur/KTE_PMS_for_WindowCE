@@ -419,6 +419,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.lbStatus_Day_Load.Text = "로드"
         Me.lbStatus_Day_Load.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbStatus_Day_Load.UseKeyPad = False
+        Me.lbStatus_Day_Load.Visible = False
         '
         'VsLabel1
         '
@@ -493,6 +494,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.lbStatus_Day_Grid.Text = "그리드"
         Me.lbStatus_Day_Grid.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbStatus_Day_Grid.UseKeyPad = False
+        Me.lbStatus_Day_Grid.Visible = False
         '
         'pnlGraphDay
         '
@@ -542,6 +544,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.lbStatus_Month_Load.Text = "로드"
         Me.lbStatus_Month_Load.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbStatus_Month_Load.UseKeyPad = False
+        Me.lbStatus_Month_Load.Visible = False
         '
         'lbStatus_Month_Inverter
         '
@@ -582,6 +585,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.lbStatus_Month_Grid.Text = "그리드"
         Me.lbStatus_Month_Grid.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbStatus_Month_Grid.UseKeyPad = False
+        Me.lbStatus_Month_Grid.Visible = False
         '
         'cbMonth_Month
         '
@@ -671,6 +675,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.lbStatus_Year_Load.Text = "로드"
         Me.lbStatus_Year_Load.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbStatus_Year_Load.UseKeyPad = False
+        Me.lbStatus_Year_Load.Visible = False
         '
         'lbStatus_Year_Inverter
         '
@@ -711,6 +716,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.lbStatus_Year_Grid.Text = "그리드"
         Me.lbStatus_Year_Grid.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbStatus_Year_Grid.UseKeyPad = False
+        Me.lbStatus_Year_Grid.Visible = False
         '
         'VsLabel3
         '
@@ -770,7 +776,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.PageHeader4.BorderSide_Top = True
         Me.PageHeader4.BorderWidth = 1
         Me.PageHeader4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.PageHeader4.Location = New System.Drawing.Point(460, 10)
+        Me.PageHeader4.Location = New System.Drawing.Point(460, 17)
         Me.PageHeader4.Name = "PageHeader4"
         Me.PageHeader4.Size = New System.Drawing.Size(150, 40)
         Me.PageHeader4.TabIndex = 29
@@ -787,7 +793,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.PageHeader3.BorderSide_Top = True
         Me.PageHeader3.BorderWidth = 1
         Me.PageHeader3.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.PageHeader3.Location = New System.Drawing.Point(310, 10)
+        Me.PageHeader3.Location = New System.Drawing.Point(310, 17)
         Me.PageHeader3.Name = "PageHeader3"
         Me.PageHeader3.Size = New System.Drawing.Size(150, 40)
         Me.PageHeader3.TabIndex = 28
@@ -804,7 +810,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.PageHeader2.BorderSide_Top = True
         Me.PageHeader2.BorderWidth = 1
         Me.PageHeader2.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.PageHeader2.Location = New System.Drawing.Point(160, 10)
+        Me.PageHeader2.Location = New System.Drawing.Point(160, 17)
         Me.PageHeader2.Name = "PageHeader2"
         Me.PageHeader2.Size = New System.Drawing.Size(150, 40)
         Me.PageHeader2.TabIndex = 25
@@ -821,7 +827,7 @@ Partial Public Class wnd서브화면3_수요관리
         Me.PageHeader1.BorderSide_Top = True
         Me.PageHeader1.BorderWidth = 1
         Me.PageHeader1.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.PageHeader1.Location = New System.Drawing.Point(10, 10)
+        Me.PageHeader1.Location = New System.Drawing.Point(10, 17)
         Me.PageHeader1.Name = "PageHeader1"
         Me.PageHeader1.Size = New System.Drawing.Size(150, 40)
         Me.PageHeader1.TabIndex = 26

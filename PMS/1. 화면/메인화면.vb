@@ -681,7 +681,7 @@ Public Class 메인화면
 
         Dim nCurrent As Integer = Now.Second
         Dim deadbandSOC As Integer = 3
-        Dim deadbandVolt As Integer = 10
+        Dim deadbandVolt As Integer = 5
 
 
         If nCurrent <> nRunModeCheck Then ' And nCurrent Mod 5 = 0 Then

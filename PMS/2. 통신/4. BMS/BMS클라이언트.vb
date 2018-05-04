@@ -7,8 +7,6 @@ Imports System.ComponentModel
 Imports System.Windows.Forms
 Imports System.Data
 
-
-
 Imports System.Text
 Imports System.IO
 

@@ -237,21 +237,43 @@
 
         If MsgBox("충/방전 설정을 변경하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "알림") = MsgBoxResult.Yes Then
 
+            Dim a11 As UShort
+            Dim a12 As UShort
+            Dim a21 As UShort
+            Dim a22 As UShort
+
+            a11 = Val(lbTime1StartHour.Text) * 100 + Val(lbTime1StartMin.Text)
+            a12 = Val(lbTime1EndHour.Text) * 100 + Val(lbTime1EndMin.Text)
+            a21 = Val(lbTime2StartHour.Text) * 100 + Val(lbTime2StartMin.Text)
+            a22 = Val(lbTime2EndHour.Text) * 100 + Val(lbTime2EndMin.Text)
+
+            Dim extra1 As UShort = 0
+            Dim extra2 As UShort = 0
+
             Dim szTime1Start As String = String.Format("{0}:{1}", Val(lbTime1StartHour.Text).ToString("00"), Val(lbTime1StartMin.Text).ToString("00"))
             Dim szTime1End As String = String.Format("{0}:{1}", Val(lbTime1EndHour.Text).ToString("00"), Val(lbTime1EndMin.Text).ToString("00"))
             Dim szTime2Start As String = String.Format("{0}:{1}", Val(lbTime2StartHour.Text).ToString("00"), Val(lbTime2StartMin.Text).ToString("00"))
             Dim szTime2End As String = String.Format("{0}:{1}", Val(lbTime2EndHour.Text).ToString("00"), Val(lbTime2EndMin.Text).ToString("00"))
 
-            If szTime1Start < szTime2Start And szTime2Start < szTime1End Then
-                MsgBox("충전시간이 방전시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
-                Exit Sub
+            If a11 > a12 Then
+                If szTime1Start < szTime2Start Or szTime2Start < szTime1End Then
+                    MsgBox("충전시간이 방전시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+                    Exit Sub
+                End If
+                If szTime1Start < szTime2End Or szTime2End < szTime1End Then
+                    MsgBox("충전시간이 방전시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+                    Exit Sub
+                End If
+            Else
+                If szTime1Start < szTime2Start And szTime2Start < szTime1End Then
+                    MsgBox("충전시간이 방전시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+                    Exit Sub
+                End If
+                If szTime1Start < szTime2End And szTime2End < szTime1End Then
+                    MsgBox("충전시간이 방전시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
+                    Exit Sub
+                End If
             End If
-
-            If szTime1Start < szTime2End And szTime2End < szTime1End Then
-                MsgBox("방전시간이 충전시간과 겹칩니다. 다시 설정하여 주십시오.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly, "알림")
-                Exit Sub
-            End If
-
 
             사용모드_피크컷시간(1, 1) = Val(lbTime1StartHour.Text)  ' 피크컷시간1 - 시작 시
             사용모드_피크컷시간(1, 2) = Val(lbTime1StartMin.Text)  ' 피크컷시간1 - 시작 분
@@ -262,8 +284,6 @@
             사용모드_피크컷시간(2, 2) = Val(lbTime2StartMin.Text)  ' 피크컷시간2 - 시작 분
             사용모드_피크컷시간(2, 3) = Val(lbTime2EndHour.Text)  ' 피크컷시간2 - 종료 시
             사용모드_피크컷시간(2, 4) = Val(lbTime2EndMin.Text)  ' 피크컷시간2 - 종료 분
-
-
 
             d사용모드_충전유효전력 = Val(lbChargingGridActivePower.Text)
             d사용모드_방전유효전력 = Val(lbDischargingGridActivePower.Text)
@@ -282,7 +302,6 @@
             pINI.SetKeyValue("사용모드", "피크컷시간2_시작분", 사용모드_피크컷시간(2, 2).ToString("00"))
             pINI.SetKeyValue("사용모드", "피크컷시간2_종료시", 사용모드_피크컷시간(2, 3).ToString("00"))
             pINI.SetKeyValue("사용모드", "피크컷시간2_종료분", 사용모드_피크컷시간(2, 4).ToString("00"))
-
 
             pINI.SetKeyValue("사용모드", "충전유효전력", d사용모드_충전유효전력.ToString)
             pINI.SetKeyValue("사용모드", "방전유효전력", d사용모드_방전유효전력.ToString)
