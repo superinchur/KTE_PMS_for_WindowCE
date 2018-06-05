@@ -26,14 +26,19 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel7 = New PMS.VSLabel
         Me.VsLabel8 = New PMS.VSLabel
         Me.pnlScreen1 = New System.Windows.Forms.Panel
+        Me.VsLabel21 = New PMS.VSLabel
+        Me.VsLabel25 = New PMS.VSLabel
+        Me.lb총방전량 = New PMS.VSLabel
+        Me.VsLabel38 = New PMS.VSLabel
         Me.VsLabel9 = New PMS.VSLabel
-        Me.VsLabel5 = New PMS.VSLabel
+        Me.lb총충전량 = New PMS.VSLabel
+        Me.VsLabel6 = New PMS.VSLabel
         Me.lbDischargingGridActivePower = New PMS.VSLabel
-        Me.VsLabel17 = New PMS.VSLabel
-        Me.lbChargingGridActivePower = New PMS.VSLabel
+        Me.VsLabel41 = New PMS.VSLabel
+        Me.lbRunMode2 = New PMS.VSLabel
+        Me.vs태양광PVMode = New PMS.VSPictureButton
         Me.btnPeakCutSet = New PMS.VSPictureButton
         Me.VsLabel15 = New PMS.VSLabel
-        Me.VsLabel6 = New PMS.VSLabel
         Me.VsLabel14 = New PMS.VSLabel
         Me.VsLabel29 = New PMS.VSLabel
         Me.VsLabel19 = New PMS.VSLabel
@@ -49,15 +54,20 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime1EndHour = New PMS.VSLabel
         Me.lbTime2StartHour = New PMS.VSLabel
         Me.lbTime1StartHour = New PMS.VSLabel
+        Me.VsLabel5 = New PMS.VSLabel
+        Me.VsLabel17 = New PMS.VSLabel
+        Me.lbChargingGridActivePower = New PMS.VSLabel
         Me.VsLabel13 = New PMS.VSLabel
-        Me.lbBatteryCS = New PMS.VSLabel
+        Me.lb충전정지SOC = New PMS.VSLabel
         Me.VsLabel4 = New PMS.VSLabel
         Me.VsLabel12 = New PMS.VSLabel
-        Me.lbBatteryFD = New PMS.VSLabel
+        Me.lb방전종료SOC = New PMS.VSLabel
         Me.VsLabel3 = New PMS.VSLabel
         Me.pnlScreen2 = New System.Windows.Forms.Panel
         Me.VsLabel30 = New PMS.VSLabel
         Me.VsLabel32 = New PMS.VSLabel
+        Me.lbStatusDisCharging = New PMS.VSLabel
+        Me.lbStatusCharging = New PMS.VSLabel
         Me.pnlScreen3 = New System.Windows.Forms.Panel
         Me.VsPictureButton4 = New PMS.VSPictureButton
         Me.VsPictureButton3 = New PMS.VSPictureButton
@@ -71,20 +81,24 @@ Partial Public Class wnd서브화면5_사용모드
         Me.PageHeader1 = New PMS.VSLabel
         Me.PageHeader4 = New PMS.VSLabel
         Me.pnlScreen4 = New System.Windows.Forms.Panel
+        Me.VsLabel24 = New PMS.VSLabel
+        Me.lbSOC = New PMS.VSLabel
+        Me.VsLabel26 = New PMS.VSLabel
+        Me.VsLabel10 = New PMS.VSLabel
+        Me.lbDC = New PMS.VSLabel
         Me.lbRunMode = New PMS.VSLabel
+        Me.VsLabel23 = New PMS.VSLabel
         Me.VsLabel16 = New PMS.VSLabel
-        Me.lb방전정지전압 = New PMS.VSLabel
+        Me.lb방전종료전압 = New PMS.VSLabel
         Me.VsLabel2 = New PMS.VSLabel
         Me.lb충전정지전압 = New PMS.VSLabel
         Me.VsLabel20 = New PMS.VSLabel
-        Me.lbStatusDisCharging = New PMS.VSLabel
         Me.VsLabel11 = New PMS.VSLabel
-        Me.lbStatusCharging = New PMS.VSLabel
         Me.btnBatteryCharging = New PMS.VSPictureButton
         Me.VsLabel39 = New PMS.VSLabel
-        Me.lbBatteryCV = New PMS.VSLabel
+        Me.lb방전시최대전류값 = New PMS.VSLabel
         Me.VsLabel36 = New PMS.VSLabel
-        Me.lbBatteryCC = New PMS.VSLabel
+        Me.lb충전시최대전류값 = New PMS.VSLabel
         Me.VsLabel37 = New PMS.VSLabel
         Me.VsLabel31 = New PMS.VSLabel
         Me.Panel1.SuspendLayout()
@@ -190,14 +204,19 @@ Partial Public Class wnd서브화면5_사용모드
         'pnlScreen1
         '
         Me.pnlScreen1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlScreen1.Controls.Add(Me.VsLabel21)
+        Me.pnlScreen1.Controls.Add(Me.VsLabel25)
+        Me.pnlScreen1.Controls.Add(Me.lb총방전량)
+        Me.pnlScreen1.Controls.Add(Me.VsLabel38)
         Me.pnlScreen1.Controls.Add(Me.VsLabel9)
-        Me.pnlScreen1.Controls.Add(Me.VsLabel5)
+        Me.pnlScreen1.Controls.Add(Me.lb총충전량)
+        Me.pnlScreen1.Controls.Add(Me.VsLabel6)
         Me.pnlScreen1.Controls.Add(Me.lbDischargingGridActivePower)
-        Me.pnlScreen1.Controls.Add(Me.VsLabel17)
-        Me.pnlScreen1.Controls.Add(Me.lbChargingGridActivePower)
+        Me.pnlScreen1.Controls.Add(Me.VsLabel41)
+        Me.pnlScreen1.Controls.Add(Me.lbRunMode2)
+        Me.pnlScreen1.Controls.Add(Me.vs태양광PVMode)
         Me.pnlScreen1.Controls.Add(Me.btnPeakCutSet)
         Me.pnlScreen1.Controls.Add(Me.VsLabel15)
-        Me.pnlScreen1.Controls.Add(Me.VsLabel6)
         Me.pnlScreen1.Controls.Add(Me.VsLabel14)
         Me.pnlScreen1.Controls.Add(Me.VsLabel29)
         Me.pnlScreen1.Controls.Add(Me.VsLabel19)
@@ -217,6 +236,84 @@ Partial Public Class wnd서브화면5_사용모드
         Me.pnlScreen1.Name = "pnlScreen1"
         Me.pnlScreen1.Size = New System.Drawing.Size(784, 283)
         '
+        'VsLabel21
+        '
+        Me.VsLabel21.BackColor = System.Drawing.Color.LightGreen
+        Me.VsLabel21.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsLabel21.BorderSide_Bottom = True
+        Me.VsLabel21.BorderSide_Left = True
+        Me.VsLabel21.BorderSide_Right = True
+        Me.VsLabel21.BorderSide_Top = True
+        Me.VsLabel21.BorderWidth = 1
+        Me.VsLabel21.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel21.IsPassword = False
+        Me.VsLabel21.Location = New System.Drawing.Point(315, 107)
+        Me.VsLabel21.Name = "VsLabel21"
+        Me.VsLabel21.Size = New System.Drawing.Size(255, 40)
+        Me.VsLabel21.TabIndex = 57
+        Me.VsLabel21.Text = "일일 총 방전량"
+        Me.VsLabel21.TextAlign = System.Drawing.StringAlignment.Center
+        Me.VsLabel21.UseKeyPad = False
+        '
+        'VsLabel25
+        '
+        Me.VsLabel25.BackColor = System.Drawing.Color.LightGreen
+        Me.VsLabel25.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsLabel25.BorderSide_Bottom = True
+        Me.VsLabel25.BorderSide_Left = True
+        Me.VsLabel25.BorderSide_Right = True
+        Me.VsLabel25.BorderSide_Top = True
+        Me.VsLabel25.BorderWidth = 1
+        Me.VsLabel25.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel25.IsPassword = False
+        Me.VsLabel25.Location = New System.Drawing.Point(47, 107)
+        Me.VsLabel25.Name = "VsLabel25"
+        Me.VsLabel25.Size = New System.Drawing.Size(255, 40)
+        Me.VsLabel25.TabIndex = 56
+        Me.VsLabel25.Text = "일일 총 충전량"
+        Me.VsLabel25.TextAlign = System.Drawing.StringAlignment.Center
+        Me.VsLabel25.UseKeyPad = False
+        '
+        'lb총방전량
+        '
+        Me.lb총방전량.BackColor = System.Drawing.Color.White
+        Me.lb총방전량.BorderColor = System.Drawing.Color.Gray
+        Me.lb총방전량.BorderSide_Bottom = True
+        Me.lb총방전량.BorderSide_Left = True
+        Me.lb총방전량.BorderSide_Right = True
+        Me.lb총방전량.BorderSide_Top = True
+        Me.lb총방전량.BorderWidth = 1
+        Me.lb총방전량.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lb총방전량.IsPassword = False
+        Me.lb총방전량.Location = New System.Drawing.Point(315, 151)
+        Me.lb총방전량.MaxRange = 200
+        Me.lb총방전량.MinRange = 0
+        Me.lb총방전량.Name = "lb총방전량"
+        Me.lb총방전량.Size = New System.Drawing.Size(188, 40)
+        Me.lb총방전량.TabIndex = 54
+        Me.lb총방전량.Text = "10"
+        Me.lb총방전량.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lb총방전량.UseKeyPad = True
+        '
+        'VsLabel38
+        '
+        Me.VsLabel38.BackColor = System.Drawing.Color.White
+        Me.VsLabel38.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel38.BorderSide_Bottom = True
+        Me.VsLabel38.BorderSide_Left = True
+        Me.VsLabel38.BorderSide_Right = True
+        Me.VsLabel38.BorderSide_Top = True
+        Me.VsLabel38.BorderWidth = 0
+        Me.VsLabel38.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel38.IsPassword = False
+        Me.VsLabel38.Location = New System.Drawing.Point(241, 151)
+        Me.VsLabel38.Name = "VsLabel38"
+        Me.VsLabel38.Size = New System.Drawing.Size(58, 40)
+        Me.VsLabel38.TabIndex = 55
+        Me.VsLabel38.Text = "kW"
+        Me.VsLabel38.TextAlign = System.Drawing.StringAlignment.Near
+        Me.VsLabel38.UseKeyPad = False
+        '
         'VsLabel9
         '
         Me.VsLabel9.BackColor = System.Drawing.Color.LightGreen
@@ -228,7 +325,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel9.BorderWidth = 1
         Me.VsLabel9.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel9.IsPassword = False
-        Me.VsLabel9.Location = New System.Drawing.Point(312, 131)
+        Me.VsLabel9.Location = New System.Drawing.Point(315, 197)
         Me.VsLabel9.Name = "VsLabel9"
         Me.VsLabel9.Size = New System.Drawing.Size(255, 40)
         Me.VsLabel9.TabIndex = 50
@@ -236,24 +333,45 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel9.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel9.UseKeyPad = False
         '
-        'VsLabel5
+        'lb총충전량
         '
-        Me.VsLabel5.BackColor = System.Drawing.Color.LightGreen
-        Me.VsLabel5.BorderColor = System.Drawing.Color.DarkGray
-        Me.VsLabel5.BorderSide_Bottom = True
-        Me.VsLabel5.BorderSide_Left = True
-        Me.VsLabel5.BorderSide_Right = True
-        Me.VsLabel5.BorderSide_Top = True
-        Me.VsLabel5.BorderWidth = 1
-        Me.VsLabel5.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel5.IsPassword = False
-        Me.VsLabel5.Location = New System.Drawing.Point(44, 131)
-        Me.VsLabel5.Name = "VsLabel5"
-        Me.VsLabel5.Size = New System.Drawing.Size(255, 40)
-        Me.VsLabel5.TabIndex = 49
-        Me.VsLabel5.Text = "충전 전력값 설정"
-        Me.VsLabel5.TextAlign = System.Drawing.StringAlignment.Center
-        Me.VsLabel5.UseKeyPad = False
+        Me.lb총충전량.BackColor = System.Drawing.Color.White
+        Me.lb총충전량.BorderColor = System.Drawing.Color.Gray
+        Me.lb총충전량.BorderSide_Bottom = True
+        Me.lb총충전량.BorderSide_Left = True
+        Me.lb총충전량.BorderSide_Right = True
+        Me.lb총충전량.BorderSide_Top = True
+        Me.lb총충전량.BorderWidth = 1
+        Me.lb총충전량.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lb총충전량.IsPassword = False
+        Me.lb총충전량.Location = New System.Drawing.Point(46, 151)
+        Me.lb총충전량.MaxRange = 200
+        Me.lb총충전량.MinRange = 0
+        Me.lb총충전량.Name = "lb총충전량"
+        Me.lb총충전량.Size = New System.Drawing.Size(188, 40)
+        Me.lb총충전량.TabIndex = 52
+        Me.lb총충전량.Text = "10"
+        Me.lb총충전량.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lb총충전량.UseKeyPad = True
+        '
+        'VsLabel6
+        '
+        Me.VsLabel6.BackColor = System.Drawing.Color.White
+        Me.VsLabel6.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel6.BorderSide_Bottom = True
+        Me.VsLabel6.BorderSide_Left = True
+        Me.VsLabel6.BorderSide_Right = True
+        Me.VsLabel6.BorderSide_Top = True
+        Me.VsLabel6.BorderWidth = 0
+        Me.VsLabel6.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel6.IsPassword = False
+        Me.VsLabel6.Location = New System.Drawing.Point(509, 241)
+        Me.VsLabel6.Name = "VsLabel6"
+        Me.VsLabel6.Size = New System.Drawing.Size(58, 40)
+        Me.VsLabel6.TabIndex = 41
+        Me.VsLabel6.Text = "kW"
+        Me.VsLabel6.TextAlign = System.Drawing.StringAlignment.Near
+        Me.VsLabel6.UseKeyPad = False
         '
         'lbDischargingGridActivePower
         '
@@ -266,7 +384,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbDischargingGridActivePower.BorderWidth = 1
         Me.lbDischargingGridActivePower.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbDischargingGridActivePower.IsPassword = False
-        Me.lbDischargingGridActivePower.Location = New System.Drawing.Point(312, 175)
+        Me.lbDischargingGridActivePower.Location = New System.Drawing.Point(315, 241)
         Me.lbDischargingGridActivePower.MaxRange = 200
         Me.lbDischargingGridActivePower.MinRange = 0
         Me.lbDischargingGridActivePower.Name = "lbDischargingGridActivePower"
@@ -276,45 +394,64 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbDischargingGridActivePower.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbDischargingGridActivePower.UseKeyPad = True
         '
-        'VsLabel17
+        'VsLabel41
         '
-        Me.VsLabel17.BackColor = System.Drawing.Color.White
-        Me.VsLabel17.BorderColor = System.Drawing.Color.Gray
-        Me.VsLabel17.BorderSide_Bottom = True
-        Me.VsLabel17.BorderSide_Left = True
-        Me.VsLabel17.BorderSide_Right = True
-        Me.VsLabel17.BorderSide_Top = True
-        Me.VsLabel17.BorderWidth = 0
-        Me.VsLabel17.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel17.IsPassword = False
-        Me.VsLabel17.Location = New System.Drawing.Point(238, 175)
-        Me.VsLabel17.Name = "VsLabel17"
-        Me.VsLabel17.Size = New System.Drawing.Size(58, 40)
-        Me.VsLabel17.TabIndex = 48
-        Me.VsLabel17.Text = "kW"
-        Me.VsLabel17.TextAlign = System.Drawing.StringAlignment.Near
-        Me.VsLabel17.UseKeyPad = False
+        Me.VsLabel41.BackColor = System.Drawing.Color.White
+        Me.VsLabel41.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel41.BorderSide_Bottom = True
+        Me.VsLabel41.BorderSide_Left = True
+        Me.VsLabel41.BorderSide_Right = True
+        Me.VsLabel41.BorderSide_Top = True
+        Me.VsLabel41.BorderWidth = 0
+        Me.VsLabel41.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel41.IsPassword = False
+        Me.VsLabel41.Location = New System.Drawing.Point(509, 151)
+        Me.VsLabel41.Name = "VsLabel41"
+        Me.VsLabel41.Size = New System.Drawing.Size(58, 40)
+        Me.VsLabel41.TabIndex = 53
+        Me.VsLabel41.Text = "kW"
+        Me.VsLabel41.TextAlign = System.Drawing.StringAlignment.Near
+        Me.VsLabel41.UseKeyPad = False
         '
-        'lbChargingGridActivePower
+        'lbRunMode2
         '
-        Me.lbChargingGridActivePower.BackColor = System.Drawing.Color.White
-        Me.lbChargingGridActivePower.BorderColor = System.Drawing.Color.Gray
-        Me.lbChargingGridActivePower.BorderSide_Bottom = True
-        Me.lbChargingGridActivePower.BorderSide_Left = True
-        Me.lbChargingGridActivePower.BorderSide_Right = True
-        Me.lbChargingGridActivePower.BorderSide_Top = True
-        Me.lbChargingGridActivePower.BorderWidth = 1
-        Me.lbChargingGridActivePower.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbChargingGridActivePower.IsPassword = False
-        Me.lbChargingGridActivePower.Location = New System.Drawing.Point(43, 175)
-        Me.lbChargingGridActivePower.MaxRange = 200
-        Me.lbChargingGridActivePower.MinRange = 0
-        Me.lbChargingGridActivePower.Name = "lbChargingGridActivePower"
-        Me.lbChargingGridActivePower.Size = New System.Drawing.Size(188, 40)
-        Me.lbChargingGridActivePower.TabIndex = 27
-        Me.lbChargingGridActivePower.Text = "10"
-        Me.lbChargingGridActivePower.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbChargingGridActivePower.UseKeyPad = True
+        Me.lbRunMode2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.lbRunMode2.BorderColor = System.Drawing.Color.Gray
+        Me.lbRunMode2.BorderSide_Bottom = True
+        Me.lbRunMode2.BorderSide_Left = True
+        Me.lbRunMode2.BorderSide_Right = True
+        Me.lbRunMode2.BorderSide_Top = True
+        Me.lbRunMode2.BorderWidth = 1
+        Me.lbRunMode2.Font = New System.Drawing.Font("Tahoma", 20.0!, System.Drawing.FontStyle.Bold)
+        Me.lbRunMode2.ForeColor = System.Drawing.Color.Black
+        Me.lbRunMode2.Location = New System.Drawing.Point(597, 163)
+        Me.lbRunMode2.Name = "lbRunMode2"
+        Me.lbRunMode2.Size = New System.Drawing.Size(160, 48)
+        Me.lbRunMode2.TabIndex = 41
+        Me.lbRunMode2.Text = "사용모드"
+        Me.lbRunMode2.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbRunMode2.UseKeyPad = True
+        Me.lbRunMode2.Visible = False
+        '
+        'vs태양광PVMode
+        '
+        Me.vs태양광PVMode.BackColor = System.Drawing.Color.Blue
+        Me.vs태양광PVMode.BackgroundImageValue = CType(resources.GetObject("vs태양광PVMode.BackgroundImageValue"), System.Drawing.Image)
+        Me.vs태양광PVMode.BorderColor = System.Drawing.Color.Gray
+        Me.vs태양광PVMode.BorderSide_Bottom = True
+        Me.vs태양광PVMode.BorderSide_Left = True
+        Me.vs태양광PVMode.BorderSide_Right = True
+        Me.vs태양광PVMode.BorderSide_Top = True
+        Me.vs태양광PVMode.BorderWidth = 1
+        Me.vs태양광PVMode.Font = New System.Drawing.Font("Tahoma", 20.0!, System.Drawing.FontStyle.Bold)
+        Me.vs태양광PVMode.ForeColor = System.Drawing.Color.White
+        Me.vs태양광PVMode.Location = New System.Drawing.Point(597, 217)
+        Me.vs태양광PVMode.Name = "vs태양광PVMode"
+        Me.vs태양광PVMode.PressedImageValue = CType(resources.GetObject("vs태양광PVMode.PressedImageValue"), System.Drawing.Image)
+        Me.vs태양광PVMode.Size = New System.Drawing.Size(160, 50)
+        Me.vs태양광PVMode.TabIndex = 51
+        Me.vs태양광PVMode.Text = "적용"
+        Me.vs태양광PVMode.Visible = False
         '
         'btnPeakCutSet
         '
@@ -346,32 +483,13 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel15.BorderWidth = 1
         Me.VsLabel15.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel15.IsPassword = False
-        Me.VsLabel15.Location = New System.Drawing.Point(312, 39)
+        Me.VsLabel15.Location = New System.Drawing.Point(315, 12)
         Me.VsLabel15.Name = "VsLabel15"
         Me.VsLabel15.Size = New System.Drawing.Size(254, 40)
         Me.VsLabel15.TabIndex = 27
         Me.VsLabel15.Text = "방전시간 설정"
         Me.VsLabel15.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel15.UseKeyPad = False
-        '
-        'VsLabel6
-        '
-        Me.VsLabel6.BackColor = System.Drawing.Color.White
-        Me.VsLabel6.BorderColor = System.Drawing.Color.Gray
-        Me.VsLabel6.BorderSide_Bottom = True
-        Me.VsLabel6.BorderSide_Left = True
-        Me.VsLabel6.BorderSide_Right = True
-        Me.VsLabel6.BorderSide_Top = True
-        Me.VsLabel6.BorderWidth = 0
-        Me.VsLabel6.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel6.IsPassword = False
-        Me.VsLabel6.Location = New System.Drawing.Point(506, 175)
-        Me.VsLabel6.Name = "VsLabel6"
-        Me.VsLabel6.Size = New System.Drawing.Size(58, 40)
-        Me.VsLabel6.TabIndex = 41
-        Me.VsLabel6.Text = "kW"
-        Me.VsLabel6.TextAlign = System.Drawing.StringAlignment.Near
-        Me.VsLabel6.UseKeyPad = False
         '
         'VsLabel14
         '
@@ -384,7 +502,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel14.BorderWidth = 1
         Me.VsLabel14.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel14.IsPassword = False
-        Me.VsLabel14.Location = New System.Drawing.Point(43, 39)
+        Me.VsLabel14.Location = New System.Drawing.Point(46, 12)
         Me.VsLabel14.Name = "VsLabel14"
         Me.VsLabel14.Size = New System.Drawing.Size(255, 40)
         Me.VsLabel14.TabIndex = 27
@@ -403,7 +521,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel29.BorderWidth = 0
         Me.VsLabel29.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel29.IsPassword = False
-        Me.VsLabel29.Location = New System.Drawing.Point(424, 85)
+        Me.VsLabel29.Location = New System.Drawing.Point(427, 58)
         Me.VsLabel29.Name = "VsLabel29"
         Me.VsLabel29.Size = New System.Drawing.Size(30, 40)
         Me.VsLabel29.TabIndex = 27
@@ -422,7 +540,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel19.BorderWidth = 0
         Me.VsLabel19.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel19.IsPassword = False
-        Me.VsLabel19.Location = New System.Drawing.Point(156, 85)
+        Me.VsLabel19.Location = New System.Drawing.Point(159, 58)
         Me.VsLabel19.Name = "VsLabel19"
         Me.VsLabel19.Size = New System.Drawing.Size(30, 40)
         Me.VsLabel19.TabIndex = 27
@@ -441,7 +559,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel28.BorderWidth = 0
         Me.VsLabel28.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel28.IsPassword = False
-        Me.VsLabel28.Location = New System.Drawing.Point(506, 85)
+        Me.VsLabel28.Location = New System.Drawing.Point(509, 58)
         Me.VsLabel28.Name = "VsLabel28"
         Me.VsLabel28.Size = New System.Drawing.Size(13, 40)
         Me.VsLabel28.TabIndex = 27
@@ -460,7 +578,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel22.BorderWidth = 0
         Me.VsLabel22.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel22.IsPassword = False
-        Me.VsLabel22.Location = New System.Drawing.Point(238, 85)
+        Me.VsLabel22.Location = New System.Drawing.Point(241, 58)
         Me.VsLabel22.Name = "VsLabel22"
         Me.VsLabel22.Size = New System.Drawing.Size(13, 40)
         Me.VsLabel22.TabIndex = 27
@@ -479,7 +597,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel27.BorderWidth = 0
         Me.VsLabel27.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel27.IsPassword = False
-        Me.VsLabel27.Location = New System.Drawing.Point(358, 85)
+        Me.VsLabel27.Location = New System.Drawing.Point(361, 58)
         Me.VsLabel27.Name = "VsLabel27"
         Me.VsLabel27.Size = New System.Drawing.Size(13, 40)
         Me.VsLabel27.TabIndex = 27
@@ -498,7 +616,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel18.BorderWidth = 0
         Me.VsLabel18.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.VsLabel18.IsPassword = False
-        Me.VsLabel18.Location = New System.Drawing.Point(90, 85)
+        Me.VsLabel18.Location = New System.Drawing.Point(93, 58)
         Me.VsLabel18.Name = "VsLabel18"
         Me.VsLabel18.Size = New System.Drawing.Size(13, 40)
         Me.VsLabel18.TabIndex = 27
@@ -517,7 +635,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime2EndMin.BorderWidth = 1
         Me.lbTime2EndMin.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbTime2EndMin.IsPassword = False
-        Me.lbTime2EndMin.Location = New System.Drawing.Point(525, 85)
+        Me.lbTime2EndMin.Location = New System.Drawing.Point(528, 58)
         Me.lbTime2EndMin.MaxRange = 59
         Me.lbTime2EndMin.MinRange = 0
         Me.lbTime2EndMin.Name = "lbTime2EndMin"
@@ -538,7 +656,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime1EndMin.BorderWidth = 1
         Me.lbTime1EndMin.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbTime1EndMin.IsPassword = False
-        Me.lbTime1EndMin.Location = New System.Drawing.Point(257, 85)
+        Me.lbTime1EndMin.Location = New System.Drawing.Point(260, 58)
         Me.lbTime1EndMin.MaxRange = 59
         Me.lbTime1EndMin.MinRange = 0
         Me.lbTime1EndMin.Name = "lbTime1EndMin"
@@ -559,7 +677,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime2StartMin.BorderWidth = 1
         Me.lbTime2StartMin.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbTime2StartMin.IsPassword = False
-        Me.lbTime2StartMin.Location = New System.Drawing.Point(377, 85)
+        Me.lbTime2StartMin.Location = New System.Drawing.Point(380, 58)
         Me.lbTime2StartMin.MaxRange = 59
         Me.lbTime2StartMin.MinRange = 0
         Me.lbTime2StartMin.Name = "lbTime2StartMin"
@@ -580,7 +698,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime1StartMin.BorderWidth = 1
         Me.lbTime1StartMin.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbTime1StartMin.IsPassword = False
-        Me.lbTime1StartMin.Location = New System.Drawing.Point(109, 85)
+        Me.lbTime1StartMin.Location = New System.Drawing.Point(112, 58)
         Me.lbTime1StartMin.MaxRange = 59
         Me.lbTime1StartMin.MinRange = 0
         Me.lbTime1StartMin.Name = "lbTime1StartMin"
@@ -601,7 +719,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime2EndHour.BorderWidth = 1
         Me.lbTime2EndHour.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbTime2EndHour.IsPassword = False
-        Me.lbTime2EndHour.Location = New System.Drawing.Point(459, 85)
+        Me.lbTime2EndHour.Location = New System.Drawing.Point(462, 58)
         Me.lbTime2EndHour.MaxRange = 23
         Me.lbTime2EndHour.MinRange = 0
         Me.lbTime2EndHour.Name = "lbTime2EndHour"
@@ -622,7 +740,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime1EndHour.BorderWidth = 1
         Me.lbTime1EndHour.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbTime1EndHour.IsPassword = False
-        Me.lbTime1EndHour.Location = New System.Drawing.Point(192, 85)
+        Me.lbTime1EndHour.Location = New System.Drawing.Point(195, 58)
         Me.lbTime1EndHour.MaxRange = 23
         Me.lbTime1EndHour.MinRange = 0
         Me.lbTime1EndHour.Name = "lbTime1EndHour"
@@ -643,7 +761,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime2StartHour.BorderWidth = 1
         Me.lbTime2StartHour.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbTime2StartHour.IsPassword = False
-        Me.lbTime2StartHour.Location = New System.Drawing.Point(311, 85)
+        Me.lbTime2StartHour.Location = New System.Drawing.Point(314, 58)
         Me.lbTime2StartHour.MaxRange = 23
         Me.lbTime2StartHour.MinRange = 0
         Me.lbTime2StartHour.Name = "lbTime2StartHour"
@@ -664,7 +782,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime1StartHour.BorderWidth = 1
         Me.lbTime1StartHour.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
         Me.lbTime1StartHour.IsPassword = False
-        Me.lbTime1StartHour.Location = New System.Drawing.Point(44, 85)
+        Me.lbTime1StartHour.Location = New System.Drawing.Point(47, 58)
         Me.lbTime1StartHour.MaxRange = 23
         Me.lbTime1StartHour.MinRange = 0
         Me.lbTime1StartHour.Name = "lbTime1StartHour"
@@ -673,6 +791,68 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbTime1StartHour.Text = "00"
         Me.lbTime1StartHour.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbTime1StartHour.UseKeyPad = True
+        '
+        'VsLabel5
+        '
+        Me.VsLabel5.BackColor = System.Drawing.Color.LightGreen
+        Me.VsLabel5.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsLabel5.BorderSide_Bottom = True
+        Me.VsLabel5.BorderSide_Left = True
+        Me.VsLabel5.BorderSide_Right = True
+        Me.VsLabel5.BorderSide_Top = True
+        Me.VsLabel5.BorderWidth = 1
+        Me.VsLabel5.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel5.IsPassword = False
+        Me.VsLabel5.Location = New System.Drawing.Point(498, 46)
+        Me.VsLabel5.Name = "VsLabel5"
+        Me.VsLabel5.Size = New System.Drawing.Size(255, 40)
+        Me.VsLabel5.TabIndex = 49
+        Me.VsLabel5.Text = "충전 전력값 설정"
+        Me.VsLabel5.TextAlign = System.Drawing.StringAlignment.Center
+        Me.VsLabel5.UseKeyPad = False
+        Me.VsLabel5.Visible = False
+        '
+        'VsLabel17
+        '
+        Me.VsLabel17.BackColor = System.Drawing.Color.White
+        Me.VsLabel17.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel17.BorderSide_Bottom = True
+        Me.VsLabel17.BorderSide_Left = True
+        Me.VsLabel17.BorderSide_Right = True
+        Me.VsLabel17.BorderSide_Top = True
+        Me.VsLabel17.BorderWidth = 0
+        Me.VsLabel17.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel17.IsPassword = False
+        Me.VsLabel17.Location = New System.Drawing.Point(692, 90)
+        Me.VsLabel17.Name = "VsLabel17"
+        Me.VsLabel17.Size = New System.Drawing.Size(58, 40)
+        Me.VsLabel17.TabIndex = 48
+        Me.VsLabel17.Text = "kW"
+        Me.VsLabel17.TextAlign = System.Drawing.StringAlignment.Near
+        Me.VsLabel17.UseKeyPad = False
+        Me.VsLabel17.Visible = False
+        '
+        'lbChargingGridActivePower
+        '
+        Me.lbChargingGridActivePower.BackColor = System.Drawing.Color.White
+        Me.lbChargingGridActivePower.BorderColor = System.Drawing.Color.Gray
+        Me.lbChargingGridActivePower.BorderSide_Bottom = True
+        Me.lbChargingGridActivePower.BorderSide_Left = True
+        Me.lbChargingGridActivePower.BorderSide_Right = True
+        Me.lbChargingGridActivePower.BorderSide_Top = True
+        Me.lbChargingGridActivePower.BorderWidth = 1
+        Me.lbChargingGridActivePower.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lbChargingGridActivePower.IsPassword = False
+        Me.lbChargingGridActivePower.Location = New System.Drawing.Point(497, 90)
+        Me.lbChargingGridActivePower.MaxRange = 200
+        Me.lbChargingGridActivePower.MinRange = 0
+        Me.lbChargingGridActivePower.Name = "lbChargingGridActivePower"
+        Me.lbChargingGridActivePower.Size = New System.Drawing.Size(188, 40)
+        Me.lbChargingGridActivePower.TabIndex = 27
+        Me.lbChargingGridActivePower.Text = "10"
+        Me.lbChargingGridActivePower.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbChargingGridActivePower.UseKeyPad = True
+        Me.lbChargingGridActivePower.Visible = False
         '
         'VsLabel13
         '
@@ -693,26 +873,26 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel13.TextAlign = System.Drawing.StringAlignment.Near
         Me.VsLabel13.UseKeyPad = False
         '
-        'lbBatteryCS
+        'lb충전정지SOC
         '
-        Me.lbBatteryCS.BackColor = System.Drawing.Color.White
-        Me.lbBatteryCS.BorderColor = System.Drawing.Color.Gray
-        Me.lbBatteryCS.BorderSide_Bottom = True
-        Me.lbBatteryCS.BorderSide_Left = True
-        Me.lbBatteryCS.BorderSide_Right = True
-        Me.lbBatteryCS.BorderSide_Top = True
-        Me.lbBatteryCS.BorderWidth = 1
-        Me.lbBatteryCS.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbBatteryCS.IsPassword = False
-        Me.lbBatteryCS.Location = New System.Drawing.Point(608, 45)
-        Me.lbBatteryCS.MaxRange = 100
-        Me.lbBatteryCS.MinRange = 0
-        Me.lbBatteryCS.Name = "lbBatteryCS"
-        Me.lbBatteryCS.Size = New System.Drawing.Size(77, 40)
-        Me.lbBatteryCS.TabIndex = 27
-        Me.lbBatteryCS.Text = "10"
-        Me.lbBatteryCS.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbBatteryCS.UseKeyPad = True
+        Me.lb충전정지SOC.BackColor = System.Drawing.Color.White
+        Me.lb충전정지SOC.BorderColor = System.Drawing.Color.Gray
+        Me.lb충전정지SOC.BorderSide_Bottom = True
+        Me.lb충전정지SOC.BorderSide_Left = True
+        Me.lb충전정지SOC.BorderSide_Right = True
+        Me.lb충전정지SOC.BorderSide_Top = True
+        Me.lb충전정지SOC.BorderWidth = 1
+        Me.lb충전정지SOC.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lb충전정지SOC.IsPassword = False
+        Me.lb충전정지SOC.Location = New System.Drawing.Point(608, 45)
+        Me.lb충전정지SOC.MaxRange = 100
+        Me.lb충전정지SOC.MinRange = 0
+        Me.lb충전정지SOC.Name = "lb충전정지SOC"
+        Me.lb충전정지SOC.Size = New System.Drawing.Size(77, 40)
+        Me.lb충전정지SOC.TabIndex = 27
+        Me.lb충전정지SOC.Text = "10"
+        Me.lb충전정지SOC.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lb충전정지SOC.UseKeyPad = True
         '
         'VsLabel4
         '
@@ -752,26 +932,26 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel12.TextAlign = System.Drawing.StringAlignment.Near
         Me.VsLabel12.UseKeyPad = False
         '
-        'lbBatteryFD
+        'lb방전종료SOC
         '
-        Me.lbBatteryFD.BackColor = System.Drawing.Color.White
-        Me.lbBatteryFD.BorderColor = System.Drawing.Color.Gray
-        Me.lbBatteryFD.BorderSide_Bottom = True
-        Me.lbBatteryFD.BorderSide_Left = True
-        Me.lbBatteryFD.BorderSide_Right = True
-        Me.lbBatteryFD.BorderSide_Top = True
-        Me.lbBatteryFD.BorderWidth = 1
-        Me.lbBatteryFD.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbBatteryFD.IsPassword = False
-        Me.lbBatteryFD.Location = New System.Drawing.Point(248, 46)
-        Me.lbBatteryFD.MaxRange = 100
-        Me.lbBatteryFD.MinRange = 0
-        Me.lbBatteryFD.Name = "lbBatteryFD"
-        Me.lbBatteryFD.Size = New System.Drawing.Size(77, 40)
-        Me.lbBatteryFD.TabIndex = 27
-        Me.lbBatteryFD.Text = "10"
-        Me.lbBatteryFD.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbBatteryFD.UseKeyPad = True
+        Me.lb방전종료SOC.BackColor = System.Drawing.Color.White
+        Me.lb방전종료SOC.BorderColor = System.Drawing.Color.Gray
+        Me.lb방전종료SOC.BorderSide_Bottom = True
+        Me.lb방전종료SOC.BorderSide_Left = True
+        Me.lb방전종료SOC.BorderSide_Right = True
+        Me.lb방전종료SOC.BorderSide_Top = True
+        Me.lb방전종료SOC.BorderWidth = 1
+        Me.lb방전종료SOC.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lb방전종료SOC.IsPassword = False
+        Me.lb방전종료SOC.Location = New System.Drawing.Point(248, 46)
+        Me.lb방전종료SOC.MaxRange = 100
+        Me.lb방전종료SOC.MinRange = 0
+        Me.lb방전종료SOC.Name = "lb방전종료SOC"
+        Me.lb방전종료SOC.Size = New System.Drawing.Size(77, 40)
+        Me.lb방전종료SOC.TabIndex = 27
+        Me.lb방전종료SOC.Text = "10"
+        Me.lb방전종료SOC.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lb방전종료SOC.UseKeyPad = True
         '
         'VsLabel3
         '
@@ -797,9 +977,15 @@ Partial Public Class wnd서브화면5_사용모드
         Me.pnlScreen2.BackColor = System.Drawing.Color.WhiteSmoke
         Me.pnlScreen2.Controls.Add(Me.VsLabel30)
         Me.pnlScreen2.Controls.Add(Me.VsLabel32)
+        Me.pnlScreen2.Controls.Add(Me.lbStatusDisCharging)
+        Me.pnlScreen2.Controls.Add(Me.lbStatusCharging)
+        Me.pnlScreen2.Controls.Add(Me.lbChargingGridActivePower)
+        Me.pnlScreen2.Controls.Add(Me.VsLabel17)
+        Me.pnlScreen2.Controls.Add(Me.VsLabel5)
         Me.pnlScreen2.Location = New System.Drawing.Point(8, 336)
         Me.pnlScreen2.Name = "pnlScreen2"
         Me.pnlScreen2.Size = New System.Drawing.Size(784, 283)
+        Me.pnlScreen2.Visible = False
         '
         'VsLabel30
         '
@@ -838,6 +1024,46 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel32.Text = "kW"
         Me.VsLabel32.TextAlign = System.Drawing.StringAlignment.Near
         Me.VsLabel32.UseKeyPad = False
+        '
+        'lbStatusDisCharging
+        '
+        Me.lbStatusDisCharging.BackColor = System.Drawing.Color.White
+        Me.lbStatusDisCharging.BorderColor = System.Drawing.Color.Gray
+        Me.lbStatusDisCharging.BorderSide_Bottom = True
+        Me.lbStatusDisCharging.BorderSide_Left = True
+        Me.lbStatusDisCharging.BorderSide_Right = True
+        Me.lbStatusDisCharging.BorderSide_Top = True
+        Me.lbStatusDisCharging.BorderWidth = 0
+        Me.lbStatusDisCharging.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lbStatusDisCharging.IsPassword = False
+        Me.lbStatusDisCharging.Location = New System.Drawing.Point(572, 213)
+        Me.lbStatusDisCharging.Name = "lbStatusDisCharging"
+        Me.lbStatusDisCharging.Size = New System.Drawing.Size(126, 40)
+        Me.lbStatusDisCharging.TabIndex = 41
+        Me.lbStatusDisCharging.Text = "%"
+        Me.lbStatusDisCharging.TextAlign = System.Drawing.StringAlignment.Near
+        Me.lbStatusDisCharging.UseKeyPad = False
+        Me.lbStatusDisCharging.Visible = False
+        '
+        'lbStatusCharging
+        '
+        Me.lbStatusCharging.BackColor = System.Drawing.Color.White
+        Me.lbStatusCharging.BorderColor = System.Drawing.Color.Gray
+        Me.lbStatusCharging.BorderSide_Bottom = True
+        Me.lbStatusCharging.BorderSide_Left = True
+        Me.lbStatusCharging.BorderSide_Right = True
+        Me.lbStatusCharging.BorderSide_Top = True
+        Me.lbStatusCharging.BorderWidth = 0
+        Me.lbStatusCharging.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lbStatusCharging.IsPassword = False
+        Me.lbStatusCharging.Location = New System.Drawing.Point(438, 213)
+        Me.lbStatusCharging.Name = "lbStatusCharging"
+        Me.lbStatusCharging.Size = New System.Drawing.Size(126, 40)
+        Me.lbStatusCharging.TabIndex = 40
+        Me.lbStatusCharging.Text = "%"
+        Me.lbStatusCharging.TextAlign = System.Drawing.StringAlignment.Near
+        Me.lbStatusCharging.UseKeyPad = False
+        Me.lbStatusCharging.Visible = False
         '
         'pnlScreen3
         '
@@ -1038,31 +1264,134 @@ Partial Public Class wnd서브화면5_사용모드
         'pnlScreen4
         '
         Me.pnlScreen4.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlScreen4.Controls.Add(Me.VsLabel24)
+        Me.pnlScreen4.Controls.Add(Me.lbSOC)
+        Me.pnlScreen4.Controls.Add(Me.VsLabel26)
+        Me.pnlScreen4.Controls.Add(Me.VsLabel10)
+        Me.pnlScreen4.Controls.Add(Me.lbDC)
         Me.pnlScreen4.Controls.Add(Me.lbRunMode)
+        Me.pnlScreen4.Controls.Add(Me.VsLabel23)
         Me.pnlScreen4.Controls.Add(Me.VsLabel16)
-        Me.pnlScreen4.Controls.Add(Me.lb방전정지전압)
+        Me.pnlScreen4.Controls.Add(Me.lb방전종료전압)
         Me.pnlScreen4.Controls.Add(Me.VsLabel2)
         Me.pnlScreen4.Controls.Add(Me.lb충전정지전압)
         Me.pnlScreen4.Controls.Add(Me.VsLabel20)
-        Me.pnlScreen4.Controls.Add(Me.lbStatusDisCharging)
         Me.pnlScreen4.Controls.Add(Me.VsLabel11)
-        Me.pnlScreen4.Controls.Add(Me.lbStatusCharging)
         Me.pnlScreen4.Controls.Add(Me.btnBatteryCharging)
         Me.pnlScreen4.Controls.Add(Me.VsLabel3)
-        Me.pnlScreen4.Controls.Add(Me.lbBatteryFD)
+        Me.pnlScreen4.Controls.Add(Me.lb방전종료SOC)
         Me.pnlScreen4.Controls.Add(Me.VsLabel12)
         Me.pnlScreen4.Controls.Add(Me.VsLabel39)
-        Me.pnlScreen4.Controls.Add(Me.lbBatteryCV)
+        Me.pnlScreen4.Controls.Add(Me.lb방전시최대전류값)
         Me.pnlScreen4.Controls.Add(Me.VsLabel36)
-        Me.pnlScreen4.Controls.Add(Me.lbBatteryCC)
+        Me.pnlScreen4.Controls.Add(Me.lb충전시최대전류값)
         Me.pnlScreen4.Controls.Add(Me.VsLabel37)
         Me.pnlScreen4.Controls.Add(Me.VsLabel4)
         Me.pnlScreen4.Controls.Add(Me.VsLabel31)
-        Me.pnlScreen4.Controls.Add(Me.lbBatteryCS)
+        Me.pnlScreen4.Controls.Add(Me.lb충전정지SOC)
         Me.pnlScreen4.Controls.Add(Me.VsLabel13)
         Me.pnlScreen4.Location = New System.Drawing.Point(8, 625)
         Me.pnlScreen4.Name = "pnlScreen4"
         Me.pnlScreen4.Size = New System.Drawing.Size(784, 283)
+        '
+        'VsLabel24
+        '
+        Me.VsLabel24.BackColor = System.Drawing.Color.LightGreen
+        Me.VsLabel24.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsLabel24.BorderSide_Bottom = True
+        Me.VsLabel24.BorderSide_Left = True
+        Me.VsLabel24.BorderSide_Right = True
+        Me.VsLabel24.BorderSide_Top = True
+        Me.VsLabel24.BorderWidth = 1
+        Me.VsLabel24.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel24.IsPassword = False
+        Me.VsLabel24.Location = New System.Drawing.Point(282, 240)
+        Me.VsLabel24.Name = "VsLabel24"
+        Me.VsLabel24.Size = New System.Drawing.Size(92, 40)
+        Me.VsLabel24.TabIndex = 45
+        Me.VsLabel24.Text = "SOC"
+        Me.VsLabel24.TextAlign = System.Drawing.StringAlignment.Center
+        Me.VsLabel24.UseKeyPad = False
+        '
+        'lbSOC
+        '
+        Me.lbSOC.BackColor = System.Drawing.Color.White
+        Me.lbSOC.BorderColor = System.Drawing.Color.Gray
+        Me.lbSOC.BorderSide_Bottom = True
+        Me.lbSOC.BorderSide_Left = True
+        Me.lbSOC.BorderSide_Right = True
+        Me.lbSOC.BorderSide_Top = True
+        Me.lbSOC.BorderWidth = 1
+        Me.lbSOC.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lbSOC.IsPassword = False
+        Me.lbSOC.Location = New System.Drawing.Point(380, 240)
+        Me.lbSOC.MaxRange = 100
+        Me.lbSOC.MinRange = 0
+        Me.lbSOC.Name = "lbSOC"
+        Me.lbSOC.Size = New System.Drawing.Size(77, 40)
+        Me.lbSOC.TabIndex = 44
+        Me.lbSOC.Text = "10"
+        Me.lbSOC.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbSOC.UseKeyPad = True
+        '
+        'VsLabel26
+        '
+        Me.VsLabel26.BackColor = System.Drawing.Color.White
+        Me.VsLabel26.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel26.BorderSide_Bottom = True
+        Me.VsLabel26.BorderSide_Left = True
+        Me.VsLabel26.BorderSide_Right = True
+        Me.VsLabel26.BorderSide_Top = True
+        Me.VsLabel26.BorderWidth = 0
+        Me.VsLabel26.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel26.IsPassword = False
+        Me.VsLabel26.Location = New System.Drawing.Point(463, 240)
+        Me.VsLabel26.Name = "VsLabel26"
+        Me.VsLabel26.Size = New System.Drawing.Size(58, 40)
+        Me.VsLabel26.TabIndex = 43
+        Me.VsLabel26.Text = "%"
+        Me.VsLabel26.TextAlign = System.Drawing.StringAlignment.Near
+        Me.VsLabel26.UseKeyPad = False
+        '
+        'VsLabel10
+        '
+        Me.VsLabel10.BackColor = System.Drawing.Color.LightGreen
+        Me.VsLabel10.BorderColor = System.Drawing.Color.DarkGray
+        Me.VsLabel10.BorderSide_Bottom = True
+        Me.VsLabel10.BorderSide_Left = True
+        Me.VsLabel10.BorderSide_Right = True
+        Me.VsLabel10.BorderSide_Top = True
+        Me.VsLabel10.BorderWidth = 1
+        Me.VsLabel10.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel10.IsPassword = False
+        Me.VsLabel10.Location = New System.Drawing.Point(37, 240)
+        Me.VsLabel10.Name = "VsLabel10"
+        Me.VsLabel10.Size = New System.Drawing.Size(92, 40)
+        Me.VsLabel10.TabIndex = 42
+        Me.VsLabel10.Text = "DC전압"
+        Me.VsLabel10.TextAlign = System.Drawing.StringAlignment.Center
+        Me.VsLabel10.UseKeyPad = False
+        '
+        'lbDC
+        '
+        Me.lbDC.BackColor = System.Drawing.Color.White
+        Me.lbDC.BorderColor = System.Drawing.Color.Gray
+        Me.lbDC.BorderSide_Bottom = True
+        Me.lbDC.BorderSide_Left = True
+        Me.lbDC.BorderSide_Right = True
+        Me.lbDC.BorderSide_Top = True
+        Me.lbDC.BorderWidth = 1
+        Me.lbDC.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lbDC.IsPassword = False
+        Me.lbDC.Location = New System.Drawing.Point(135, 240)
+        Me.lbDC.MaxRange = 1000
+        Me.lbDC.MinRange = 0
+        Me.lbDC.Name = "lbDC"
+        Me.lbDC.Size = New System.Drawing.Size(77, 40)
+        Me.lbDC.TabIndex = 41
+        Me.lbDC.Text = "10"
+        Me.lbDC.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbDC.UseKeyPad = True
         '
         'lbRunMode
         '
@@ -1083,6 +1412,25 @@ Partial Public Class wnd서브화면5_사용모드
         Me.lbRunMode.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbRunMode.UseKeyPad = True
         '
+        'VsLabel23
+        '
+        Me.VsLabel23.BackColor = System.Drawing.Color.White
+        Me.VsLabel23.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel23.BorderSide_Bottom = True
+        Me.VsLabel23.BorderSide_Left = True
+        Me.VsLabel23.BorderSide_Right = True
+        Me.VsLabel23.BorderSide_Top = True
+        Me.VsLabel23.BorderWidth = 0
+        Me.VsLabel23.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel23.IsPassword = False
+        Me.VsLabel23.Location = New System.Drawing.Point(218, 240)
+        Me.VsLabel23.Name = "VsLabel23"
+        Me.VsLabel23.Size = New System.Drawing.Size(58, 40)
+        Me.VsLabel23.TabIndex = 40
+        Me.VsLabel23.Text = "V"
+        Me.VsLabel23.TextAlign = System.Drawing.StringAlignment.Near
+        Me.VsLabel23.UseKeyPad = False
+        '
         'VsLabel16
         '
         Me.VsLabel16.BackColor = System.Drawing.Color.LightGreen
@@ -1102,26 +1450,26 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel16.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel16.UseKeyPad = False
         '
-        'lb방전정지전압
+        'lb방전종료전압
         '
-        Me.lb방전정지전압.BackColor = System.Drawing.Color.White
-        Me.lb방전정지전압.BorderColor = System.Drawing.Color.Gray
-        Me.lb방전정지전압.BorderSide_Bottom = True
-        Me.lb방전정지전압.BorderSide_Left = True
-        Me.lb방전정지전압.BorderSide_Right = True
-        Me.lb방전정지전압.BorderSide_Top = True
-        Me.lb방전정지전압.BorderWidth = 1
-        Me.lb방전정지전압.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lb방전정지전압.IsPassword = False
-        Me.lb방전정지전압.Location = New System.Drawing.Point(248, 91)
-        Me.lb방전정지전압.MaxRange = 1000
-        Me.lb방전정지전압.MinRange = 0
-        Me.lb방전정지전압.Name = "lb방전정지전압"
-        Me.lb방전정지전압.Size = New System.Drawing.Size(77, 40)
-        Me.lb방전정지전압.TabIndex = 41
-        Me.lb방전정지전압.Text = "10"
-        Me.lb방전정지전압.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lb방전정지전압.UseKeyPad = True
+        Me.lb방전종료전압.BackColor = System.Drawing.Color.White
+        Me.lb방전종료전압.BorderColor = System.Drawing.Color.Gray
+        Me.lb방전종료전압.BorderSide_Bottom = True
+        Me.lb방전종료전압.BorderSide_Left = True
+        Me.lb방전종료전압.BorderSide_Right = True
+        Me.lb방전종료전압.BorderSide_Top = True
+        Me.lb방전종료전압.BorderWidth = 1
+        Me.lb방전종료전압.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lb방전종료전압.IsPassword = False
+        Me.lb방전종료전압.Location = New System.Drawing.Point(248, 91)
+        Me.lb방전종료전압.MaxRange = 1000
+        Me.lb방전종료전압.MinRange = 0
+        Me.lb방전종료전압.Name = "lb방전종료전압"
+        Me.lb방전종료전압.Size = New System.Drawing.Size(77, 40)
+        Me.lb방전종료전압.TabIndex = 41
+        Me.lb방전종료전압.Text = "10"
+        Me.lb방전종료전압.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lb방전종료전압.UseKeyPad = True
         '
         'VsLabel2
         '
@@ -1182,26 +1530,6 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel20.TextAlign = System.Drawing.StringAlignment.Near
         Me.VsLabel20.UseKeyPad = False
         '
-        'lbStatusDisCharging
-        '
-        Me.lbStatusDisCharging.BackColor = System.Drawing.Color.White
-        Me.lbStatusDisCharging.BorderColor = System.Drawing.Color.Gray
-        Me.lbStatusDisCharging.BorderSide_Bottom = True
-        Me.lbStatusDisCharging.BorderSide_Left = True
-        Me.lbStatusDisCharging.BorderSide_Right = True
-        Me.lbStatusDisCharging.BorderSide_Top = True
-        Me.lbStatusDisCharging.BorderWidth = 0
-        Me.lbStatusDisCharging.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbStatusDisCharging.IsPassword = False
-        Me.lbStatusDisCharging.Location = New System.Drawing.Point(333, 240)
-        Me.lbStatusDisCharging.Name = "lbStatusDisCharging"
-        Me.lbStatusDisCharging.Size = New System.Drawing.Size(126, 40)
-        Me.lbStatusDisCharging.TabIndex = 41
-        Me.lbStatusDisCharging.Text = "%"
-        Me.lbStatusDisCharging.TextAlign = System.Drawing.StringAlignment.Near
-        Me.lbStatusDisCharging.UseKeyPad = False
-        Me.lbStatusDisCharging.Visible = False
-        '
         'VsLabel11
         '
         Me.VsLabel11.BackColor = System.Drawing.Color.White
@@ -1221,26 +1549,6 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel11.TextAlign = System.Drawing.StringAlignment.Near
         Me.VsLabel11.UseKeyPad = False
         '
-        'lbStatusCharging
-        '
-        Me.lbStatusCharging.BackColor = System.Drawing.Color.White
-        Me.lbStatusCharging.BorderColor = System.Drawing.Color.Gray
-        Me.lbStatusCharging.BorderSide_Bottom = True
-        Me.lbStatusCharging.BorderSide_Left = True
-        Me.lbStatusCharging.BorderSide_Right = True
-        Me.lbStatusCharging.BorderSide_Top = True
-        Me.lbStatusCharging.BorderWidth = 0
-        Me.lbStatusCharging.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbStatusCharging.IsPassword = False
-        Me.lbStatusCharging.Location = New System.Drawing.Point(199, 240)
-        Me.lbStatusCharging.Name = "lbStatusCharging"
-        Me.lbStatusCharging.Size = New System.Drawing.Size(126, 40)
-        Me.lbStatusCharging.TabIndex = 40
-        Me.lbStatusCharging.Text = "%"
-        Me.lbStatusCharging.TextAlign = System.Drawing.StringAlignment.Near
-        Me.lbStatusCharging.UseKeyPad = False
-        Me.lbStatusCharging.Visible = False
-        '
         'btnBatteryCharging
         '
         Me.btnBatteryCharging.BackColor = System.Drawing.Color.Blue
@@ -1253,7 +1561,7 @@ Partial Public Class wnd서브화면5_사용모드
         Me.btnBatteryCharging.BorderWidth = 1
         Me.btnBatteryCharging.Font = New System.Drawing.Font("Tahoma", 20.0!, System.Drawing.FontStyle.Bold)
         Me.btnBatteryCharging.ForeColor = System.Drawing.Color.White
-        Me.btnBatteryCharging.Location = New System.Drawing.Point(496, 204)
+        Me.btnBatteryCharging.Location = New System.Drawing.Point(538, 204)
         Me.btnBatteryCharging.Name = "btnBatteryCharging"
         Me.btnBatteryCharging.PressedImageValue = CType(resources.GetObject("btnBatteryCharging.PressedImageValue"), System.Drawing.Image)
         Me.btnBatteryCharging.Size = New System.Drawing.Size(160, 50)
@@ -1279,26 +1587,26 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel39.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel39.UseKeyPad = False
         '
-        'lbBatteryCV
+        'lb방전시최대전류값
         '
-        Me.lbBatteryCV.BackColor = System.Drawing.Color.White
-        Me.lbBatteryCV.BorderColor = System.Drawing.Color.Gray
-        Me.lbBatteryCV.BorderSide_Bottom = True
-        Me.lbBatteryCV.BorderSide_Left = True
-        Me.lbBatteryCV.BorderSide_Right = True
-        Me.lbBatteryCV.BorderSide_Top = True
-        Me.lbBatteryCV.BorderWidth = 1
-        Me.lbBatteryCV.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbBatteryCV.IsPassword = False
-        Me.lbBatteryCV.Location = New System.Drawing.Point(248, 183)
-        Me.lbBatteryCV.MaxRange = 1000
-        Me.lbBatteryCV.MinRange = 0
-        Me.lbBatteryCV.Name = "lbBatteryCV"
-        Me.lbBatteryCV.Size = New System.Drawing.Size(77, 40)
-        Me.lbBatteryCV.TabIndex = 27
-        Me.lbBatteryCV.Text = "10"
-        Me.lbBatteryCV.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbBatteryCV.UseKeyPad = True
+        Me.lb방전시최대전류값.BackColor = System.Drawing.Color.White
+        Me.lb방전시최대전류값.BorderColor = System.Drawing.Color.Gray
+        Me.lb방전시최대전류값.BorderSide_Bottom = True
+        Me.lb방전시최대전류값.BorderSide_Left = True
+        Me.lb방전시최대전류값.BorderSide_Right = True
+        Me.lb방전시최대전류값.BorderSide_Top = True
+        Me.lb방전시최대전류값.BorderWidth = 1
+        Me.lb방전시최대전류값.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lb방전시최대전류값.IsPassword = False
+        Me.lb방전시최대전류값.Location = New System.Drawing.Point(248, 183)
+        Me.lb방전시최대전류값.MaxRange = 1000
+        Me.lb방전시최대전류값.MinRange = 0
+        Me.lb방전시최대전류값.Name = "lb방전시최대전류값"
+        Me.lb방전시최대전류값.Size = New System.Drawing.Size(77, 40)
+        Me.lb방전시최대전류값.TabIndex = 27
+        Me.lb방전시최대전류값.Text = "10"
+        Me.lb방전시최대전류값.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lb방전시최대전류값.UseKeyPad = True
         '
         'VsLabel36
         '
@@ -1319,26 +1627,26 @@ Partial Public Class wnd서브화면5_사용모드
         Me.VsLabel36.TextAlign = System.Drawing.StringAlignment.Center
         Me.VsLabel36.UseKeyPad = False
         '
-        'lbBatteryCC
+        'lb충전시최대전류값
         '
-        Me.lbBatteryCC.BackColor = System.Drawing.Color.White
-        Me.lbBatteryCC.BorderColor = System.Drawing.Color.Gray
-        Me.lbBatteryCC.BorderSide_Bottom = True
-        Me.lbBatteryCC.BorderSide_Left = True
-        Me.lbBatteryCC.BorderSide_Right = True
-        Me.lbBatteryCC.BorderSide_Top = True
-        Me.lbBatteryCC.BorderWidth = 1
-        Me.lbBatteryCC.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbBatteryCC.IsPassword = False
-        Me.lbBatteryCC.Location = New System.Drawing.Point(248, 137)
-        Me.lbBatteryCC.MaxRange = 1000
-        Me.lbBatteryCC.MinRange = 0
-        Me.lbBatteryCC.Name = "lbBatteryCC"
-        Me.lbBatteryCC.Size = New System.Drawing.Size(77, 40)
-        Me.lbBatteryCC.TabIndex = 27
-        Me.lbBatteryCC.Text = "10"
-        Me.lbBatteryCC.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbBatteryCC.UseKeyPad = True
+        Me.lb충전시최대전류값.BackColor = System.Drawing.Color.White
+        Me.lb충전시최대전류값.BorderColor = System.Drawing.Color.Gray
+        Me.lb충전시최대전류값.BorderSide_Bottom = True
+        Me.lb충전시최대전류값.BorderSide_Left = True
+        Me.lb충전시최대전류값.BorderSide_Right = True
+        Me.lb충전시최대전류값.BorderSide_Top = True
+        Me.lb충전시최대전류값.BorderWidth = 1
+        Me.lb충전시최대전류값.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lb충전시최대전류값.IsPassword = False
+        Me.lb충전시최대전류값.Location = New System.Drawing.Point(248, 137)
+        Me.lb충전시최대전류값.MaxRange = 1000
+        Me.lb충전시최대전류값.MinRange = 0
+        Me.lb충전시최대전류값.Name = "lb충전시최대전류값"
+        Me.lb충전시최대전류값.Size = New System.Drawing.Size(77, 40)
+        Me.lb충전시최대전류값.TabIndex = 27
+        Me.lb충전시최대전류값.Text = "10"
+        Me.lb충전시최대전류값.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lb충전시최대전류값.UseKeyPad = True
         '
         'VsLabel37
         '
@@ -1409,9 +1717,9 @@ Partial Public Class wnd서브화면5_사용모드
     Friend WithEvents VsLabel4 As PMS.VSLabel
     Friend WithEvents VsLabel3 As PMS.VSLabel
     Friend WithEvents VsLabel13 As PMS.VSLabel
-    Friend WithEvents lbBatteryCS As PMS.VSLabel
+    Friend WithEvents lb충전정지SOC As PMS.VSLabel
     Friend WithEvents VsLabel12 As PMS.VSLabel
-    Friend WithEvents lbBatteryFD As PMS.VSLabel
+    Friend WithEvents lb방전종료SOC As PMS.VSLabel
     Friend WithEvents VsLabel15 As PMS.VSLabel
     Friend WithEvents VsLabel14 As PMS.VSLabel
     Friend WithEvents VsLabel29 As PMS.VSLabel
@@ -1438,9 +1746,9 @@ Partial Public Class wnd서브화면5_사용모드
     Friend WithEvents PageHeader4 As PMS.VSLabel
     Friend WithEvents pnlScreen4 As System.Windows.Forms.Panel
     Friend WithEvents VsLabel39 As PMS.VSLabel
-    Friend WithEvents lbBatteryCV As PMS.VSLabel
+    Friend WithEvents lb방전시최대전류값 As PMS.VSLabel
     Friend WithEvents VsLabel36 As PMS.VSLabel
-    Friend WithEvents lbBatteryCC As PMS.VSLabel
+    Friend WithEvents lb충전시최대전류값 As PMS.VSLabel
     Friend WithEvents VsLabel37 As PMS.VSLabel
     Friend WithEvents VsLabel31 As PMS.VSLabel
     Friend WithEvents btnPeakCutSet As PMS.VSPictureButton
@@ -1456,7 +1764,7 @@ Partial Public Class wnd서브화면5_사용모드
     Friend WithEvents lb충전정지전압 As PMS.VSLabel
     Friend WithEvents VsLabel11 As PMS.VSLabel
     Friend WithEvents VsLabel16 As PMS.VSLabel
-    Friend WithEvents lb방전정지전압 As PMS.VSLabel
+    Friend WithEvents lb방전종료전압 As PMS.VSLabel
     Friend WithEvents VsLabel20 As PMS.VSLabel
     Friend WithEvents lbRunMode As PMS.VSLabel
     Friend WithEvents lbDischargingGridActivePower As PMS.VSLabel
@@ -1467,5 +1775,19 @@ Partial Public Class wnd서브화면5_사용모드
     Friend WithEvents VsPictureButton1 As PMS.VSPictureButton
     Friend WithEvents VsLabel9 As PMS.VSLabel
     Friend WithEvents VsLabel5 As PMS.VSLabel
+    Friend WithEvents VsLabel24 As PMS.VSLabel
+    Friend WithEvents lbSOC As PMS.VSLabel
+    Friend WithEvents VsLabel26 As PMS.VSLabel
+    Friend WithEvents VsLabel10 As PMS.VSLabel
+    Friend WithEvents lbDC As PMS.VSLabel
+    Friend WithEvents VsLabel23 As PMS.VSLabel
+    Friend WithEvents vs태양광PVMode As PMS.VSPictureButton
+    Friend WithEvents lbRunMode2 As PMS.VSLabel
+    Friend WithEvents VsLabel21 As PMS.VSLabel
+    Friend WithEvents VsLabel25 As PMS.VSLabel
+    Friend WithEvents lb총방전량 As PMS.VSLabel
+    Friend WithEvents VsLabel38 As PMS.VSLabel
+    Friend WithEvents lb총충전량 As PMS.VSLabel
+    Friend WithEvents VsLabel41 As PMS.VSLabel
 
 End Class

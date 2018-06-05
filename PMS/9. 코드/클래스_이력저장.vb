@@ -371,7 +371,7 @@
             Dim pItem As New stHistoryItem
 
 
-            Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
+            Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
 
             Dim nCharge As Integer = ushValue >> 4 And &H1
             Dim nDischarge As Integer = ushValue >> 5 And &H1
@@ -380,13 +380,13 @@
             Dim dTemp As Double = 0
             If nCharge = 1 Then
                 'ushTemp = GetModbusData_Ushort(PT_BAT_Power)
-                ushTemp = GetModbusData_Ushort(PT_Inv_Power)
+                ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
                 dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
                 pItem.dBattPowerCharge = dTemp * 0.1 * -1
                 pItem.dBattPowerDischarge = 0
             ElseIf nDischarge = 1 Then
                 ' ushTemp = GetModbusData_Ushort(PT_BAT_Power)
-                ushTemp = GetModbusData_Ushort(PT_Inv_Power)
+                ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
                 dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
                 pItem.dBattPowerCharge = 0
                 pItem.dBattPowerDischarge = dTemp * 0.1
@@ -395,19 +395,19 @@
                 pItem.dBattPowerDischarge = 0
             End If
 
-            ushTemp = GetModbusData_Ushort(PT_Inv_Power)
+            ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
             dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
             pItem.dGridInPower = dTemp * 0.1
 
-            ushTemp = GetModbusData_Ushort(PT_Inv_Power)
+            ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
             dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
             pItem.dGridOutPower = dTemp * 0.1
 
-            ushTemp = GetModbusData_Ushort(PT_Inv_Power)
+            ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
             dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
             pItem.dInverterPower = dTemp * 0.1
 
-            ushTemp = GetModbusData_Ushort(PT_Inv_Power)
+            ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
             dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
             pItem.dLoadPower = dTemp * 0.1
 
@@ -454,22 +454,9 @@
 
             Dim szHistoryFile As String = ""
 
-            If nFileNo = 35 Then
-                ' 고장이력
-                szHistoryFile = String.Format("{0}\Inverter_{1}.csv", szPath, szEventDate)
-            ElseIf nFileNo = 36 Then
-                ' 정전이력
-                szHistoryFile = String.Format("{0}\Grid_{1}.csv", szPath, szEventDate)
-            ElseIf nFileNo = 37 Then
-                ' 전장상태
-                szHistoryFile = String.Format("{0}\Status_{1}.csv", szPath, szEventDate)
-            ElseIf nFileNo = 0 Then
-                ' 통신이력
-                szHistoryFile = String.Format("{0}\Comm_{1}.csv", szPath, szEventDate)
-            End If
-
+            ' 고장이력
+            szHistoryFile = String.Format("{0}\Inverter_{1}.csv", szPath, szEventDate)
             Dim bFIleCheck As Boolean = System.IO.File.Exists(szHistoryFile)
-
 
             Dim pWriter As System.IO.StreamWriter = Nothing
             pWriter = New System.IO.StreamWriter(szHistoryFile, True, System.Text.Encoding.UTF8)

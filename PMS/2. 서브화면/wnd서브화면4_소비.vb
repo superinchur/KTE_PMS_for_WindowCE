@@ -51,8 +51,8 @@
 
         ' 부하 상태 
 
-        Dim usPower As UShort = GetModbusData_Ushort(PT_Inv_Power)
-        Dim dLoadPower As Double = Convert.ToInt16(usPower.ToString("X4"), 16) * 0.1
+        Dim usPower As UShort = GetModbusData_Ushort(PT_INVERTER_POWER)
+        Dim dLoadPower As Double = Convert.ToInt16(usPower.ToString("X4"), 16)
 
 
         Dim szValue As String = String.Format("{0:F1} kW", dLoadPower)
@@ -73,28 +73,28 @@
 
 
 
-        Dim dValue As Double = GetModbusData_Ushort(PT_V_Inv_U) * 0.1
+        Dim dValue As Double = GetModbusData_Ushort(PT_GRID_R_Voltage)
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage1.Text <> szValue Then lbVoltage1.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_V_Inv_V) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_S_Voltage)
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage2.Text <> szValue Then lbVoltage2.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_V_Inv_W) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_T_Voltage)
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage3.Text <> szValue Then lbVoltage3.Text = szValue
 
 
-        dValue = GetModbusData_Ushort(PT_I_Inv_U) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_R_Current)
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent1.Text <> szValue Then lbCurrent1.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_I_Inv_V) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_S_Current)
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent2.Text <> szValue Then lbCurrent2.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_I_Inv_W) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_T_Current)
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent3.Text <> szValue Then lbCurrent3.Text = szValue
 

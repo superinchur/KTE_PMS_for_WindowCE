@@ -1,5 +1,5 @@
 ﻿Public Class PCS통신
-    Public PCS_MODBUS_ADDRESS As Integer = 0
+    Public PCS_MODBUS_ADDRESS As Integer = 30
     ' 추후 수정 가능함
     Public PCS_MODBUS_COUNT As Integer = 6
 
@@ -85,9 +85,7 @@
                                     RaiseEvent DataArrived(DeviceCommPort.PortName, "RX", btRecvBuffer, nRecvBufferLength)
                                     'End If
 
-
                                     tLastRecv = Now
-
                                     Dim nAddrESS As Integer = 0
                                     For i As Integer = 0 To nDataCount / 2 - 1
                                         SetModbusData(PCS_MODBUS_ADDRESS + nAddrESS, btRecvBuffer, 3 + i * 2, 2)
@@ -96,30 +94,6 @@
 
                                 End If
                             End If
-
-                        ElseIf btRecvCommand = &H6 Then
-                            If nRecvBufferLength = 8 Then
-
-                                ' 제어응답 - 싱글
-                                If DEBUG_COMM = True Then
-                                    'Debug.WriteLine("btRecvBuffer : " + btData(1) + btData(2) + btData(3) + btData(4) + btData(5))
-                                    'Debug.WriteLine("btRecvBuffer : " + btRecvBuffer(1) + btRecvBuffer(2) + btRecvBuffer(3) + btRecvBuffer(4) + btRecvBuffer(5))
-                                End If
-
-                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
-                                'nModbusWriteRegisterResponse = nRecvBufferLength - 3
-                            End If
-
-                        ElseIf btRecvCommand = &H10 Then
-                            If nRecvBufferLength = 8 Then
-
-                                ' 제어응답 - 멀티
-
-                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
-                                'nModbusWriteRegisterResponse = nRecvBufferLength - 3
-                            End If
-
-
                         End If
                     End If
                 End If
@@ -149,7 +123,7 @@
         BMS데이터비교()
 
         Priority_Read = Priority_Read + 1
-        If Priority_Read > 4 Then
+        If Priority_Read > 2 Then
             Priority_Read = 1
         End If
         ' 
@@ -158,7 +132,7 @@
         Else
             SendPollingData()
         End If
-        'SendPollingData()
+
         Timer_Comm.Enabled = True
     End Sub
 
@@ -179,6 +153,7 @@
         '' On-Delay Off-Delay를 넣어야 함.
 
         If Not cBMS.prev_Bank_SOC = cBMS.Bank_SOC Then
+
             tSpan = Now - tLastSOC
             If tSpan.TotalSeconds <= Ondelay Then
                 제어대기열_추가(PT_SOC, Convert.ToInt16(cBMS.Bank_SOC))
@@ -202,14 +177,6 @@
         End If
 
         Dim ushValue As UShort
-        BMS경보값비교(cBMS.prev_Over_Current_Discharge_Warning, cBMS.Over_Current_Discharge_Warning, ushValue, 7)
-        BMS경보값비교(cBMS.prev_Over_Current_Charge_Warning, cBMS.Over_Current_Charge_Warning, ushValue, 6)
-        BMS경보값비교(cBMS.prev_Rack_Over_Voltage_Protection_Warning, cBMS.Rack_Over_Voltage_Protection_Warning, ushValue, 5)
-        BMS경보값비교(cBMS.prev_Rack_Under_Voltage_Protection_Warning, cBMS.Rack_Under_Voltage_Protection_Warning, ushValue, 4)
-        BMS경보값비교(cBMS.prev_Rack_Voltage_Imbalance_Warning, cBMS.Rack_Voltage_Imbalance_Warning, ushValue, 3)
-        BMS경보값비교(cBMS.prev_Rack_Over_Temperature_Warning, cBMS.Rack_Over_Temperature_Warning, ushValue, 2)
-        BMS경보값비교(cBMS.prev_Rack_Under_Temperature_Warning, cBMS.Rack_Under_Temperature_Warning, ushValue, 1)
-        BMS경보값비교(cBMS.prev_Rack_Temperature_Imbalance_Warning, cBMS.Rack_Temperature_Imbalance_Warning, ushValue, 0)
 
         If Not ushValue = cBMS.prev_Bank_Status Then
             tSpan = Now - tLastStatus
@@ -245,7 +212,6 @@
         Dim bReturn As Boolean = 제어대기열_가져오기(nWriteAddress, nWriteData)
 
         If bReturn = False Then Exit Sub
-
 
         Try
 
@@ -313,8 +279,8 @@
     Private Sub SendPollingData()
 
         PCS_MODBUS_ADDRESS += PCS_MODBUS_COUNT
-        If PCS_MODBUS_ADDRESS > 50 Then
-            PCS_MODBUS_ADDRESS = 0
+        If PCS_MODBUS_ADDRESS > 81 Then
+            PCS_MODBUS_ADDRESS = 30
         End If
 
         Try

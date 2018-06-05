@@ -106,7 +106,7 @@
         ' -------------------------------------------------------------------------------------------------------
         ' 배터리 상태 
 
-        Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
 
         Dim nCharge As Integer = ushValue >> 4 And &H1
         Dim nDischarge As Integer = ushValue >> 5 And &H1
@@ -217,11 +217,11 @@
         'szValue = ""
         'End If
 
-        Dim usPower As UShort = GetModbusData_Ushort(PT_Inv_Power)
-        Dim dPT_Inv_Power As Double = Convert.ToInt16(usPower.ToString("X4"), 16) * 0.1
-
+        'Dim usPower As UShort = GetModbusData_Ushort(PT_Inv_Power)
+        'Dim dPT_Inv_Power As Double = Convert.ToInt16(usPower.ToString("X4"), 16) * 0.1
+        Dim dPT_Inv_Power As Double = 0
         'Dim dPT_Inv_Power As Double = cBMS.Bank_충방전_전력
-        szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
+        'szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
         If lbGridStatus.Text <> szValue Then
             lbGridStatus.Text = szValue
             lbGridStatus.Invalidate()
@@ -234,6 +234,7 @@
         '그리드상태 = 2
         'Else
         '그리드상태 = 0
+
         If dPT_Inv_Power > 0 Then
             그리드상태 = 1
         ElseIf dPT_Inv_Power < 0 Then

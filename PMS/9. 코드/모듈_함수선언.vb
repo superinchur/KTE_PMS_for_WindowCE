@@ -35,28 +35,224 @@
         Return ushReturn
     End Function
 
+#Region "KTEuPMS_180503_추가본"
+
+    Public Sub 초기시퀀스()
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+        If ushValue And &H1 Then
+            ' nothing to do
+        Else
+            ushValue = SetBitmask(ushValue, 0, 1)
+            제어대기열_추가(PT_INV_Control_Mode, ushValue)
+        End If
+    End Sub
+
+    Public Sub 원격RESET()
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_Fault)
+
+        If (ushValue >> 5 And &H7) = 7 Then
+            ' H/W Fault, 현장 확인 해야함. 새로운 Alarm 새로 만들어야 함.
+        Else
+            Dim ushValue1 As UShort = GetModbusData_Ushort(PT_PCS_STANDBY)
+            Dim ushValue2 As UShort = GetModbusData_Ushort(PT_Fault)
+
+            If (ushValue1 And &H1) And (ushValue2 >> 7 And &H1) Then
+                ' nothing to do
+            Else
+                Dim ushValue3 As UShort = SetBitmask(ushValue, 7, 1)
+                제어대기열_추가(PT_Fault, ushValue3)
+            End If
+
+        End If
+    End Sub
+
+    Public Sub 원격RESET_확인()
+        Dim ushValue1 As UShort = GetModbusData_Ushort(PT_PCS_STANDBY)
+        Dim ushValue2 As UShort = GetModbusData_Ushort(PT_Fault)
+
+        If (ushValue1 And &H1) And (ushValue2 >> 7 And &H1) Then
+            ' nothing to do
+        Else
+            Dim ushValue As UShort = SetBitmask(ushValue, 7, 1)
+            제어대기열_추가(PT_Fault, ushValue)
+        End If
+    End Sub
+
+    Public Sub 나주피크컷동작()
+
+        Dim nCurrent As Integer = Now.Second
+        Dim deadbandSOC As Integer = 3
+        Dim deadbandVolt As Integer = 5
+        If 현재사용모드_배터리방전시간 = True Then
+
+            ' 해당 상태에 들어서면 자동으로 제어 명령을 내 보낸다.
+            ' 방전시작, 충전시작 상태
+            ' 방전중지 
+            ' SOC가 방전중지보다 보다 같거나 낮으면 방전 중지.
+
+            ' 현재 시간이 안맞는데도 충전중이라면 충전을 꺼야한다
+            If 현재사용모드_배터리충전 = True Then
+                배터리충전취소()
+            ElseIf 현재사용모드_배터리충전 = False Then
+                Dim dBATT_SOC As Double = cBMS.Bank_SOC
+                Dim dBATT_DC전압 As Double = cBMS.Bank_DC전압
+                If dBATT_SOC <= d사용모드_배터리_방전정지SOC Then
+                    ' SOC가 배터리 방전정지값 보다 작거나 같다면 방전을 중지해야한다.
+                    If 현재사용모드_배터리방전 = True Then
+                        ' 계속 방전중이라면 방전을 취소하고
+                        배터리방전취소()
+
+                    ElseIf 현재사용모드_배터리방전 = False Then
+                        ' Nothing to do
+                    End If
+                ElseIf dBATT_SOC > d사용모드_배터리_방전정지SOC + deadbandSOC Then
+
+                    ' SOC가 배터리 방전 정지보다 크다면 방전을 계속 실시해야한다.
+                    ' 방전중이 아니라면 방전 요청을 지속적으로 보낸다..
+                    If 현재사용모드_배터리방전 = True Then
+                        ' Nothing to do
+                    ElseIf 현재사용모드_배터리방전 = False Then
+                        If 현재사용모드_PCS방전강제종료 = False Then
+                            배터리방전시작()
+                        End If
+                    End If
+                End If
+            End If
+
+        ElseIf 현재사용모드_배터리충전시간 = True Then
+
+            ' 배터리 충/방전 확인 비트
+            Dim dBATT_SOC As Double = cBMS.Bank_SOC
+            Dim dBATT_DC전압 As Double = cBMS.Bank_DC전압
+
+            If 현재사용모드_배터리방전 = True Then
+                배터리방전취소()
+            ElseIf 현재사용모드_배터리방전 = False Then
+                If dBATT_SOC < d사용모드_배터리_충전정지SOC Then
+                    If 현재사용모드_배터리충전 = True Then
+                        ' 배터리가 정상적으로 충전중이라면 더이상 명령을 내릴 필요가 없으니 아무일도 하지 않는다.
+                        ' nothing to do
+                    ElseIf 현재사용모드_배터리충전 = False Then
+                        If 현재사용모드_PCS충전강제종료 = False Then
+                            배터리충전시작()
+                        End If
+                    End If
+
+                ElseIf dBATT_SOC >= d사용모드_배터리_충전정지SOC Then
+                    '현재 SOC값이 사용모드_배터리_충전정지보다 클 경우
+                    If 현재사용모드_배터리충전 = True Then
+                        ' 충전 정지를 한다.
+                        배터리충전취소()
+                    ElseIf 현재사용모드_배터리충전 = False Then
+                        ' 충전 정상적으로 충전 정지중이라면 더이상 명령을 내릴 필요가 없으니 아무일도 하지 않는다
+                        ' nothing to do
+                    End If
+                End If
+            End If
+
+        Else
+            If 현재사용모드_배터리충전 = True Then
+                배터리충전취소()
+            End If
+            If 현재사용모드_배터리방전 = True Then
+                배터리방전취소()
+            End If
+        End If
+
+        ' C-Rate가 맞지 않을 경우에 주기적으로 값을 비교한 후, 전송한다.
+        If Not Convert.ToUInt16(d사용모드_배터리_충전시최대전류) = GetModbusData_Ushort(PT_Constant_Current) Then
+            If Assertbit Then
+                Debug.WriteLine("사용모드_배터리_충전시CRate : " + GetModbusData_Ushort(PT_Constant_Current).ToString())
+            End If
+            충전시최대전류값설정(d사용모드_배터리_충전시최대전류)
+        End If
+
+        If Not Convert.ToUInt16(d사용모드_배터리_방전시최대전류) = GetModbusData_Ushort(PT_Constant_Voltage) Then
+            If Assertbit Then
+                Debug.WriteLine("사용모드_배터리_방전시CRate : " + GetModbusData_Ushort(PT_Constant_Voltage).ToString())
+            End If
+            방전시최대전류값설정(d사용모드_배터리_방전시최대전류)
+
+        End If
+        '<-----------------------------------------------------------------------------------------------------------
+        Dim dBattVoltageofPCS As Double = cBMS.Bank_DC전압
+        '<-----------------------------------------------------------------------------------------------------------
+        If 현재사용모드_배터리충전 = True Then
+            충전시유효전력설정(dBattVoltageofPCS)
+        ElseIf 현재사용모드_배터리방전 = True Then
+            방전시유효전력설정(dBattVoltageofPCS)
+        End If
+    End Sub
+
+    Dim prev_mode As UShort ' 1이면 충전 2면 방전
+
+    Public Sub 모드변경확인()
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+        ' 충전중, 방전중 상태 표시
+        Dim nCharging As Integer = ushValue >> 6 And &H1
+        Dim nDischarging As Integer = ushValue >> 7 And &H1
+
+        Dim current_mode As UShort
+
+        If nCharging Then
+            current_mode = 1
+        ElseIf nDischarging Then
+            current_mode = 2
+        Else
+            current_mode = 0
+        End If
+
+        If (current_mode = 0) And Not (prev_mode = 0) Then
+            INV_Control_Mode_제어대기열_추가(9, 1)
+        ElseIf Not (current_mode = 0) And (prev_mode = 0) Then
+            INV_Control_Mode_제어대기열_추가(9, 0)
+        ElseIf Not prev_mode = current_mode Then
+            ushValue = SetBitmask(ushValue, 9, 1)
+            제어대기열_추가(PT_INV_Control_Mode, ushValue)
+            ushValue = SetBitmask(ushValue, 9, 0)
+            제어대기열_추가(PT_INV_Control_Mode, ushValue)
+        End If
+        prev_mode = current_mode
+    End Sub
+#End Region
+
+
     Public Sub 배터리충전시작()
-        Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
-        ushValue = SetBitmask(ushValue, 4, 1)
-        제어대기열_추가(PT_MODE_Status, ushValue)
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+        ushValue = SetBitmask(ushValue, 6, 1)
+        ushValue = SetBitmask(ushValue, 3, 1)
+
+        제어대기열_추가(PT_INV_Control_Mode, ushValue)
     End Sub
     Public Sub 배터리충전취소()
-        Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
-        ushValue = SetBitmask(ushValue, 4, 0)
-        제어대기열_추가(PT_MODE_Status, ushValue)
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+        ushValue = SetBitmask(ushValue, 6, 0)
+        제어대기열_추가(PT_INV_Control_Mode, ushValue)
     End Sub
 
     Public Sub 배터리방전취소()
-        Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
-        ushValue = SetBitmask(ushValue, 5, 0)
-        제어대기열_추가(PT_MODE_Status, ushValue)
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+        ushValue = SetBitmask(ushValue, 7, 0)
+        제어대기열_추가(PT_INV_Control_Mode, ushValue)
     End Sub
     Public Sub 배터리방전시작()
-        Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
-        ushValue = SetBitmask(ushValue, 5, 1)
-        제어대기열_추가(PT_MODE_Status, ushValue)
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+        ushValue = SetBitmask(ushValue, 7, 1)
+        ushValue = SetBitmask(ushValue, 3, 1)
+
+        제어대기열_추가(PT_INV_Control_Mode, ushValue)
     End Sub
 
+    Public Sub 피크컷취소()
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+        ushValue = SetBitmask(ushValue, 2, 0)
+        제어대기열_추가(PT_INV_Control_Mode, ushValue)
+    End Sub
+    Public Sub 피크컷시작()
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+        ushValue = SetBitmask(ushValue, 2, 1)
+        제어대기열_추가(PT_INV_Control_Mode, ushValue)
+    End Sub
     Public Sub 충전시최대전류값설정(ByVal 사용모드_배터리_충전시최대전류)
         제어대기열_추가(PT_Constant_Current, Convert.ToUInt16(사용모드_배터리_충전시최대전류))
     End Sub
@@ -71,11 +267,11 @@
         Dim d배터리_충전시최대전력 As Double = (d사용모드_배터리_충전시최대전류 * dBattVoltageofPCS) / 1000
 
         ' 74.0 // 20.0
-        If d배터리_충전시최대전력 < d사용모드_충전유효전력 Then
+        If d배터리_충전시최대전력 < d사용모드_유효전력 Then
             ' 유효전력을 낮춰줘야함
             d최종_유효전력 = d배터리_충전시최대전력
         Else
-            d최종_유효전력 = d사용모드_충전유효전력
+            d최종_유효전력 = d사용모드_유효전력
         End If
 
         Dim rawvalue As Double = GetModbusData_Ushort(PT_Grid_Active_Power) * 0.1
@@ -88,7 +284,7 @@
         If minvalue >= d최종_유효전력 Or d최종_유효전력 >= maxvalue Then
             If d최종_유효전력 > 0 Then
                 제어대기열_추가(PT_Grid_Active_Power, Convert.ToInt16(d최종_유효전력 * 10))
-                Set_MODBUS_EMS_BUFFER(44, Convert.ToInt16(d최종_유효전력 * 10))
+                '/Set_MODBUS_EMS_BUFFER(44, Convert.ToInt16(d최종_유효전력 * 10))
             End If
         End If
     End Sub
@@ -98,53 +294,40 @@
         '                                                                        전류              X       전압               / kW
         Dim d배터리_방전시최대전력 As Double = (d사용모드_배터리_방전시최대전류 * dBattVoltageofPCS) / 1000
 
-        If d배터리_방전시최대전력 < d사용모드_방전유효전력 Then
+        If d배터리_방전시최대전력 < d사용모드_유효전력 Then
             ' 유효전력을 낮춰줘야함
             d최종_유효전력 = d배터리_방전시최대전력
         Else
-            d최종_유효전력 = d사용모드_방전유효전력
+            d최종_유효전력 = d사용모드_유효전력
         End If
 
         Dim rawvalue As Double = GetModbusData_Ushort(PT_Grid_Active_Power) * 0.1
         Dim minvalue As Double = rawvalue * (1 - 0.1)
         Dim maxvalue As Double = rawvalue * (1 + 0.1)
 
+        If Not (rawvalue = d최종_유효전력) Then
 
-        If minvalue >= d최종_유효전력 Or d최종_유효전력 >= maxvalue Then
-            If d최종_유효전력 > 0 Then
+            ' Offset
+            If Not (minvalue <= d최종_유효전력 And d최종_유효전력 <= maxvalue) Then
                 제어대기열_추가(PT_Grid_Active_Power, Convert.ToInt16(d최종_유효전력 * 10))
-                Set_MODBUS_EMS_BUFFER(44, Convert.ToInt16(d최종_유효전력 * 10))
+                'Set_MODBUS_EMS_BUFFER(44, Convert.ToInt16(d최종_유효전력 * 10))
             End If
         End If
     End Sub
 
     Public Sub 현재사용모드확인()
-        Dim ushModeStatus As UShort = GetModbusData_Ushort(PT_MODE_Status)
+        Dim ushModeStatus As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
 
-        If ushModeStatus >> 4 And &H1 Then
-            현재사용모드_배터리충전 = True
-        Else
-            현재사용모드_배터리충전 = False
-        End If
-
-        If ushModeStatus >> 5 And &H1 Then
+        If ushModeStatus >> 7 And &H1 Then
             현재사용모드_배터리방전 = True
         Else
             현재사용모드_배터리방전 = False
         End If
-
-        If ushModeStatus >> 5 And &H1 Then
-            현재사용모드_PCS방전강제종료 = True
-        Else
-            현재사용모드_PCS방전강제종료 = False
-        End If
-
         If ushModeStatus >> 6 And &H1 Then
-            현재사용모드_PCS충전강제종료 = True
+            현재사용모드_배터리충전 = True
         Else
-            현재사용모드_PCS충전강제종료 = False
+            현재사용모드_배터리충전 = False
         End If
-
         Dim szTime1Start As String = String.Format("{0}:{1}", 사용모드_피크컷시간(1, 1).ToString("00"), 사용모드_피크컷시간(1, 2).ToString("00"))
         Dim szTime1End As String = String.Format("{0}:{1}", 사용모드_피크컷시간(1, 3).ToString("00"), 사용모드_피크컷시간(1, 4).ToString("00"))
         Dim szTime2Start As String = String.Format("{0}:{1}", 사용모드_피크컷시간(2, 1).ToString("00"), 사용모드_피크컷시간(2, 2).ToString("00"))
@@ -210,7 +393,7 @@
             MODBUS_EMS_BUFFER(address * 2) = Convert.ToInt16(val) \ &H100
             MODBUS_EMS_BUFFER(address * 2 + 1) = Convert.ToInt16(val) Mod &H100
         End If
-        
+
     End Sub
 
     Function PathCheck(ByVal directory)
@@ -222,4 +405,29 @@
         ' SDCard가 인식이 되지 않으면, Flash Disk에 넣도록 수정한다.
         PathCheck = System.IO.Directory.Exists(szPath)
     End Function
+
+
+    Sub INV_Control_Mode_제어대기열_추가(ByVal nOffset As Integer, ByVal nValue As Integer)
+        Dim temp_control_PT_INV_Control_Mode As UShort
+        '180518
+        'control_PT_INV_Control_Mode를 연산하고, 그 값과, 현재 값이 일치 하는지 하지 않는지 확인한다.
+        ' 일치하지 않는다면 Changed되었다는 Flag를 Set한다.
+        temp_control_PT_INV_Control_Mode = SetBitmask(control_PT_INV_Control_Mode, nOffset, nValue)
+        If Not control_PT_INV_Control_Mode = temp_control_PT_INV_Control_Mode Then
+            flag_control_PT_INV_Control_Mode_Changed = True
+            control_PT_INV_Control_Mode = temp_control_PT_INV_Control_Mode
+        End If
+    End Sub
+
+    Sub INV_Control_Mode_로컬제어요청수행()
+        '180518 
+        'Flag가 Change 되었음을 인식한다면 PCS의 제어대기열에 추가한다.
+        ' 이후 Flag를 다시 초기화한다.
+        If flag_control_PT_INV_Control_Mode_Changed = True Then
+            제어대기열_추가(PT_INV_Control_Mode, control_PT_INV_Control_Mode)
+            flag_control_PT_INV_Control_Mode_Changed = False
+        End If
+
+    End Sub
+
 End Module

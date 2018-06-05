@@ -12,13 +12,10 @@ Imports System.IO
 
 Imports System.Net.Sockets
 Imports System.Threading
-Public Class BMS클라이언트
+Public Class EPIC2500
 
     ' Private MBmaster As ModbusTCP.Master = New Master(IPaddr, Port)
     Private data As Byte()
-
-    'Const IPaddr As String = "192.168.77.52"
-    'Const Port As String = "502"
 
     ' -----------------------------------------------
     ' Constants for access
@@ -32,7 +29,7 @@ Public Class BMS클라이언트
     Private Const fctWriteMultipleRegister As Byte = 16
     Private Const fctReadWriteMultipleRegister As Byte = 23
 
-    
+
 #Region "정의"
     ''' <summary>Constant for exception illegal function.</summary>
     Public Const excIllegalFunction As Byte = 1
@@ -122,7 +119,6 @@ Public Class BMS클라이언트
             Debug.WriteLine([error].Message)
         End Try
 
-        현재BSC상태 = BSC상태.Connect
         Timer_Comm.Interval = 5000
         Timer_Comm.Enabled = True
 
@@ -159,8 +155,8 @@ Public Class BMS클라이언트
     Private Sub Timer_Comm_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer_Comm.Tick
         Timer_Comm.Enabled = False
 
-        Dim StartAddress As UShort = ReadStartAdr(num_Rack, num_Module)
-        Dim length As UShort = ReadLength(num_Rack, num_Module)
+        Dim StartAddress As UShort = 118
+        Dim length As UShort = 2
 
         'Debug.WriteLine("num_Rack : " + num_Rack.ToString() + " num_Module : " + num_Module.ToString())
         Try
@@ -245,37 +241,8 @@ Public Class BMS클라이언트
     ' 2018-02-12
     Private Sub SetEMSBUFFER()
         '42:
-
         MODBUS_EMS_BUFFER(42 * 2) = Convert.ToInt16(d사용모드_배터리_충전시최대전류) \ &H100
         MODBUS_EMS_BUFFER(42 * 2 + 1) = Convert.ToInt16(d사용모드_배터리_충전시최대전류) Mod &H100
-        ' 43
-        MODBUS_EMS_BUFFER(43 * 2) = Convert.ToInt16(d사용모드_배터리_방전시최대전류) \ &H100
-        MODBUS_EMS_BUFFER(43 * 2 + 1) = Convert.ToInt16(d사용모드_배터리_방전시최대전류) Mod &H100
-
-        ' 48
-        MODBUS_EMS_BUFFER(48 * 2) = Convert.ToInt16(cBMS.Bank_SOC * 10) \ &H100
-        MODBUS_EMS_BUFFER(48 * 2 + 1) = Convert.ToInt16(cBMS.Bank_SOC * 10) Mod &H100
-        ' 49
-        MODBUS_EMS_BUFFER(49 * 2) = Convert.ToInt16(cBMS.Bank_SOH * 10) \ &H100
-        MODBUS_EMS_BUFFER(49 * 2 + 1) = Convert.ToInt16(cBMS.Bank_SOH * 10) Mod &H100
-        ' 52
-        MODBUS_EMS_BUFFER(52 * 2) = Convert.ToInt16(cBMS.Bank_충방전_전력_제한값 * 10) \ &H100
-        MODBUS_EMS_BUFFER(52 * 2 + 1) = Convert.ToInt16(cBMS.Bank_충방전_전력_제한값 * 10) Mod &H100
-
-        ' 54
-        MODBUS_EMS_BUFFER(54 * 2) = Convert.ToInt16(cBMS.Bank내_Cell_최고_전압 * 1000) \ &H100
-        MODBUS_EMS_BUFFER(54 * 2 + 1) = Convert.ToInt16(cBMS.Bank내_Cell_최고_전압 * 1000) Mod &H100
-
-        ' 56
-        MODBUS_EMS_BUFFER(56 * 2) = Convert.ToInt16(cBMS.Bank내_Cell_최소_전압 * 1000) \ &H100
-        MODBUS_EMS_BUFFER(56 * 2 + 1) = Convert.ToInt16(cBMS.Bank내_Cell_최소_전압 * 1000) Mod &H100
-        ' 58
-        MODBUS_EMS_BUFFER(58 * 2) = Convert.ToInt16(cBMS.Bank내_Module_최고_온도 * 10) \ &H100
-        MODBUS_EMS_BUFFER(58 * 2 + 1) = Convert.ToInt16(cBMS.Bank내_Module_최고_온도 * 10) Mod &H100
-        ' 60
-        MODBUS_EMS_BUFFER(60 * 2) = Convert.ToInt16(cBMS.Bank내_Module_최저_온도 * 10) \ &H100
-        MODBUS_EMS_BUFFER(60 * 2 + 1) = Convert.ToInt16(cBMS.Bank내_Module_최저_온도 * 10) Mod &H100
-
     End Sub
 
     ' ------------------------------------------------------------------------
@@ -385,20 +352,20 @@ Public Class BMS클라이언트
     Private Sub ReadHoldingRegister(ByVal ID As UShort, ByVal StartAddress As UShort, ByVal Length As UShort)
 
         Dim func As UShort = 3
-        Dim Unit As Byte = 1
+        Dim Unit As Byte = 2
 
         WriteAsyncData(Me.CreateReadHeader(ID, Unit, StartAddress, Length, fctReadHoldingRegister), func)
     End Sub
     Private Sub ReadInputRegister(ByVal StartAddress As UShort, ByVal Length As UShort)
         Dim ID As UShort = 1
-        Dim Unit As Byte = 1
+        Dim Unit As Byte = 2
 
         WriteAsyncData(CreateReadHeader(ID, Unit, StartAddress, Length, fctReadInputRegister), ID)
     End Sub
 
     Private Sub WriteMultipleRegister(ByVal StartAddress As UShort, ByRef data As Byte())
         Dim ID As UShort = 8
-        Dim Unit As Byte = 1
+        Dim Unit As Byte = 2
 
         Dim numBytes As Integer = Convert.ToUInt16(data.Length)
         If ((numBytes Mod 2) _
@@ -414,8 +381,6 @@ Public Class BMS클라이언트
     End Sub
     Private Function GetData(ByVal num As Integer) As Byte()
         Dim word As Integer() = New Integer(num - 1) {}
-
-        ' Num은 Length인건가
 
         Try
             'word(x) = Convert.ToInt16(ctrl.Text)
@@ -455,38 +420,7 @@ Public Class BMS클라이언트
         Select Case ID
             Case 1
                 data = values
-                'heartbit = Convert.ToUInt16(values(1))
-                'Read Input Register
                 ShowAs()
-
-            Case 2
-
-                data = values
-
-            Case 3
-                data = values
-                'heartbit = Convert.ToUInt16(values(1))
-                'Debug.WriteLine("ID3 is : " + data(1).ToString)
-                ShowAs()
-            Case 4
-                'Read Input Register
-                data = values
-                Dim temp_value As UShort
-
-                cBMS_Rack(num_Rack).Max_Cell_Voltage = Convert.ToDouble(data(0))
-                temp_value = data(0) * 256 + data(1)
-                ' If temp_value > 0 Then
-                'Debug.WriteLine("ID4 is : " + temp_value.ToString)
-                ' End If
-                ShowAs()
-            Case 5
-
-            Case 6
-
-            Case 7
-
-            Case 8
-                ' Write 한거임
 
         End Select
     End Sub
@@ -526,142 +460,22 @@ Public Class BMS클라이언트
 
     Private Sub ShowAs()
         Dim x As UShort
-
-        Dim word As UShort() = New UShort(0) {}
-
-        If data.Length < 2 Then Return
-        word = New UShort(data.Length / 2 - 1) {}
+        Dim mysingle As Single() = New Single(0) {}
+        If data.Length < 4 Then Return
+        mysingle = New Single(data.Length / 4 - 1) {}
         x = 0
         While x < data.Length
-            word(x / 2) = data(x) * 256 + data(x + 1)
-            x = x + 2
+            mysingle(x / 4) = BAToSingle(data, x / 4)
+            x = x + 4
         End While
-
-        Display(word)
 
     End Sub
 
-    Private Function ReadStartAdr(ByVal nRack As UShort, ByVal nModule As UShort) As UShort
-
-        Dim nStartAddress As UShort
-        If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
-            nStartAddress = 0
-        ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
-            If nRack = 0 Then
-            Else
-                nStartAddress = (379 * nRack) - 354
-            End If
-
-        ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
-            If nRack = 0 Or nModule = 0 Then
-            Else
-                nStartAddress = (379 * nRack) + (9 * nModule) - 354
-            End If
-
-        End If
-
-        Return nStartAddress
-
+    Function BAToSingle(ByVal bytes() As Byte, ByVal index As Integer)
+        Dim value As Single = BitConverter.ToSingle(bytes, index)
+        BAToSingle = value
     End Function
-
-    Private Function ReadLength(ByVal nRack As UShort, ByVal nModule As UShort) As UShort
-
-        Dim nLength As UShort
-        If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
-            nLength = 25
-        ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
-            nLength = 19
-        ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
-            nLength = 9
-        End If
-
-        Return nLength
-
-    End Function
-
-    Private Function Set_BSCStatus()
-        Dim BSCStatus As UShort = 0
-
-        Select Case 현재BSC상태
-            Case BSC상태.Connect
-                ' 추후 수정이 필요함
-                현재BSC상태 = BSC상태.Initializing
-
-            Case BSC상태.Initializing
-                BSCStatus = SetBitmask(BSCStatus, 2, 1) ' Initializing
-                현재BSC상태 = BSC상태.Normal ' 추후 수정 필요
-            Case BSC상태.Normal
-            Case BSC상태.Contactor_Open
-
-                BSCStatus = SetBitmask(BSCStatus, 0, 0) ' Shutdown()
-                BSCStatus = SetBitmask(BSCStatus, 1, 0) ' Shutdown()
-        End Select
-
-        Return BSCStatus
-    End Function
-
-    Private Function controller_status()
-        Dim status As UShort
-
-        status = SetBitmask(status, 1, 1)
-
-        Return status
-    End Function
-    Private Function Set_BSC_Req_Contactor()
-        Dim status As UShort
-        Select Case 현재BSC상태
-            Case BSC상태.Contactor_Close
-                status = SetBitmask(status, 1, 1)
-                현재BSC상태 = BSC상태.Normal ' 추후 수정 필요
-            Case BSC상태.Contactor_Open1
-                현재BSC상태 = BSC상태.Contactor_Open2 ' 추후 수정 필요
-            Case BSC상태.Contactor_Open2
-                status = SetBitmask(status, 0, 1)
-                현재BSC상태 = BSC상태.Normal ' 추후 수정 필요
-            Case Else
-                status = SetBitmask(status, 1, 0)
-                status = SetBitmask(status, 2, 0)
-        End Select
-        Return status
-    End Function
-
-
     Private Sub Display(ByVal word() As UShort)
-
-        'Resolution에 대한 처리를 Display에서 하도록 변경
-
-        If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
-
-            Set_MODBUS_EMS_BUFFER(34, word(6))
-            'cBMS.Bank_SOC = word(10) * 0.1
-            cBMS.Bank_SOH = word(11) * 0.1
-            'cBMS.Bank_DC전압 = word(12) * 0.1
-            cBMS.Bank_DC전류 = Convert.ToInt16(word(13).ToString("X4"), 16) * 0.1
-            cBMS.Bank_충방전_전력_제한값 = word(14) * 0.1
-            cBMS.Bank내_Cell_최고_전압 = word(16) * 0.001
-            cBMS.Bank내_Cell_최소_전압 = word(18) * 0.001
-            cBMS.Bank내_Module_최고_온도 = Convert.ToInt16(word(20).ToString("X4"), 16) * 0.1
-            cBMS.Bank내_Module_최저_온도 = Convert.ToInt16(word(22).ToString("X4"), 16) * 0.1
-            cBMS.Bank_충방전_전력 = Convert.ToInt16(word(24).ToString("X4"), 16) * 0.1
-
-        ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
-            cBMS_Rack(num_Rack).Rack_SOC = word(3) * 0.1
-            cBMS_Rack(num_Rack).Rack_SOH = word(4) * 0.1
-            cBMS_Rack(num_Rack).Rack_Voltage = word(5) * 0.1
-            cBMS_Rack(num_Rack).Rack_Current = Convert.ToInt16(word(6).ToString("X4"), 16) * 0.1
-            cBMS_Rack(num_Rack).Max_Cell_Voltage = word(7)
-            cBMS_Rack(num_Rack).Max_Cell_Voltage_Position = word(8)
-            cBMS_Rack(num_Rack).Min_Cell_Voltage = word(9)
-            cBMS_Rack(num_Rack).Min_Cell_Voltage_Position = word(10)
-            cBMS_Rack(num_Rack).Cell_Voltage_Gap = word(11)
-            cBMS_Rack(num_Rack).Rack_Average_Cell_Voltage = word(12)
-            cBMS_Rack(num_Rack).Max_Cell_Temperature = Convert.ToInt16(word(13).ToString("X4"), 16) * 0.1
-            cBMS_Rack(num_Rack).Max_Cell_Temperature_Position = word(14)
-            cBMS_Rack(num_Rack).Min_Cell_Temperature = Convert.ToInt16(word(14).ToString("X4"), 16) * 0.1
-            cBMS_Rack(num_Rack).Min_Cell_Temperature_Position = word(15)
-            cBMS_Rack(num_Rack).Cell_Temperature_Gap = word(16)
-            cBMS_Rack(num_Rack).Rack_Average_Module_Temperature = word(17)
-        End If
 
     End Sub
 

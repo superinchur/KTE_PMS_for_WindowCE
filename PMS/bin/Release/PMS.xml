@@ -6,7 +6,43 @@ PMS
 </name>
 </assembly>
 <members>
-<member name="F:PMS.BMS클라이언트.excIllegalFunction">
+<member name="F:PMS.EPIC2500.excIllegalFunction">
+	<summary>Constant for exception illegal function.</summary>
+</member><member name="F:PMS.EPIC2500.excIllegalDataAdr">
+	<summary>Constant for exception illegal data address.</summary>
+</member><member name="F:PMS.EPIC2500.excIllegalDataVal">
+	<summary>Constant for exception illegal data value.</summary>
+</member><member name="F:PMS.EPIC2500.excSlaveDeviceFailure">
+	<summary>Constant for exception slave device failure.</summary>
+</member><member name="F:PMS.EPIC2500.excAck">
+	<summary>Constant for exception acknowledge.</summary>
+</member><member name="F:PMS.EPIC2500.excSlaveIsBusy">
+	<summary>Constant for exception slave is busy/booting up.</summary>
+</member><member name="F:PMS.EPIC2500.excGatePathUnavailable">
+	<summary>Constant for exception gate path unavailable.</summary>
+</member><member name="F:PMS.EPIC2500.excExceptionNotConnected">
+	<summary>Constant for exception not connected.</summary>
+</member><member name="F:PMS.EPIC2500.excExceptionConnectionLost">
+	<summary>Constant for exception connection lost.</summary>
+</member><member name="F:PMS.EPIC2500.excExceptionTimeout">
+	<summary>Constant for exception response timeout.</summary>
+</member><member name="F:PMS.EPIC2500.excExceptionOffset">
+	<summary>Constant for exception wrong offset.</summary>
+</member><member name="F:PMS.EPIC2500.excSendFailt">
+	<summary>Constant for exception send failt.</summary>
+</member><member name="T:PMS.EPIC2500.ResponseData">
+	<summary>Response data event. This event is called when new data arrives</summary>
+</member><member name="E:PMS.EPIC2500.OnResponseData">
+	<summary>Response data event. This event is called when new data arrives</summary>
+</member><member name="T:PMS.EPIC2500.ExceptionData">
+	<summary>Exception data event. This event is called when the data is incorrect</summary>
+</member><member name="E:PMS.EPIC2500.OnException">
+	<summary>Exception data event. This event is called when the data is incorrect</summary>
+</member><member name="M:PMS.EPIC2500.connect(System.String,System.Int32)">
+	<summary>Start connection to slave.</summary>
+	<param name="ip">IP adress of modbus slave.</param>
+	<param name="port">Port number of modbus slave. Usually port 502 is used.</param>
+</member><member name="F:PMS.BMS클라이언트.excIllegalFunction">
 	<summary>Constant for exception illegal function.</summary>
 </member><member name="F:PMS.BMS클라이언트.excIllegalDataAdr">
 	<summary>Constant for exception illegal data address.</summary>
@@ -42,6 +78,19 @@ PMS
 	<summary>Start connection to slave.</summary>
 	<param name="ip">IP adress of modbus slave.</param>
 	<param name="port">Port number of modbus slave. Usually port 502 is used.</param>
+</member><member name="P:PMS.My.Resources.Resources.ResourceManager">
+	<summary>
+  이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
+</summary>
+</member><member name="P:PMS.My.Resources.Resources.Culture">
+	<summary>
+  이 강력한 형식의 리소스 클래스를 사용하여 모든 리소스 조회에 대한 현재 스레드의 CurrentUICulture
+  속성을 재정의합니다.
+</summary>
+</member><member name="T:PMS.My.Resources.Resources">
+	<summary>
+  지역화된 문자열 등을 찾기 위한 강력한 형식의 리소스 클래스입니다.
+</summary>
 </member><member name="F:PMS.ModbusTCP.Master.excIllegalFunction">
 	<summary>Constant for exception illegal function.</summary>
 </member><member name="F:PMS.ModbusTCP.Master.excIllegalDataAdr">
@@ -96,19 +145,6 @@ PMS
 	<summary>Destroy master instance.</summary>
 </member><member name="M:PMS.ModbusTCP.Master.Dispose">
 	<summary>Destroy master instance</summary>
-</member><member name="P:PMS.My.Resources.Resources.ResourceManager">
-	<summary>
-  이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
-</summary>
-</member><member name="P:PMS.My.Resources.Resources.Culture">
-	<summary>
-  이 강력한 형식의 리소스 클래스를 사용하여 모든 리소스 조회에 대한 현재 스레드의 CurrentUICulture
-  속성을 재정의합니다.
-</summary>
-</member><member name="T:PMS.My.Resources.Resources">
-	<summary>
-  지역화된 문자열 등을 찾기 위한 강력한 형식의 리소스 클래스입니다.
-</summary>
 </member>
 </members>
 </doc>

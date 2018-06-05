@@ -155,8 +155,12 @@
     <Compile Include="2. 통신\4. BMS\BMS클라이언트.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="2. 통신\4. BMS\BMS통신서버.vb" />
-    <Compile Include="2. 통신\4. BMS\BMS통신차일드.vb" />
+    <Compile Include="2. 통신\4. BMS\EPIC2500.Designer.vb">
+      <DependentUpon>EPIC2500.vb</DependentUpon>
+    </Compile>
+    <Compile Include="2. 통신\4. BMS\EPIC2500.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="9. 코드\IniFileVb.vb" />
     <Compile Include="9. 코드\MBMaster.vb" />
     <Compile Include="9. 코드\모듈_고장함수.vb" />
@@ -239,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="2. 통신\4. BMS\BMS클라이언트.resx">
       <DependentUpon>BMS클라이언트.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="2. 통신\4. BMS\EPIC2500.resx">
+      <DependentUpon>EPIC2500.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

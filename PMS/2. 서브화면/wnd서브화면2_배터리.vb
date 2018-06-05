@@ -61,7 +61,7 @@
 
         ' -------------------------------------------------------------------------------------------------------
         ' 배터리 상태 
-        Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
 
         Dim nCharge As Integer = ushValue >> 4 And &H1
         Dim nDischarge As Integer = ushValue >> 5 And &H1
@@ -253,16 +253,6 @@
                 lCell최소온도위치.Text = cBMS_Rack(num_Rack).Min_Cell_Temperature_Position
                 lCell온도편차.Text = Convert.ToString(cBMS_Rack(num_Rack).Cell_Temperature_Gap)
                 l랙평균모듈온도.Text = cBMS_Rack(num_Rack).Rack_Average_Module_Temperature
-            ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
-                l모듈전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Module_DC_Voltage) + " V"
-                l모듈내Cell최대전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Max_Cell_Voltage) + " V"
-                l모듈내Cell최저전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Min_Cell_Voltage) + " V"
-                l모듈내Cell평균전압.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Averge_Cell_Voltage) + " V"
-                l최고최저셀전압위치.Text = cBMS_Module(num_Rack, num_Module).Max_Min_Cell_Voltage_Location
-                l모듈평균온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Average_Module_Temperature) + " °C"
-                l모듈최고온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Max_Module_Temperature) + " °C"
-                l모듈최저온도.Text = Convert.ToString(cBMS_Module(num_Rack, num_Module).Min_Module_Temeperature) + " °C"
-                l모듈최고최저온도위치.Text = cBMS_Module(num_Rack, num_Module).Max_Min_Module_Temperature_Location
             End If
 
         Catch ex As Exception

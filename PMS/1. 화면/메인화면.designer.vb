@@ -32,7 +32,9 @@ Partial Public Class 메인화면
         Me.버튼_화면전환_배터리 = New PMS.VSPictureButton
         Me.버튼_화면전환_메인 = New PMS.VSPictureButton
         Me.판넬_통신상태 = New System.Windows.Forms.Panel
+        Me.VsLabel4 = New PMS.VSLabel
         Me.VsLabel5 = New PMS.VSLabel
+        Me.pbMETER = New System.Windows.Forms.PictureBox
         Me.pbBMS = New System.Windows.Forms.PictureBox
         Me.VsLabel2 = New PMS.VSLabel
         Me.VsLabel1 = New PMS.VSLabel
@@ -221,7 +223,9 @@ Partial Public Class 메인화면
         '판넬_통신상태
         '
         Me.판넬_통신상태.BackColor = System.Drawing.Color.White
+        Me.판넬_통신상태.Controls.Add(Me.VsLabel4)
         Me.판넬_통신상태.Controls.Add(Me.VsLabel5)
+        Me.판넬_통신상태.Controls.Add(Me.pbMETER)
         Me.판넬_통신상태.Controls.Add(Me.pbBMS)
         Me.판넬_통신상태.Controls.Add(Me.VsLabel2)
         Me.판넬_통신상태.Controls.Add(Me.VsLabel1)
@@ -233,22 +237,42 @@ Partial Public Class 메인화면
         Me.판넬_통신상태.Name = "판넬_통신상태"
         Me.판넬_통신상태.Size = New System.Drawing.Size(800, 40)
         '
+        'VsLabel4
+        '
+        Me.VsLabel4.BackColor = System.Drawing.Color.White
+        Me.VsLabel4.BorderWidth = 0
+        Me.VsLabel4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel4.Location = New System.Drawing.Point(570, 2)
+        Me.VsLabel4.Name = "VsLabel4"
+        Me.VsLabel4.Size = New System.Drawing.Size(87, 34)
+        Me.VsLabel4.TabIndex = 9
+        Me.VsLabel4.Text = "METER :"
+        Me.VsLabel4.TextAlign = System.Drawing.StringAlignment.Far
+        '
         'VsLabel5
         '
         Me.VsLabel5.BackColor = System.Drawing.Color.White
         Me.VsLabel5.BorderWidth = 0
         Me.VsLabel5.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel5.Location = New System.Drawing.Point(336, 2)
+        Me.VsLabel5.Location = New System.Drawing.Point(213, 2)
         Me.VsLabel5.Name = "VsLabel5"
         Me.VsLabel5.Size = New System.Drawing.Size(59, 34)
         Me.VsLabel5.TabIndex = 3
         Me.VsLabel5.Text = "BMS :"
         Me.VsLabel5.TextAlign = System.Drawing.StringAlignment.Far
         '
+        'pbMETER
+        '
+        Me.pbMETER.Image = CType(resources.GetObject("pbMETER.Image"), System.Drawing.Image)
+        Me.pbMETER.Location = New System.Drawing.Point(663, 2)
+        Me.pbMETER.Name = "pbMETER"
+        Me.pbMETER.Size = New System.Drawing.Size(47, 34)
+        Me.pbMETER.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        '
         'pbBMS
         '
         Me.pbBMS.Image = CType(resources.GetObject("pbBMS.Image"), System.Drawing.Image)
-        Me.pbBMS.Location = New System.Drawing.Point(401, 2)
+        Me.pbBMS.Location = New System.Drawing.Point(278, 2)
         Me.pbBMS.Name = "pbBMS"
         Me.pbBMS.Size = New System.Drawing.Size(47, 34)
         Me.pbBMS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -258,7 +282,7 @@ Partial Public Class 메인화면
         Me.VsLabel2.BackColor = System.Drawing.Color.White
         Me.VsLabel2.BorderWidth = 0
         Me.VsLabel2.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel2.Location = New System.Drawing.Point(575, 3)
+        Me.VsLabel2.Location = New System.Drawing.Point(452, 3)
         Me.VsLabel2.Name = "VsLabel2"
         Me.VsLabel2.Size = New System.Drawing.Size(59, 34)
         Me.VsLabel2.TabIndex = 0
@@ -270,7 +294,7 @@ Partial Public Class 메인화면
         Me.VsLabel1.BackColor = System.Drawing.Color.White
         Me.VsLabel1.BorderWidth = 0
         Me.VsLabel1.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel1.Location = New System.Drawing.Point(457, 3)
+        Me.VsLabel1.Location = New System.Drawing.Point(334, 3)
         Me.VsLabel1.Name = "VsLabel1"
         Me.VsLabel1.Size = New System.Drawing.Size(59, 34)
         Me.VsLabel1.TabIndex = 1
@@ -280,7 +304,7 @@ Partial Public Class 메인화면
         'pbEMS
         '
         Me.pbEMS.Image = CType(resources.GetObject("pbEMS.Image"), System.Drawing.Image)
-        Me.pbEMS.Location = New System.Drawing.Point(640, 3)
+        Me.pbEMS.Location = New System.Drawing.Point(517, 3)
         Me.pbEMS.Name = "pbEMS"
         Me.pbEMS.Size = New System.Drawing.Size(47, 34)
         Me.pbEMS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -288,7 +312,7 @@ Partial Public Class 메인화면
         'pbPCS
         '
         Me.pbPCS.Image = CType(resources.GetObject("pbPCS.Image"), System.Drawing.Image)
-        Me.pbPCS.Location = New System.Drawing.Point(522, 3)
+        Me.pbPCS.Location = New System.Drawing.Point(399, 3)
         Me.pbPCS.Name = "pbPCS"
         Me.pbPCS.Size = New System.Drawing.Size(47, 34)
         Me.pbPCS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -566,5 +590,7 @@ Partial Public Class 메인화면
     Friend WithEvents 타이머_사용모드 As System.Windows.Forms.Timer
     Friend WithEvents VsLabel5 As PMS.VSLabel
     Friend WithEvents pbBMS As System.Windows.Forms.PictureBox
+    Friend WithEvents VsLabel4 As PMS.VSLabel
+    Friend WithEvents pbMETER As System.Windows.Forms.PictureBox
 
 End Class

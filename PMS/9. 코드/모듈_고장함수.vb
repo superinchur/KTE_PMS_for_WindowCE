@@ -1,15 +1,11 @@
 ﻿Module 모듈_고장함수
 
-    Public FAULT_CODE(,) As String = {{"35_0", "Battery Fuse 손상"}, {"35_1", "reserved"}, {"35_2", "DC Link Over-Current"}, {"35_3", "DC Link Over-Voltage"}, _
-                        {"35_4", "INV Over-Currnet"}, {"35_5", "INV Over-Voltage"}, {"35_6", "상전류 불평형"}, {"35_7", "INV Stack Over-temp"}, _
-                        {"35_8", "CON Stack Over-temp"}, {"35_9", "함체 내부 Over-temp"}, {"35_10", "Transfomer Over-temp"}, {"35_11", "Reator Over-temp"}, _
-                        {"35_12", "INV_STACK_Fault"}, {"35_13", "Over_LOAD"}, {"35_14", "reserved"}, {"35_15", "reserved"}, _
-                        {"36_0", "정전"}, {"36_1", "Grid Over-Voltage"}, {"36_2", "Grid Under-Voltage"}, {"36_3", "Over-Frequency"}, {"36_4", "Under-Frequency"}, _
-                        {"36_5", "reserevd"}, {"36_6", "누설 전류"}, {"36_7", "reserved"}, {"36_8", "reserved"}, {"36_9", "reserved"}, {"36_10", "reserved"}, _
-                        {"36_11", "reserved"}, {"36_12", "reserved"}, {"36_13", "reserved"}, {"36_14", "reserved"}, {"36_15", "reserved"}, _
-                        {"37_0", "EMO"}, {"37_1", "Door A open"}, {"37_2", "Door B open"}, {"37_3", "Grid SPD 교체 필요"}, {"37_4", "Load SPD 교체 필요"}, _
-                        {"37_5", "Grid CB open"}, {"37_6", "INV CB open"}, {"37_7", "INV MC open"}, {"37_8", "BAT CB open"}, {"37_9", "PV S/W open"}, _
-                        {"37_10", "reserved"}, {"37_11", "reserved"}, {"37_12", "reserved"}, {"37_13", "reserved"}, {"37_14", "reserved"}, {"37_15", "PCS COMM FAULT"}}
+    Public FAULT_CODE(,) As String = {{"46_0", "Black out"}, {"46_1", "Over frequency"}, {"46_2", "Under frequency"}, {"46_3", "Over Voltage"}, _
+                            {"46_4", "Under Voltage"}, {"46_5", "Reserved"}, {"46_6", "Reserved"}, {"46_7", "Reserved"}, _
+                            {"46_8", "Reserved"}, {"46_9", "Reserved"}, {"46_10", "Reserved"}, {"46_11", "Reserved"}, _
+                            {"46_12", "Reserved"}, {"46_13", "Reserved"}, {"46_13", "Reserved"}, {"46_14", "Reserved"}, {"46_15", "Reserved"}, _
+                            {"47_0", "INV_OVR"}, {"47_1", "INV_OCR"}, {"47_2", "GRID_OCR"}, {"47_3", "DC_OCR"}, {"47_4", "DC_UVR"}, {"47_5", "DC_OCR"}, _
+                            {"47_6", "OT"}, {"47_7", "Door_Open_Fault"}, {"47_8", "PCS Comm Fault"}, {"47_9", "HW Fault"}}
 
     Public BMS_FAULT_CODE(,) As String = {{"6_7", "Over Current Discharge Warning"}, _
         {"6_6", "Over Current Cahrge Warning"}, _
