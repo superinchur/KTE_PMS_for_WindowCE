@@ -44,7 +44,7 @@ Public Class EMS통신차일드
     Public Sub OnDataArrived(ByVal szAddr As String, ByVal nPort As Integer, ByVal szMode As String, ByVal btData() As Byte, ByVal nLength As Integer)
         Try
             If nLength > 0 Then
-                'RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
+                RaiseEvent DataArrived(szAddr, nPort, szMode, btData, nLength)
             End If
         Catch ex As Exception
             Debug.WriteLine("")
@@ -56,7 +56,7 @@ Public Class EMS통신차일드
             For i As Integer = 0 To nLength - 1
                 szRecvMsg &= String.Format("{0:X2} ", btData(i))
             Next
-            'Debug.WriteLine(szRecvMsg)
+            Debug.WriteLine(szRecvMsg)
 
 
             Array.Copy(btData, 0, btRecvBuffer, nRecvBuffer, nLength)
@@ -89,22 +89,22 @@ Public Class EMS통신차일드
                         ' 단일 제어 명령
 
                         If nRecvBuffer >= TCPFrameHeaderLength + 6 Then
+                            ' REMOTE 모드일 떄는 막아야한다
+
                             WriteSingleRegister(btFrameData, nFrameLength)
-                        End If
+                    End If
 
-                    ElseIf btFrameCommand = &H10 Then
-                        ' 복수 제어 명령 
-
-                        If nRecvBuffer >= TCPFrameHeaderLength + 7 Then
-                            Dim nDataCount As Integer = btRecvBuffer(6)
-
-                            If nRecvBuffer >= TCPFrameHeaderLength + 7 + nDataCount Then
-
-                                WriteMultiRegister(btFrameData, nFrameLength)
-
-                            End If
-
-                        End If
+                        '현재 사용하지 않음
+                        'ElseIf btFrameCommand = &H10 Then
+                        '    ' 복수 제어 명령 
+                        '    If nRecvBuffer >= TCPFrameHeaderLength + 7 Then
+                        'Dim nDataCount As Integer = btRecvBuffer(6)
+                        '
+                        'If nRecvBuffer >= TCPFrameHeaderLength + 7 + nDataCount Then
+                        '
+                        '    'WriteMultiRegister(btFrameData, nFrameLength)
+                        '
+                        'End If
                     Else
                         Array.Clear(btRecvBuffer, 0, btRecvBuffer.Length)
                         nRecvBuffer = 0
@@ -155,8 +155,6 @@ Public Class EMS통신차일드
             Dim nAddrESS As Integer = btRecv(2) * &H100 + btRecv(3)
             Dim nDataCount As Integer = btRecv(4) * &H100 + btRecv(5)
 
-
-
             EMS_MODBUS_ADDRESS = nAddrESS
 
             Dim btSendData(1024) As Byte
@@ -186,40 +184,18 @@ Public Class EMS통신차일드
         Dim nAddress As Integer = btData(2) * &H100 + btData(3)
         Dim nWriteData As Integer = btData(4) * &H100 + btData(5)
 
-        Dim bMatch As Boolean = True
+        If nAddress < 512 Then
 
-        Select Case nAddress
-            Case 1
-                ' PCS1 MODE SET
-                nAddress = 38
-            Case 2
-                ' PCS2 MODE SET
-                nAddress = 38
-            Case 3
-                ' PCS1 POWER ACTIVE SET
-                nAddress = 44
-            Case 4
-                ' PCS1 POWER REACTIVE SET
-                nAddress = 45
-            Case 5
-                ' PCS2 POWER ACTIVE SET
-                nAddress = 44
-            Case 6
-                ' PCS2 POWER REACTIVE SET
-                nAddress = 45
-            Case 7
-                ' PCS1 RESET SET
-                nAddress = 38
-                nWriteData = &H1
-            Case 8
-                ' PCS2 RESET SET
-                nAddress = 38
-                nWriteData = &H1
-            Case Else
-                bMatch = False
-        End Select
-
-        제어대기열_추가(nAddress, nWriteData)
+            If 현재사용모드_리모트모드 = False Then
+                If nAddress >= 0 And nAddress <= 2 Then
+                    WriteDataFrame(btData, nData)
+                    Exit Sub
+                End If
+                else
+            End If
+            MODBUS_EMS_BUFFER(2 * nAddress) = btData(4)
+            MODBUS_EMS_BUFFER(2 * nAddress + 1) = btData(5)
+        End If
 
         WriteDataFrame(btData, nData)
 
@@ -227,50 +203,21 @@ Public Class EMS통신차일드
 
     Private Sub WriteMultiRegister(ByVal btData() As Byte, ByVal nData As Integer)
 
-        Dim nAddress As Integer = btData(2) * &H100 + btData(3)
-        Dim nDataCount As Integer = btData(4) * &H100 + btData(5)
-        Dim nDataByte As Integer = btData(6)
+        ' 사용하지 않는 함수
+        'Dim nAddress As Integer = btData(2) * &H100 + btData(3)
+        'Dim nDataCount As Integer = btData(4) * &H100 + btData(5)
+        'Dim nDataByte As Integer = btData(6)
 
-        Dim nWriteData As Integer = btData(7) * &H100 + btData(8)
+        'Dim nWriteData As Integer = btData(7) * &H100 + btData(8)
 
-        Dim bMatch As Boolean = True
 
-        Select Case nAddress
-            Case 1
-                ' PCS1 MODE SET
-                nAddress = 38
-            Case 2
-                ' PCS2 MODE SET
-                nAddress = 38
-            Case 3
-                ' PCS1 POWER ACTIVE SET
-                nAddress = 44
-            Case 4
-                ' PCS1 POWER REACTIVE SET
-                nAddress = 45
-            Case 5
-                ' PCS2 POWER ACTIVE SET
-                nAddress = 44
-            Case 6
-                ' PCS2 POWER REACTIVE SET
-                nAddress = 45
-            Case 7
-                ' PCS1 RESET SET
-                nAddress = 38
-                nWriteData = &H1
-            Case 8
-                ' PCS2 RESET SET
-                nAddress = 38
-                nWriteData = &H1
-            Case Else
-                bMatch = False
-        End Select
+        'If nAddress < 100 Then
+        'MODBUS_EMS_BUFFER(2 * nAddress) = btData(7)
+        'MODBUS_EMS_BUFFER(2 * nAddress + 1) = btData(8)
+        '제어대기열_추가(nAddress, nWriteData)
+        'End If
 
-        If bMatch = True Then
-            제어대기열_추가(nAddress, nWriteData)
-        End If
-
-        WriteDataFrame(btData, nData)
+        'WriteDataFrame(btData, nData)
 
     End Sub
 
@@ -294,14 +241,6 @@ Public Class EMS통신차일드
         nSendData += nData
 
         pClientSocket.sckSend(btSendData, nSendData)
-
-
-
-        'Dim szRecvMsg As String = "EMS TX : "
-        'For i As Integer = 0 To nSendData - 1
-        '    szRecvMsg &= String.Format("{0:X2} ", btSendData(i))
-        'Next
-        'Debug.WriteLine(szRecvMsg)
 
     End Sub
 End Class

@@ -21,6 +21,9 @@ Public Class wnd서브화면7_설정
     End Sub
 
 
+    Private 그리드상태 As Integer = -1
+
+
     Private Sub 초기화_옵션()
 
         ' ---------------------------------------------------------------------------------------
@@ -41,14 +44,11 @@ Public Class wnd서브화면7_설정
 
         For i As Integer = 0 To 시리얼포트배열.Count - 1
             cbPCS통신포트.Items.Add(String.Format("COM{0}", 시리얼포트배열(i)))
-            cbBMS통신포트.Items.Add(String.Format("COM{0}", 시리얼포트배열(i)))
+            'cbBMS통신포트.Items.Add(String.Format("COM{0}", 시리얼포트배열(i)))
         Next
 
         If cbPCS통신포트.Items.Count > 0 Then
             cbPCS통신포트.SelectedIndex = 0
-        End If
-        If cbBMS통신포트.Items.Count > 0 Then
-            cbBMS통신포트.SelectedIndex = 0
         End If
 
         ' ---------------------------------------------------------------------------------------
@@ -68,24 +68,6 @@ Public Class wnd서브화면7_설정
         cbPCS통신주기.Items.Add("4500")
         cbPCS통신주기.Items.Add("5000")
         cbPCS통신주기.SelectedIndex = 0
-
-        ' 통신주기
-        cbBMS통신주기.Items.Add("100")
-        cbBMS통신주기.Items.Add("200")
-        cbBMS통신주기.Items.Add("300")
-        cbBMS통신주기.Items.Add("400")
-        cbBMS통신주기.Items.Add("500")
-        cbBMS통신주기.Items.Add("1000")
-        cbBMS통신주기.Items.Add("1500")
-        cbBMS통신주기.Items.Add("2000")
-        cbBMS통신주기.Items.Add("2500")
-        cbBMS통신주기.Items.Add("3000")
-        cbBMS통신주기.Items.Add("3500")
-        cbBMS통신주기.Items.Add("4000")
-        cbBMS통신주기.Items.Add("4500")
-        cbBMS통신주기.Items.Add("5000")
-        cbBMS통신주기.SelectedIndex = 0
-
 
         Panel1.BackColor = Color.White
 
@@ -519,10 +501,6 @@ Public Class wnd서브화면7_설정
             설정변경_PCS = True
         End If
 
-        If BMS_통신포트 <> cbBMS통신포트.SelectedItem & "" Then
-            BMS_통신포트 = cbBMS통신포트.SelectedItem & ""
-            설정변경_BMS = True
-        End If
 
         If PCS_통신주기 <> Val(cbPCS통신주기.SelectedItem & "") Then
             PCS_통신주기 = Val(cbPCS통신주기.SelectedItem & "")
@@ -942,15 +920,22 @@ Public Class wnd서브화면7_설정
 
     End Sub
 
-    Private Sub Label7_ParentChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label7.ParentChanged
+    Private Sub Label7_ParentChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
 
-    Private Sub cbBMS통신주기_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbBMS통신주기.SelectedIndexChanged
+    Private Sub cbBMS통신주기_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
 
-    Private Sub Label6_ParentChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label6.ParentChanged
+    Private Sub Label6_ParentChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
+
+    Private Sub VsPictureButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsPictureButton3.Click
+        If MsgBox("프로그램을 종료 하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "알림") = MsgBoxResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
+
 End Class

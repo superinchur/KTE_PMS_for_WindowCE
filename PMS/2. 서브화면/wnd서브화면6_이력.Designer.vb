@@ -621,6 +621,7 @@ Partial Public Class wnd서브화면6_이력
         Me.PageHeader4.TabIndex = 40
         Me.PageHeader4.Text = "전장 상태"
         Me.PageHeader4.TextAlign = System.Drawing.StringAlignment.Center
+        Me.PageHeader4.Visible = False
         '
         'PageHeader3
         '
@@ -638,6 +639,7 @@ Partial Public Class wnd서브화면6_이력
         Me.PageHeader3.TabIndex = 40
         Me.PageHeader3.Text = "통신 이력"
         Me.PageHeader3.TextAlign = System.Drawing.StringAlignment.Center
+        Me.PageHeader3.Visible = False
         '
         'PageHeader2
         '
@@ -655,6 +657,7 @@ Partial Public Class wnd서브화면6_이력
         Me.PageHeader2.TabIndex = 38
         Me.PageHeader2.Text = "정전 이력"
         Me.PageHeader2.TextAlign = System.Drawing.StringAlignment.Center
+        Me.PageHeader2.Visible = False
         '
         'PageHeader1
         '

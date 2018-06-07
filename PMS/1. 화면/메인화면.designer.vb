@@ -23,15 +23,16 @@ Partial Public Class 메인화면
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(메인화면))
         Me.타이머_상태 = New System.Windows.Forms.Timer
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.버튼_화면전환_사용모드 = New PMS.VSPictureButton
+        Me.버튼_화면전환_메인 = New PMS.VSPictureButton
         Me.VsPictureButton8 = New PMS.VSPictureButton
         Me.버튼_화면전환_설정 = New PMS.VSPictureButton
         Me.버튼_화면전환_이력 = New PMS.VSPictureButton
-        Me.버튼_화면전환_사용모드 = New PMS.VSPictureButton
         Me.버튼_화면전환_소비 = New PMS.VSPictureButton
         Me.버튼_화면전환_수요관리 = New PMS.VSPictureButton
         Me.버튼_화면전환_배터리 = New PMS.VSPictureButton
-        Me.버튼_화면전환_메인 = New PMS.VSPictureButton
         Me.판넬_통신상태 = New System.Windows.Forms.Panel
+        Me.lb현재모드상태 = New PMS.VSLabel
         Me.VsLabel5 = New PMS.VSLabel
         Me.pbBMS = New System.Windows.Forms.PictureBox
         Me.VsLabel2 = New PMS.VSLabel
@@ -76,19 +77,51 @@ Partial Public Class 메인화면
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.버튼_화면전환_사용모드)
+        Me.Panel1.Controls.Add(Me.버튼_화면전환_메인)
         Me.Panel1.Controls.Add(Me.VsPictureButton8)
         Me.Panel1.Controls.Add(Me.버튼_화면전환_설정)
         Me.Panel1.Controls.Add(Me.버튼_화면전환_이력)
-        Me.Panel1.Controls.Add(Me.버튼_화면전환_사용모드)
         Me.Panel1.Controls.Add(Me.버튼_화면전환_소비)
         Me.Panel1.Controls.Add(Me.버튼_화면전환_수요관리)
         Me.Panel1.Controls.Add(Me.버튼_화면전환_배터리)
-        Me.Panel1.Controls.Add(Me.버튼_화면전환_메인)
         Me.Panel1.Controls.Add(Me.판넬_통신상태)
         Me.Panel1.Controls.Add(Me.pnlWorkArea)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(800, 480)
+        '
+        '버튼_화면전환_사용모드
+        '
+        Me.버튼_화면전환_사용모드.BackgroundImageValue = CType(resources.GetObject("버튼_화면전환_사용모드.BackgroundImageValue"), System.Drawing.Image)
+        Me.버튼_화면전환_사용모드.BorderColor = System.Drawing.Color.Gray
+        Me.버튼_화면전환_사용모드.BorderSide_Bottom = False
+        Me.버튼_화면전환_사용모드.BorderSide_Left = False
+        Me.버튼_화면전환_사용모드.BorderSide_Right = False
+        Me.버튼_화면전환_사용모드.BorderSide_Top = False
+        Me.버튼_화면전환_사용모드.BorderWidth = 0
+        Me.버튼_화면전환_사용모드.Location = New System.Drawing.Point(400, 377)
+        Me.버튼_화면전환_사용모드.Name = "버튼_화면전환_사용모드"
+        Me.버튼_화면전환_사용모드.PressedImageValue = CType(resources.GetObject("버튼_화면전환_사용모드.PressedImageValue"), System.Drawing.Image)
+        Me.버튼_화면전환_사용모드.Selected = False
+        Me.버튼_화면전환_사용모드.Size = New System.Drawing.Size(100, 102)
+        Me.버튼_화면전환_사용모드.TabIndex = 8
+        '
+        '버튼_화면전환_메인
+        '
+        Me.버튼_화면전환_메인.BackgroundImageValue = CType(resources.GetObject("버튼_화면전환_메인.BackgroundImageValue"), System.Drawing.Image)
+        Me.버튼_화면전환_메인.BorderColor = System.Drawing.Color.Gray
+        Me.버튼_화면전환_메인.BorderSide_Bottom = False
+        Me.버튼_화면전환_메인.BorderSide_Left = False
+        Me.버튼_화면전환_메인.BorderSide_Right = False
+        Me.버튼_화면전환_메인.BorderSide_Top = False
+        Me.버튼_화면전환_메인.BorderWidth = 0
+        Me.버튼_화면전환_메인.Location = New System.Drawing.Point(0, 377)
+        Me.버튼_화면전환_메인.Name = "버튼_화면전환_메인"
+        Me.버튼_화면전환_메인.PressedImageValue = CType(resources.GetObject("버튼_화면전환_메인.PressedImageValue"), System.Drawing.Image)
+        Me.버튼_화면전환_메인.Selected = False
+        Me.버튼_화면전환_메인.Size = New System.Drawing.Size(100, 102)
+        Me.버튼_화면전환_메인.TabIndex = 8
         '
         'VsPictureButton8
         '
@@ -138,22 +171,6 @@ Partial Public Class 메인화면
         Me.버튼_화면전환_이력.Size = New System.Drawing.Size(100, 102)
         Me.버튼_화면전환_이력.TabIndex = 7
         '
-        '버튼_화면전환_사용모드
-        '
-        Me.버튼_화면전환_사용모드.BackgroundImageValue = CType(resources.GetObject("버튼_화면전환_사용모드.BackgroundImageValue"), System.Drawing.Image)
-        Me.버튼_화면전환_사용모드.BorderColor = System.Drawing.Color.Gray
-        Me.버튼_화면전환_사용모드.BorderSide_Bottom = False
-        Me.버튼_화면전환_사용모드.BorderSide_Left = False
-        Me.버튼_화면전환_사용모드.BorderSide_Right = False
-        Me.버튼_화면전환_사용모드.BorderSide_Top = False
-        Me.버튼_화면전환_사용모드.BorderWidth = 0
-        Me.버튼_화면전환_사용모드.Location = New System.Drawing.Point(400, 377)
-        Me.버튼_화면전환_사용모드.Name = "버튼_화면전환_사용모드"
-        Me.버튼_화면전환_사용모드.PressedImageValue = CType(resources.GetObject("버튼_화면전환_사용모드.PressedImageValue"), System.Drawing.Image)
-        Me.버튼_화면전환_사용모드.Selected = False
-        Me.버튼_화면전환_사용모드.Size = New System.Drawing.Size(100, 102)
-        Me.버튼_화면전환_사용모드.TabIndex = 6
-        '
         '버튼_화면전환_소비
         '
         Me.버튼_화면전환_소비.BackgroundImageValue = CType(resources.GetObject("버튼_화면전환_소비.BackgroundImageValue"), System.Drawing.Image)
@@ -202,25 +219,10 @@ Partial Public Class 메인화면
         Me.버튼_화면전환_배터리.Size = New System.Drawing.Size(100, 102)
         Me.버튼_화면전환_배터리.TabIndex = 3
         '
-        '버튼_화면전환_메인
-        '
-        Me.버튼_화면전환_메인.BackgroundImageValue = CType(resources.GetObject("버튼_화면전환_메인.BackgroundImageValue"), System.Drawing.Image)
-        Me.버튼_화면전환_메인.BorderColor = System.Drawing.Color.Gray
-        Me.버튼_화면전환_메인.BorderSide_Bottom = False
-        Me.버튼_화면전환_메인.BorderSide_Left = False
-        Me.버튼_화면전환_메인.BorderSide_Right = False
-        Me.버튼_화면전환_메인.BorderSide_Top = False
-        Me.버튼_화면전환_메인.BorderWidth = 0
-        Me.버튼_화면전환_메인.Location = New System.Drawing.Point(0, 377)
-        Me.버튼_화면전환_메인.Name = "버튼_화면전환_메인"
-        Me.버튼_화면전환_메인.PressedImageValue = CType(resources.GetObject("버튼_화면전환_메인.PressedImageValue"), System.Drawing.Image)
-        Me.버튼_화면전환_메인.Selected = False
-        Me.버튼_화면전환_메인.Size = New System.Drawing.Size(100, 102)
-        Me.버튼_화면전환_메인.TabIndex = 3
-        '
         '판넬_통신상태
         '
         Me.판넬_통신상태.BackColor = System.Drawing.Color.White
+        Me.판넬_통신상태.Controls.Add(Me.lb현재모드상태)
         Me.판넬_통신상태.Controls.Add(Me.VsLabel5)
         Me.판넬_통신상태.Controls.Add(Me.pbBMS)
         Me.판넬_통신상태.Controls.Add(Me.VsLabel2)
@@ -233,12 +235,29 @@ Partial Public Class 메인화면
         Me.판넬_통신상태.Name = "판넬_통신상태"
         Me.판넬_통신상태.Size = New System.Drawing.Size(800, 40)
         '
+        'lb현재모드상태
+        '
+        Me.lb현재모드상태.BackColor = System.Drawing.Color.LightGreen
+        Me.lb현재모드상태.BorderColor = System.Drawing.Color.Gray
+        Me.lb현재모드상태.BorderSide_Bottom = False
+        Me.lb현재모드상태.BorderSide_Left = True
+        Me.lb현재모드상태.BorderSide_Right = True
+        Me.lb현재모드상태.BorderSide_Top = True
+        Me.lb현재모드상태.BorderWidth = 1
+        Me.lb현재모드상태.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lb현재모드상태.Location = New System.Drawing.Point(557, 3)
+        Me.lb현재모드상태.Name = "lb현재모드상태"
+        Me.lb현재모드상태.Size = New System.Drawing.Size(129, 32)
+        Me.lb현재모드상태.TabIndex = 40
+        Me.lb현재모드상태.Text = "Local"
+        Me.lb현재모드상태.TextAlign = System.Drawing.StringAlignment.Center
+        '
         'VsLabel5
         '
         Me.VsLabel5.BackColor = System.Drawing.Color.White
         Me.VsLabel5.BorderWidth = 0
         Me.VsLabel5.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel5.Location = New System.Drawing.Point(336, 2)
+        Me.VsLabel5.Location = New System.Drawing.Point(189, 1)
         Me.VsLabel5.Name = "VsLabel5"
         Me.VsLabel5.Size = New System.Drawing.Size(59, 34)
         Me.VsLabel5.TabIndex = 3
@@ -248,7 +267,7 @@ Partial Public Class 메인화면
         'pbBMS
         '
         Me.pbBMS.Image = CType(resources.GetObject("pbBMS.Image"), System.Drawing.Image)
-        Me.pbBMS.Location = New System.Drawing.Point(401, 2)
+        Me.pbBMS.Location = New System.Drawing.Point(254, 1)
         Me.pbBMS.Name = "pbBMS"
         Me.pbBMS.Size = New System.Drawing.Size(47, 34)
         Me.pbBMS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -258,11 +277,11 @@ Partial Public Class 메인화면
         Me.VsLabel2.BackColor = System.Drawing.Color.White
         Me.VsLabel2.BorderWidth = 0
         Me.VsLabel2.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel2.Location = New System.Drawing.Point(575, 3)
+        Me.VsLabel2.Location = New System.Drawing.Point(428, 2)
         Me.VsLabel2.Name = "VsLabel2"
         Me.VsLabel2.Size = New System.Drawing.Size(59, 34)
         Me.VsLabel2.TabIndex = 0
-        Me.VsLabel2.Text = " EMS :"
+        Me.VsLabel2.Text = " PMS :"
         Me.VsLabel2.TextAlign = System.Drawing.StringAlignment.Far
         '
         'VsLabel1
@@ -270,7 +289,7 @@ Partial Public Class 메인화면
         Me.VsLabel1.BackColor = System.Drawing.Color.White
         Me.VsLabel1.BorderWidth = 0
         Me.VsLabel1.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.VsLabel1.Location = New System.Drawing.Point(457, 3)
+        Me.VsLabel1.Location = New System.Drawing.Point(310, 2)
         Me.VsLabel1.Name = "VsLabel1"
         Me.VsLabel1.Size = New System.Drawing.Size(59, 34)
         Me.VsLabel1.TabIndex = 1
@@ -280,7 +299,7 @@ Partial Public Class 메인화면
         'pbEMS
         '
         Me.pbEMS.Image = CType(resources.GetObject("pbEMS.Image"), System.Drawing.Image)
-        Me.pbEMS.Location = New System.Drawing.Point(640, 3)
+        Me.pbEMS.Location = New System.Drawing.Point(493, 2)
         Me.pbEMS.Name = "pbEMS"
         Me.pbEMS.Size = New System.Drawing.Size(47, 34)
         Me.pbEMS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -288,7 +307,7 @@ Partial Public Class 메인화면
         'pbPCS
         '
         Me.pbPCS.Image = CType(resources.GetObject("pbPCS.Image"), System.Drawing.Image)
-        Me.pbPCS.Location = New System.Drawing.Point(522, 3)
+        Me.pbPCS.Location = New System.Drawing.Point(375, 2)
         Me.pbPCS.Name = "pbPCS"
         Me.pbPCS.Size = New System.Drawing.Size(47, 34)
         Me.pbPCS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -306,8 +325,8 @@ Partial Public Class 메인화면
         Me.Label1.Font = New System.Drawing.Font("Tahoma", 20.0!, System.Drawing.FontStyle.Regular)
         Me.Label1.Location = New System.Drawing.Point(8, 5)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(319, 31)
-        Me.Label1.Text = "EB-ESS99K"
+        Me.Label1.Size = New System.Drawing.Size(153, 31)
+        Me.Label1.Text = "KPC-125T"
         '
         'pnlWorkArea
         '
@@ -502,6 +521,7 @@ Partial Public Class 메인화면
         '
         '타이머_사용모드
         '
+        Me.타이머_사용모드.Interval = 2000
         '
         '메인화면
         '
@@ -543,11 +563,9 @@ Partial Public Class 메인화면
     Friend WithEvents VsLabel2 As PMS.VSLabel
     Friend WithEvents VsLabel1 As PMS.VSLabel
     Friend WithEvents 판넬_통신상태 As System.Windows.Forms.Panel
-    Friend WithEvents 버튼_화면전환_메인 As PMS.VSPictureButton
     Friend WithEvents VsPictureButton8 As PMS.VSPictureButton
     Friend WithEvents 버튼_화면전환_설정 As PMS.VSPictureButton
     Friend WithEvents 버튼_화면전환_이력 As PMS.VSPictureButton
-    Friend WithEvents 버튼_화면전환_사용모드 As PMS.VSPictureButton
     Friend WithEvents 버튼_화면전환_소비 As PMS.VSPictureButton
     Friend WithEvents 버튼_화면전환_수요관리 As PMS.VSPictureButton
     Friend WithEvents 버튼_화면전환_배터리 As PMS.VSPictureButton
@@ -565,5 +583,8 @@ Partial Public Class 메인화면
     Friend WithEvents 타이머_사용모드 As System.Windows.Forms.Timer
     Friend WithEvents VsLabel5 As PMS.VSLabel
     Friend WithEvents pbBMS As System.Windows.Forms.PictureBox
+    Friend WithEvents 버튼_화면전환_메인 As PMS.VSPictureButton
+    Friend WithEvents 버튼_화면전환_사용모드 As PMS.VSPictureButton
+    Friend WithEvents lb현재모드상태 As PMS.VSLabel
 
 End Class

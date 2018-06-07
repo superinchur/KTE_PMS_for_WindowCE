@@ -424,11 +424,11 @@ Namespace ModbusTCP
                     Me.tcpAsyCl.BeginSend(write_data, 0, write_data.Length, SocketFlags.None, New AsyncCallback(AddressOf OnSend), Nothing)
                     Me.tcpAsyCl.BeginReceive(Me.tcpAsyClBuffer, 0, Me.tcpAsyClBuffer.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), Me.tcpAsyCl)
                 Catch a As SystemException
-                    'Me.CallException(id, write_data(6), write_data(7), excExceptionConnectionLost)
+                    Me.CallException(id, write_data(6), write_data(7), excExceptionConnectionLost)
                 End Try
 
             Else
-                'Me.CallException(id, write_data(6), write_data(7), excExceptionConnectionLost)
+                Me.CallException(id, write_data(6), write_data(7), excExceptionConnectionLost)
             End If
 
         End Sub
@@ -475,8 +475,9 @@ Namespace ModbusTCP
             ' ------------------------------------------------------------
             ' Response data is regular data
             ' If (Not (OnResponseData) Is Nothing) Then
-            'RaiseEvent OnResponseData(id, unit, func, data)
+            RaiseEvent OnResponseData(id, unit, func, data)
             'End If
+            Array.Clear(Me.tcpAsyClBuffer, 0, Me.tcpAsyClBuffer.Length)
 
         End Sub
 

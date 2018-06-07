@@ -36,16 +36,25 @@
         Dim tCurrent As Date = Now
         Dim szHistoryFile As String = ""
 
+        Dim bPathCheck As Boolean = 0
+        Dim szPath As String
 
-        Dim szPath As String = "\Flash Disk\Run\History"
-        Dim bPathCheck As Boolean = System.IO.Directory.Exists(szPath)
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\History") = False Then
+                Exit Sub
+            Else
+                szPath = String.Format("\SD Card\History\{0}", tCurrent.Year)
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\History") = False Then
+                Exit Sub
+            Else
+                szPath = String.Format("\Flash Disk\Run\History\{0}", tCurrent.Year)
+            End If
+        End If
 
-        If bPathCheck = False Then System.IO.Directory.CreateDirectory(szPath)
-        bPathCheck = System.IO.Directory.Exists(szPath)
 
-        If bPathCheck = False Then Exit Sub
 
-        szPath = String.Format("\Flash Disk\Run\History\{0}", tCurrent.Year)
         bPathCheck = System.IO.Directory.Exists(szPath)
 
         If bPathCheck = False Then System.IO.Directory.CreateDirectory(szPath)
@@ -130,7 +139,7 @@
         If pHistoryData.nDay <> tCurrent.Day Then
             Try
 
-                szPath = String.Format("\Flash Disk\Run\History\{0}", pHistoryData.nYear.ToString("0000"))
+
 
                 szHistoryFile = String.Format("{0}\H{1}-{2}-{3}.csv", szPath, pHistoryData.nYear.ToString("0000"), pHistoryData.nMonth.ToString("00"), pHistoryData.nDay.ToString("00"))
 
@@ -249,7 +258,7 @@
         If pHistoryData.nMonth <> tCurrent.Month Then
             Try
 
-                szPath = String.Format("\Flash Disk\Run\History\{0}", pHistoryData.nYear.ToString("0000"))
+
 
                 szHistoryFile = String.Format("{0}\H{1}-{2}.csv", szPath, pHistoryData.nYear.ToString("0000"), pHistoryData.nMonth.ToString("00"))
 
@@ -360,38 +369,33 @@
         If pHistoryData.nMinute <> tCurrent.Minute And tCurrent.Second Mod 10 = 0 Then
 
             Dim pItem As New stHistoryItem
-
-
-            Dim ushValue As UShort = GetModbusData_Ushort(PT_MODE_Status)
+            Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
 
             Dim nCharge As Integer = ushValue >> 4 And &H1
             Dim nDischarge As Integer = ushValue >> 5 And &H1
 
             Dim ushTemp As UShort = 0
+            Dim dTemp As Double = 0
             If nCharge = 1 Then
-                ushTemp = GetModbusData_Ushort(PT_BAT_Power)
-                pItem.dBattPowerCharge = ushTemp * 0.1
+                'ushTemp = GetModbusData_Ushort(PT_BAT_Power)
+                ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
+                dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
+                pItem.dBattPowerCharge = dTemp * -1
                 pItem.dBattPowerDischarge = 0
             ElseIf nDischarge = 1 Then
-                ushTemp = GetModbusData_Ushort(PT_BAT_Power)
+                ' ushTemp = GetModbusData_Ushort(PT_BAT_Power)
+                ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
+                dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
                 pItem.dBattPowerCharge = 0
-                pItem.dBattPowerDischarge = ushTemp * 0.1
+                pItem.dBattPowerDischarge = dTemp
             Else
                 pItem.dBattPowerCharge = 0
                 pItem.dBattPowerDischarge = 0
             End If
 
-            ushTemp = GetModbusData_Ushort(PT_Grid_In_Power)
-            pItem.dGridInPower = ushTemp * 0.1
-
-            ushTemp = GetModbusData_Ushort(PT_Grid_Out_Power)
-            pItem.dGridOutPower = ushTemp * 0.1
-
-            ushTemp = GetModbusData_Ushort(PT_Inv_Power)
-            pItem.dInverterPower = ushTemp * 0.1
-
-            ushTemp = GetModbusData_Ushort(PT_Load_Power)
-            pItem.dLoadPower = ushTemp * 0.1
+            ushTemp = GetModbusData_Ushort(PT_INVERTER_POWER)
+            dTemp = Convert.ToInt16(ushTemp.ToString("X4"), 16)
+            pItem.dGridInPower = dTemp
 
             pHistoryData.pHistory_Hour.Add(pItem)
 
@@ -409,33 +413,26 @@
 
         Dim nFileNo As Integer = szFileNo
 
-        Dim szPath As String = "\Flash Disk\Run\FaultHistory"
-        Dim bPathCheck As Boolean = System.IO.Directory.Exists(szPath)
+        Dim szPath As String
 
-        If bPathCheck = False Then
-            System.IO.Directory.CreateDirectory(szPath)
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\SD Card\FaultHistory"
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\Flash Disk\Run\FaultHistory"
+            End If
         End If
-        bPathCheck = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then Exit Sub
-
         Try
 
             Dim szHistoryFile As String = ""
 
-            If nFileNo = 35 Then
-                ' 고장이력
-                szHistoryFile = String.Format("{0}\Inverter_{1}.csv", szPath, szEventDate)
-            ElseIf nFileNo = 36 Then
-                ' 정전이력
-                szHistoryFile = String.Format("{0}\Grid_{1}.csv", szPath, szEventDate)
-            ElseIf nFileNo = 37 Then
-                ' 전장상태
-                szHistoryFile = String.Format("{0}\Status_{1}.csv", szPath, szEventDate)
-            ElseIf nFileNo = 0 Then
-                ' 통신이력
-                szHistoryFile = String.Format("{0}\Comm_{1}.csv", szPath, szEventDate)
-            End If
+            szHistoryFile = String.Format("{0}\Fault_{1}.csv", szPath, szEventDate)
 
             Dim bFIleCheck As Boolean = System.IO.File.Exists(szHistoryFile)
 

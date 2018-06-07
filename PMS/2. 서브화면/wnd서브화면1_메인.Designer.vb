@@ -26,6 +26,14 @@ Partial Public Class wnd서브화면1_메인
         Me.PictureBox4 = New System.Windows.Forms.PictureBox
         Me.Label2 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
+        Me.lbcontrol_INV = New PMS.VSLabel
+        Me.VsLabel2 = New PMS.VSLabel
+        Me.lbHeartBit = New PMS.VSLabel
+        Me.Addr2 = New PMS.VSLabel
+        Me.Addr1 = New PMS.VSLabel
+        Me.Addr0 = New PMS.VSLabel
+        Me.btn리모트모드 = New PMS.VSLabel
+        Me.btn로컬모드 = New PMS.VSLabel
         Me.lbRunMode = New PMS.VSLabel
         Me.ucScrollGridStatus = New PMS.ucScrollArrow
         Me.ucScrollBattStatus = New PMS.ucScrollArrow
@@ -75,6 +83,153 @@ Partial Public Class wnd서브화면1_메인
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(151, 2)
         '
+        'lbcontrol_INV
+        '
+        Me.lbcontrol_INV.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.lbcontrol_INV.BorderColor = System.Drawing.Color.Gray
+        Me.lbcontrol_INV.BorderSide_Bottom = True
+        Me.lbcontrol_INV.BorderSide_Left = True
+        Me.lbcontrol_INV.BorderSide_Right = True
+        Me.lbcontrol_INV.BorderSide_Top = True
+        Me.lbcontrol_INV.BorderWidth = 1
+        Me.lbcontrol_INV.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lbcontrol_INV.ForeColor = System.Drawing.Color.Black
+        Me.lbcontrol_INV.Location = New System.Drawing.Point(21, 10)
+        Me.lbcontrol_INV.Name = "lbcontrol_INV"
+        Me.lbcontrol_INV.Size = New System.Drawing.Size(120, 30)
+        Me.lbcontrol_INV.TabIndex = 51
+        Me.lbcontrol_INV.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbcontrol_INV.UseKeyPad = True
+        Me.lbcontrol_INV.Visible = False
+        '
+        'VsLabel2
+        '
+        Me.VsLabel2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.VsLabel2.BorderColor = System.Drawing.Color.Gray
+        Me.VsLabel2.BorderSide_Bottom = True
+        Me.VsLabel2.BorderSide_Left = True
+        Me.VsLabel2.BorderSide_Right = True
+        Me.VsLabel2.BorderSide_Top = True
+        Me.VsLabel2.BorderWidth = 1
+        Me.VsLabel2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.VsLabel2.ForeColor = System.Drawing.Color.Black
+        Me.VsLabel2.Location = New System.Drawing.Point(48, 269)
+        Me.VsLabel2.Name = "VsLabel2"
+        Me.VsLabel2.Size = New System.Drawing.Size(120, 30)
+        Me.VsLabel2.TabIndex = 50
+        Me.VsLabel2.Text = "HeartBit"
+        Me.VsLabel2.TextAlign = System.Drawing.StringAlignment.Center
+        Me.VsLabel2.UseKeyPad = True
+        '
+        'lbHeartBit
+        '
+        Me.lbHeartBit.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.lbHeartBit.BorderColor = System.Drawing.Color.Gray
+        Me.lbHeartBit.BorderSide_Bottom = True
+        Me.lbHeartBit.BorderSide_Left = True
+        Me.lbHeartBit.BorderSide_Right = True
+        Me.lbHeartBit.BorderSide_Top = True
+        Me.lbHeartBit.BorderWidth = 1
+        Me.lbHeartBit.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.lbHeartBit.ForeColor = System.Drawing.Color.Black
+        Me.lbHeartBit.Location = New System.Drawing.Point(48, 305)
+        Me.lbHeartBit.Name = "lbHeartBit"
+        Me.lbHeartBit.Size = New System.Drawing.Size(120, 30)
+        Me.lbHeartBit.TabIndex = 49
+        Me.lbHeartBit.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbHeartBit.UseKeyPad = True
+        '
+        'Addr2
+        '
+        Me.Addr2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Addr2.BorderColor = System.Drawing.Color.Gray
+        Me.Addr2.BorderSide_Bottom = True
+        Me.Addr2.BorderSide_Left = True
+        Me.Addr2.BorderSide_Right = True
+        Me.Addr2.BorderSide_Top = True
+        Me.Addr2.BorderWidth = 1
+        Me.Addr2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Addr2.ForeColor = System.Drawing.Color.Black
+        Me.Addr2.Location = New System.Drawing.Point(677, 84)
+        Me.Addr2.Name = "Addr2"
+        Me.Addr2.Size = New System.Drawing.Size(120, 30)
+        Me.Addr2.TabIndex = 43
+        Me.Addr2.TextAlign = System.Drawing.StringAlignment.Center
+        Me.Addr2.UseKeyPad = True
+        Me.Addr2.Visible = False
+        '
+        'Addr1
+        '
+        Me.Addr1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Addr1.BorderColor = System.Drawing.Color.Gray
+        Me.Addr1.BorderSide_Bottom = True
+        Me.Addr1.BorderSide_Left = True
+        Me.Addr1.BorderSide_Right = True
+        Me.Addr1.BorderSide_Top = True
+        Me.Addr1.BorderWidth = 1
+        Me.Addr1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Addr1.ForeColor = System.Drawing.Color.Black
+        Me.Addr1.Location = New System.Drawing.Point(677, 48)
+        Me.Addr1.Name = "Addr1"
+        Me.Addr1.Size = New System.Drawing.Size(120, 30)
+        Me.Addr1.TabIndex = 42
+        Me.Addr1.TextAlign = System.Drawing.StringAlignment.Center
+        Me.Addr1.UseKeyPad = True
+        Me.Addr1.Visible = False
+        '
+        'Addr0
+        '
+        Me.Addr0.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Addr0.BorderColor = System.Drawing.Color.Gray
+        Me.Addr0.BorderSide_Bottom = True
+        Me.Addr0.BorderSide_Left = True
+        Me.Addr0.BorderSide_Right = True
+        Me.Addr0.BorderSide_Top = True
+        Me.Addr0.BorderWidth = 1
+        Me.Addr0.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Addr0.ForeColor = System.Drawing.Color.Black
+        Me.Addr0.Location = New System.Drawing.Point(677, 10)
+        Me.Addr0.Name = "Addr0"
+        Me.Addr0.Size = New System.Drawing.Size(120, 30)
+        Me.Addr0.TabIndex = 41
+        Me.Addr0.TextAlign = System.Drawing.StringAlignment.Center
+        Me.Addr0.UseKeyPad = True
+        Me.Addr0.Visible = False
+        '
+        'btn리모트모드
+        '
+        Me.btn리모트모드.BackColor = System.Drawing.Color.LightGreen
+        Me.btn리모트모드.BorderColor = System.Drawing.Color.Gray
+        Me.btn리모트모드.BorderSide_Bottom = False
+        Me.btn리모트모드.BorderSide_Left = False
+        Me.btn리모트모드.BorderSide_Right = True
+        Me.btn리모트모드.BorderSide_Top = True
+        Me.btn리모트모드.BorderWidth = 1
+        Me.btn리모트모드.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.btn리모트모드.Location = New System.Drawing.Point(632, 295)
+        Me.btn리모트모드.Name = "btn리모트모드"
+        Me.btn리모트모드.Size = New System.Drawing.Size(145, 40)
+        Me.btn리모트모드.TabIndex = 40
+        Me.btn리모트모드.Text = "Remote Mode"
+        Me.btn리모트모드.TextAlign = System.Drawing.StringAlignment.Center
+        '
+        'btn로컬모드
+        '
+        Me.btn로컬모드.BackColor = System.Drawing.Color.LightGreen
+        Me.btn로컬모드.BorderColor = System.Drawing.Color.Gray
+        Me.btn로컬모드.BorderSide_Bottom = False
+        Me.btn로컬모드.BorderSide_Left = True
+        Me.btn로컬모드.BorderSide_Right = True
+        Me.btn로컬모드.BorderSide_Top = True
+        Me.btn로컬모드.BorderWidth = 1
+        Me.btn로컬모드.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.btn로컬모드.Location = New System.Drawing.Point(472, 295)
+        Me.btn로컬모드.Name = "btn로컬모드"
+        Me.btn로컬모드.Size = New System.Drawing.Size(145, 40)
+        Me.btn로컬모드.TabIndex = 39
+        Me.btn로컬모드.Text = "Local Mode"
+        Me.btn로컬모드.TextAlign = System.Drawing.StringAlignment.Center
+        '
         'lbRunMode
         '
         Me.lbRunMode.BackColor = System.Drawing.Color.WhiteSmoke
@@ -86,9 +241,9 @@ Partial Public Class wnd서브화면1_메인
         Me.lbRunMode.BorderWidth = 1
         Me.lbRunMode.Font = New System.Drawing.Font("Tahoma", 20.0!, System.Drawing.FontStyle.Bold)
         Me.lbRunMode.ForeColor = System.Drawing.Color.Black
-        Me.lbRunMode.Location = New System.Drawing.Point(250, 10)
+        Me.lbRunMode.Location = New System.Drawing.Point(202, 10)
         Me.lbRunMode.Name = "lbRunMode"
-        Me.lbRunMode.Size = New System.Drawing.Size(300, 68)
+        Me.lbRunMode.Size = New System.Drawing.Size(414, 68)
         Me.lbRunMode.TabIndex = 33
         Me.lbRunMode.Text = "사용모드"
         Me.lbRunMode.TextAlign = System.Drawing.StringAlignment.Center
@@ -167,6 +322,14 @@ Partial Public Class wnd서브화면1_메인
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.lbcontrol_INV)
+        Me.Controls.Add(Me.VsLabel2)
+        Me.Controls.Add(Me.lbHeartBit)
+        Me.Controls.Add(Me.Addr2)
+        Me.Controls.Add(Me.Addr1)
+        Me.Controls.Add(Me.Addr0)
+        Me.Controls.Add(Me.btn리모트모드)
+        Me.Controls.Add(Me.btn로컬모드)
         Me.Controls.Add(Me.lbRunMode)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.ucScrollGridStatus)
@@ -195,5 +358,13 @@ Partial Public Class wnd서브화면1_메인
     Friend WithEvents ucScrollGridStatus As PMS.ucScrollArrow
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents lbRunMode As PMS.VSLabel
+    Friend WithEvents btn리모트모드 As PMS.VSLabel
+    Friend WithEvents btn로컬모드 As PMS.VSLabel
+    Friend WithEvents Addr0 As PMS.VSLabel
+    Friend WithEvents Addr1 As PMS.VSLabel
+    Friend WithEvents Addr2 As PMS.VSLabel
+    Friend WithEvents lbHeartBit As PMS.VSLabel
+    Friend WithEvents VsLabel2 As PMS.VSLabel
+    Friend WithEvents lbcontrol_INV As PMS.VSLabel
 
 End Class

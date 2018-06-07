@@ -1,10 +1,12 @@
 ﻿Module 모듈_제어대기열
 
     Private q제어대기열 As New Queue
+    Private q제어대기열길이 As Integer = 0
 
     Public Sub 제어대기열_추가(ByVal nAddress As Integer, ByVal nData As Integer)
 
         Dim btData() As Integer = {nAddress, nData}
+
         q제어대기열.Enqueue(btData)
 
     End Sub

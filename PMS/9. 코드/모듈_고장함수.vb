@@ -1,131 +1,140 @@
 ﻿Module 모듈_고장함수
 
-    Public FAULT_CODE(,) As String = {{"35_0", "Battery Fuse 손상"}, {"35_1", "reserved"}, {"35_2", "DC Link Over-Current"}, {"35_3", "DC Link Over-Voltage"}, _
-                        {"35_4", "INV Over-Currnet"}, {"35_5", "INV Over-Voltage"}, {"35_6", "상전류 불평형"}, {"35_7", "INV Stack Over-temp"}, _
-                        {"35_8", "CON Stack Over-temp"}, {"35_9", "함체 내부 Over-temp"}, {"35_10", "Transfomer Over-temp"}, {"35_11", "Reator Over-temp"}, _
-                        {"35_12", "INV_STACK_Fault"}, {"35_13", "Over_LOAD"}, {"35_14", "reserved"}, {"35_15", "reserved"}, _
-                        {"36_0", "정전"}, {"36_1", "Grid Over-Voltage"}, {"36_2", "Grid Under-Voltage"}, {"36_3", "Over-Frequency"}, {"36_4", "Under-Frequency"}, _
-                        {"36_5", "reserevd"}, {"36_6", "누설 전류"}, {"36_7", "reserved"}, {"36_8", "reserved"}, {"36_9", "reserved"}, {"36_10", "reserved"}, _
-                        {"36_11", "reserved"}, {"36_12", "reserved"}, {"36_13", "reserved"}, {"36_14", "reserved"}, {"36_15", "reserved"}, _
-                        {"37_0", "EMO"}, {"37_1", "Door A open"}, {"37_2", "Door B open"}, {"37_3", "Grid SPD 교체 필요"}, {"37_4", "Load SPD 교체 필요"}, _
-                        {"37_5", "Grid CB open"}, {"37_6", "INV CB open"}, {"37_7", "INV MC open"}, {"37_8", "BAT CB open"}, {"37_9", "PV S/W open"}, _
-                        {"37_10", "reserved"}, {"37_11", "reserved"}, {"37_12", "reserved"}, {"37_13", "reserved"}, {"37_14", "reserved"}, {"37_15", "PCS COMM FAULT"}}
+    Public FAULT_CODE(,) As String = {{"46_0", "Black out"}, {"46_1", "Over frequency"}, {"46_2", "Under frequency"}, {"46_3", "Over Voltage"}, _
+                        {"46_4", "Under Voltage"}, {"46_5", "Reserved"}, {"46_6", "Reserved"}, {"46_7", "Reserved"}, _
+                        {"46_8", "Reserved"}, {"46_9", "Reserved"}, {"46_10", "Reserved"}, {"46_11", "Reserved"}, _
+                        {"46_12", "Reserved"}, {"46_13", "Reserved"}, {"46_13", "Reserved"}, {"46_14", "Reserved"}, {"46_15", "Reserved"}, _
+                        {"47_0", "INV_OVR"}, {"47_1", "INV_OCR"}, {"47_2", "GRID_OCR"}, {"47_3", "DC_OCR"}, {"47_4", "DC_UVR"}, {"47_5", "DC_OCR"}, _
+                        {"47_6", "OT"}, {"47_7", "Door_Open_Fault"}, {"47_8", "PCS Comm Fault"}, {"47_9", "HW Fault"}}
 
-    Public BMS_FAULT_CODE(,) As String = {{"6_7", "Over Current Discharge Warning"}, _
-        {"6_6", "Over Current Cahrge Warning"}, _
-        {"6_5", "Rack Over Voltage Protection Warning"}, _
-        {"6_4", "Rack Under Voltage Protection Warning"}, _
-        {"6_3", "Rack Voltage Imbalance Warning"}, _
-        {"6_2", "Rack Over Temperature Warning"}, _
-        {"6_1", "Rack Under Temperature Warning"}, _
-        {"6_0", "Rack Temperature Imbalance Warning"}, _
-        {"7_11", "Tray-Rack Communication Fault"}, _
-        {"7_10", "Over Current Cahrge Warning"}, _
-        {"7_9", "Rack Over Voltage Protection Warning"}, _
-        {"7_8", "Rack Under Voltage Protection Warning"}, _
-        {"7_7", "Rack Voltage Imbalance Warning"}, _
-        {"7_6", "Rack Over Temperature Warning"}, _
-        {"7_5", "Rack Under Temperature Warning"}, _
-        {"7_4", "Rack Temperature Imbalance Warning"}, _
-        {"7_3", "Rack Voltage Imbalance Warning"}, _
-        {"7_2", "Rack Over Temperature Warning"}, _
-        {"7_1", "Rack Under Temperature Warning"}, _
-        {"7_0", "Rack Temperature Imbalance Warning"}, _
-        {"8_1", "Rack2 to Master BMS Communication Status"}, _
-        {"8_0", "Rack1 to Master BMS Communication Status"}, _
-        {"9_5", "Rack to Master BMS Communication Status"}, _
-        {"9_4", "Bank Warning"}, _
-        {"9_3", "Bank Fault"}, _
-        {"9_2", "Bank Charge"}, _
-        {"9_1", "Bank Discharge"}, _
-        {"9_0", "Bank able to RUN"}, _
-        {"25_10", "Rack #1 Alarm"}, _
-        {"25_9", "Rack #1 Fault"}, _
-        {"25_8", "Rack #1 RUN"}, _
-        {"25_4", "Rack #1 Current sensor Charge"}, _
-        {"25_3", "Rack #1 Current sensor Discharge"}, _
-        {"25_2", "Rack #1 Cell balance Status"}, _
-        {"25_1", "Rack #1 Charge Relay(+) Status"}, _
-        {"25_0", "Rack #1 Discharge Relay(-) Status"}, _
-        {"26_7", "Rack #1 Over Current Discharge Warning"}, _
-        {"26_6", "Rack #1 Over Current Charge Warning"}, _
-        {"26_5", "Rack #1 Over Voltage Protection Warning"}, _
-        {"26_4", "Rack #1  Under Voltage Protection Warning"}, _
-        {"26_3", "Rack #1 Voltage Imbalance Warning"}, _
-        {"26_2", "Rack #1 Over Temperature Warning"}, _
-        {"26_1", "Rack #1 Under Temperature Warning"}, _
-        {"26_0", "Rack #1 Temperature Imbalance Warning"}, _
-        {"27_12", "Rack #1 Tray-Rack Communication Fault"}, _
-        {"27_11", "Rack #1 Fuse(+) Fault Status"}, _
-        {"27_10", "Rack #1 Fuse(-) Fault Status"}, _
-        {"27_9", "Rack #1 Discharge Relay(-) Fault Status"}, _
-        {"27_8", "Rack #1 Charge Relay(+) Fault Status"}, _
-        {"27_7", "Rack #1 Over Current Discharge Fault"}, _
-        {"27_6", "Rack #1 Over Current Charge Fault"}, _
-        {"27_5", "Rack #1 Rack Over Voltage Protection Fault"}, _
-        {"27_4", "Rack #1 Rack Under Voltage Protection Fault"}, _
-        {"27_3", "Rack #1 Rack Voltage Imbalance Fault"}, _
-        {"27_2", "Rack #1 Rack Over Temperature Fault"}, _
-        {"27_1", "Rack #1 Rack Under Temperature Fault"}, _
-        {"27_0", "Rack #1 Rack Temperature Imbalance Fault"}, _
-        {"404_10", "Rack #2 Alarm"}, _
-        {"404_9", "Rack #2 Fault"}, _
-        {"404_8", "Rack #2 RUN"}, _
-        {"404_4", "Rack #2 Current sensor Charge"}, _
-        {"404_3", "Rack #2 Current sensor Discharge"}, _
-        {"404_2", "Rack #2 Cell balance Status"}, _
-        {"404_1", "Rack #2 Charge Relay(+) Status"}, _
-        {"404_0", "Rack #2 Discharge Relay(-) Status"}, _
-        {"405_7", "Rack #2 Over Current Discharge Warning"}, _
-        {"405_6", "Rack #2 Over Current Charge Warning"}, _
-        {"405_5", "Rack #2 Over Voltage Protection Warning"}, _
-        {"405_4", "Rack #2  Under Voltage Protection Warning"}, _
-        {"405_3", "Rack #2 Voltage Imbalance Warning"}, _
-        {"405_2", "Rack #2 Over Temperature Warning"}, _
-        {"405_1", "Rack #2 Under Temperature Warning"}, _
-        {"405_0", "Rack #2 Temperature Imbalance Warning"}, _
-        {"406_12", "Rack #2 Tray-Rack Communication Fault"}, _
-        {"406_11", "Rack #2 Fuse(+) Fault Status"}, _
-        {"406_10", "Rack #2 Fuse(-) Fault Status"}, _
-        {"406_9", "Rack #2 Discharge Relay(-) Fault Status"}, _
-        {"406_8", "Rack #2 Charge Relay(+) Fault Status"}, _
-        {"406_7", "Rack #2 Over Current Discharge Fault"}, _
-        {"406_6", "Rack #2 Over Current Charge Fault"}, _
-        {"406_5", "Rack #2 Rack Over Voltage Protection Fault"}, _
-        {"406_4", "Rack #2 Rack Under Voltage Protection Fault"}, _
-        {"406_3", "Rack #2 Rack Voltage Imbalance Fault"}, _
-        {"406_2", "Rack #2 Rack Over Temperature Fault"}, _
-        {"406_1", "Rack #2 Rack Under Temperature Fault"}, _
-        {"406_0", "Rack #2 Rack Temperature Imbalance Fault"}, _
-        {"783_10", "Rack #3 Alarm"}, _
-        {"783_9", "Rack #3 Fault"}, _
-        {"783_8", "Rack #3 RUN"}, _
-        {"783_4", "Rack #3 Current sensor Charge"}, _
-        {"783_3", "Rack #3 Current sensor Discharge"}, _
-        {"783_2", "Rack #3 Cell balance Status"}, _
-        {"783_1", "Rack #3 Charge Relay(+) Status"}, _
-        {"783_0", "Rack #3 Discharge Relay(-) Status"}, _
-        {"784_7", "Rack #3 Over Current Discharge Warning"}, _
-        {"784_6", "Rack #3 Over Current Charge Warning"}, _
-        {"784_5", "Rack #3 Over Voltage Protection Warning"}, _
-        {"784_4", "Rack #3  Under Voltage Protection Warning"}, _
-        {"784_3", "Rack #3 Voltage Imbalance Warning"}, _
-        {"784_2", "Rack #3 Over Temperature Warning"}, _
-        {"784_1", "Rack #3 Under Temperature Warning"}, _
-        {"784_0", "Rack #3 Temperature Imbalance Warning"}, _
-        {"785_12", "Rack #3 Tray-Rack Communication Fault"}, _
-        {"785_11", "Rack #3 Fuse(+) Fault Status"}, _
-        {"785_10", "Rack #3 Fuse(-) Fault Status"}, _
-        {"785_9", "Rack #3 Discharge Relay(-) Fault Status"}, _
-        {"785_8", "Rack #3 Charge Relay(+) Fault Status"}, _
-        {"785_7", "Rack #3 Over Current Discharge Fault"}, _
-        {"785_6", "Rack #3 Over Current Charge Fault"}, _
-        {"785_5", "Rack #3 Rack Over Voltage Protection Fault"}, _
-        {"785_4", "Rack #3 Rack Under Voltage Protection Fault"}, _
-        {"785_3", "Rack #3 Rack Voltage Imbalance Fault"}, _
-        {"785_2", "Rack #3 Rack Over Temperature Fault"}, _
-        {"785_1", "Rack #3 Rack Under Temperature Fault"}, _
-        {"785_0", "Rack #3 Rack Temperature Imbalance Fault"}}
+    Public Samsung_BMS_FAULT_CODE(,) As String = {{"14_15", "Reserved"}, _
+            {"14_14", "Reserved"}, _
+            {"14_13", "Reserved"}, _
+            {"14_12", "Reserved"}, _
+            {"14_11", "Reserved"}, _
+            {"14_10", "Reserved"}, _
+            {"14_9", "Reserved"}, _
+            {"14_8", "Reserved"}, _
+            {"14_7", "Reserved"}, _
+            {"14_6", "Reserved"}, _
+            {"14_5", "Reserved"}, _
+            {"14_4", "Reserved"}, _
+            {"14_3", "Reserved"}, _
+            {"14_2", "Reserved"}, _
+            {"14_1", "Reserved"}, _
+            {"14_0", "Additional Protection Fail"}, _
+            {"15_15", "Cell dchg operation limit"}, _
+            {"15_14", "Cell chg operation limit"}, _
+            {"15_13", "Module pcb ot"}, _
+            {"15_12", "Module pcb ut"}, _
+            {"15_11", "Dcsw3_fail"}, _
+            {"15_10", "Dcsw3_sensing_fail"}, _
+            {"15_9", "Dcsw2_sensing_fail"}, _
+            {"15_8", "Dcsw1_sensing_fail"}, _
+            {"15_7", "Reserved"}, _
+            {"15_6", "Reserved"}, _
+            {"15_5", "Reserved"}, _
+            {"15_4", "Reserved"}, _
+            {"15_3", "Reserved"}, _
+            {"15_2", "Reserved"}, _
+            {"15_1", "Reserved"}, _
+            {"15_0", "Reserved"}, _
+            {"16_15", "Reserved"}, _
+            {"16_14", "Reserved"}, _
+            {"16_13", "Reserved"}, _
+            {"16_12", "Reserved"}, _
+            {"16_11", "Reserved"}, _
+            {"16_10", "Reserved"}, _
+            {"16_9", "Reserved"}, _
+            {"16_8", "Reserved"}, _
+            {"16_7", "Reserved"}, _
+            {"16_6", "Reserved"}, _
+            {"16_5", "Reserved"}, _
+            {"16_4", "Reserved"}, _
+            {"16_3", "Reserved"}, _
+            {"16_2", "Reserved"}, _
+            {"16_1", "Rack string I-imb"}, _
+            {"16_0", "Rack string V-imb"}, _
+            {"17_15", "Permanent uv"}, _
+            {"17_14", "Rack fuse fail"}, _
+            {"17_13", "Rack I sensor fail"}, _
+            {"17_12", "Rack V sensing diff"}, _
+            {"17_11", "Rack OV"}, _
+            {"17_10", "Rack UV"}, _
+            {"17_9", "Rack DchqOC"}, _
+            {"17_8", "Rack ChgOC"}, _
+            {"17_7", "R-S comm fail"}, _
+            {"17_6", "R-M comm fail"}, _
+            {"17_5", "Module T-imb"}, _
+            {"17_4", "Module V-imb"}, _
+            {"17_3", "Module OV"}, _
+            {"17_2", "Module UV"}, _
+            {"17_1", "Module OT"}, _
+            {"17_0", "Module UT"}, _
+            {"18_15", "Reserved"}, _
+            {"18_14", "Reserved"}, _
+            {"18_13", "Reserved"}, _
+            {"18_12", "Reserved"}, _
+            {"18_11", "Reserved"}, _
+            {"18_10", "Reserved"}, _
+            {"18_9", "Reserved"}, _
+            {"18_8", "Reserved"}, _
+            {"18_7", "Reserved"}, _
+            {"18_6", "Reserved"}, _
+            {"18_5", "Reserved"}, _
+            {"18_4", "Reserved"}, _
+            {"18_3", "Reserved"}, _
+            {"18_2", "Reserved"}, _
+            {"18_1", "Reserved"}, _
+            {"18_0", "Additional Protection Fail"}, _
+            {"19_15", "Cell dchg operation limit"}, _
+            {"19_14", "Cell chg operation limit"}, _
+            {"19_13", "Module pcb ot"}, _
+            {"19_12", "Module pcb ut"}, _
+            {"19_11", "Dcsw3_fail"}, _
+            {"19_10", "Dcsw3_sensing_fail"}, _
+            {"19_9", "Dcsw2_sensing_fail"}, _
+            {"19_8", "Dcsw1_sensing_fail"}, _
+            {"19_7", "Reserved"}, _
+            {"19_6", "Reserved"}, _
+            {"19_5", "Reserved"}, _
+            {"19_4", "Reserved"}, _
+            {"19_3", "Reserved"}, _
+            {"19_2", "Reserved"}, _
+            {"19_1", "Reserved"}, _
+            {"19_0", "Reserved"}, _
+            {"20_15", "Reserved"}, _
+            {"20_14", "Reserved"}, _
+            {"20_13", "Reserved"}, _
+            {"20_12", "Reserved"}, _
+            {"20_11", "Reserved"}, _
+            {"20_10", "Reserved"}, _
+            {"20_9", "Reserved"}, _
+            {"20_8", "Reserved"}, _
+            {"20_7", "Reserved"}, _
+            {"20_6", "Reserved"}, _
+            {"20_5", "Reserved"}, _
+            {"20_4", "Reserved"}, _
+            {"20_3", "Reserved"}, _
+            {"20_2", "Reserved"}, _
+            {"20_1", "Rack string I-imb"}, _
+            {"20_0", "Rack string V-imb"}, _
+            {"21_15", "Permanent uv"}, _
+            {"21_14", "Rack fuse fail"}, _
+            {"21_13", "Rack I sensor fail"}, _
+            {"21_12", "Rack V sensing diff"}, _
+            {"21_11", "Rack OV"}, _
+            {"21_10", "Rack UV"}, _
+            {"21_9", "Rack DchqOC"}, _
+            {"21_8", "Rack ChgOC"}, _
+            {"21_7", "R-S comm fail"}, _
+            {"21_6", "R-M comm fail"}, _
+            {"21_5", "Module T-imb"}, _
+            {"21_4", "Module V-imb"}, _
+            {"21_3", "Module OV"}, _
+            {"21_2", "Module UV"}, _
+            {"21_1", "Module OT"}, _
+            {"21_0", "Module UT"}}
 
     Public FAULT_STATUS(255, 16, 2) As String
 

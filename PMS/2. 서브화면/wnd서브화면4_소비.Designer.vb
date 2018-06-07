@@ -30,6 +30,7 @@ Partial Public Class wnd서브화면4_소비
         Me.VsLabel6 = New PMS.VSLabel
         Me.lbCurrent3 = New PMS.VSLabel
         Me.lbVoltage3 = New PMS.VSLabel
+        Me.lbCurrent2 = New PMS.VSLabel
         Me.lbVoltage2 = New PMS.VSLabel
         Me.lbCurrent1 = New PMS.VSLabel
         Me.lbVoltage1 = New PMS.VSLabel
@@ -37,7 +38,6 @@ Partial Public Class wnd서브화면4_소비
         Me.lbPower2 = New PMS.VSLabel
         Me.ucScrollLoadStatus = New PMS.ucScrollArrow
         Me.lbLoadStatus = New PMS.VSLabel
-        Me.lbCurrent2 = New PMS.VSLabel
         Me.SuspendLayout()
         '
         'Label1
@@ -71,7 +71,7 @@ Partial Public Class wnd서브화면4_소비
         Me.PictureBox2.Location = New System.Drawing.Point(258, 113)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(80, 80)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         '
         'Label2
         '
@@ -153,6 +153,24 @@ Partial Public Class wnd서브화면4_소비
         Me.lbVoltage3.TabIndex = 62
         Me.lbVoltage3.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbVoltage3.UseKeyPad = False
+        '
+        'lbCurrent2
+        '
+        Me.lbCurrent2.BackColor = System.Drawing.Color.White
+        Me.lbCurrent2.BorderColor = System.Drawing.Color.DarkGray
+        Me.lbCurrent2.BorderSide_Bottom = True
+        Me.lbCurrent2.BorderSide_Left = True
+        Me.lbCurrent2.BorderSide_Right = True
+        Me.lbCurrent2.BorderSide_Top = True
+        Me.lbCurrent2.BorderWidth = 1
+        Me.lbCurrent2.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.lbCurrent2.IsPassword = False
+        Me.lbCurrent2.Location = New System.Drawing.Point(563, 211)
+        Me.lbCurrent2.Name = "lbCurrent2"
+        Me.lbCurrent2.Size = New System.Drawing.Size(110, 50)
+        Me.lbCurrent2.TabIndex = 61
+        Me.lbCurrent2.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbCurrent2.UseKeyPad = False
         '
         'lbVoltage2
         '
@@ -269,24 +287,6 @@ Partial Public Class wnd서브화면4_소비
         Me.lbLoadStatus.TabIndex = 5
         Me.lbLoadStatus.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbLoadStatus.UseKeyPad = True
-        '
-        'lbCurrent2
-        '
-        Me.lbCurrent2.BackColor = System.Drawing.Color.White
-        Me.lbCurrent2.BorderColor = System.Drawing.Color.DarkGray
-        Me.lbCurrent2.BorderSide_Bottom = True
-        Me.lbCurrent2.BorderSide_Left = True
-        Me.lbCurrent2.BorderSide_Right = True
-        Me.lbCurrent2.BorderSide_Top = True
-        Me.lbCurrent2.BorderWidth = 1
-        Me.lbCurrent2.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.lbCurrent2.IsPassword = False
-        Me.lbCurrent2.Location = New System.Drawing.Point(563, 211)
-        Me.lbCurrent2.Name = "lbCurrent2"
-        Me.lbCurrent2.Size = New System.Drawing.Size(110, 50)
-        Me.lbCurrent2.TabIndex = 61
-        Me.lbCurrent2.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbCurrent2.UseKeyPad = False
         '
         'wnd서브화면4_소비
         '

@@ -204,22 +204,27 @@
         On Error Resume Next
         ListView1.Items.Clear()
 
-        Dim szPath As String = "\Flash Disk\Run\FaultHistory"
-        Dim bPathCheck As Boolean = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then
-            System.IO.Directory.CreateDirectory(szPath)
+        Dim szPath As String
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\SD Card\FaultHistory"
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\Flash Disk\Run\FaultHistory"
+            End If
         End If
-        bPathCheck = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then Exit Sub
 
         Dim szHistoryFile As String = ""
 
         Dim dtCurrent As Date = DateTimePicker11.Value
         While (dtCurrent <= DateTimePicker12.Value)
 
-            szHistoryFile = String.Format("{0}\Inverter_{1}.csv", szPath, Format(dtCurrent, "yyyy-MM-dd"))
+            szHistoryFile = String.Format("{0}\Fault_{1}.csv", szPath, Format(dtCurrent, "yyyy-MM-dd"))
 
             ReadFaultFile(szHistoryFile, ListView1)
 
@@ -234,15 +239,20 @@
     Private Sub btnSearch2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch2.Click
         ListView2.Items.Clear()
 
-        Dim szPath As String = "\Flash Disk\Run\FaultHistory"
-        Dim bPathCheck As Boolean = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then
-            System.IO.Directory.CreateDirectory(szPath)
+        Dim szPath As String
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\SD Card\FaultHistory"
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\Flash Disk\Run\FaultHistory"
+            End If
         End If
-        bPathCheck = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then Exit Sub
 
         Dim szHistoryFile As String = ""
 
@@ -263,15 +273,20 @@
     Private Sub btnSearch3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch3.Click
         ListView3.Items.Clear()
 
-        Dim szPath As String = "\Flash Disk\Run\FaultHistory"
-        Dim bPathCheck As Boolean = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then
-            System.IO.Directory.CreateDirectory(szPath)
+        Dim szPath As String
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\SD Card\FaultHistory"
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\Flash Disk\Run\FaultHistory"
+            End If
         End If
-        bPathCheck = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then Exit Sub
 
         Dim szHistoryFile As String = ""
 
@@ -292,15 +307,20 @@
     Private Sub btnSearch4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch4.Click
         ListView4.Items.Clear()
 
-        Dim szPath As String = "\Flash Disk\Run\FaultHistory"
-        Dim bPathCheck As Boolean = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then
-            System.IO.Directory.CreateDirectory(szPath)
+        Dim szPath As String
+        If isSDCard_Mode = True Then
+            If PathCheck("\SD Card\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\SD Card\FaultHistory"
+            End If
+        Else '  isSDCard_Mode = False
+            If PathCheck("\Flash Disk\Run\FaultHistory") = False Then
+                Exit Sub
+            Else
+                szPath = "\Flash Disk\Run\FaultHistory"
+            End If
         End If
-        bPathCheck = System.IO.Directory.Exists(szPath)
-
-        If bPathCheck = False Then Exit Sub
 
         Dim szHistoryFile As String = ""
 

@@ -27,33 +27,6 @@ Partial Public Class wnd서브화면3_수요관리
         Me.타이머_상태 = New System.Windows.Forms.Timer
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.pnlScreen1 = New System.Windows.Forms.Panel
-        Me.pnlScreen2 = New System.Windows.Forms.Panel
-        Me.pnlGraphDay = New System.Windows.Forms.Panel
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker
-        Me.pnlScreen3 = New System.Windows.Forms.Panel
-        Me.cbMonth_Month = New System.Windows.Forms.ComboBox
-        Me.cbMonth_Year = New System.Windows.Forms.ComboBox
-        Me.pnlGraphMonth = New System.Windows.Forms.Panel
-        Me.pnlScreen4 = New System.Windows.Forms.Panel
-        Me.cbYear_Year = New System.Windows.Forms.ComboBox
-        Me.pnlGraphYear = New System.Windows.Forms.Panel
-        Me.lbStatus_Year_Load = New PMS.VSLabel
-        Me.lbStatus_Year_Inverter = New PMS.VSLabel
-        Me.lbStatus_Year_Grid = New PMS.VSLabel
-        Me.VsLabel3 = New PMS.VSLabel
-        Me.btnSearch_Year = New PMS.VSPictureButton
-        Me.lbStatus_Month_Load = New PMS.VSLabel
-        Me.lbStatus_Month_Inverter = New PMS.VSLabel
-        Me.lbStatus_Month_Grid = New PMS.VSLabel
-        Me.VsLabel2 = New PMS.VSLabel
-        Me.btnSearch_Month = New PMS.VSPictureButton
-        Me.PageHeader4 = New PMS.VSLabel
-        Me.PageHeader3 = New PMS.VSLabel
-        Me.lbStatus_Day_Load = New PMS.VSLabel
-        Me.VsLabel1 = New PMS.VSLabel
-        Me.lbStatus_Day_Inverter = New PMS.VSLabel
-        Me.btnSearch_Day = New PMS.VSPictureButton
-        Me.lbStatus_Day_Grid = New PMS.VSLabel
         Me.VsLabel7 = New PMS.VSLabel
         Me.VsLabel9 = New PMS.VSLabel
         Me.VsLabel6 = New PMS.VSLabel
@@ -68,6 +41,27 @@ Partial Public Class wnd서브화면3_수요관리
         Me.lbPower2 = New PMS.VSLabel
         Me.ucScrollGridStatus = New PMS.ucScrollArrow
         Me.lbGridStatus = New PMS.VSLabel
+        Me.pnlScreen2 = New System.Windows.Forms.Panel
+        Me.VsLabel1 = New PMS.VSLabel
+        Me.btnSearch_Day = New PMS.VSPictureButton
+        Me.lbStatus_Day_Grid = New PMS.VSLabel
+        Me.pnlGraphDay = New System.Windows.Forms.Panel
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker
+        Me.pnlScreen3 = New System.Windows.Forms.Panel
+        Me.lbStatus_Month_Grid = New PMS.VSLabel
+        Me.cbMonth_Month = New System.Windows.Forms.ComboBox
+        Me.VsLabel2 = New PMS.VSLabel
+        Me.cbMonth_Year = New System.Windows.Forms.ComboBox
+        Me.btnSearch_Month = New PMS.VSPictureButton
+        Me.pnlGraphMonth = New System.Windows.Forms.Panel
+        Me.pnlScreen4 = New System.Windows.Forms.Panel
+        Me.lbStatus_Year_Grid = New PMS.VSLabel
+        Me.VsLabel3 = New PMS.VSLabel
+        Me.cbYear_Year = New System.Windows.Forms.ComboBox
+        Me.btnSearch_Year = New PMS.VSPictureButton
+        Me.pnlGraphYear = New System.Windows.Forms.Panel
+        Me.PageHeader4 = New PMS.VSLabel
+        Me.PageHeader3 = New PMS.VSLabel
         Me.PageHeader2 = New PMS.VSLabel
         Me.PageHeader1 = New PMS.VSLabel
         Me.pnlScreen1.SuspendLayout()
@@ -140,414 +134,6 @@ Partial Public Class wnd서브화면3_수요관리
         Me.pnlScreen1.Location = New System.Drawing.Point(10, 338)
         Me.pnlScreen1.Name = "pnlScreen1"
         Me.pnlScreen1.Size = New System.Drawing.Size(784, 283)
-        '
-        'pnlScreen2
-        '
-        Me.pnlScreen2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlScreen2.Controls.Add(Me.lbStatus_Day_Load)
-        Me.pnlScreen2.Controls.Add(Me.VsLabel1)
-        Me.pnlScreen2.Controls.Add(Me.lbStatus_Day_Inverter)
-        Me.pnlScreen2.Controls.Add(Me.btnSearch_Day)
-        Me.pnlScreen2.Controls.Add(Me.lbStatus_Day_Grid)
-        Me.pnlScreen2.Controls.Add(Me.pnlGraphDay)
-        Me.pnlScreen2.Controls.Add(Me.DateTimePicker1)
-        Me.pnlScreen2.Location = New System.Drawing.Point(800, 338)
-        Me.pnlScreen2.Name = "pnlScreen2"
-        Me.pnlScreen2.Size = New System.Drawing.Size(784, 283)
-        '
-        'pnlGraphDay
-        '
-        Me.pnlGraphDay.BackColor = System.Drawing.Color.White
-        Me.pnlGraphDay.Location = New System.Drawing.Point(13, 37)
-        Me.pnlGraphDay.Name = "pnlGraphDay"
-        Me.pnlGraphDay.Size = New System.Drawing.Size(759, 239)
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(95, 7)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(190, 24)
-        Me.DateTimePicker1.TabIndex = 1
-        '
-        'pnlScreen3
-        '
-        Me.pnlScreen3.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlScreen3.Controls.Add(Me.lbStatus_Month_Load)
-        Me.pnlScreen3.Controls.Add(Me.lbStatus_Month_Inverter)
-        Me.pnlScreen3.Controls.Add(Me.lbStatus_Month_Grid)
-        Me.pnlScreen3.Controls.Add(Me.cbMonth_Month)
-        Me.pnlScreen3.Controls.Add(Me.VsLabel2)
-        Me.pnlScreen3.Controls.Add(Me.cbMonth_Year)
-        Me.pnlScreen3.Controls.Add(Me.btnSearch_Month)
-        Me.pnlScreen3.Controls.Add(Me.pnlGraphMonth)
-        Me.pnlScreen3.Location = New System.Drawing.Point(10, 627)
-        Me.pnlScreen3.Name = "pnlScreen3"
-        Me.pnlScreen3.Size = New System.Drawing.Size(784, 283)
-        '
-        'cbMonth_Month
-        '
-        Me.cbMonth_Month.Location = New System.Drawing.Point(187, 8)
-        Me.cbMonth_Month.Name = "cbMonth_Month"
-        Me.cbMonth_Month.Size = New System.Drawing.Size(81, 23)
-        Me.cbMonth_Month.TabIndex = 6
-        '
-        'cbMonth_Year
-        '
-        Me.cbMonth_Year.Location = New System.Drawing.Point(95, 8)
-        Me.cbMonth_Year.Name = "cbMonth_Year"
-        Me.cbMonth_Year.Size = New System.Drawing.Size(86, 23)
-        Me.cbMonth_Year.TabIndex = 6
-        '
-        'pnlGraphMonth
-        '
-        Me.pnlGraphMonth.BackColor = System.Drawing.Color.White
-        Me.pnlGraphMonth.Location = New System.Drawing.Point(13, 37)
-        Me.pnlGraphMonth.Name = "pnlGraphMonth"
-        Me.pnlGraphMonth.Size = New System.Drawing.Size(759, 239)
-        '
-        'pnlScreen4
-        '
-        Me.pnlScreen4.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlScreen4.Controls.Add(Me.lbStatus_Year_Load)
-        Me.pnlScreen4.Controls.Add(Me.lbStatus_Year_Inverter)
-        Me.pnlScreen4.Controls.Add(Me.lbStatus_Year_Grid)
-        Me.pnlScreen4.Controls.Add(Me.VsLabel3)
-        Me.pnlScreen4.Controls.Add(Me.cbYear_Year)
-        Me.pnlScreen4.Controls.Add(Me.btnSearch_Year)
-        Me.pnlScreen4.Controls.Add(Me.pnlGraphYear)
-        Me.pnlScreen4.Location = New System.Drawing.Point(800, 627)
-        Me.pnlScreen4.Name = "pnlScreen4"
-        Me.pnlScreen4.Size = New System.Drawing.Size(784, 283)
-        '
-        'cbYear_Year
-        '
-        Me.cbYear_Year.Location = New System.Drawing.Point(95, 8)
-        Me.cbYear_Year.Name = "cbYear_Year"
-        Me.cbYear_Year.Size = New System.Drawing.Size(86, 23)
-        Me.cbYear_Year.TabIndex = 7
-        '
-        'pnlGraphYear
-        '
-        Me.pnlGraphYear.BackColor = System.Drawing.Color.White
-        Me.pnlGraphYear.Location = New System.Drawing.Point(13, 37)
-        Me.pnlGraphYear.Name = "pnlGraphYear"
-        Me.pnlGraphYear.Size = New System.Drawing.Size(759, 239)
-        '
-        'lbStatus_Year_Load
-        '
-        Me.lbStatus_Year_Load.BackColor = System.Drawing.Color.Blue
-        Me.lbStatus_Year_Load.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Year_Load.BorderSide_Bottom = False
-        Me.lbStatus_Year_Load.BorderSide_Left = False
-        Me.lbStatus_Year_Load.BorderSide_Right = False
-        Me.lbStatus_Year_Load.BorderSide_Top = False
-        Me.lbStatus_Year_Load.BorderWidth = 0
-        Me.lbStatus_Year_Load.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Year_Load.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Year_Load.IsPassword = False
-        Me.lbStatus_Year_Load.Location = New System.Drawing.Point(652, 7)
-        Me.lbStatus_Year_Load.Name = "lbStatus_Year_Load"
-        Me.lbStatus_Year_Load.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Year_Load.TabIndex = 38
-        Me.lbStatus_Year_Load.Text = "로드"
-        Me.lbStatus_Year_Load.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Year_Load.UseKeyPad = False
-        '
-        'lbStatus_Year_Inverter
-        '
-        Me.lbStatus_Year_Inverter.BackColor = System.Drawing.Color.Green
-        Me.lbStatus_Year_Inverter.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Year_Inverter.BorderSide_Bottom = False
-        Me.lbStatus_Year_Inverter.BorderSide_Left = False
-        Me.lbStatus_Year_Inverter.BorderSide_Right = False
-        Me.lbStatus_Year_Inverter.BorderSide_Top = False
-        Me.lbStatus_Year_Inverter.BorderWidth = 0
-        Me.lbStatus_Year_Inverter.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Year_Inverter.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Year_Inverter.IsPassword = False
-        Me.lbStatus_Year_Inverter.Location = New System.Drawing.Point(526, 7)
-        Me.lbStatus_Year_Inverter.Name = "lbStatus_Year_Inverter"
-        Me.lbStatus_Year_Inverter.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Year_Inverter.TabIndex = 37
-        Me.lbStatus_Year_Inverter.Text = "인버터"
-        Me.lbStatus_Year_Inverter.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Year_Inverter.UseKeyPad = False
-        '
-        'lbStatus_Year_Grid
-        '
-        Me.lbStatus_Year_Grid.BackColor = System.Drawing.Color.Red
-        Me.lbStatus_Year_Grid.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Year_Grid.BorderSide_Bottom = False
-        Me.lbStatus_Year_Grid.BorderSide_Left = False
-        Me.lbStatus_Year_Grid.BorderSide_Right = False
-        Me.lbStatus_Year_Grid.BorderSide_Top = False
-        Me.lbStatus_Year_Grid.BorderWidth = 0
-        Me.lbStatus_Year_Grid.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Year_Grid.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Year_Grid.IsPassword = False
-        Me.lbStatus_Year_Grid.Location = New System.Drawing.Point(400, 7)
-        Me.lbStatus_Year_Grid.Name = "lbStatus_Year_Grid"
-        Me.lbStatus_Year_Grid.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Year_Grid.TabIndex = 36
-        Me.lbStatus_Year_Grid.Text = "그리드"
-        Me.lbStatus_Year_Grid.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Year_Grid.UseKeyPad = False
-        '
-        'VsLabel3
-        '
-        Me.VsLabel3.BackColor = System.Drawing.Color.White
-        Me.VsLabel3.BorderColor = System.Drawing.Color.Black
-        Me.VsLabel3.BorderSide_Bottom = False
-        Me.VsLabel3.BorderSide_Left = False
-        Me.VsLabel3.BorderSide_Right = False
-        Me.VsLabel3.BorderSide_Top = False
-        Me.VsLabel3.BorderWidth = 0
-        Me.VsLabel3.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.VsLabel3.IsPassword = False
-        Me.VsLabel3.Location = New System.Drawing.Point(13, 9)
-        Me.VsLabel3.Name = "VsLabel3"
-        Me.VsLabel3.Size = New System.Drawing.Size(76, 20)
-        Me.VsLabel3.TabIndex = 35
-        Me.VsLabel3.Text = "년도선택 :"
-        Me.VsLabel3.TextAlign = System.Drawing.StringAlignment.Far
-        Me.VsLabel3.UseKeyPad = False
-        '
-        'btnSearch_Year
-        '
-        Me.btnSearch_Year.BorderColor = System.Drawing.Color.DarkGray
-        Me.btnSearch_Year.BorderSide_Bottom = True
-        Me.btnSearch_Year.BorderSide_Left = True
-        Me.btnSearch_Year.BorderSide_Right = True
-        Me.btnSearch_Year.BorderSide_Top = True
-        Me.btnSearch_Year.BorderWidth = 1
-        Me.btnSearch_Year.Location = New System.Drawing.Point(187, 7)
-        Me.btnSearch_Year.Name = "btnSearch_Year"
-        Me.btnSearch_Year.Selected = False
-        Me.btnSearch_Year.Size = New System.Drawing.Size(93, 24)
-        Me.btnSearch_Year.TabIndex = 3
-        Me.btnSearch_Year.Text = "조회"
-        '
-        'lbStatus_Month_Load
-        '
-        Me.lbStatus_Month_Load.BackColor = System.Drawing.Color.Blue
-        Me.lbStatus_Month_Load.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Month_Load.BorderSide_Bottom = False
-        Me.lbStatus_Month_Load.BorderSide_Left = False
-        Me.lbStatus_Month_Load.BorderSide_Right = False
-        Me.lbStatus_Month_Load.BorderSide_Top = False
-        Me.lbStatus_Month_Load.BorderWidth = 0
-        Me.lbStatus_Month_Load.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Month_Load.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Month_Load.IsPassword = False
-        Me.lbStatus_Month_Load.Location = New System.Drawing.Point(652, 7)
-        Me.lbStatus_Month_Load.Name = "lbStatus_Month_Load"
-        Me.lbStatus_Month_Load.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Month_Load.TabIndex = 37
-        Me.lbStatus_Month_Load.Text = "로드"
-        Me.lbStatus_Month_Load.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Month_Load.UseKeyPad = False
-        '
-        'lbStatus_Month_Inverter
-        '
-        Me.lbStatus_Month_Inverter.BackColor = System.Drawing.Color.Green
-        Me.lbStatus_Month_Inverter.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Month_Inverter.BorderSide_Bottom = False
-        Me.lbStatus_Month_Inverter.BorderSide_Left = False
-        Me.lbStatus_Month_Inverter.BorderSide_Right = False
-        Me.lbStatus_Month_Inverter.BorderSide_Top = False
-        Me.lbStatus_Month_Inverter.BorderWidth = 0
-        Me.lbStatus_Month_Inverter.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Month_Inverter.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Month_Inverter.IsPassword = False
-        Me.lbStatus_Month_Inverter.Location = New System.Drawing.Point(526, 7)
-        Me.lbStatus_Month_Inverter.Name = "lbStatus_Month_Inverter"
-        Me.lbStatus_Month_Inverter.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Month_Inverter.TabIndex = 36
-        Me.lbStatus_Month_Inverter.Text = "인버터"
-        Me.lbStatus_Month_Inverter.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Month_Inverter.UseKeyPad = False
-        '
-        'lbStatus_Month_Grid
-        '
-        Me.lbStatus_Month_Grid.BackColor = System.Drawing.Color.Red
-        Me.lbStatus_Month_Grid.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Month_Grid.BorderSide_Bottom = False
-        Me.lbStatus_Month_Grid.BorderSide_Left = False
-        Me.lbStatus_Month_Grid.BorderSide_Right = False
-        Me.lbStatus_Month_Grid.BorderSide_Top = False
-        Me.lbStatus_Month_Grid.BorderWidth = 0
-        Me.lbStatus_Month_Grid.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Month_Grid.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Month_Grid.IsPassword = False
-        Me.lbStatus_Month_Grid.Location = New System.Drawing.Point(400, 7)
-        Me.lbStatus_Month_Grid.Name = "lbStatus_Month_Grid"
-        Me.lbStatus_Month_Grid.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Month_Grid.TabIndex = 35
-        Me.lbStatus_Month_Grid.Text = "그리드"
-        Me.lbStatus_Month_Grid.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Month_Grid.UseKeyPad = False
-        '
-        'VsLabel2
-        '
-        Me.VsLabel2.BackColor = System.Drawing.Color.White
-        Me.VsLabel2.BorderColor = System.Drawing.Color.Black
-        Me.VsLabel2.BorderSide_Bottom = False
-        Me.VsLabel2.BorderSide_Left = False
-        Me.VsLabel2.BorderSide_Right = False
-        Me.VsLabel2.BorderSide_Top = False
-        Me.VsLabel2.BorderWidth = 0
-        Me.VsLabel2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.VsLabel2.IsPassword = False
-        Me.VsLabel2.Location = New System.Drawing.Point(13, 9)
-        Me.VsLabel2.Name = "VsLabel2"
-        Me.VsLabel2.Size = New System.Drawing.Size(76, 20)
-        Me.VsLabel2.TabIndex = 34
-        Me.VsLabel2.Text = "년월선택 :"
-        Me.VsLabel2.TextAlign = System.Drawing.StringAlignment.Far
-        Me.VsLabel2.UseKeyPad = False
-        '
-        'btnSearch_Month
-        '
-        Me.btnSearch_Month.BorderColor = System.Drawing.Color.DarkGray
-        Me.btnSearch_Month.BorderSide_Bottom = True
-        Me.btnSearch_Month.BorderSide_Left = True
-        Me.btnSearch_Month.BorderSide_Right = True
-        Me.btnSearch_Month.BorderSide_Top = True
-        Me.btnSearch_Month.BorderWidth = 1
-        Me.btnSearch_Month.Location = New System.Drawing.Point(274, 7)
-        Me.btnSearch_Month.Name = "btnSearch_Month"
-        Me.btnSearch_Month.Selected = False
-        Me.btnSearch_Month.Size = New System.Drawing.Size(93, 24)
-        Me.btnSearch_Month.TabIndex = 3
-        Me.btnSearch_Month.Text = "조회"
-        '
-        'PageHeader4
-        '
-        Me.PageHeader4.BackColor = System.Drawing.Color.White
-        Me.PageHeader4.BorderColor = System.Drawing.Color.Gray
-        Me.PageHeader4.BorderSide_Bottom = False
-        Me.PageHeader4.BorderSide_Left = False
-        Me.PageHeader4.BorderSide_Right = True
-        Me.PageHeader4.BorderSide_Top = True
-        Me.PageHeader4.BorderWidth = 1
-        Me.PageHeader4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.PageHeader4.Location = New System.Drawing.Point(460, 10)
-        Me.PageHeader4.Name = "PageHeader4"
-        Me.PageHeader4.Size = New System.Drawing.Size(150, 40)
-        Me.PageHeader4.TabIndex = 29
-        Me.PageHeader4.Text = "연간 수요관리"
-        Me.PageHeader4.TextAlign = System.Drawing.StringAlignment.Center
-        '
-        'PageHeader3
-        '
-        Me.PageHeader3.BackColor = System.Drawing.Color.White
-        Me.PageHeader3.BorderColor = System.Drawing.Color.Gray
-        Me.PageHeader3.BorderSide_Bottom = False
-        Me.PageHeader3.BorderSide_Left = False
-        Me.PageHeader3.BorderSide_Right = True
-        Me.PageHeader3.BorderSide_Top = True
-        Me.PageHeader3.BorderWidth = 1
-        Me.PageHeader3.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.PageHeader3.Location = New System.Drawing.Point(310, 10)
-        Me.PageHeader3.Name = "PageHeader3"
-        Me.PageHeader3.Size = New System.Drawing.Size(150, 40)
-        Me.PageHeader3.TabIndex = 28
-        Me.PageHeader3.Text = "월간 수요관리"
-        Me.PageHeader3.TextAlign = System.Drawing.StringAlignment.Center
-        '
-        'lbStatus_Day_Load
-        '
-        Me.lbStatus_Day_Load.BackColor = System.Drawing.Color.Blue
-        Me.lbStatus_Day_Load.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Day_Load.BorderSide_Bottom = False
-        Me.lbStatus_Day_Load.BorderSide_Left = False
-        Me.lbStatus_Day_Load.BorderSide_Right = False
-        Me.lbStatus_Day_Load.BorderSide_Top = False
-        Me.lbStatus_Day_Load.BorderWidth = 0
-        Me.lbStatus_Day_Load.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Day_Load.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Day_Load.IsPassword = False
-        Me.lbStatus_Day_Load.Location = New System.Drawing.Point(652, 7)
-        Me.lbStatus_Day_Load.Name = "lbStatus_Day_Load"
-        Me.lbStatus_Day_Load.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Day_Load.TabIndex = 33
-        Me.lbStatus_Day_Load.Text = "로드"
-        Me.lbStatus_Day_Load.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Day_Load.UseKeyPad = False
-        '
-        'VsLabel1
-        '
-        Me.VsLabel1.BackColor = System.Drawing.Color.White
-        Me.VsLabel1.BorderColor = System.Drawing.Color.Black
-        Me.VsLabel1.BorderSide_Bottom = False
-        Me.VsLabel1.BorderSide_Left = False
-        Me.VsLabel1.BorderSide_Right = False
-        Me.VsLabel1.BorderSide_Top = False
-        Me.VsLabel1.BorderWidth = 0
-        Me.VsLabel1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.VsLabel1.IsPassword = False
-        Me.VsLabel1.Location = New System.Drawing.Point(13, 9)
-        Me.VsLabel1.Name = "VsLabel1"
-        Me.VsLabel1.Size = New System.Drawing.Size(76, 20)
-        Me.VsLabel1.TabIndex = 33
-        Me.VsLabel1.Text = "일자선택 :"
-        Me.VsLabel1.TextAlign = System.Drawing.StringAlignment.Far
-        Me.VsLabel1.UseKeyPad = False
-        '
-        'lbStatus_Day_Inverter
-        '
-        Me.lbStatus_Day_Inverter.BackColor = System.Drawing.Color.Green
-        Me.lbStatus_Day_Inverter.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Day_Inverter.BorderSide_Bottom = False
-        Me.lbStatus_Day_Inverter.BorderSide_Left = False
-        Me.lbStatus_Day_Inverter.BorderSide_Right = False
-        Me.lbStatus_Day_Inverter.BorderSide_Top = False
-        Me.lbStatus_Day_Inverter.BorderWidth = 0
-        Me.lbStatus_Day_Inverter.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Day_Inverter.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Day_Inverter.IsPassword = False
-        Me.lbStatus_Day_Inverter.Location = New System.Drawing.Point(526, 7)
-        Me.lbStatus_Day_Inverter.Name = "lbStatus_Day_Inverter"
-        Me.lbStatus_Day_Inverter.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Day_Inverter.TabIndex = 33
-        Me.lbStatus_Day_Inverter.Text = "인버터"
-        Me.lbStatus_Day_Inverter.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Day_Inverter.UseKeyPad = False
-        '
-        'btnSearch_Day
-        '
-        Me.btnSearch_Day.BorderColor = System.Drawing.Color.DarkGray
-        Me.btnSearch_Day.BorderSide_Bottom = True
-        Me.btnSearch_Day.BorderSide_Left = True
-        Me.btnSearch_Day.BorderSide_Right = True
-        Me.btnSearch_Day.BorderSide_Top = True
-        Me.btnSearch_Day.BorderWidth = 1
-        Me.btnSearch_Day.Location = New System.Drawing.Point(291, 7)
-        Me.btnSearch_Day.Name = "btnSearch_Day"
-        Me.btnSearch_Day.Selected = False
-        Me.btnSearch_Day.Size = New System.Drawing.Size(93, 24)
-        Me.btnSearch_Day.TabIndex = 3
-        Me.btnSearch_Day.Text = "조회"
-        '
-        'lbStatus_Day_Grid
-        '
-        Me.lbStatus_Day_Grid.BackColor = System.Drawing.Color.Red
-        Me.lbStatus_Day_Grid.BorderColor = System.Drawing.Color.Black
-        Me.lbStatus_Day_Grid.BorderSide_Bottom = False
-        Me.lbStatus_Day_Grid.BorderSide_Left = False
-        Me.lbStatus_Day_Grid.BorderSide_Right = False
-        Me.lbStatus_Day_Grid.BorderSide_Top = False
-        Me.lbStatus_Day_Grid.BorderWidth = 0
-        Me.lbStatus_Day_Grid.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
-        Me.lbStatus_Day_Grid.ForeColor = System.Drawing.Color.White
-        Me.lbStatus_Day_Grid.IsPassword = False
-        Me.lbStatus_Day_Grid.Location = New System.Drawing.Point(400, 7)
-        Me.lbStatus_Day_Grid.Name = "lbStatus_Day_Grid"
-        Me.lbStatus_Day_Grid.Size = New System.Drawing.Size(120, 25)
-        Me.lbStatus_Day_Grid.TabIndex = 33
-        Me.lbStatus_Day_Grid.Text = "그리드"
-        Me.lbStatus_Day_Grid.TextAlign = System.Drawing.StringAlignment.Center
-        Me.lbStatus_Day_Grid.UseKeyPad = False
         '
         'VsLabel7
         '
@@ -794,6 +380,288 @@ Partial Public Class wnd서브화면3_수요관리
         Me.lbGridStatus.TextAlign = System.Drawing.StringAlignment.Center
         Me.lbGridStatus.UseKeyPad = True
         '
+        'pnlScreen2
+        '
+        Me.pnlScreen2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlScreen2.Controls.Add(Me.VsLabel1)
+        Me.pnlScreen2.Controls.Add(Me.btnSearch_Day)
+        Me.pnlScreen2.Controls.Add(Me.lbStatus_Day_Grid)
+        Me.pnlScreen2.Controls.Add(Me.pnlGraphDay)
+        Me.pnlScreen2.Controls.Add(Me.DateTimePicker1)
+        Me.pnlScreen2.Location = New System.Drawing.Point(800, 338)
+        Me.pnlScreen2.Name = "pnlScreen2"
+        Me.pnlScreen2.Size = New System.Drawing.Size(784, 283)
+        '
+        'VsLabel1
+        '
+        Me.VsLabel1.BackColor = System.Drawing.Color.White
+        Me.VsLabel1.BorderColor = System.Drawing.Color.Black
+        Me.VsLabel1.BorderSide_Bottom = False
+        Me.VsLabel1.BorderSide_Left = False
+        Me.VsLabel1.BorderSide_Right = False
+        Me.VsLabel1.BorderSide_Top = False
+        Me.VsLabel1.BorderWidth = 0
+        Me.VsLabel1.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
+        Me.VsLabel1.IsPassword = False
+        Me.VsLabel1.Location = New System.Drawing.Point(13, 9)
+        Me.VsLabel1.Name = "VsLabel1"
+        Me.VsLabel1.Size = New System.Drawing.Size(76, 20)
+        Me.VsLabel1.TabIndex = 33
+        Me.VsLabel1.Text = "일자선택 :"
+        Me.VsLabel1.TextAlign = System.Drawing.StringAlignment.Far
+        Me.VsLabel1.UseKeyPad = False
+        '
+        'btnSearch_Day
+        '
+        Me.btnSearch_Day.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnSearch_Day.BorderSide_Bottom = True
+        Me.btnSearch_Day.BorderSide_Left = True
+        Me.btnSearch_Day.BorderSide_Right = True
+        Me.btnSearch_Day.BorderSide_Top = True
+        Me.btnSearch_Day.BorderWidth = 1
+        Me.btnSearch_Day.Location = New System.Drawing.Point(291, 7)
+        Me.btnSearch_Day.Name = "btnSearch_Day"
+        Me.btnSearch_Day.Selected = False
+        Me.btnSearch_Day.Size = New System.Drawing.Size(93, 24)
+        Me.btnSearch_Day.TabIndex = 3
+        Me.btnSearch_Day.Text = "조회"
+        '
+        'lbStatus_Day_Grid
+        '
+        Me.lbStatus_Day_Grid.BackColor = System.Drawing.Color.Red
+        Me.lbStatus_Day_Grid.BorderColor = System.Drawing.Color.Black
+        Me.lbStatus_Day_Grid.BorderSide_Bottom = False
+        Me.lbStatus_Day_Grid.BorderSide_Left = False
+        Me.lbStatus_Day_Grid.BorderSide_Right = False
+        Me.lbStatus_Day_Grid.BorderSide_Top = False
+        Me.lbStatus_Day_Grid.BorderWidth = 0
+        Me.lbStatus_Day_Grid.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
+        Me.lbStatus_Day_Grid.ForeColor = System.Drawing.Color.White
+        Me.lbStatus_Day_Grid.IsPassword = False
+        Me.lbStatus_Day_Grid.Location = New System.Drawing.Point(400, 7)
+        Me.lbStatus_Day_Grid.Name = "lbStatus_Day_Grid"
+        Me.lbStatus_Day_Grid.Size = New System.Drawing.Size(120, 25)
+        Me.lbStatus_Day_Grid.TabIndex = 33
+        Me.lbStatus_Day_Grid.Text = "그리드"
+        Me.lbStatus_Day_Grid.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbStatus_Day_Grid.UseKeyPad = False
+        '
+        'pnlGraphDay
+        '
+        Me.pnlGraphDay.BackColor = System.Drawing.Color.White
+        Me.pnlGraphDay.Location = New System.Drawing.Point(13, 37)
+        Me.pnlGraphDay.Name = "pnlGraphDay"
+        Me.pnlGraphDay.Size = New System.Drawing.Size(759, 239)
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(95, 7)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(190, 24)
+        Me.DateTimePicker1.TabIndex = 1
+        '
+        'pnlScreen3
+        '
+        Me.pnlScreen3.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlScreen3.Controls.Add(Me.lbStatus_Month_Grid)
+        Me.pnlScreen3.Controls.Add(Me.cbMonth_Month)
+        Me.pnlScreen3.Controls.Add(Me.VsLabel2)
+        Me.pnlScreen3.Controls.Add(Me.cbMonth_Year)
+        Me.pnlScreen3.Controls.Add(Me.btnSearch_Month)
+        Me.pnlScreen3.Controls.Add(Me.pnlGraphMonth)
+        Me.pnlScreen3.Location = New System.Drawing.Point(10, 627)
+        Me.pnlScreen3.Name = "pnlScreen3"
+        Me.pnlScreen3.Size = New System.Drawing.Size(784, 283)
+        '
+        'lbStatus_Month_Grid
+        '
+        Me.lbStatus_Month_Grid.BackColor = System.Drawing.Color.Red
+        Me.lbStatus_Month_Grid.BorderColor = System.Drawing.Color.Black
+        Me.lbStatus_Month_Grid.BorderSide_Bottom = False
+        Me.lbStatus_Month_Grid.BorderSide_Left = False
+        Me.lbStatus_Month_Grid.BorderSide_Right = False
+        Me.lbStatus_Month_Grid.BorderSide_Top = False
+        Me.lbStatus_Month_Grid.BorderWidth = 0
+        Me.lbStatus_Month_Grid.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
+        Me.lbStatus_Month_Grid.ForeColor = System.Drawing.Color.White
+        Me.lbStatus_Month_Grid.IsPassword = False
+        Me.lbStatus_Month_Grid.Location = New System.Drawing.Point(400, 7)
+        Me.lbStatus_Month_Grid.Name = "lbStatus_Month_Grid"
+        Me.lbStatus_Month_Grid.Size = New System.Drawing.Size(120, 25)
+        Me.lbStatus_Month_Grid.TabIndex = 35
+        Me.lbStatus_Month_Grid.Text = "그리드"
+        Me.lbStatus_Month_Grid.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbStatus_Month_Grid.UseKeyPad = False
+        '
+        'cbMonth_Month
+        '
+        Me.cbMonth_Month.Location = New System.Drawing.Point(187, 8)
+        Me.cbMonth_Month.Name = "cbMonth_Month"
+        Me.cbMonth_Month.Size = New System.Drawing.Size(81, 23)
+        Me.cbMonth_Month.TabIndex = 6
+        '
+        'VsLabel2
+        '
+        Me.VsLabel2.BackColor = System.Drawing.Color.White
+        Me.VsLabel2.BorderColor = System.Drawing.Color.Black
+        Me.VsLabel2.BorderSide_Bottom = False
+        Me.VsLabel2.BorderSide_Left = False
+        Me.VsLabel2.BorderSide_Right = False
+        Me.VsLabel2.BorderSide_Top = False
+        Me.VsLabel2.BorderWidth = 0
+        Me.VsLabel2.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
+        Me.VsLabel2.IsPassword = False
+        Me.VsLabel2.Location = New System.Drawing.Point(13, 9)
+        Me.VsLabel2.Name = "VsLabel2"
+        Me.VsLabel2.Size = New System.Drawing.Size(76, 20)
+        Me.VsLabel2.TabIndex = 34
+        Me.VsLabel2.Text = "년월선택 :"
+        Me.VsLabel2.TextAlign = System.Drawing.StringAlignment.Far
+        Me.VsLabel2.UseKeyPad = False
+        '
+        'cbMonth_Year
+        '
+        Me.cbMonth_Year.Location = New System.Drawing.Point(95, 8)
+        Me.cbMonth_Year.Name = "cbMonth_Year"
+        Me.cbMonth_Year.Size = New System.Drawing.Size(86, 23)
+        Me.cbMonth_Year.TabIndex = 6
+        '
+        'btnSearch_Month
+        '
+        Me.btnSearch_Month.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnSearch_Month.BorderSide_Bottom = True
+        Me.btnSearch_Month.BorderSide_Left = True
+        Me.btnSearch_Month.BorderSide_Right = True
+        Me.btnSearch_Month.BorderSide_Top = True
+        Me.btnSearch_Month.BorderWidth = 1
+        Me.btnSearch_Month.Location = New System.Drawing.Point(274, 7)
+        Me.btnSearch_Month.Name = "btnSearch_Month"
+        Me.btnSearch_Month.Selected = False
+        Me.btnSearch_Month.Size = New System.Drawing.Size(93, 24)
+        Me.btnSearch_Month.TabIndex = 3
+        Me.btnSearch_Month.Text = "조회"
+        '
+        'pnlGraphMonth
+        '
+        Me.pnlGraphMonth.BackColor = System.Drawing.Color.White
+        Me.pnlGraphMonth.Location = New System.Drawing.Point(13, 37)
+        Me.pnlGraphMonth.Name = "pnlGraphMonth"
+        Me.pnlGraphMonth.Size = New System.Drawing.Size(759, 239)
+        '
+        'pnlScreen4
+        '
+        Me.pnlScreen4.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pnlScreen4.Controls.Add(Me.lbStatus_Year_Grid)
+        Me.pnlScreen4.Controls.Add(Me.VsLabel3)
+        Me.pnlScreen4.Controls.Add(Me.cbYear_Year)
+        Me.pnlScreen4.Controls.Add(Me.btnSearch_Year)
+        Me.pnlScreen4.Controls.Add(Me.pnlGraphYear)
+        Me.pnlScreen4.Location = New System.Drawing.Point(800, 627)
+        Me.pnlScreen4.Name = "pnlScreen4"
+        Me.pnlScreen4.Size = New System.Drawing.Size(784, 283)
+        '
+        'lbStatus_Year_Grid
+        '
+        Me.lbStatus_Year_Grid.BackColor = System.Drawing.Color.Red
+        Me.lbStatus_Year_Grid.BorderColor = System.Drawing.Color.Black
+        Me.lbStatus_Year_Grid.BorderSide_Bottom = False
+        Me.lbStatus_Year_Grid.BorderSide_Left = False
+        Me.lbStatus_Year_Grid.BorderSide_Right = False
+        Me.lbStatus_Year_Grid.BorderSide_Top = False
+        Me.lbStatus_Year_Grid.BorderWidth = 0
+        Me.lbStatus_Year_Grid.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
+        Me.lbStatus_Year_Grid.ForeColor = System.Drawing.Color.White
+        Me.lbStatus_Year_Grid.IsPassword = False
+        Me.lbStatus_Year_Grid.Location = New System.Drawing.Point(400, 7)
+        Me.lbStatus_Year_Grid.Name = "lbStatus_Year_Grid"
+        Me.lbStatus_Year_Grid.Size = New System.Drawing.Size(120, 25)
+        Me.lbStatus_Year_Grid.TabIndex = 36
+        Me.lbStatus_Year_Grid.Text = "그리드"
+        Me.lbStatus_Year_Grid.TextAlign = System.Drawing.StringAlignment.Center
+        Me.lbStatus_Year_Grid.UseKeyPad = False
+        '
+        'VsLabel3
+        '
+        Me.VsLabel3.BackColor = System.Drawing.Color.White
+        Me.VsLabel3.BorderColor = System.Drawing.Color.Black
+        Me.VsLabel3.BorderSide_Bottom = False
+        Me.VsLabel3.BorderSide_Left = False
+        Me.VsLabel3.BorderSide_Right = False
+        Me.VsLabel3.BorderSide_Top = False
+        Me.VsLabel3.BorderWidth = 0
+        Me.VsLabel3.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Regular)
+        Me.VsLabel3.IsPassword = False
+        Me.VsLabel3.Location = New System.Drawing.Point(13, 9)
+        Me.VsLabel3.Name = "VsLabel3"
+        Me.VsLabel3.Size = New System.Drawing.Size(76, 20)
+        Me.VsLabel3.TabIndex = 35
+        Me.VsLabel3.Text = "년도선택 :"
+        Me.VsLabel3.TextAlign = System.Drawing.StringAlignment.Far
+        Me.VsLabel3.UseKeyPad = False
+        '
+        'cbYear_Year
+        '
+        Me.cbYear_Year.Location = New System.Drawing.Point(95, 8)
+        Me.cbYear_Year.Name = "cbYear_Year"
+        Me.cbYear_Year.Size = New System.Drawing.Size(86, 23)
+        Me.cbYear_Year.TabIndex = 7
+        '
+        'btnSearch_Year
+        '
+        Me.btnSearch_Year.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnSearch_Year.BorderSide_Bottom = True
+        Me.btnSearch_Year.BorderSide_Left = True
+        Me.btnSearch_Year.BorderSide_Right = True
+        Me.btnSearch_Year.BorderSide_Top = True
+        Me.btnSearch_Year.BorderWidth = 1
+        Me.btnSearch_Year.Location = New System.Drawing.Point(187, 7)
+        Me.btnSearch_Year.Name = "btnSearch_Year"
+        Me.btnSearch_Year.Selected = False
+        Me.btnSearch_Year.Size = New System.Drawing.Size(93, 24)
+        Me.btnSearch_Year.TabIndex = 3
+        Me.btnSearch_Year.Text = "조회"
+        '
+        'pnlGraphYear
+        '
+        Me.pnlGraphYear.BackColor = System.Drawing.Color.White
+        Me.pnlGraphYear.Location = New System.Drawing.Point(13, 37)
+        Me.pnlGraphYear.Name = "pnlGraphYear"
+        Me.pnlGraphYear.Size = New System.Drawing.Size(759, 239)
+        '
+        'PageHeader4
+        '
+        Me.PageHeader4.BackColor = System.Drawing.Color.White
+        Me.PageHeader4.BorderColor = System.Drawing.Color.Gray
+        Me.PageHeader4.BorderSide_Bottom = False
+        Me.PageHeader4.BorderSide_Left = False
+        Me.PageHeader4.BorderSide_Right = True
+        Me.PageHeader4.BorderSide_Top = True
+        Me.PageHeader4.BorderWidth = 1
+        Me.PageHeader4.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.PageHeader4.Location = New System.Drawing.Point(460, 10)
+        Me.PageHeader4.Name = "PageHeader4"
+        Me.PageHeader4.Size = New System.Drawing.Size(150, 40)
+        Me.PageHeader4.TabIndex = 29
+        Me.PageHeader4.Text = "연간 수요관리"
+        Me.PageHeader4.TextAlign = System.Drawing.StringAlignment.Center
+        '
+        'PageHeader3
+        '
+        Me.PageHeader3.BackColor = System.Drawing.Color.White
+        Me.PageHeader3.BorderColor = System.Drawing.Color.Gray
+        Me.PageHeader3.BorderSide_Bottom = False
+        Me.PageHeader3.BorderSide_Left = False
+        Me.PageHeader3.BorderSide_Right = True
+        Me.PageHeader3.BorderSide_Top = True
+        Me.PageHeader3.BorderWidth = 1
+        Me.PageHeader3.Font = New System.Drawing.Font("Tahoma", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.PageHeader3.Location = New System.Drawing.Point(310, 10)
+        Me.PageHeader3.Name = "PageHeader3"
+        Me.PageHeader3.Size = New System.Drawing.Size(150, 40)
+        Me.PageHeader3.TabIndex = 28
+        Me.PageHeader3.Text = "월간 수요관리"
+        Me.PageHeader3.TextAlign = System.Drawing.StringAlignment.Center
+        '
         'PageHeader2
         '
         Me.PageHeader2.BackColor = System.Drawing.Color.White
@@ -879,14 +747,8 @@ Partial Public Class wnd서브화면3_수요관리
     Friend WithEvents VsLabel1 As PMS.VSLabel
     Friend WithEvents VsLabel2 As PMS.VSLabel
     Friend WithEvents VsLabel3 As PMS.VSLabel
-    Friend WithEvents lbStatus_Day_Load As PMS.VSLabel
-    Friend WithEvents lbStatus_Day_Inverter As PMS.VSLabel
     Friend WithEvents lbStatus_Day_Grid As PMS.VSLabel
-    Friend WithEvents lbStatus_Month_Load As PMS.VSLabel
-    Friend WithEvents lbStatus_Month_Inverter As PMS.VSLabel
     Friend WithEvents lbStatus_Month_Grid As PMS.VSLabel
-    Friend WithEvents lbStatus_Year_Load As PMS.VSLabel
-    Friend WithEvents lbStatus_Year_Inverter As PMS.VSLabel
     Friend WithEvents lbStatus_Year_Grid As PMS.VSLabel
     Friend WithEvents ucScrollGridStatus As PMS.ucScrollArrow
     Friend WithEvents VsLabel4 As PMS.VSLabel

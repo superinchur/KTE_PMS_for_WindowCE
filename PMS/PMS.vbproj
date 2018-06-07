@@ -149,15 +149,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="2. 통신\3. 공통\모듈_제어대기열.vb" />
-    <Compile Include="2. 통신\4. BMS\BMS시리얼통신.vb" />
     <Compile Include="2. 통신\4. BMS\BMS클라이언트.Designer.vb">
       <DependentUpon>BMS클라이언트.vb</DependentUpon>
     </Compile>
     <Compile Include="2. 통신\4. BMS\BMS클라이언트.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="2. 통신\4. BMS\BMS통신서버.vb" />
-    <Compile Include="2. 통신\4. BMS\BMS통신차일드.vb" />
     <Compile Include="9. 코드\IniFileVb.vb" />
     <Compile Include="9. 코드\MBMaster.vb" />
     <Compile Include="9. 코드\모듈_고장함수.vb" />
@@ -175,7 +172,6 @@
     </Compile>
     <Compile Include="2. 통신\3. 공통\MODBUS배열.vb" />
     <Compile Include="9. 코드\모듈_변수선언.vb" />
-    <Compile Include="2. 통신\1. EMS\EMS비동기통신소켓.vb" />
     <Compile Include="2. 통신\1. EMS\EMS통신서버.vb" />
     <Compile Include="2. 통신\1. EMS\EMS통신차일드.vb" />
     <Compile Include="2. 통신\2. PCS\PCS통신.vb" />
@@ -264,6 +260,8 @@
     <None Include="Resources\배터리_060.png" />
     <None Include="Resources\배터리_080.png" />
     <None Include="Resources\배터리_100.png" />
+    <None Include="Resources\dctoac.jpg" />
+    <None Include="Resources\ELT_CI.png" />
     <Content Include="vnc\vncconfig.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

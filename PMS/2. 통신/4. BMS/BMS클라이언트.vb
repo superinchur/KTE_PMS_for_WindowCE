@@ -1,28 +1,22 @@
-﻿
-Imports System
+﻿Imports System
 Imports System.Net
 Imports System.Drawing
 Imports System.Collections
 Imports System.ComponentModel
 Imports System.Windows.Forms
 Imports System.Data
-
-
-
 Imports System.Text
 Imports System.IO
-
 Imports System.Net.Sockets
 Imports System.Threading
+
 Public Class BMS클라이언트
 
     ' Private MBmaster As ModbusTCP.Master = New Master(IPaddr, Port)
     Private data As Byte()
 
-    Const IPaddr As String = "192.168.0.247"
-    'Const IPaddr As String = "192.168.0.201"
-    'Const IPaddr As String = "127.0.0.1"
-    Const Port As String = "502"
+    Const IPaddr As String = "17.91.30.246"
+    Const Port As String = "602"
 
     ' -----------------------------------------------
     ' Constants for access
@@ -35,6 +29,7 @@ Public Class BMS클라이언트
     Private Const fctWriteMultipleCoils As Byte = 15
     Private Const fctWriteMultipleRegister As Byte = 16
     Private Const fctReadWriteMultipleRegister As Byte = 23
+
 
 #Region "정의"
     ''' <summary>Constant for exception illegal function.</summary>
@@ -86,7 +81,6 @@ Public Class BMS클라이언트
 
     Private tcpSynClBuffer() As Byte = New Byte((2048) - 1) {}
 
-
     Dim writedata As Byte()
     Dim Length As Byte
 
@@ -94,7 +88,7 @@ Public Class BMS클라이언트
 
     Private btRecvBuffer(1024) As Byte
     Private nRecvBufferLength As Integer = 0
-#End Region
+
 
     WithEvents Timer_Comm As New Windows.Forms.Timer
 
@@ -109,7 +103,7 @@ Public Class BMS클라이언트
 
     ''' <summary>Exception data event. This event is called when the data is incorrect</summary>
     Public Event OnException As ExceptionData
-
+#End Region
     Public Sub ServiceStart()
 
         Timer_Comm.Enabled = False
@@ -122,22 +116,23 @@ Public Class BMS클라이언트
 
 
         Catch [error] As SystemException
-            MessageBox.Show([error].Message)
+            'MessageBox.Show([error].Message)
+            Debug.WriteLine([error].Message)
         End Try
 
-        현재BSC상태 = BSC상태.Connect
         Timer_Comm.Interval = 1000
         Timer_Comm.Enabled = True
 
     End Sub
 
-
+#Region "Comm"
     ' ------------------------------------------------------------------------
     ''' <summary>Start connection to slave.</summary>
     ''' <param name="ip">IP adress of modbus slave.</param>
     ''' <param name="port">Port number of modbus slave. Usually port 502 is used.</param>
     Public Sub connect(ByVal ip As String, ByVal port As Integer)
         Try
+
             Me.tcpAsyCl = New Socket(IPAddress.Parse(ip).AddressFamily, SocketType.Stream, ProtocolType.Tcp)
             Me.tcpAsyCl.Connect(New IPEndPoint(IPAddress.Parse(ip), port))
             _connected = True
@@ -147,55 +142,18 @@ Public Class BMS클라이언트
         End Try
 
     End Sub
+    Private tLastRecv As Date = DateAdd(DateInterval.Day, -1, Now)
+    Public Function Connected() As Integer
 
-    Private Sub Timer_Comm_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer_Comm.Tick
-        Timer_Comm.Enabled = False
+        Dim tSpan As TimeSpan = Now - tLastRecv
+        Dim nReturn As Integer = 0
 
-        'Dim StartAddress As UShort = ReadStartAdr(num_Rack, num_Module)
-        'Dim length As UShort = ReadLength(num_Rack, num_Module)
-        Dim StartAddress As UShort
-        Dim length As UShort
+        If tSpan.TotalSeconds <= 60 Then
+            nReturn = 1
+        End If
 
-        ReDim writedata(6)
-        Try
-            StartAddress = 40000
-            length = 27 * 2
-            ReadHoldingRegister(3, StartAddress, length)
-            ' Read Heartbit (읽어온다
-
-
-            ' 읽어온 Heartbit를 Write 한다
-            StartAddress = 44000
-
-            If heartbit = 1 Then
-                heartbit = 0
-            Else
-                heartbit = 1
-            End If
-            ' 44000 Controller HeartBeat
-            writedata(0) = heartbit \ &H100
-            writedata(1) = heartbit Mod &H100
-
-            '44001
-            Dim temp_BSCStatus As UShort = Set_BSCStatus()
-            writedata(2) = temp_BSCStatus \ &H100
-            writedata(3) = temp_BSCStatus Mod &H100
-
-            '44002
-            Dim temp_Req_Contactor As UShort = Set_BSC_Req_Contactor()
-            writedata(4) = temp_Req_Contactor \ &H100
-            writedata(5) = temp_Req_Contactor Mod &H100
-
-            WriteMultipleRegister(StartAddress, writedata)
-
-
-        Catch ex As Exception
-            Debug.WriteLine(ex.ToString)
-        End Try
-
-        Timer_Comm.Enabled = True
-    End Sub
-
+        Return nReturn
+    End Function
 
     ' ------------------------------------------------------------------------
     ' Write asynchronous data
@@ -222,7 +180,6 @@ Public Class BMS클라이언트
         End If
 
     End Sub
-
     ' ------------------------------------------------------------------------
     ' Write asynchronous data response
     Private Sub OnReceive(ByVal result As System.IAsyncResult)
@@ -259,9 +216,9 @@ Public Class BMS클라이언트
         ' If (Not (OnResponseData) Is Nothing) Then
         RaiseEvent OnResponseData(id, unit, func, data)
         'End If
-
+        ''
     End Sub
-   
+
     ' ------------------------------------------------------------------------
     ' Create modbus header for read action
     Private Function CreateReadHeader(ByVal id As UShort, ByVal unit As Byte, ByVal startAddress As UShort, ByVal length As UShort, ByVal func As Byte) As Byte()
@@ -374,12 +331,19 @@ Public Class BMS클라이언트
         WriteAsyncData(Me.CreateReadHeader(ID, Unit, StartAddress, Length, fctReadHoldingRegister), func)
     End Sub
     Private Sub ReadInputRegister(ByVal StartAddress As UShort, ByVal Length As UShort)
-        Dim ID As UShort = 4
+        Dim ID As UShort = 1
         Dim Unit As Byte = 1
 
         WriteAsyncData(CreateReadHeader(ID, Unit, StartAddress, Length, fctReadInputRegister), ID)
     End Sub
 
+    Public Overloads Sub WriteSingleRegister(ByVal ids As Integer, ByVal unit As Byte, ByVal startAddress As Integer, ByVal values() As Byte)
+        Dim data() As Byte
+        data = Me.CreateWriteHeader(ids, unit, startAddress, 1, 1, fctWriteSingleRegister)
+        data(10) = values(0)
+        data(11) = values(1)
+        Me.WriteAsyncData(data, ids)
+    End Sub
     Private Sub WriteMultipleRegister(ByVal StartAddress As UShort, ByRef data As Byte())
         Dim ID As UShort = 8
         Dim Unit As Byte = 1
@@ -396,6 +360,29 @@ Public Class BMS클라이언트
         Me.WriteAsyncData(data2, ID)
 
     End Sub
+    Friend Sub CallException(ByVal id As Integer, ByVal unit As Byte, ByVal func As Byte, ByVal exception As Byte)
+        If ((Me.tcpAsyCl Is Nothing) _
+                    OrElse (Me.tcpSynCl Is Nothing)) Then
+            Return
+        End If
+
+        If (exception = excExceptionConnectionLost) Then
+            Me.tcpSynCl = Nothing
+            Me.tcpAsyCl = Nothing
+        End If
+
+        'If (Not (OnException) Is Nothing) Then
+        RaiseEvent OnException(id, unit, func, exception)
+        'End If
+
+    End Sub
+
+    Friend Shared Function SwapUInt16(ByVal inValue As UInt16) As UInt16
+        Return CType((((inValue And 65280) _
+                    + 8) _
+                    Or ((inValue And 255) _
+                    + 8)), UInt16)
+    End Function
     Private Function GetData(ByVal num As Integer) As Byte()
         Dim word As Integer() = New Integer(num - 1) {}
 
@@ -415,57 +402,89 @@ Public Class BMS클라이언트
             data(x * 2) = dat(0)
             data(x * 2 + 1) = dat(1)
         Next
-
         Return data
 
     End Function
+#End Region
+
+    Private Sub Timer_Comm_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer_Comm.Tick
+        Timer_Comm.Enabled = False
+
+        ' 여기에서 어디를 읽을지를 선택해야하는데 지금은 하나만 읽으면 될것 같다.
+
+        Dim StartAddress As UShort = 0
+        Dim length As UShort = 90
+
+        Dim bytearray As Byte()
+        ReDim bytearray(2)
+
+        Try
+
+            If Control_Trigger_Relay = 1 Then
+                bytearray(0) = Control_BMS_Relay \ &H100
+                bytearray(1) = Control_BMS_Relay Mod &H100
+
+                WriteSingleRegister(2, 1, 0, bytearray)
+
+
+                Control_Trigger_Relay = 0
+                Timer_Comm.Enabled = True
+                Exit Sub
+            End If
+            If Control_Trigger_Fault_Reset = 1 Then
+                bytearray(0) = Control_BMS_Fault_Reset \ &H100
+                bytearray(1) = Control_BMS_Fault_Reset Mod &H100
+                WriteSingleRegister(2, 1, 1, bytearray)
+                Control_Trigger_Fault_Reset = 0
+                Timer_Comm.Enabled = True
+                Exit Sub
+            End If
+
+            If Control_Trigger_WatchDog = 1 Then
+                bytearray(0) = Control_BMS_WatchDog \ &H100
+                bytearray(1) = Control_BMS_WatchDog Mod &H100
+                WriteSingleRegister(2, 1, 2, bytearray)
+                Control_Trigger_WatchDog = 0
+                Timer_Comm.Enabled = True
+                Exit Sub
+            End If
+
+            ReadInputRegister(StartAddress, length)
+
+
+        Catch ex As Exception
+            Debug.WriteLine(ex.ToString)
+        End Try
+
+        Timer_Comm.Enabled = True
+    End Sub
 
 
     Private Sub MBmaster_OnResponseData(ByVal ID As UShort, ByVal unit As Byte, ByVal func As Byte, ByVal values As Byte())
 
-        'If Me.InvokeRequired Then
-        'Me.BeginInvoke(New ResponseData(AddressOf MBmaster_OnResponseData), New Object() {ID, unit, func, values})
-        'Return
-        'End If
+        If Me.InvokeRequired Then
+            Me.BeginInvoke(New ResponseData(AddressOf MBmaster_OnResponseData), New Object() {ID, unit, func, values})
+            Return
+        End If
 
         If ID = &HFF Then
             Return
         End If
 
-        Select Case ID
+        If ID > 0 Then
+            tLastRecv = Now
+        End If
+
+        Select ID
             Case 1
+                'Read Input Registers (FC=04)
                 data = values
-                'heartbit = Convert.ToUInt16(values(1))
+                ShowAs()
 
             Case 2
-
-                data = values
-
-            Case 3
-                data = values
-                'heartbit = Convert.ToUInt16(values(1))
-                'Debug.WriteLine("ID3 is : " + data(1).ToString)
-                ShowAs()
-            Case 4
-                'Read Input Register
-                data = values
-                Dim temp_value As UShort
-
-                cBMS_Rack(num_Rack).Max_Cell_Voltage = Convert.ToDouble(data(0))
-                temp_value = data(0) * 256 + data(1)
-                ' If temp_value > 0 Then
-                Debug.WriteLine("ID4 is : " + temp_value.ToString)
-                ' End If
-                ShowAs()
-            Case 5
-
-            Case 6
-
-            Case 7
-
-            Case 8
-                ' Write 한거임
-
+                'Preset Single Register (FC=06)
+                'data = values
+                'ShowAs()
         End Select
     End Sub
 
@@ -519,174 +538,70 @@ Public Class BMS클라이언트
 
     End Sub
 
-    Private Function ReadStartAdr(ByVal nRack As UShort, ByVal nModule As UShort) As UShort
-
-        Dim nStartAddress As UShort
-        If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
-            nStartAddress = 0
-        ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
-            nStartAddress = (379 * nRack) - 354
-        ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
-            nStartAddress = (379 * nRack) + (9 * nModule) - 354
-        End If
-
-        Return nStartAddress
-
-    End Function
-
-    Private Function ReadLength(ByVal nRack As UShort, ByVal nModule As UShort) As UShort
-
-        Dim nLength As UShort
-        If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
-            nLength = 25
-        ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
-            nLength = 19
-        ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
-            nLength = 9
-        End If
-
-        Return nLength
-
-    End Function
-
-    Private Function Set_BSCStatus()
-        Dim BSCStatus As UShort = 0
-
-        Select Case 현재BSC상태
-            Case BSC상태.Connect
-                ' 추후 수정이 필요함
-                현재BSC상태 = BSC상태.Initializing
-
-            Case BSC상태.Initializing
-                BSCStatus = SetBitmask(BSCStatus, 2, 1) ' Initializing
-                현재BSC상태 = BSC상태.Normal ' 추후 수정 필요
-            Case BSC상태.Normal
-            Case BSC상태.Contactor_Open
-
-                BSCStatus = SetBitmask(BSCStatus, 0, 0) ' Shutdown()
-                BSCStatus = SetBitmask(BSCStatus, 1, 0) ' Shutdown()
-        End Select
-
-        'BSCStatus = SetBitmask(BSCStatus, 0, 0) ' None
-        'BSCStatus = SetBitmask(BSCStatus, 1, 0) ' BMS not connected
-        'BSCStatus = SetBitmask(BSCStatus, 2, 0) ' Initializing
-        'BSCStatus = SetBitmask(BSCStatus, 3, 1) ' Normal
-        'BSCStatus = SetBitmask(BSCStatus, 4, 0) ' NPS ( Normal Power Saving)
-        'BSCStatus = SetBitmask(BSCStatus, 5, 0) ' Manual
-        'BSCStatus = SetBitmask(BSCStatus, 6, 0) ' Emergency
-        'BSCStatus = SetBitmask(BSCStatus, 7, 0) ' PPS(Protective Power Saving)
-
-
-        Return BSCStatus
-    End Function
-
-    Private Function controller_status()
-        Dim status As UShort
-
-        status = SetBitmask(status, 1, 1)
-
-        Return status
-    End Function
-    Private Function Set_BSC_Req_Contactor()
-        Dim status As UShort
-        Select Case 현재BSC상태
-            Case BSC상태.Contactor_Close
-                status = SetBitmask(status, 1, 1)
-                현재BSC상태 = BSC상태.Normal ' 추후 수정 필요
-            Case BSC상태.Contactor_Open1
-                현재BSC상태 = BSC상태.Contactor_Open2 ' 추후 수정 필요
-            Case BSC상태.Contactor_Open2
-                status = SetBitmask(status, 0, 1)
-                현재BSC상태 = BSC상태.Normal ' 추후 수정 필요
-            Case Else
-                status = SetBitmask(status, 1, 0)
-                status = SetBitmask(status, 2, 0)
-        End Select
-        Return status
-    End Function
-
-    Private Function UShortToShort(ByVal vIn As Integer) As Short
-        Dim vOut As Short
-        If vIn > 32767 Then
-            vOut = (vIn - 32768) * -1
-        End If
-        Return vOut
-    End Function
 
     Private Sub Display(ByVal word() As UShort)
 
+        'If 현재사용모드_PMS의존모드 > 0 Then
+        'If 현재사용모드_리모트모드 = False Then
+        'If Not cBMS.System_SOC = Get_MODBUS_EMS_BUFFER(2) * 0.1 Then
+        'Dim ushSOCData
+        'ushSOCData = Get_MODBUS_EMS_BUFFER(2) * 0.1
+        '제어대기열_추가(PT_Current_Battery_SOC_DATA, ushSOCData)
+        'cBMS.System_SOC = Get_MODBUS_EMS_BUFFER(2) * 0.1  ' 3 Resolution 0.1 %
+        'End If
+        'End If
+        'cBMS.System_Voltage = Get_MODBUS_EMS_BUFFER(3)
+        'cBMS.System_Current = Convert.ToInt16(Get_MODBUS_EMS_BUFFER(4).ToString("X4"), 16) ' 2 Signed Resolution 1 A
+        'cBMS.System_Power = cBMS.System_Voltage * cBMS.System_Current / 1000
+        'cBMS.System_Heartbit = Get_MODBUS_EMS_BUFFER(5) ' 25
+        'Else
+        'Resolution에 대한 처리를 Display에서 하도록 변경
+        ' 삼성 Battery Version으로 함
+        cBMS.Protocol_Version = word(0)
+        cBMS.System_Voltage = word(1) * 0.1 ' Voltage 0.1 V
 
-        cBMS.Bank_SOC = Convert.ToDouble(word(12)) / 10
-        cBMS.Bank_SOH = Convert.ToDouble(word(13)) / 10
-        cBMS.Bank_DC전압 = Convert.ToDouble(word(14)) / 10
+        cBMS.System_Current = Convert.ToInt16(word(2).ToString("X4"), 16) ' 2 Signed Resolution 1 A
+        cBMS.System_Power = cBMS.System_Voltage * cBMS.System_Current / 1000
 
-
-        cBMS.Bank_DC전류 = Convert.ToDouble(Convert.ToInt16(word(15).ToString("X4"), 16)) / 10
-        cBMS.Bank_충방전_전력_제한값 = Convert.ToDouble(word(14)) / 10
-        cBMS.Bank내_Cell_최고_전압 = Convert.ToDouble(word(16)) / 1000
-        cBMS.Bank내_Cell_최소_전압 = Convert.ToDouble(word(18)) / 1000
-        cBMS.Bank내_Module_최고_온도 = Convert.ToDouble(Convert.ToInt16(word(20).ToString("X4"), 16))
-        cBMS.Bank내_Module_최저_온도 = Convert.ToDouble(Convert.ToInt16(word(22).ToString("X4"), 16))
-        cBMS.Bank_충방전_전력 = Convert.ToDouble(Convert.ToInt16(word(24).ToString("X4"), 16))
-
-        If BMS현재통신모드 = BMS통신모드정의.BankInfo Then
-        ElseIf BMS현재통신모드 = BMS통신모드정의.RackInfo Then
-            cBMS_Rack(num_Rack).Rack_SOC = word(3)
-            cBMS_Rack(num_Rack).Rack_SOH = word(4)
-            cBMS_Rack(num_Rack).Rack_Voltage = word(5)
-            cBMS_Rack(num_Rack).Rack_Current = Convert.ToInt16(word(6).ToString("X4"), 16)
-            cBMS_Rack(num_Rack).Max_Cell_Voltage = word(7)
-            cBMS_Rack(num_Rack).Max_Cell_Voltage_Position = word(8)
-            cBMS_Rack(num_Rack).Min_Cell_Voltage = word(9)
-            cBMS_Rack(num_Rack).Min_Cell_Voltage_Position = word(10)
-            cBMS_Rack(num_Rack).Cell_Voltage_Gap = word(11)
-            cBMS_Rack(num_Rack).Rack_Average_Cell_Voltage = word(12)
-            cBMS_Rack(num_Rack).Max_Cell_Temperature = Convert.ToInt16(word(13).ToString("X4"), 16)
-            cBMS_Rack(num_Rack).Max_Cell_Temperature_Position = word(14)
-            cBMS_Rack(num_Rack).Min_Cell_Temperature = Convert.ToInt16(word(14).ToString("X4"), 16)
-            cBMS_Rack(num_Rack).Min_Cell_Temperature_Position = word(15)
-            cBMS_Rack(num_Rack).Cell_Temperature_Gap = word(16)
-            cBMS_Rack(num_Rack).Rack_Average_Module_Temperature = word(17)
-        ElseIf BMS현재통신모드 = BMS통신모드정의.ModuleInfo Then
-
-            cBMS_Module(num_Rack, num_Module).Module_DC_Voltage = word(0)
-            cBMS_Module(num_Rack, num_Module).Max_Cell_Voltage = word(1)
-            cBMS_Module(num_Rack, num_Module).Min_Cell_Voltage = word(2)
-            cBMS_Module(num_Rack, num_Module).Averge_Cell_Voltage = word(3)
-            cBMS_Module(num_Rack, num_Module).Max_Min_Cell_Voltage_Location = word(4)
-            cBMS_Module(num_Rack, num_Module).Average_Module_Temperature = Convert.ToInt16(word(5).ToString("X4"), 16)
-            cBMS_Module(num_Rack, num_Module).Max_Module_Temperature = Convert.ToInt16(word(6).ToString("X4"), 16)
-            cBMS_Module(num_Rack, num_Module).Min_Module_Temeperature = Convert.ToInt16(word(7).ToString("X4"), 16)
-            cBMS_Module(num_Rack, num_Module).Max_Min_Module_Temperature_Location = word(8)
-        Else
-
+        'TODO : SOC가 변경될떄마다 PMS로 SOC 변경값을 보낸다.  Finished
+        'Remote 모드에는 동작하지 않는다
+        If 현재사용모드_리모트모드 = False Then
+            If Not cBMS.System_SOC = word(3) * 0.1 Then
+                Dim ushSOCData
+                ushSOCData = word(3) * 0.1
+                제어대기열_추가(PT_Current_Battery_SOC_DATA, ushSOCData)
+                cBMS.System_SOC = word(3) * 0.1  ' 3 Resolution 0.1 %
+            End If
         End If
+        cBMS.System_SOH = word(4) * 0.1  ' 4 Resolution 0.1 %
+        'TODO : BMS의 현재 상태를 전시해야함
+        cBMS.System_Mode = word(5) ' 5 
+        cBMS.System_Max_Voltage = word(6) ' 6 Resolution 1 mV
+        cBMS.System_Min_Voltage = word(7) ' 7 Resolution 1 mV
+        cBMS.System_Max_Temp = Convert.ToInt16(word(8).ToString("X4"), 16) / 100 '8  °C
+        cBMS.System_Min_Temp = Convert.ToInt16(word(9).ToString("X4"), 16) / 100 ' 9 °C
+        cBMS.Protection_Summary4 = word(14) ' 14
+        cBMS.Protection_Summary3 = word(15) ' 15
+        cBMS.Protection_Summary2 = word(16) ' 16
+        cBMS.Protection_Summary1 = word(17) ' 17
+        cBMS.Alarm_Summary4 = word(18) ' 18
+        cBMS.Alarm_Summary3 = word(19) ' 19
+        cBMS.Alarm_Summary2 = word(20) ' 20
+        cBMS.Alarm_Summary1 = word(21) ' 21
+        BMS_Fault_처리_프로시져()
 
-    End Sub
+        cBMS.Discharge_Current_Limit = word(22) ' 22 Resolution 0.1 10 W
+        cBMS.Charge_Current_Limit = word(23) ' 23 Resolution 0.1 10 W
+        cBMS.Watchdog_Response = Convert.ToInt16(word(24).ToString("X4"), 16) ' 24
+        cBMS.System_Heartbit = word(25) ' 25
+        cBMS.Connecting_Status = word(26) ' 26
 
-    Friend Sub CallException(ByVal id As Integer, ByVal unit As Byte, ByVal func As Byte, ByVal exception As Byte)
-        If ((Me.tcpAsyCl Is Nothing) _
-                    OrElse (Me.tcpSynCl Is Nothing)) Then
-            Return
-        End If
+        cBMS.Service_Voltage = word(27) ' 27
+        cBMS.Service_SOC = word(28) ' 28
+        cBMS.Ambient_Temp = word(30) '30
 
-        If (exception = excExceptionConnectionLost) Then
-            Me.tcpSynCl = Nothing
-            Me.tcpAsyCl = Nothing
-        End If
-
-        'If (Not (OnException) Is Nothing) Then
-        RaiseEvent OnException(id, unit, func, exception)
         'End If
 
     End Sub
-
-
-    Friend Shared Function SwapUInt16(ByVal inValue As UInt16) As UInt16
-        Return CType((((inValue And 65280) _
-                    + 8) _
-                    Or ((inValue And 255) _
-                    + 8)), UInt16)
-    End Function
 
 End Class

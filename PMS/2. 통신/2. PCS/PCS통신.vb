@@ -81,49 +81,20 @@
 
                                 If nCheckSum1 = btRecvBuffer(nRecvBufferLength - 2) And nCheckSum2 = btRecvBuffer(nRecvBufferLength - 1) Then
 
-                                    If DEBUG_COMM = True Then
-                                        RaiseEvent DataArrived(DeviceCommPort.PortName, "RX", btRecvBuffer, nRecvBufferLength)
-                                    End If
-
+                                    'If DEBUG_COMM = True Then
+                                    RaiseEvent DataArrived(DeviceCommPort.PortName, "RX", btRecvBuffer, nRecvBufferLength)
+                                    'End If
 
                                     tLastRecv = Now
-
                                     Dim nAddrESS As Integer = 0
                                     For i As Integer = 0 To nDataCount / 2 - 1
-                                        'Dim btValue As Byte = btRecvBuffer(3 + i)
-                                        'ModbusData(nAddrESS) = btValue
-
                                         SetModbusData(PCS_MODBUS_ADDRESS + nAddrESS, btRecvBuffer, 3 + i * 2, 2)
                                         nAddrESS += 1
                                     Next
 
                                 End If
                             End If
-
-                        ElseIf btRecvCommand = &H6 Then
-                            If nRecvBufferLength = 8 Then
-
-                                ' 제어응답 - 싱글
-                                If DEBUG_COMM = True Then
-                                    'Debug.WriteLine("btRecvBuffer : " + btData(1) + btData(2) + btData(3) + btData(4) + btData(5))
-                                    'Debug.WriteLine("btRecvBuffer : " + btRecvBuffer(1) + btRecvBuffer(2) + btRecvBuffer(3) + btRecvBuffer(4) + btRecvBuffer(5))
-                                End If
-                                'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
-
-                                'nModbusWriteRegisterResponse = nRecvBufferLength - 3
-                            End If
-
-                            ElseIf btRecvCommand = &H10 Then
-                                If nRecvBufferLength = 8 Then
-
-                                    ' 제어응답 - 멀티
-
-                                    'Array.Copy(btRecvBuffer, 1, btModbusWriteRegisterResponse, 0, nRecvBufferLength - 3)
-                                    'nModbusWriteRegisterResponse = nRecvBufferLength - 3
-                                End If
-
-
-                            End If
+                        End If
                     End If
                 End If
             Next
@@ -149,10 +120,10 @@
         Timer_Comm.Enabled = False
 
         ' 매초 비교를 현재 BMS 데이터를 비교하고, 비교한 값과 달라지는게 있다면 제어대기열에 넣어서 Writing을 한다.
-        BMS데이터비교()
+        ' BMS데이터비교()
 
         Priority_Read = Priority_Read + 1
-        If Priority_Read > 4 Then
+        If Priority_Read > 2 Then
             Priority_Read = 1
         End If
         ' 
@@ -161,7 +132,7 @@
         Else
             SendPollingData()
         End If
-        'SendPollingData()
+
         Timer_Comm.Enabled = True
     End Sub
 
@@ -169,65 +140,6 @@
     Private tLastSOC As Date
     Private tLastSOH As Date
     Private tLastStatus As Date
-
-    Private Sub BMS데이터비교()
-
-        ' 같다면 이전 상태아무런 동작을 하지 않지만, 다르다면 제어대기열 추가 이후, prev_값을 넣는다
-
-
-        Dim tSpan As TimeSpan
-        Dim Ondelay As Integer = 3
-
-        '' Deadband를 넣어야함.
-        '' On-Delay Off-Delay를 넣어야 함.
-
-        If Not cBMS.prev_Bank_SOC = cBMS.Bank_SOC Then
-            tSpan = Now - tLastSOC
-            If tSpan.TotalSeconds <= Ondelay Then
-                제어대기열_추가(PT_SOC, Convert.ToInt16(cBMS.Bank_SOC))
-                cBMS.prev_Bank_SOC = cBMS.Bank_SOC
-            Else
-                ' Waiting until Deadband
-            End If
-        Else
-            tLastSOC = Now
-        End If
-
-        If Not cBMS.prev_Bank_SOH = cBMS.Bank_SOH Then
-            tSpan = Now - tLastSOH
-            If tSpan.TotalSeconds <= Ondelay Then
-                제어대기열_추가(PT_SOH, Convert.ToInt16(cBMS.Bank_SOH))
-                cBMS.prev_Bank_SOH = cBMS.Bank_SOH
-            Else
-                ' Waiting until Deadband
-            End If
-            tLastSOH = Now
-        End If
-
-        Dim ushValue As UShort
-        BMS경보값비교(cBMS.prev_Over_Current_Discharge_Warning, cBMS.Over_Current_Discharge_Warning, ushValue, 7)
-        BMS경보값비교(cBMS.prev_Over_Current_Charge_Warning, cBMS.Over_Current_Charge_Warning, ushValue, 6)
-        BMS경보값비교(cBMS.prev_Rack_Over_Voltage_Protection_Warning, cBMS.Rack_Over_Voltage_Protection_Warning, ushValue, 5)
-        BMS경보값비교(cBMS.prev_Rack_Under_Voltage_Protection_Warning, cBMS.Rack_Under_Voltage_Protection_Warning, ushValue, 4)
-        BMS경보값비교(cBMS.prev_Rack_Voltage_Imbalance_Warning, cBMS.Rack_Voltage_Imbalance_Warning, ushValue, 3)
-        BMS경보값비교(cBMS.prev_Rack_Over_Temperature_Warning, cBMS.Rack_Over_Temperature_Warning, ushValue, 2)
-        BMS경보값비교(cBMS.prev_Rack_Under_Temperature_Warning, cBMS.Rack_Under_Temperature_Warning, ushValue, 1)
-        BMS경보값비교(cBMS.prev_Rack_Temperature_Imbalance_Warning, cBMS.Rack_Temperature_Imbalance_Warning, ushValue, 0)
-
-        If Not ushValue = cBMS.prev_Bank_Status Then
-            tSpan = Now - tLastStatus
-            If tSpan.TotalSeconds <= Ondelay Then
-                제어대기열_추가(PT_STS, ushValue)
-                cBMS.prev_Bank_Status = ushValue
-            Else
-                ' Waiting until Deadband
-            End If
-
-        Else
-            tLastStatus = Now
-        End If
-
-    End Sub
 
     Private Sub BMS경보값비교(ByRef prev_a As Boolean, ByVal a As Boolean, ByRef ushValue As Integer, ByVal nbit As Integer)
         Dim temp_flag As Integer = 0
@@ -248,7 +160,6 @@
         Dim bReturn As Boolean = 제어대기열_가져오기(nWriteAddress, nWriteData)
 
         If bReturn = False Then Exit Sub
-
 
         Try
 
@@ -316,8 +227,8 @@
     Private Sub SendPollingData()
 
         PCS_MODBUS_ADDRESS += PCS_MODBUS_COUNT
-        If PCS_MODBUS_ADDRESS > 50 Then
-            PCS_MODBUS_ADDRESS = 0
+        If PCS_MODBUS_ADDRESS > 81 Then
+            PCS_MODBUS_ADDRESS = 30
         End If
 
         Try
@@ -359,9 +270,9 @@
 
             Try
                 If DEBUG_COMM = True Then
-                    RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
+                    'RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
                 End If
-                'RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
+                RaiseEvent DataArrived(DeviceCommPort.PortName, "TX", btData, nData)
                 DeviceCommPort.Write(btData, 0, nData)
 
             Catch ex As Exception

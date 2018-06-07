@@ -209,26 +209,44 @@
 
         Dim szValue As String = "-"
         Dim nOldStatus As Integer = 그리드상태
-        Dim dGrid_In_Power As Double = GetModbusData_Ushort(PT_grid_in_Power) * 0.1
-        Dim dGrid_Out_Power As Double = GetModbusData_Ushort(PT_grid_out_Power) * 0.1
 
-        If dGrid_In_Power > 0 And dGrid_Out_Power <= 0 Then
-            그리드상태 = 1
-            szValue = String.Format("{0:F1} kW", dGrid_In_Power)
-        ElseIf dGrid_In_Power <= 0 And dGrid_Out_Power > 0 Then
-            그리드상태 = 2
-            szValue = String.Format("{0:F1} kW", dGrid_Out_Power)
-        Else
-            그리드상태 = 0
-            szValue = ""
-        End If
 
+
+        'If cBMS.System_Power > 0 Then
+        '그리드상태 = 1
+        'ElseIf cBMS.System_Power < 0 Then
+        '그리드상태 = 2
+        'Else
+        '그리드상태 = 0
+        'End If
+
+        Dim usPower As UShort = GetModbusData_Ushort(PT_INVERTER_POWER)
+        Dim dPT_Inv_Power As Double = Convert.ToInt16(usPower.ToString("X4"), 16)
+
+
+
+        'Dim dPT_Inv_Power As Double = cBMS.Bank_충방전_전력
+        szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
         If lbGridStatus.Text <> szValue Then
             lbGridStatus.Text = szValue
             lbGridStatus.Invalidate()
 
             lbPower2.Text = szValue
             lbPower2.Invalidate()
+        End If
+
+        '180529 사용전검사를 위해서 변경함
+        Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
+
+        Dim nCharge As Integer = ushValue >> 6 And &H1
+        Dim nDischarge As Integer = ushValue >> 7 And &H1
+
+        If nCharge = 1 Then
+            그리드상태 = 1
+        ElseIf nDischarge = 1 Then
+            그리드상태 = 2
+        Else
+            그리드상태 = 0
         End If
 
         If nOldStatus <> 그리드상태 Then
@@ -245,32 +263,32 @@
             End Select
         End If
 
-        Dim dValue As Double = GetModbusData_Ushort(PT_V_Grid_R) * 0.1
+        Dim dValue As Double = GetModbusData_Ushort(PT_GRID_R_Voltage)
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage1.Text <> szValue Then lbVoltage1.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_V_Grid_S) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_S_Voltage)
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage2.Text <> szValue Then lbVoltage2.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_V_Grid_T) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_T_Voltage)
         szValue = String.Format("{0:F1} V", dValue)
         If lbVoltage3.Text <> szValue Then lbVoltage3.Text = szValue
 
 
-        dValue = GetModbusData_Ushort(PT_I_Grid_R) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_R_Current)
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent1.Text <> szValue Then lbCurrent1.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_I_Grid_S) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_S_Current)
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent2.Text <> szValue Then lbCurrent2.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_I_Grid_T) * 0.1
+        dValue = GetModbusData_Ushort(PT_GRID_T_Current)
         szValue = String.Format("{0:F1} A", dValue)
         If lbCurrent3.Text <> szValue Then lbCurrent3.Text = szValue
 
-        dValue = GetModbusData_Ushort(PT_Grid_Freq) * 0.01
+        dValue = GetModbusData_Ushort(PT_GRID_Frequency) * 0.1
         szValue = String.Format("{0:F1} Hz", dValue)
         If lbFrequency.Text <> szValue Then lbFrequency.Text = szValue
 
@@ -310,8 +328,7 @@
     Private Sub DrawGraph_Day(ByRef pGraphic As Graphics)
 
         lbStatus_Day_Grid.Text = "그리드"
-        lbStatus_Day_Inverter.Text = "인버터"
-        lbStatus_Day_Load.Text = "로드"
+
 
         Dim nCtrlWidth As Integer = pnlGraphDay.Width
         Dim nCtrlHeight As Integer = pnlGraphDay.Height
@@ -439,8 +456,7 @@
 
                 If bSelected = True Then
                     lbStatus_Day_Grid.Text = String.Format("그리드 - {0:F1}kWh", dValueArray(0) + dValueArray(1))
-                    lbStatus_Day_Inverter.Text = String.Format("인버터 - {0:F1}kWh", dValueArray(2))
-                    lbStatus_Day_Load.Text = String.Format("로드 - {0:F1}kWh", dValueArray(3))
+
                 End If
             End If
         Next
@@ -454,7 +470,7 @@
         nMaxValue_Day = 0
         htHistoryData_Day.Clear()
 
-        Dim szPath As String = String.Format("\Flash Disk\Run\History\{0}", dtDayReport_Date.Year)
+        Dim szPath As String = String.Format("\SD Card\History\{0}", dtDayReport_Date.Year)
         Dim szHistoryFile As String = ""
         szHistoryFile = String.Format("{0}\H{1}-{2}-{3}.csv", szPath, dtDayReport_Date.Year.ToString("0000"), dtDayReport_Date.Month.ToString("00"), dtDayReport_Date.Day.ToString("00"))
         If System.IO.File.Exists(szHistoryFile) = True Then
@@ -550,8 +566,7 @@
 
     Private Sub DrawGraph_Month(ByRef pGraphic As Graphics)
         lbStatus_Month_Grid.Text = "그리드"
-        lbStatus_Month_Inverter.Text = "인버터"
-        lbStatus_Month_Load.Text = "로드"
+
 
         Dim nColumnCount As Integer = DateTime.DaysInMonth(nMonthReport_Year, nMonthReport_Month)
         Dim nCtrlWidth As Integer = pnlGraphMonth.Width
@@ -699,21 +714,6 @@
                         lbStatus_Month_Grid.Text = String.Format("그리드 - {0:F1}gWh", (dValueArray(0) + dValueArray(1)) / 1000 / 1000)
                     End If
 
-                    If dValueArray(2) < 1000 Then
-                        lbStatus_Month_Inverter.Text = String.Format("인버터 - {0:F1}kWh", dValueArray(2))
-                    ElseIf dValueArray(2) < 1000 * 1000 Then
-                        lbStatus_Month_Inverter.Text = String.Format("인버터 - {0:F1}mWh", dValueArray(2) / 1000)
-                    ElseIf dValueArray(2) < 1000 * 1000 * 1000 Then
-                        lbStatus_Month_Inverter.Text = String.Format("인버터 - {0:F1}gWh", dValueArray(2) / 1000 / 1000)
-                    End If
-
-                    If dValueArray(3) < 1000 Then
-                        lbStatus_Month_Load.Text = String.Format("로드 - {0:F1}kWh", dValueArray(3))
-                    ElseIf dValueArray(3) < 1000 * 1000 Then
-                        lbStatus_Month_Load.Text = String.Format("로드 - {0:F1}mWh", dValueArray(3) / 1000)
-                    ElseIf dValueArray(3) < 1000 * 1000 * 1000 Then
-                        lbStatus_Month_Load.Text = String.Format("로드 - {0:F1}gWh", dValueArray(3) / 1000 / 1000)
-                    End If
 
                 End If
             End If
@@ -732,7 +732,7 @@
 
 
 
-        Dim szPath As String = String.Format("\Flash Disk\Run\History\{0}", nMonthReport_Year)
+        Dim szPath As String = String.Format("\SD Card\History\{0}", nMonthReport_Year)
         Dim szHistoryFile As String = ""
         szHistoryFile = String.Format("{0}\H{1}-{2}.csv", szPath, nMonthReport_Year.ToString("0000"), nMonthReport_Month.ToString("00"))
         If System.IO.File.Exists(szHistoryFile) = True Then
@@ -829,8 +829,6 @@
 
     Private Sub DrawGraph_Year(ByRef pGraphic As Graphics)
         lbStatus_Year_Grid.Text = "그리드"
-        lbStatus_Year_Inverter.Text = "인버터"
-        lbStatus_Year_Load.Text = "로드"
 
 
         Dim nColumnCount As Integer = 12
@@ -978,23 +976,6 @@
                     ElseIf dValueArray(0) + dValueArray(1) < 1000 * 1000 * 1000 Then
                         lbStatus_Year_Grid.Text = String.Format("그리드 - {0:F1}gWh", (dValueArray(0) + dValueArray(1)) / 1000 / 1000)
                     End If
-
-                    If dValueArray(2) < 1000 Then
-                        lbStatus_Year_Inverter.Text = String.Format("인버터 - {0:F1}kWh", dValueArray(2))
-                    ElseIf dValueArray(2) < 1000 * 1000 Then
-                        lbStatus_Year_Inverter.Text = String.Format("인버터 - {0:F1}mWh", dValueArray(2) / 1000)
-                    ElseIf dValueArray(2) < 1000 * 1000 * 1000 Then
-                        lbStatus_Year_Inverter.Text = String.Format("인버터 - {0:F1}gWh", dValueArray(2) / 1000 / 1000)
-                    End If
-
-                    If dValueArray(3) < 1000 Then
-                        lbStatus_Year_Load.Text = String.Format("로드 - {0:F1}kWh", dValueArray(3))
-                    ElseIf dValueArray(3) < 1000 * 1000 Then
-                        lbStatus_Year_Load.Text = String.Format("로드 - {0:F1}mWh", dValueArray(3) / 1000)
-                    ElseIf dValueArray(3) < 1000 * 1000 * 1000 Then
-                        lbStatus_Year_Load.Text = String.Format("로드 - {0:F1}gWh", dValueArray(3) / 1000 / 1000)
-                    End If
-
                 End If
             End If
         Next
