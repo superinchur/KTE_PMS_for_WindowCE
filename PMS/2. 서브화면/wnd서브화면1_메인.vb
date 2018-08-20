@@ -112,7 +112,7 @@
 
         'TODO : 왜 PCS에서 Battery Power를 받아오는가? 이는 수정되어야 함. 생각해보니까 그때 두개의 차이를 두기 위해서 했었음_ 
 
-        Dim ushTemp As UShort = cBMS.System_Current
+        Dim ushTemp As Short = cBMS.System_Current
         Dim dValue As Double = Convert.ToInt16(ushTemp.ToString("X4"), 16)
 
         If nCharge = 1 Then
