@@ -92,34 +92,18 @@ Public Class EMS통신차일드
                             ' REMOTE 모드일 떄는 막아야한다
 
                             WriteSingleRegister(btFrameData, nFrameLength)
-                    End If
+                        Else
+                            Array.Clear(btRecvBuffer, 0, btRecvBuffer.Length)
+                            nRecvBuffer = 0
 
-                        '현재 사용하지 않음
-                        'ElseIf btFrameCommand = &H10 Then
-                        '    ' 복수 제어 명령 
-                        '    If nRecvBuffer >= TCPFrameHeaderLength + 7 Then
-                        'Dim nDataCount As Integer = btRecvBuffer(6)
-                        '
-                        'If nRecvBuffer >= TCPFrameHeaderLength + 7 + nDataCount Then
-                        '
-                        '    'WriteMultiRegister(btFrameData, nFrameLength)
-                        '
-                        'End If
+                        End If
                     Else
                         Array.Clear(btRecvBuffer, 0, btRecvBuffer.Length)
                         nRecvBuffer = 0
-
                     End If
-                Else
-                    Array.Clear(btRecvBuffer, 0, btRecvBuffer.Length)
-                    nRecvBuffer = 0
-
                 End If
-
-
             End If
         End If
-
     End Sub
 
     Public Overloads Sub ServiceStop()

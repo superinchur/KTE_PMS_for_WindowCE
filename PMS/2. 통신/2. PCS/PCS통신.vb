@@ -119,9 +119,6 @@
     Private Sub Timer_Comm_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer_Comm.Tick
         Timer_Comm.Enabled = False
 
-        ' 매초 비교를 현재 BMS 데이터를 비교하고, 비교한 값과 달라지는게 있다면 제어대기열에 넣어서 Writing을 한다.
-        ' BMS데이터비교()
-
         Priority_Read = Priority_Read + 1
         If Priority_Read > 2 Then
             Priority_Read = 1

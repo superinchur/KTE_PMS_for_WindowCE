@@ -32,10 +32,6 @@ Public Class EMS통신서버
             pListenSocket.Bind(ipep)
             pListenSocket.Listen(nMaxListen)
 
-            '메시지소켓그룹 = New 소켓그룹  ' 클라이언크 그룹으로 사용할 변수을 만들어 준다.
-            '생성폼.메시지로그("수신 서버 시작") ' 
-            '스레드 풀로 기능 변경함.
-
             Dim objCallBack As New WaitCallback(AddressOf AcceptClient)
             ThreadPool.QueueUserWorkItem(objCallBack)
         Catch ex As Exception

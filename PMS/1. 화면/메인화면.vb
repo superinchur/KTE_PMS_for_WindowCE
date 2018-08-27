@@ -71,6 +71,7 @@ Public Class 메인화면
         Me.Left = 0
         Me.Top = 0
 
+        '사용자 코드 추가
         화면_고장.Visible = False
         타이머_상태.Interval = 1000
         타이머_상태.Enabled = True
@@ -525,16 +526,8 @@ Public Class 메인화면
         Dim nCurrentImage As Integer = nComm_PCS_Image
         If PCS통신.Connected > 0 Then
             nCurrentImage = 2
-            If flag_PCS_CommFault = True Then
-                PCS_CommFault(0)
-                flag_PCS_CommFault = False
-            End If
         Else
             nCurrentImage = 1
-            If Not flag_PCS_CommFault = True Then
-                flag_PCS_CommFault = True
-                PCS_CommFault(1)
-            End If
         End If
 
         If nCurrentImage <> nComm_PCS_Image Then
@@ -542,17 +535,17 @@ Public Class 메인화면
 
             Select Case nComm_PCS_Image
                 Case 1
+                    PCS_CommFault(1)
                     pbPCS.Image = My.Resources.단선_32
                     pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "PCS 통신", "단선")
                 Case 2
+                    PCS_CommFault(0)
                     pbPCS.Image = My.Resources.연결_32
                     pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "PCS 통신", "연결")
             End Select
         End If
 
-
         nCurrentImage = nComm_EMS_Image
-        현재사용모드_PMS의존모드 = EMS수신서버.Connected()
         If EMS수신서버.Connected > 0 Then
             nCurrentImage = 2
         Else
@@ -563,14 +556,15 @@ Public Class 메인화면
 
             Select Case nComm_EMS_Image
                 Case 1
+                    PMS_CommFault(1)
                     pbEMS.Image = My.Resources.단선_32
                     pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "EMS 통신", "단선")
                 Case 2
+                    PMS_CommFault(0)
                     pbEMS.Image = My.Resources.연결_32
                     pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "EMS 통신", "연결")
             End Select
         End If
-
 
         nCurrentImage = nComm_BMS_Image
         If BMS통신.Connected() > 0 Then
@@ -584,15 +578,17 @@ Public Class 메인화면
 
             Select Case nComm_BMS_Image
                 Case 1
+                    BMS_CommFault(1)
                     pbBMS.Image = My.Resources.단선_32
                     pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "BMS 통신", "단선")
                 Case 2
+                    BMS_CommFault(0)
                     pbBMS.Image = My.Resources.연결_32
                     pHistorySave.FaultSave(Format(Now, "yyyy-MM-dd"), Format(Now, "HH:mm:ss"), "0", "BMS 통신", "연결")
             End Select
         End If
 
-        타이머_통신상태.Interval = BMS_통신주기
+
         타이머_통신상태.Enabled = True
 
     End Sub
@@ -670,11 +666,12 @@ Public Class 메인화면
     End Sub
 
     Private nRunModeCheck As Integer = -1
-    Private Sub 타이머_사용모드_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles 타이머_사용모드.Tick
+    Private Sub 타이머_PCS사용모드_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles 타이머_사용모드.Tick
         타이머_사용모드.Enabled = False
         Dim nCurrent As Integer = Now.Second
         If nCurrent <> nRunModeCheck And nCurrent Mod 2 = 0 Then
             ' 사용모드 확인
+            ' 0(Local):MicriPMS, 1(Remote):PMS에서 PCS를 제어함.
             If 현재사용모드_리모트모드 = True Then
                 리모트모드수행()
             Else ' It means current operating mode is local mode
@@ -726,6 +723,25 @@ Public Class 메인화면
 
     End Sub
 
+    Private Sub BMS_CommFault(ByVal nStatus As Integer)
+        '<---------------------------------------
+        ' BMS Fault를 위한 강제 지정
+        Dim nFileNo As Integer = 47
+        Dim nBit As Integer = 10
+        '<---------------------------------------
+        경보발생및해제(nStatus, nFileNo, nBit)
+
+    End Sub
+
+    Private Sub PMS_CommFault(ByVal nStatus As Integer)
+        '<---------------------------------------
+        ' PMS Fault를 위한 강제 지정
+        Dim nFileNo As Integer = 47
+        Dim nBit As Integer = 11
+        '<---------------------------------------
+        경보발생및해제(nStatus, nFileNo, nBit)
+
+    End Sub
     Public fault As Integer = 0
 
     Private Sub pbBMS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pbBMS.Click

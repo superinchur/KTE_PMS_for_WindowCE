@@ -63,9 +63,6 @@
         '180518 배터리상태를 PCS에서 받아오는게 아니라 BMS에서 받아오는 것으로 변경한다.
         Dim ushValue As UShort = cBMS.System_Mode
 
-        Dim nCharge As Integer = ushValue >> 4 And &H1
-        Dim nDischarge As Integer = ushValue >> 5 And &H1
-
         Dim nOldStatus As Integer = 배터리모드
         Dim dValue As Double = cBMS.System_SOC
 

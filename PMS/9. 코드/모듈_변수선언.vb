@@ -104,7 +104,6 @@
     Public flag_control_PT_INV_Control_Mode_Changed As Boolean = False
 
     Public 현재사용모드 As 사용모드정의 = 사용모드정의.동작안함
-    Public 현재사용모드_PMS의존모드 As Integer
 
     Public Enum 사용모드정의
         동작안함 = 0

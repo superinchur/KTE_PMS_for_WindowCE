@@ -431,6 +431,7 @@ Public Class BMS클라이언트
                 Timer_Comm.Enabled = True
                 Exit Sub
             End If
+
             If Control_Trigger_Fault_Reset = 1 Then
                 bytearray(0) = Control_BMS_Fault_Reset \ &H100
                 bytearray(1) = Control_BMS_Fault_Reset Mod &H100
@@ -541,22 +542,6 @@ Public Class BMS클라이언트
 
     Private Sub Display(ByVal word() As UShort)
 
-        'If 현재사용모드_PMS의존모드 > 0 Then
-        'If 현재사용모드_리모트모드 = False Then
-        'If Not cBMS.System_SOC = Get_MODBUS_EMS_BUFFER(2) * 0.1 Then
-        'Dim ushSOCData
-        'ushSOCData = Get_MODBUS_EMS_BUFFER(2) * 0.1
-        '제어대기열_추가(PT_Current_Battery_SOC_DATA, ushSOCData)
-        'cBMS.System_SOC = Get_MODBUS_EMS_BUFFER(2) * 0.1  ' 3 Resolution 0.1 %
-        'End If
-        'End If
-        'cBMS.System_Voltage = Get_MODBUS_EMS_BUFFER(3)
-        'cBMS.System_Current = Convert.ToInt16(Get_MODBUS_EMS_BUFFER(4).ToString("X4"), 16) ' 2 Signed Resolution 1 A
-        'cBMS.System_Power = cBMS.System_Voltage * cBMS.System_Current / 1000
-        'cBMS.System_Heartbit = Get_MODBUS_EMS_BUFFER(5) ' 25
-        'Else
-        'Resolution에 대한 처리를 Display에서 하도록 변경
-        ' 삼성 Battery Version으로 함
         cBMS.Protocol_Version = word(0)
         cBMS.System_Voltage = word(1) * 0.1 ' Voltage 0.1 V
 

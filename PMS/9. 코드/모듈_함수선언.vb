@@ -86,13 +86,11 @@
             INV_Control_Mode_제어대기열_추가(8, 0)
         End If
 
-
-        '일반모드
         If 현재사용모드_배터리방전시간 = True Then
             If dBATT_SOC > d사용모드_배터리_방전정지SOC Then
-                If ushPT_Fault >> 7 And &H1 Then
+                If ushPT_Fault >> 7 And &H1 Then '현재 PCS가 방전중임.
                     ' do nothing
-                Else
+                Else 'PCS 방전 수행
                     INV_Control_Mode_제어대기열_추가(0, 1)
                     INV_Control_Mode_제어대기열_추가(2, 1)
                     INV_Control_Mode_제어대기열_추가(6, 0)
@@ -129,21 +127,6 @@
         d사용모드_유효전력_이전값 = d사용모드_유효전력
     End Sub
 #End Region
-
-
-    Public Sub 배터리충전시작()
-        INV_Control_Mode_제어대기열_추가(4, 1)
-    End Sub
-    Public Sub 배터리충전취소()
-        INV_Control_Mode_제어대기열_추가(4, 0)
-    End Sub
-
-    Public Sub 배터리방전취소()
-        INV_Control_Mode_제어대기열_추가(5, 0)
-    End Sub
-    Public Sub 배터리방전시작()
-        INV_Control_Mode_제어대기열_추가(5, 1)
-    End Sub
 
     Public Sub 현재사용모드확인()
         Dim ushModeStatus As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)
@@ -242,7 +225,7 @@
 
     Public Sub BMS_Fault_처리_프로시져()
         ' 14~15 에러 하기 (BMS쪽 Fault)
-        For nFileNo As Integer = 14 To 22
+        For nFileNo As Integer = 14 To 21
             Dim ushValue As UShort
             For nBit As Integer = 0 To 15
                 If nFileNo = 14 Then

@@ -209,8 +209,6 @@
             lbRunMode.Visible = False
         End If
 
-        ushValue = GetModbusData_Ushort(PT_CONTROL_MODE)
-
     End Sub
 
     Private Sub VsPictureButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBatteryCharging.Click

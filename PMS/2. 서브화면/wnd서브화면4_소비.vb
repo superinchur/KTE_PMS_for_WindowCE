@@ -52,6 +52,7 @@
         ' 부하 상태 
 
         Dim usPower As UShort = GetModbusData_Ushort(PT_INVERTER_POWER)
+        ' UShort -> Short로 변환하기 위한 항목 Convert.ToInt16(usPower.ToString("X4"), 16)
         Dim dLoadPower As Double = Convert.ToInt16(usPower.ToString("X4"), 16)
 
         Dim ushValue As UShort = GetModbusData_Ushort(PT_CONTROL_MODE)

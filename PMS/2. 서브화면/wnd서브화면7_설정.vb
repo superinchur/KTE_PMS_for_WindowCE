@@ -935,6 +935,8 @@ Public Class wnd서브화면7_설정
     Private Sub VsPictureButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VsPictureButton3.Click
         If MsgBox("프로그램을 종료 하시겠습니까?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "알림") = MsgBoxResult.Yes Then
             Application.Exit()
+
+
         End If
     End Sub
 

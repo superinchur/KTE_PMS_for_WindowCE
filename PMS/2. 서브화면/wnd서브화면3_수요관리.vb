@@ -212,20 +212,9 @@
 
 
 
-        'If cBMS.System_Power > 0 Then
-        '그리드상태 = 1
-        'ElseIf cBMS.System_Power < 0 Then
-        '그리드상태 = 2
-        'Else
-        '그리드상태 = 0
-        'End If
-
         Dim usPower As UShort = GetModbusData_Ushort(PT_INVERTER_POWER)
         Dim dPT_Inv_Power As Double = Convert.ToInt16(usPower.ToString("X4"), 16)
 
-
-
-        'Dim dPT_Inv_Power As Double = cBMS.Bank_충방전_전력
         szValue = String.Format("{0:F1} kW", dPT_Inv_Power)
         If lbGridStatus.Text <> szValue Then
             lbGridStatus.Text = szValue
@@ -1056,4 +1045,7 @@
 #End Region
      
 
+    Private Sub lbStatus_Day_Grid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbStatus_Day_Grid.Click
+
+    End Sub
 End Class

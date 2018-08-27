@@ -24,7 +24,10 @@
         Dim btTempData(1) As Byte
         Array.Copy(btData, nOffset, btTempData, 0, nSize)
         If nAddress < 128 Then
+            ' 받아온 데이터를 PCS 버퍼에다가 저장
             htModbusData(nAddress) = btTempData
+
+            ' 받아온 데이터를 EMS 버퍼에다가 저장
             MODBUS_EMS_BUFFER(2 * nAddress) = btTempData(0)
             MODBUS_EMS_BUFFER(2 * nAddress + 1) = btTempData(1)
         End If
